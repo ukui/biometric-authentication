@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
+<policyconfig>
+
+	<icon_name>stock_person</icon_name>
+
+	<action id="org.ukui.biometric.enroll-own-data">
+		<description>Enroll your biometric feature</description>
+		<description xml:lang="zh">录入您的用户生物特征信息</description>
+		<message>Enrolling your biometric features requires authorization</message>
+		<message xml:lang="zh">录入您的用户生物特征信息需要授权</message>
+		<defaults>
+			<allow_any>auth_self</allow_any>
+			<allow_inactive>auth_self</allow_inactive>
+			<allow_active>auth_self_keep</allow_active>
+		</defaults>
+	</action>
+
+	<action id="org.ukui.biometric.enroll-admin-data">
+		<description>Enroll other user's biometric features</description>
+		<description xml:lang="zh">录入其他用户的生物信息</description>
+		<message>Enrolling other user's biometric features requires authorization</message>
+		<message xml:lang="zh">录入其他用户的生物信息需要授权</message>
+		<defaults>
+			<allow_any>auth_admin</allow_any>
+			<allow_inactive>auth_admin</allow_inactive>
+			<allow_active>auth_admin_keep</allow_active>
+		</defaults>
+	</action>
+
+	<action id="org.ukui.biometric.clean-own-data">
+		<description>Delete your biometric features</description>
+		<description xml:lang="zh">删除您的用户生物信息</description>
+		<message>Deleting your biometric features requires authorization</message>
+		<message xml:lang="zh">删除您的用户生物信息需要授权</message>
+		<defaults>
+			<allow_any>auth_self</allow_any>
+			<allow_inactive>auth_self</allow_inactive>
+			<allow_active>auth_self_keep</allow_active>
+		</defaults>
+	</action>
+
+	<action id="org.ukui.biometric.clean-admin-data">
+		<description>Delete other user's biometric features</description>
+		<description xml:lang="zh">删除其他用户生物信息</description>
+		<message>Deleting other user's biometric features requires authorization</message>
+		<message xml:lang="zh">删除其他用户的生物信息需要授权</message>
+		<defaults>
+			<allow_any>auth_admin</allow_any>
+			<allow_inactive>auth_admin</allow_inactive>
+			<allow_active>auth_admin_keep</allow_active>
+		</defaults>
+	</action>
+
+</policyconfig>

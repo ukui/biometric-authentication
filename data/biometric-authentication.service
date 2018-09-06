@@ -1,0 +1,13 @@
+[Unit]
+Description=Authenticate by human biometric
+Before=lightdm.service
+
+[Service]
+Type=dbus
+Restart=always
+RestartSec=0
+BusName=org.ukui.Biometric
+ExecStart=/usr/lib/biometric-authentication/biometric-authenticationd
+
+[Install]
+WantedBy=multi-user.target

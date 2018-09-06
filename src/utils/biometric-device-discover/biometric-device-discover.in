@@ -1,0 +1,129 @@
+#!/bin/bash
+
+ENO_INVAL=2
+ENO_PERM=1
+
+discover_tools_dir=DISCOVER_TOOLS_DIR
+discover_list=`ls ${discover_tools_dir} 2>/dev/null`
+drv_list=""
+
+device_type="all"
+write_flag="false"
+short_flag="false"
+
+function help()
+{
+	echo "Discover biometric device, need root authority"
+	echo "Usage:	biometric-device-discover [option]"
+	echo ""
+	echo "Options:"
+	echo "	-t	device type (\"serial\", \"usb\", \"pcie\" or \"all\")"
+	echo "	-w	Write the discover results to configuration file"
+	echo "	-h	Show this help"
+}
+
+while getopts "t:wsh" arg #选项后面的冒号表示该选项需要参数
+do
+		case $arg in
+			t)
+				device_type=${OPTARG}
+
+				case ${device_type} in
+					all)
+						;;
+					serial)
+						;;
+					usb)
+						;;
+					pcie)
+						;;
+					*)
+						echo "Unkonw device type: ${device_type}"
+						exit ${ENO_INVAL}
+						;;
+				esac
+
+				echo "Device type is ${device_type}" #参数存在$optarg中
+				;;
+			w)
+				echo "Write the discover results to configuration file"
+				write_flag="true"
+				;;
+			s)
+				echo "Use short output"
+				short_flag="true"
+				;;
+			h)
+				help
+				exit 0
+				;;
+			?)  #当有不认识的选项的时候arg为?
+				#echo "Unkonw argument ${OPTARG}"
+				help >&2
+				exit ${ENO_INVAL}
+				;;
+		esac
+done
+
+user=`whoami`
+if [ "${user}X" != "rootX" ];
+then
+	echo "Discover biometric device need root authority" >&2
+	exit ${ENO_NOAUTH}
+fi
+
+if [ "${device_type}X" = "allX" ];
+then
+	device_type_list="serial usb pcie"
+else
+	device_type_list=${device_type}
+fi
+
+for device_type in ${device_type_list}; do
+	drv_list=""
+
+	for bio_drv in ${discover_list}; do
+		if [[ "${bio_drv}" =~ "${device_type}-" ]]; then
+			drv_list="${drv_list} ${bio_drv##${device_type}-}"
+		fi
+	done
+
+	drv_list=${drv_list## } # 移除前导空格
+	if [ "${drv_list}X" != "X" ]; then
+		echo "${device_type} driver [${drv_list}] has discover tools"
+	fi
+
+
+	for driver in ${drv_list}; do
+		dev_node_list=`/usr/lib/biometric-authentication/discover-tools/${device_type}-${driver} 2>/dev/null`
+		echo -n "  Discover ${driver} device: "
+
+		if [ "${dev_node_list}X" != "X" ]; then
+			if [ ${write_flag} = "true" ]; then
+				biometric-config-tool add-driver -f -d ${driver} /usr/lib/biometric-authentication/drivers/${driver}.so
+			fi
+
+			for dev_node in ${dev_node_list}; do
+				echo "${dev_node}, enable ${driver} driver"
+				if [ ${write_flag} == "true" ]; then
+					if [ ${device_type} == "serial" ]; then
+						biometric-config-tool set-key -f ${driver} Path ${dev_node}
+					fi
+					biometric-config-tool enable-driver ${driver}
+				fi
+			done
+		else
+			echo -n "not found"
+			if [ ${write_flag} == "true" -a ${device_type} == "serial" ]; then
+				echo ", remove ${driver} driver"
+				biometric-config-tool remove-driver -i ${driver}
+			else
+				echo
+			fi
+		fi
+	done
+done
+
+
+
+

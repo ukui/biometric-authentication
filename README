@@ -1,0 +1,25 @@
+# Biometric Authentication
+
+A biometric identification framework. Provide unified DBus interface for
+application layer, used for various biometric identification and authentication.
+
+The framework is divided into three layers: service layer, core layer and
+drive layer.
+
+## Service Layer
+
+The service layer uses the DBus bus to provide the upper application with
+operation interfaces such as feature enroll, feature verify, feature identify,
+feature search, feature delete, etc. Meanwhile, it also provides notification
+of device status changes event and notification of USB device hotplug event.
+
+## Core Layer
+
+The core layer abstracts the common operation of all kinds of biometric
+recognition, constructs the underlying framework of biometric recognition,
+and provides the general function and unified data storage method.
+
+## Driver Layer
+
+The driver layer adapts various hardware, one driver corresponds to a kind
+of hardware, and completes the hardware related characteristic operation.

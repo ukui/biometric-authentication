@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<node name="/">
+	<interface name="org.ukui.Biometric">
+
+		<method name="CheckAppApiVersion">
+			<doc>
+				<line>Check application API Version</line>
+				<line>result等于0，应用使用的API版本兼容框架版本（主、从版本号匹配，功能版本号小于等于框架版本）</line>
+				<line>result大于0，应用使用的API版本不兼容框架版本，应用过新</line>
+				<line>result小于0，应用使用的API版本不兼容框架版本，应用过旧</line>
+			</doc>
+			<arg name="major" type="i" direction="in" />
+			<arg name="minor" type="i" direction="in" />
+			<arg name="function" type="i" direction="in" />
+			<arg name="result" type="i" direction="out" />
+		</method>
+
+		<method name="GetDrvList">
+			<doc>
+				<line>Get Drive List</line>
+			</doc>
+			<arg name="count" type="i" direction="out" />
+			<arg name="info" type="av" direction="out">
+				<doc>
+					(v)info = (issiiiiiiiiiii)struct{
+						int drv_ID;
+						char * name;
+						char * full_name;
+						int enable;
+						int dev_num;
+						int biotype;
+						int stotype;
+						int eigtype;
+						int vertype;
+						int idtype;
+						int bustype
+						int dev_status;
+						int ops_result;
+						int notify_mid;
+					}
+				</doc>
+			</arg>
+		</method>
+
+		<method name="GetDevList">
+			<doc>
+				<line>Get Device List</line>
+			</doc>
+			<arg name="count" type="i" direction="out" />
+			<arg name="info" type="av" direction="out">
+				<doc>
+					(v)info = (issiiiiiiiiiii)struct{
+						int drv_ID;
+						char * name;
+						char * full_name;
+						int enable;
+						int dev_num;
+						int biotype;
+						int stotype;
+						int eigtype;
+						int vertype;
+						int idtype;
+						int bustype
+						int dev_status;
+						int ops_result;
+						int notify_mid;
+					}
+				</doc>
+			</arg>
+		</method>
+
+		<method name="GetFeatureList">
+			<doc>
+				<line>Get Feature List</line>
+			</doc>
+			<arg name="drvid" type="i" direction="in" />
+			<arg name="uid" type="i" direction="in" />
+			<arg name="idx_start" type="i" direction="in" />
+			<arg name="idx_end" type="i" direction="in" />
+			<arg name="count" type="i" direction="out" />
+			<arg name="feature_list" type="av" direction="out">
+				<doc>
+					<line>feature_list = struct(uid, idx, idx_name)</line>
+					<line>name = name</line>
+				</doc>
+			</arg>
+		</method>
+
+		<method name="UpdateStatus">
+			<doc>
+				<line>Update Device Status</line>
+			</doc>
+			<arg name="drvid" type="i" direction="in" />
+			<arg name="result" type="i" direction="out" />
+			<arg name="enable" type="i" direction="out" />
+			<arg name="dev_num" type="i" direction="out" />
+			<arg name="dev_status" type="i" direction="out" />
+			<arg name="ops_result" type="i" direction="out" />
+			<arg name="notify_mid" type="i" direction="out" />
+			<arg name="dev_status_timestamp_sec" type="x" direction="out" />
+			<arg name="dev_status_timestamp_usec" type="x" direction="out" />
+			<arg name="ops_result_timestamp_sec" type="x" direction="out" />
+			<arg name="ops_result_timestamp_usec" type="x" direction="out" />
+			<arg name="notify_mid_timestamp_sec" type="x" direction="out" />
+			<arg name="notify_mid_timestamp_usec" type="x" direction="out" />
+		</method>
+
+		<method name="GetDevMesg">
+			<doc>
+				<line>Get Device Status Message</line>
+			</doc>
+			<arg name="drvid" type="i" direction="in" />
+			<arg name="mesg" type="s" direction="out" />
+			<arg name="timestamp_sec" type="x" direction="out" />
+			<arg name="timestamp_usec" type="x" direction="out" />
+		</method>
+
+		<method name="GetOpsMesg">
+			<doc>
+				<line>Get Operations Status Message</line>
+			</doc>
+			<arg name="drvid" type="i" direction="in" />
+			<arg name="mesg" type="s" direction="out" />
+			<arg name="timestamp_sec" type="x" direction="out" />
+			<arg name="timestamp_usec" type="x" direction="out" />
+		</method>
+
+		<method name="GetNotifyMesg">
+			<doc>
+				<line>Get Notify Message</line>
+			</doc>
+			<arg name="drvid" type="i" direction="in" />
+			<arg name="mesg" type="s" direction="out" />
+			<arg name="timestamp_sec" type="x" direction="out" />
+			<arg name="timestamp_usec" type="x" direction="out" />
+		</method>
+
+		<method name="Enroll">
+			<doc>
+				<line>Enroll Eigen</line>
+			</doc>
+			<arg name="drvid" type="i" direction="in" />
+			<arg name="uid" type="i" direction="in" />
+			<arg name="idx" type="i" direction="in" />
+			<arg name="idx_name" type="s" direction="in" />
+			<arg name="result" type="i" direction="out" />
+		</method>
+
+		<method name="Verify">
+			<doc>
+				<line>Verify Eigen</line>
+			</doc>
+			<arg name="drvid" type="i" direction="in" />
+			<arg name="uid" type="i" direction="in" />
+			<arg name="idx" type="i" direction="in" />
+			<arg name="result" type="i" direction="out" />
+		</method>
+
+		<method name="Identify">
+			<doc>
+				<line>Identify Eigen</line>
+			</doc>
+			<arg name="drvid" type="i" direction="in" />
+			<arg name="uid" type="i" direction="in" />
+			<arg name="idx_start" type="i" direction="in" />
+			<arg name="idx_end" type="i" direction="in" />
+			<arg name="result" type="i" direction="out" />
+			<arg name="uid" type="i" direction="out" />
+		</method>
+
+		<method name="Capture">
+			<doc>
+				<line>Capture Eigen</line>
+			</doc>
+			<arg name="drvid" type="i" direction="in" />
+			<arg name="result" type="i" direction="out" />
+			<arg name="eigen_base64" type="s" direction="out" />
+		</method>
+
+		<method name="Search">
+			<doc>
+				<line>Search Eigen</line>
+			</doc>
+			<arg name="drvid" type="i" direction="in" />
+			<arg name="uid" type="i" direction="in" />
+			<arg name="idx_start" type="i" direction="in" />
+			<arg name="idx_end" type="i" direction="in" />
+			<arg name="count" type="i" direction="out" />
+			<arg name="feature_list" type="av" direction="out" />
+		</method>
+
+		<method name="Clean">
+			<doc>
+				<line>Clean Eigen</line>
+			</doc>
+			<arg name="drvid" type="i" direction="in" />
+			<arg name="uid" type="i" direction="in" />
+			<arg name="idx_start" type="i" direction="in" />
+			<arg name="idx_end" type="i" direction="in" />
+			<arg name="result" type="i" direction="out" />
+		</method>
+
+		<method name="Rename">
+			<doc>
+				<line>Rename Eigen</line>
+			</doc>
+			<arg name="drvid" type="i" direction="in" />
+			<arg name="uid" type="i" direction="in" />
+			<arg name="idx" type="i" direction="in" />
+			<arg name="new_name" type="s" direction="in" />
+			<arg name="result" type="i" direction="out" />
+		</method>
+
+		<method name="StopOps">
+			<doc>
+				<line>Stop Current Operations</line>
+			</doc>
+			<arg name="drvid" type="i" direction="in" />
+			<arg name="waiting" type="i" direction="in" />
+			<arg name="result" type="i" direction="out" />
+		</method>
+
+		<signal name="StatusChanged">
+			<doc>
+				Emitted when device status is changed.
+			</doc>
+			<arg name="drvid" type="i">
+				<doc>Driver(device) of status changed.</doc>
+			</arg>
+			<arg name="type" type="i">
+				<doc>Type of status changed.</doc>
+			</arg>
+		</signal>
+
+		<signal name="USBDeviceHotPlug">
+			<doc>
+				Emitted when device status is changed.
+			</doc>
+			<arg name="drvid" type="i">
+				<doc>Driver or device ID</doc>
+			</arg>
+			<arg name="action" type="i">
+				<doc>Action type</doc>
+			</arg>
+			<arg name="dev_num_now" type="i">
+				<doc>Number of devices after the event</doc>
+			</arg>
+		</signal>
+
+
+	</interface>
+</node>

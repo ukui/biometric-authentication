@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+
+	<action id="org.freedesktop.policykit.pkexec.biometric-config-tool">
+		<description>Run the biometric authentication configuration tool</description>
+		<description xml:lang="zh">运行生物特征认证配置工具</description>
+		<message>Authentication is required to change biometrics authentication configuration</message>
+		<message xml:lang="zh">更改生物特征认证配置需要进行身份验证</message>
+		<icon_name>stock_person</icon_name>
+		<defaults>
+			<allow_any>auth_admin</allow_any>
+			<allow_inactive>auth_admin</allow_inactive>
+			<allow_active>auth_self_keep</allow_active>
+		</defaults>
+		<annotate key="org.freedesktop.policykit.exec.path">/usr/bin/biometric-config-tool</annotate>
+	</action>
+
+</policyconfig>
