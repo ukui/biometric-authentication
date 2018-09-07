@@ -1,5 +1,6 @@
 [Unit]
 Description=Authenticate by human biometric
+Documentation=https://github.com/ukui/biometric-authentication
 Before=lightdm.service
 
 [Service]
