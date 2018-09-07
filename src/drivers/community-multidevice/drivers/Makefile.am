@@ -37,7 +37,7 @@ COMM_CFS = -Wall -g -shared -fpic \
 	$(NULL)
 
 COMM_LDFS = $(LIBFPRINT_LIBS) $(GLIB_2_LIBS) $(LIBUSB_1_LIBS) $(SQLITE3_LIBS) \
-	../../../lib/libbiometric.la -lcrypto -module -avoid-version \
+	../../../lib/libbiometric.la -lcrypto -module -avoid-version -z,now \
 	$(NULL)
 
 upekts_la_SOURCES = $(COMM_SOURCES) upekts.c
