@@ -1,7 +1,9 @@
 Source: biometric-authentication
 Section: admin
 Priority: optional
-Maintainer: jianglinxuan (droiing) <jianglinxuan@kylinos.cn>
+Maintainer: Kylin Team <team+kylin@tracker.debian.org>
+Uploaders: handsome_feng <jianfengli@ubuntukylin.com>,
+           jianglinxuan (droiing) <jianglinxuan@kylinos.cn>
 Build-Depends: debhelper (>= 11),
                automake,
                intltool,
@@ -17,6 +19,8 @@ Build-Depends: debhelper (>= 11),
                libssl-dev
 Standards-Version: 4.2.1
 Homepage: https://github.com/ukui/biometric-authentication.git
+Vcs-Git: https://github.com/ukui/biometric-authentication.git
+vcs-Browser: https://github.com/ukui/biometric-authentication
 
 Package: biometric-auth
 Architecture: any
