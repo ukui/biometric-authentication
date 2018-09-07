@@ -399,7 +399,7 @@ msgstr "正在中止设备关闭操作"
 
 #: ../src/lib/biometric_common.c:1115
 #, c-format
-msgid "Device unknow status code: %d\n"
+msgid "Device unknown status code: %d\n"
 msgstr "设备未知状态码：%d\n"
 
 #: ../src/lib/biometric_common.c:1116

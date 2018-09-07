@@ -1112,7 +1112,7 @@ const char * bio_get_dev_status_mesg(bio_dev *dev){
 		return _("Terminating close operation");
 
 	default:
-		bio_print_warning(_("Device unknow status code: %d\n"), bio_get_dev_status(dev));
+		bio_print_warning(_("Device unknown status code: %d\n"), bio_get_dev_status(dev));
 		return _("Device is in an unknown status...");
 	}
 }
