@@ -1,0 +1,5 @@
+etc/
+lib/systemd/system/biometric-authentication.service
+usr/share/dbus-1/
+usr/lib/biometric-authentication/biometric-authenticationd
+usr/share/polkit-1/actions/

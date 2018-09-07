@@ -1,0 +1,4 @@
+usr/include/libbiometric/
+usr/lib/*/libbiometric.a
+usr/lib/*/libbiometric.so
+usr/lib/*/pkgconfig/

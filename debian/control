@@ -1,0 +1,95 @@
+Source: biometric-authentication
+Section: admin
+Priority: optional
+Maintainer: jianglinxuan (droiing) <jianglinxuan@kylinos.cn>
+Build-Depends: debhelper (>= 11),
+               automake,
+               intltool,
+               autopoint,
+               libtool-bin,
+               libglib2.0-dev (>= 2.36),
+               libgtk2.0-dev (>= 2.24),
+               libusb-1.0-0-dev (>= 1.0.20),
+               libsqlite3-dev (>= 3.8),
+               libfprint-dev,
+               libpolkit-gobject-1-dev,
+               uuid-dev,
+               libssl-dev
+Standards-Version: 4.2.1
+Homepage: https://github.com/ukui/biometric-authentication.git
+
+Package: biometric-auth
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         libbiometric0 (= ${binary:Version}),
+         systemd,
+         libglib2.0-0
+Provides: ${bio-app-api:Provides}
+Description: Biometric Authentication Service
+ The service layer of the biometric identification authentication framework.
+ The service layer uses the DBus bus to provide the upper application with
+ operation interfaces such as feature enroll, feature verify, feature identify,
+ feature search, feature delete, etc. Meanwhile, it also provides notification
+ of device status changes event and notification of USB device hotplug event.
+ .
+ This package contains a library for biometric authentication.
+
+Package: libbiometric0
+Architecture: any
+Section: libs
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         systemd,
+         libglib2.0-0,
+         libsqlite3-0,
+         libusb-1.0-0
+Provides: ${bio-drv-api:Provides}
+Description: Biometric Identification library
+ The core layer of biometric identification authentication framework.
+ The core layer abstracts the common operation of all kinds of biometric
+ recognition, constructs the underlying framework of biometric recognition,
+ and provides the general function and unified data storage method.
+ .
+ This package contains a library for biometric identification.
+
+Package: libbiometric-dev
+Architecture: any
+Section: libdevel
+Depends: ${misc:Depends},
+         libbiometric0 (= ${binary:Version}),
+         systemd,
+         libglib2.0-0
+Description: Biometric Identification DRIVER API - development files
+ It provides the development file for driver development based on biometric
+ identification authentication framework.
+ .
+ This package contains the development files (headers, static libraries)
+
+Package: biometric-utils
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, biometric-auth, systemd, libglib2.0-0
+Description: Biometric authentication utils
+ Biometric authentication tools.
+ This package provides the biometric-config-tool and biometric-device-discover
+ tools:
+  - biometric-config-tool: add, remove, configure the biometric drivers;
+  - biometric-device-discover: discover the devices supported by the biometric
+    framework;
+
+Package: biometric-driver-community-multidevice
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         ${bio-drv-api:Depends},
+         libbiometric0,
+         biometric-utils,
+         libfprint0
+Description: Biometric Authentication Driver (community multidevice)
+ Community multi-device drivers for biometric authentication.
+ Community multi-device drivers use libfprint for biometric identification.
+ .
+ This package supports following devices:
+   upekts, uru4000, aes4000, aes2501, upektc, aes1610, fdu2000, vcom5s,
+   upeksonly, vfs101, vfs301, aes2550, upeke2, aes1660, aes2660, aes3500,
+   upektc_img, etes603, vfs5011, vfs0050, elan.
