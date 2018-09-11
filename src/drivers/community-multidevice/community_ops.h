@@ -30,7 +30,8 @@
 
 #define OPS_DETECTION_INTERVAL_MS	100
 
-#define DEFAULT_AES_KEY	"This is UKUI default AES key."
+#define DEFAULT_AES_KEY			"This is UKUI default AES key."
+#define DEFAULT_AES_KEY_MAX_LEN	(256 / 8)
 
 typedef enum {
 	DOR_STOP_BY_USER = -3,
