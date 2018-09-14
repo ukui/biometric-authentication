@@ -8,7 +8,7 @@ autoreconf --force --install || exit 1
 
 automake --add-missing
 
-libtoolize -f -c
+libtoolize
 
 echo "Setting up Intltool"
 intltoolize --copy --force --automake || exit 1
