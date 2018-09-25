@@ -86,36 +86,36 @@ AM_CONDITIONAL(NEED_UD650, [test "X$HOST_ARCH" = "Xamd64" -o "X$HOST_ARCH" = "Xa
 
 AC_ARG_WITH([bio-db-dir],
 		AS_HELP_STRING([--with-bio-db-dir=DIR], [Directory for database file]),
-		[], [])
-BIO_DB_DIR="$withval"
+		[BIO_DB_DIR="$withval"],
+		[BIO_DB_DIR=""])
 AC_SUBST([BIO_DB_DIR])
 AM_CONDITIONAL(HAS_BIO_DB_DIR, test "X$BIO_DB_DIR" != "X")
 
 AC_ARG_WITH([bio-db-name],
 		AS_HELP_STRING([--with-bio-db-name=FILE], [Database file name]),
-		[], [])
-BIO_DB_NAME="$withval"
+		[BIO_DB_NAME="$withval"],
+		[BIO_DB_NAME=""])
 AC_SUBST([BIO_DB_NAME])
 AM_CONDITIONAL(HAS_BIO_DB_NAME, test "X$BIO_DB_NAME" != "X")
 
 AC_ARG_WITH([bio-config-dir],
 		AS_HELP_STRING([--with-bio-config-dir=DIR], [Directory for biometric config file]),
-		[], [])
-BIO_CONFIG_DIR="$with_bio_config_dir"
+		[BIO_CONFIG_DIR="$withval"],
+		[BIO_CONFIG_DIR="$"])
 AC_SUBST([BIO_CONFIG_DIR])
 AM_CONDITIONAL(HAS_BIO_CONFIG_DIR, test "X$BIO_CONFIG_DIR" != "X")
 
 AC_ARG_WITH([bio-driver-dir],
 		AS_HELP_STRING([--with-bio-driver-dir=DIR], [Directory for driver files]),
-		[], [])
-BIO_DRIVER_DIR="$withval"
+		[BIO_DRIVER_DIR="$withval"],
+		[BIO_DRIVER_DIR=""])
 AC_SUBST([BIO_DRIVER_DIR])
 AM_CONDITIONAL(HAS_BIO_DRIVER_DIR, test "X$BIO_DRIVER_DIR" != "X")
 
 AC_ARG_WITH([bio-extra-dir],
 		AS_HELP_STRING([--with-bio-extra-dir=DIR], [Directory for extra files(driver and extra tools)]),
-		[], [])
-BIO_EXTRA_DIR="$withval"
+		[BIO_EXTRA_DIR="$withval"],
+		[BIO_EXTRA_DIR=""])
 AC_SUBST([BIO_EXTRA_DIR])
 AM_CONDITIONAL(HAS_BIO_EXTRA_DIR, test "X$BIO_EXTRA_DIR" != "X")
 

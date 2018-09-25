@@ -118,44 +118,96 @@ int community_internal_aes_decrypt(unsigned char *in, int len,
 int community_para_config(bio_dev * dev, GKeyFile * conf)
 {
 	community_fpdev *cfpdev = dev->dev_priv;
+	char * key_file = NULL;
 
 	cfpdev->aes_key = NULL;
 	GError * err = NULL;
 
-	cfpdev->aes_key = (unsigned char * )g_key_file_get_string(conf,
-															  dev->device_name,
-															  "AESKey",
-															  &err);
+	key_file = g_key_file_get_string(conf, dev->device_name, "AESKey", &err);
 	if (err != NULL)
 	{
-		bio_print_warning(_("Get AES Key Error[%d]: %s, use default Key.\n"),
+		bio_print_warning(_("Get AES Key File Error[%d]: %s, use default Key.\n"),
 							err->code, err->message);
 		g_error_free(err);
 
 		cfpdev->aes_key = malloc(strlen(DEFAULT_AES_KEY) + 1);
 		memset(cfpdev->aes_key, 0, strlen(DEFAULT_AES_KEY) + 1);
 		sprintf((char *)cfpdev->aes_key, "%s", DEFAULT_AES_KEY);
+
+		return 0;
 	}
+
+	if (access(key_file, F_OK | R_OK) != 0)
+	{
+		bio_print_warning(_("AES Key File (%s) does not Exist or has no Read "
+							"Permission, use default key.\n"), key_file);
+
+		cfpdev->aes_key = malloc(strlen(DEFAULT_AES_KEY) + 1);
+		memset(cfpdev->aes_key, 0, strlen(DEFAULT_AES_KEY) + 1);
+		sprintf((char *)cfpdev->aes_key, "%s", DEFAULT_AES_KEY);
+
+		return 0;
+	}
+
+	FILE *fp = NULL;
+	int len = 0;
+	int read_len = 0;
+
+	fp = fopen(key_file, "r");
+	if (fp == NULL)
+	{
+		bio_print_warning(_("Can not open AES Key File: %s, use default key.\n")
+						  , key_file);
+
+		cfpdev->aes_key = malloc(strlen(DEFAULT_AES_KEY) + 1);
+		memset(cfpdev->aes_key, 0, strlen(DEFAULT_AES_KEY) + 1);
+		sprintf((char *)cfpdev->aes_key, "%s", DEFAULT_AES_KEY);
+
+		return 0;
+	}
+
+	fseek(fp, 0, SEEK_END);
+	len = ftell(fp);
+
+	if (len == 0)
+	{
+		bio_print_warning(_("AES Key File is Enpty, use default Key.\n"));
+		fclose(fp);
+
+		cfpdev->aes_key = malloc(strlen(DEFAULT_AES_KEY) + 1);
+		memset(cfpdev->aes_key, 0, strlen(DEFAULT_AES_KEY) + 1);
+		sprintf((char *)cfpdev->aes_key, "%s", DEFAULT_AES_KEY);
+
+		return 0;
+	}
+
+	if (len > DEFAULT_AES_KEY_MAX_LEN)
+		len = DEFAULT_AES_KEY_MAX_LEN;
+
+	cfpdev->aes_key = malloc(len + 1);
+	memset(cfpdev->aes_key, 0, len + 1);
+
+	fseek(fp, 0, SEEK_SET);
+	read_len = fread(cfpdev->aes_key, 1, len, fp);
+	cfpdev->aes_key[read_len * 1] = 0;
+
+	fclose(fp);
 
 	if (cfpdev->aes_key[0] == '\0')
 	{
 		bio_print_warning(_("AES Key is Enpty, use default Key.\n"));
 
+		free(cfpdev->aes_key);
 		cfpdev->aes_key = malloc(strlen(DEFAULT_AES_KEY) + 1);
 		memset(cfpdev->aes_key, 0, strlen(DEFAULT_AES_KEY) + 1);
 		sprintf((char *)cfpdev->aes_key, "%s", DEFAULT_AES_KEY);
 	}
 
-	printf("aes key = %s\n", cfpdev->aes_key);
-
 	return 0;
 }
 
-
 int community_ops_driver_init(bio_dev *dev)
 {
-	community_fpdev *cfpdev = dev->dev_priv;
-	printf("aes key = %s\n", cfpdev->aes_key);
 	return 0;
 }
 

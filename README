@@ -1,25 +1,73 @@
 # Biometric Authentication
+--------------------------
 
+## Introduction
 A biometric identification framework. Provide unified DBus interface for
 application layer, used for various biometric identification and authentication.
 
 The framework is divided into three layers: service layer, core layer and
 drive layer.
 
-## Service Layer
+### Service Layer
 
 The service layer uses the DBus bus to provide the upper application with
 operation interfaces such as feature enroll, feature verify, feature identify,
 feature search, feature delete, etc. Meanwhile, it also provides notification
 of device status changes event and notification of USB device hotplug event.
 
-## Core Layer
+### Core Layer
 
 The core layer abstracts the common operation of all kinds of biometric
 recognition, constructs the underlying framework of biometric recognition,
 and provides the general function and unified data storage method.
 
-## Driver Layer
+### Driver Layer
 
 The driver layer adapts various hardware, one driver corresponds to a kind
 of hardware, and completes the hardware related characteristic operation.
+
+---
+
+## Compilation & Install
+
+### Least parameter compilation：
+
+```
+./autogen.sh
+./configure --disable-dependency-tracking
+make
+```
+
+### Complete parameter compilation (in ubuntu, x86_64 architectures)：
+
+```
+export prefix=/usr
+./autogen.sh
+./configure --build=x86_64-linux-gnu \
+    --prefix=/usr \
+    --includedir=\${prefix}/include \
+    --mandir=\${prefix}/share/man \
+    --infodir=\${prefix}/share/info \
+    --sysconfdir=/etc \
+    --localstatedir=/var \
+    --disable-silent-rules \
+    --libdir=\${prefix}/lib/x86_64-linux-gnu \
+    --libexecdir=\${prefix}/lib/x86_64-linux-gnu \
+    --disable-dependency-tracking \
+    --enable-static \
+    --enable-shared \
+    --with-bio-db-dir=/var/lib/biometric-auth/ \
+    --with-bio-db-name=biometric.db \
+    --with-bio-config-dir=/etc/biometric-auth/ \
+    --with-bio-driver-dir=/usr/lib/biometric-authentication/drivers \
+    --with-bio-extra-dir=/usr/lib/biometric-authentication/drivers/extra \
+    --libexecdir=\${prefix}/lib/biometric-authentication
+make
+```
+
+### Install
+Note: Root permissions may be required for installation
+
+```
+make install
+```
