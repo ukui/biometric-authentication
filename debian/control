@@ -3,7 +3,6 @@ Section: admin
 Priority: optional
 Maintainer: Kylin Team <team+kylin@tracker.debian.org>
 Uploaders: handsome_feng <jianfengli@ubuntukylin.com>,
-           jianglinxuan (droiing) <jianglinxuan@kylinos.cn>
 Build-Depends: debhelper (>= 11),
                automake,
                intltool,
@@ -18,17 +17,16 @@ Build-Depends: debhelper (>= 11),
                uuid-dev,
                libssl-dev
 Standards-Version: 4.2.1
-Homepage: https://github.com/ukui/biometric-authentication.git
-Vcs-Git: https://github.com/ukui/biometric-authentication.git
-vcs-Browser: https://github.com/ukui/biometric-authentication
+Homepage: http://www.ukui.org
+Vcs-Git: https://salsa.debian.org/kylin-team/biometric-authentication.git
+vcs-Browser: https://salsa.debian.org/kylin-team/biometric-authentication
 
 Package: biometric-auth
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          libbiometric0 (= ${binary:Version}),
-         systemd,
-         libglib2.0-0
+         systemd
 Provides: ${bio-app-api:Provides}
 Description: Biometric Authentication Service
  The service layer of the biometric identification authentication framework.
@@ -45,9 +43,6 @@ Section: libs
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          systemd,
-         libglib2.0-0,
-         libsqlite3-0,
-         libusb-1.0-0
 Provides: ${bio-drv-api:Provides}
 Description: Biometric Identification library
  The core layer of biometric identification authentication framework.
@@ -62,8 +57,7 @@ Architecture: any
 Section: libdevel
 Depends: ${misc:Depends},
          libbiometric0 (= ${binary:Version}),
-         systemd,
-         libglib2.0-0
+         systemd
 Description: Biometric Identification DRIVER API - development files
  It provides the development file for driver development based on biometric
  identification authentication framework.
@@ -72,7 +66,7 @@ Description: Biometric Identification DRIVER API - development files
 
 Package: biometric-utils
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, biometric-auth, systemd, libglib2.0-0
+Depends: ${shlibs:Depends}, ${misc:Depends}, biometric-auth, systemd
 Description: Biometric authentication utils
  Biometric authentication tools.
  This package provides the biometric-config-tool and biometric-device-discover
@@ -88,7 +82,6 @@ Depends: ${shlibs:Depends},
          ${bio-drv-api:Depends},
          libbiometric0,
          biometric-utils,
-         libfprint0
 Description: Biometric Authentication Driver (community multidevice)
  Community multi-device drivers for biometric authentication.
  Community multi-device drivers use libfprint for biometric identification.

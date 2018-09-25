@@ -1,5 +1,5 @@
-biometric-authentication (0.9.55-1) unstable; urgency=medium
+biometric-authentication (0.9.55-2) unstable; urgency=medium
 
   * Initial release. (Closes: #908197)
 
- -- handsome_feng <jianfengli@ubuntukylin.com>  Fri, 07 Sep 2018 14:45:52 +0800
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Tue, 25 Sep 2018 15:53:10 +0800
