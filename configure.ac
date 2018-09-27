@@ -128,6 +128,7 @@ AC_CONFIG_FILES([Makefile
 				src/drivers/community-multidevice/Makefile
 				src/drivers/community-multidevice/drivers/Makefile
 				src/utils/Makefile
+				src/utils/biometric-auth-client/Makefile
 				src/utils/biometric-config-tool/Makefile
 				src/utils/biometric-device-discover/Makefile
 				src/utils/biometric-device-discover/community-multidevice/Makefile
