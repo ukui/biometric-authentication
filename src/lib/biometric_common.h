@@ -917,6 +917,17 @@ void bio_free_dev_list(void);
 
 char * bio_new_string(char * old_str);
 
+/*
+ * 查询空闲索引号
+ *   在数据库中查询指定用户指定范围的空闲索引号
+ * @param[in]	dev		设备结构体
+ * @param[in]	uid		用户ID
+ * @param[in]	start	开始的索引值
+ * @param[in]	end		结束的索引值，-1代表不限大小
+ * @return		空闲的索引号，-1代表指定范围索引全被占用
+ */
+int bio_common_get_empty_index(bio_dev *dev, int uid, int start, int end);
+
 /* 数据库中查询空闲采样编号 */
 int bio_common_get_empty_sample_no(bio_dev *dev, int start, int end);
 
