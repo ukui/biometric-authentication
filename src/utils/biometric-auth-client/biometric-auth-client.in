@@ -50,6 +50,11 @@ ExitNormal = 0
 ExitParamError = 1
 ExitDBusNotExist = 2
 ExitStopOpsFailed = 3
+ExitAppApiNotMatch = 4
+
+APP_API_MAJOR = 0
+APP_API_MINOR = 11
+APP_API_FUNC = 1
 
 DrvEnableList = [_("Disable"), _("Enable")]
 DrvBioTypeList = [_("Finger Print"), _("Finger Vein"), _("Iris"), _("Face"), _("Voice Print")]
@@ -287,6 +292,17 @@ def getDrvOrDevList(argList, getType):
 		print(_("Biometric identification backend framework service is not started"))
 		sys.exit(ExitDBusNotExist)
 	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+
+	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
+	if api_check > 0:
+		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
+			" Please upgrade framework service or degrade client\n"))
+		sys.exit(ExitAppApiNotMatch)
+	if api_check < 0:
+		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
+			" Please degrade framework service or upgrade client\n"))
+		sys.exit(ExitAppApiNotMatch)
+
 	mGetList = bioIF.get_dbus_method(method, dbus_interface=None)
 	mReturn = mGetList()
 	drvList = mReturn[1]
@@ -395,6 +411,17 @@ def doEnroll(argList):
 
 	bus.add_signal_receiver(statusChangedHandler, dbus_interface="org.ukui.Biometric", signal_name="StatusChanged")
 	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+
+	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
+	if api_check > 0:
+		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
+			" Please upgrade framework service or degrade client\n"))
+		sys.exit(ExitAppApiNotMatch)
+	if api_check < 0:
+		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
+			" Please degrade framework service or upgrade client\n"))
+		sys.exit(ExitAppApiNotMatch)
+
 	bioIF.Enroll(opsDrvID, uid, -1, fname,
 					reply_handler=ops_handle_retcode_reply,
 					error_handler=ops_handle_error)
@@ -445,6 +472,17 @@ def doVerify(argList):
 
 	bus.add_signal_receiver(statusChangedHandler, dbus_interface="org.ukui.Biometric", signal_name="StatusChanged")
 	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+
+	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
+	if api_check > 0:
+		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
+			" Please upgrade framework service or degrade client\n"))
+		sys.exit(ExitAppApiNotMatch)
+	if api_check < 0:
+		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
+			" Please degrade framework service or upgrade client\n"))
+		sys.exit(ExitAppApiNotMatch)
+
 	bioIF.Verify(opsDrvID, uid, index,
 					reply_handler=ops_handle_retcode_reply,
 					error_handler=ops_handle_error)
@@ -487,6 +525,17 @@ def doCapture(argList):
 
 	bus.add_signal_receiver(statusChangedHandler, dbus_interface="org.ukui.Biometric", signal_name="StatusChanged")
 	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+
+	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
+	if api_check > 0:
+		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
+			" Please upgrade framework service or degrade client\n"))
+		sys.exit(ExitAppApiNotMatch)
+	if api_check < 0:
+		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
+			" Please degrade framework service or upgrade client\n"))
+		sys.exit(ExitAppApiNotMatch)
+
 	bioIF.Capture(opsDrvID,
 					reply_handler=ops_handle_capture_reply,
 					error_handler=ops_handle_error)
@@ -541,6 +590,17 @@ def doSearch(argList):
 
 	bus.add_signal_receiver(statusChangedHandler, dbus_interface="org.ukui.Biometric", signal_name="StatusChanged")
 	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+
+	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
+	if api_check > 0:
+		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
+			" Please upgrade framework service or degrade client\n"))
+		sys.exit(ExitAppApiNotMatch)
+	if api_check < 0:
+		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
+			" Please degrade framework service or upgrade client\n"))
+		sys.exit(ExitAppApiNotMatch)
+
 	bioIF.Search(opsDrvID, uid, index_start, index_end,
 					reply_handler=ops_handle_search_reply,
 					error_handler=ops_handle_error)
@@ -596,6 +656,17 @@ def doClean(argList):
 
 	bus.add_signal_receiver(statusChangedHandler, dbus_interface="org.ukui.Biometric", signal_name="StatusChanged")
 	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+
+	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
+	if api_check > 0:
+		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
+			" Please upgrade framework service or degrade client\n"))
+		sys.exit(ExitAppApiNotMatch)
+	if api_check < 0:
+		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
+			" Please degrade framework service or upgrade client\n"))
+		sys.exit(ExitAppApiNotMatch)
+
 	bioIF.Clean(opsDrvID, uid, index_start, index_end,
 					reply_handler=ops_handle_retcode_reply,
 					error_handler=ops_handle_error)
@@ -643,6 +714,17 @@ def doGetFeatureList(argList):
 
 	bus.add_signal_receiver(statusChangedHandler, dbus_interface="org.ukui.Biometric", signal_name="StatusChanged")
 	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+
+	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
+	if api_check > 0:
+		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
+			" Please upgrade framework service or degrade client\n"))
+		sys.exit(ExitAppApiNotMatch)
+	if api_check < 0:
+		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
+			" Please degrade framework service or upgrade client\n"))
+		sys.exit(ExitAppApiNotMatch)
+
 	bioIF.GetFeatureList(opsDrvID, uid, 0, -1,
 						reply_handler=ops_handle_get_feature_list_reply,
 						error_handler=ops_handle_error)
@@ -696,6 +778,17 @@ def doRename(argList):
 
 	bus.add_signal_receiver(statusChangedHandler, dbus_interface="org.ukui.Biometric", signal_name="StatusChanged")
 	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+
+	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
+	if api_check > 0:
+		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
+			" Please upgrade framework service or degrade client\n"))
+		sys.exit(ExitAppApiNotMatch)
+	if api_check < 0:
+		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
+			" Please degrade framework service or upgrade client\n"))
+		sys.exit(ExitAppApiNotMatch)
+
 	bioIF.Rename(opsDrvID, uid, index, new_name,
 					reply_handler=ops_handle_retcode_reply,
 					error_handler=ops_handle_error)
