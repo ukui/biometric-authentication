@@ -296,11 +296,11 @@ def getDrvOrDevList(argList, getType):
 	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
 	if api_check > 0:
 		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
-			" Please upgrade framework service or degrade client\n"))
+			" Please upgrade framework service or degrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 	if api_check < 0:
 		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
-			" Please degrade framework service or upgrade client\n"))
+			" Please degrade framework service or upgrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 
 	mGetList = bioIF.get_dbus_method(method, dbus_interface=None)
@@ -415,11 +415,11 @@ def doEnroll(argList):
 	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
 	if api_check > 0:
 		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
-			" Please upgrade framework service or degrade client\n"))
+			" Please upgrade framework service or degrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 	if api_check < 0:
 		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
-			" Please degrade framework service or upgrade client\n"))
+			" Please degrade framework service or upgrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 
 	bioIF.Enroll(opsDrvID, uid, -1, fname,
@@ -476,11 +476,11 @@ def doVerify(argList):
 	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
 	if api_check > 0:
 		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
-			" Please upgrade framework service or degrade client\n"))
+			" Please upgrade framework service or degrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 	if api_check < 0:
 		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
-			" Please degrade framework service or upgrade client\n"))
+			" Please degrade framework service or upgrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 
 	bioIF.Verify(opsDrvID, uid, index,
@@ -529,11 +529,11 @@ def doCapture(argList):
 	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
 	if api_check > 0:
 		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
-			" Please upgrade framework service or degrade client\n"))
+			" Please upgrade framework service or degrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 	if api_check < 0:
 		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
-			" Please degrade framework service or upgrade client\n"))
+			" Please degrade framework service or upgrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 
 	bioIF.Capture(opsDrvID,
@@ -553,17 +553,17 @@ def doSearch(argList):
 	global opsDrvID
 
 	opsType = OPS_TYPE_SEARCH
-	usage = _("%s %s [-u USER_NAME] -d DRIVER_ID -s INDEX_START -e INDEX_END") % (sys.argv[0], sys.argv[1])
+	usage = _("%s %s [-u USER_NAME] -d DRIVER_ID [-s INDEX_START] [-e INDEX_END]") % (sys.argv[0], sys.argv[1])
 
 	opt = OptionParser(usage)
 	opt.add_option("-u", action="store", type="string", dest="user_name", default=None,
 					help=_("User Name (Not set to search for all users)"))
 	opt.add_option("-d", action="store", type="int", dest="driver_id", default=-1,
 					help=_("Driver(or Device) ID"))
-	opt.add_option("-s", action="store", type="int", dest="index_start", default=-2,
-					help=_("Start of Feature Index"))
-	opt.add_option("-e", action="store", type="int", dest="index_end", default=-2,
-					help=_("End of Feature Index (-1 means search all)"))
+	opt.add_option("-s", action="store", type="int", dest="index_start", default=0,
+					help=_("Start of Feature Index (default 0)"))
+	opt.add_option("-e", action="store", type="int", dest="index_end", default=-1,
+					help=_("End of Feature Index (default -1, means search all)"))
 	options = opt.parse_args(args=argList)
 
 	if options[0].user_name is None:
@@ -574,7 +574,7 @@ def doSearch(argList):
 	index_start = options[0].index_start
 	index_end = options[0].index_end
 
-	if opsDrvID <= -1 or index_start < 0 or index_end <= -2:
+	if opsDrvID <= -1 or index_start < 0 or index_end < -1:
 		sys.stderr.write(_("Input parameter error\n"))
 		sys.stderr.write(opt.get_usage())
 		sys.exit(ExitParamError)
@@ -594,11 +594,11 @@ def doSearch(argList):
 	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
 	if api_check > 0:
 		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
-			" Please upgrade framework service or degrade client\n"))
+			" Please upgrade framework service or degrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 	if api_check < 0:
 		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
-			" Please degrade framework service or upgrade client\n"))
+			" Please degrade framework service or upgrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 
 	bioIF.Search(opsDrvID, uid, index_start, index_end,
@@ -660,11 +660,11 @@ def doClean(argList):
 	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
 	if api_check > 0:
 		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
-			" Please upgrade framework service or degrade client\n"))
+			" Please upgrade framework service or degrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 	if api_check < 0:
 		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
-			" Please degrade framework service or upgrade client\n"))
+			" Please degrade framework service or upgrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 
 	bioIF.Clean(opsDrvID, uid, index_start, index_end,
@@ -718,11 +718,11 @@ def doGetFeatureList(argList):
 	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
 	if api_check > 0:
 		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
-			" Please upgrade framework service or degrade client\n"))
+			" Please upgrade framework service or degrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 	if api_check < 0:
 		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
-			" Please degrade framework service or upgrade client\n"))
+			" Please degrade framework service or upgrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 
 	bioIF.GetFeatureList(opsDrvID, uid, 0, -1,
@@ -782,11 +782,11 @@ def doRename(argList):
 	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
 	if api_check > 0:
 		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
-			" Please upgrade framework service or degrade client\n"))
+			" Please upgrade framework service or degrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 	if api_check < 0:
 		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
-			" Please degrade framework service or upgrade client\n"))
+			" Please degrade framework service or upgrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 
 	bioIF.Rename(opsDrvID, uid, index, new_name,
