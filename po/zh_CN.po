@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: biometric-authentication 0.9.55\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-17 09:51+0800\n"
+"POT-Creation-Date: 2018-09-29 09:25+0800\n"
 "PO-Revision-Date: 2017-10-11 11:57+0800\n"
 "Last-Translator: droiing <jianglinxuan@kylinos.cn>\n"
 "Language-Team: Chinese (simplified)\n"
@@ -153,6 +153,10 @@ msgid "There is an exception to write PID file: %s\n"
 msgstr "写 PID 文件出现异常：%s\n"
 
 #: ../src/biometric-authenticationd.c:1633
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:153
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:171
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:190
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:224
 msgid "No such device"
 msgstr "无此设备"
 
@@ -618,51 +622,51 @@ msgstr "特征重命名不完全，请重试"
 msgid "Device internal error"
 msgstr "设备内部错误"
 
-#: ../src/lib/biometric_common.c:1427
+#: ../src/lib/biometric_common.c:1473
 msgid "Init libusb Error\n"
 msgstr "初始化 libusb库 失败\n"
 
-#: ../src/lib/biometric_common.c:1434
+#: ../src/lib/biometric_common.c:1480
 msgid "Get USB Device List Error\n"
 msgstr "获取USB设备列表失败\n"
 
-#: ../src/lib/biometric_common.c:1443
+#: ../src/lib/biometric_common.c:1489
 msgid "Can not get usb information\n"
 msgstr "无法获取USB相关信息\n"
 
-#: ../src/lib/biometric_common.c:1460
+#: ../src/lib/biometric_common.c:1506
 #, c-format
 msgid "libbiometric detected usb device(%s): %d\n"
 msgstr "libbiometric检测到USB设备(%s)：%d\n"
 
-#: ../src/lib/biometric_common.c:1701
+#: ../src/lib/biometric_common.c:1747
 #, c-format
 msgid "Get function %s handle error: %s\n"
 msgstr "获取函数 %s 句柄出错：%s\n"
 
-#: ../src/lib/biometric_common.c:1718
+#: ../src/lib/biometric_common.c:1764
 msgid "Error: Can not get device descriptor\n"
 msgstr "错误：无法获取设备描述符\n"
 
-#: ../src/lib/biometric_common.c:1721
+#: ../src/lib/biometric_common.c:1767
 #, c-format
 msgid "Device attached: %04x:%04x\n"
 msgstr "设备插入：%04x:%04x\n"
 
-#: ../src/lib/biometric_common.c:1782
+#: ../src/lib/biometric_common.c:1828
 msgid "Error getting device descriptor"
 msgstr "错误：无法获取设备描述符"
 
-#: ../src/lib/biometric_common.c:1785
+#: ../src/lib/biometric_common.c:1831
 #, c-format
 msgid "Device detached: %04x:%04x\n"
 msgstr "设备拔出：%04x:%04x\n"
 
-#: ../src/lib/biometric_common.c:1911
+#: ../src/lib/biometric_common.c:1957
 msgid "Unable to find feature that require renaming\n"
 msgstr "未找到需要重命名的特征\n"
 
-#: ../src/lib/biometric_common.c:1914
+#: ../src/lib/biometric_common.c:1960
 #, c-format
 msgid "There are %d feature samples to renaming failed, please try again\n"
 msgstr "%d 个特征采样重命名失败，请重试\n"
@@ -818,25 +822,25 @@ msgid "Device failed to open"
 msgstr "设备打开失败"
 
 #: ../src/drivers/community-multidevice/community_ops.c:333
-#: ../src/drivers/community-multidevice/community_ops.c:1091
-#: ../src/drivers/community-multidevice/community_ops.c:1279
+#: ../src/drivers/community-multidevice/community_ops.c:1089
+#: ../src/drivers/community-multidevice/community_ops.c:1277
 #, c-format
 msgid "Unknown error, error code: %d"
 msgstr "出现未知的错误，错误码：%d"
 
-#: ../src/drivers/community-multidevice/community_ops.c:459
-#: ../src/drivers/community-multidevice/community_ops.c:542
-#: ../src/drivers/community-multidevice/community_ops.c:677
+#: ../src/drivers/community-multidevice/community_ops.c:458
+#: ../src/drivers/community-multidevice/community_ops.c:541
+#: ../src/drivers/community-multidevice/community_ops.c:676
 msgid "Find the following feature matching:\n"
 msgstr "找到以下匹配的特征：\n"
 
-#: ../src/drivers/community-multidevice/community_ops.c:626
+#: ../src/drivers/community-multidevice/community_ops.c:625
 #, c-format
 msgid ""
 "Search from offset %d, index %d has been searched, global index %d(%d + %d)\n"
 msgstr "从偏移 %d 开始搜索，搜索到索引 %d, 全局索引 %d(%d + %d)\n"
 
-#: ../src/drivers/community-multidevice/community_ops.c:631
+#: ../src/drivers/community-multidevice/community_ops.c:630
 #, c-format
 msgid ""
 "The %d feature has been searched(UID = %d, Index = %d, Index Name = %s), "
@@ -844,72 +848,72 @@ msgid ""
 msgstr ""
 "搜索到第 %d 个特征(UID = %d, Index = %d, Index Name = %s)，请按下手指继续搜索"
 
-#: ../src/drivers/community-multidevice/community_ops.c:775
+#: ../src/drivers/community-multidevice/community_ops.c:774
 #, c-format
 msgid "Device %s[%d] received interrupt request\n"
 msgstr "设备 %s[%d] 收到中断请求\n"
 
-#: ../src/drivers/community-multidevice/community_ops.c:820
+#: ../src/drivers/community-multidevice/community_ops.c:819
 msgid "Sample complete"
 msgstr "采样完成"
 
-#: ../src/drivers/community-multidevice/community_ops.c:822
+#: ../src/drivers/community-multidevice/community_ops.c:821
 msgid ""
 "Enrollment failed due to incomprehensible data. (Please use the same finger "
 "at different sampling stages of the same enroll)"
 msgstr ""
 "由于采样数据无法理解而导致录入失败（请在同一次录入的不同阶段使用同一手指）"
 
-#: ../src/drivers/community-multidevice/community_ops.c:826
+#: ../src/drivers/community-multidevice/community_ops.c:825
 msgid ""
 "Please place your finger again because of poor quality of the sample or "
 "other scanning problems"
 msgstr "由于采样的图像质量较差或其他扫描问题导致采样指纹失败，请重放手指..."
 
-#: ../src/drivers/community-multidevice/community_ops.c:829
+#: ../src/drivers/community-multidevice/community_ops.c:828
 msgid "Your swipe was too short, please place your finger again."
 msgstr "由于手指的滑动距离太短导致采样失败，请重放手指..."
 
-#: ../src/drivers/community-multidevice/community_ops.c:832
+#: ../src/drivers/community-multidevice/community_ops.c:831
 msgid ""
 "Didn't catch that, please center your finger on the sensor and try again."
 msgstr "由于手指偏离设备导致采样失败，请重放手指..."
 
-#: ../src/drivers/community-multidevice/community_ops.c:835
+#: ../src/drivers/community-multidevice/community_ops.c:834
 msgid ""
 "Because of the scanning image quality or finger pressure problem, the "
 "sampling failed, please remove the finger and retry"
 msgstr "由于扫描成像质量或手指压力问题导致采样失败。请移开手指后重试"
 
-#: ../src/drivers/community-multidevice/community_ops.c:839
+#: ../src/drivers/community-multidevice/community_ops.c:838
 msgid "Unable to generate feature data, enroll failure"
 msgstr "无法生成特征数据，录入失败"
 
-#: ../src/drivers/community-multidevice/community_ops.c:841
+#: ../src/drivers/community-multidevice/community_ops.c:840
 msgid ""
 "Sample start, please press and lift your finger (Some devices need to swipe "
 "your finger)"
 msgstr "采样开始，请按下并抬起您的手指（部分设备需要滑动手指）"
 
-#: ../src/drivers/community-multidevice/community_ops.c:896
+#: ../src/drivers/community-multidevice/community_ops.c:895
 #, c-format
 msgid "Could not open device (driver %s)"
 msgstr "无法打开设备（驱动 %s）"
 
-#: ../src/drivers/community-multidevice/community_ops.c:1066
-#: ../src/drivers/community-multidevice/community_ops.c:1231
+#: ../src/drivers/community-multidevice/community_ops.c:1064
+#: ../src/drivers/community-multidevice/community_ops.c:1229
 #, c-format
 msgid "Failed to call function %s\n"
 msgstr "调用函数 %s 失败\n"
 
-#: ../src/drivers/community-multidevice/community_ops.c:1114
+#: ../src/drivers/community-multidevice/community_ops.c:1112
 #, c-format
 msgid ""
 "Enroll failed: The feature was successfully sampled, but the encoding of the "
 "sampling feature could not be generated"
 msgstr "录入失败：特征采样成功，但无法生成采样特征的编码"
 
-#: ../src/drivers/community-multidevice/community_ops.c:1131
+#: ../src/drivers/community-multidevice/community_ops.c:1129
 #, c-format
 msgid ""
 "The %d [%d/%d] sampling was successful, in the next sampling: please press "
@@ -917,6 +921,460 @@ msgid ""
 msgstr ""
 "第 %d [%d/%d] 次采样成功，正在进行下一次采样：请按下并抬起您的手指（部分设备"
 "需要滑动手指）"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:59
+msgid "Disable"
+msgstr "禁用"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:59
+msgid "Enable"
+msgstr "启用"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:60
+msgid "Finger Print"
+msgstr "指纹"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:60
+msgid "Finger Vein"
+msgstr "指静脉"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:60
+msgid "Iris"
+msgstr "虹膜"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:60
+msgid "Face"
+msgstr "人脸"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:60
+msgid "Voice Print"
+msgstr "声纹"
+
+#
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:61
+msgid "Device"
+msgstr "设备"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:61
+msgid "OS"
+msgstr "系统"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:61
+msgid "Device and OS"
+msgstr "设备和系统"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
+msgid "Original Data"
+msgstr "原始数据"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
+msgid "Eigen Value"
+msgstr "特征值"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
+msgid "Eigen Vector"
+msgstr "特征向量"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:63
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:64
+msgid "Hardware"
+msgstr "硬件"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:63
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:64
+msgid "Software"
+msgstr "软件"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:63
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:64
+msgid "Mix"
+msgstr "混合"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:63
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:64
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:69
+msgid "Other"
+msgstr "其它"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:67
+msgid "Serial"
+msgstr "串口"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:67
+msgid "USB"
+msgstr "USB"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:67
+msgid "PCIE"
+msgstr "PCIE"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:68
+msgid "Any"
+msgstr "任意"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:71
+msgid "Common"
+msgstr "通用"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:71
+msgid "Open"
+msgstr "打开设备"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:71
+msgid "Enroll"
+msgstr "录入"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:71
+msgid "Verify"
+msgstr "正在认证特征"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:71
+msgid "Identify"
+msgstr "识别"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:71
+msgid "Capture"
+msgstr "捕获"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:72
+msgid "Search"
+msgstr "搜索"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:72
+msgid "Clean"
+msgstr "清理"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:72
+msgid "GetFeatureList"
+msgstr "获取特征列表"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:72
+msgid "Rename"
+msgstr "重命名"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:72
+msgid "Close"
+msgstr "关闭设备"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:74
+msgid ""
+"Usage:\n"
+"  biometric-auth-client BuiltinCommands ...\n"
+"\n"
+"BuiltinCommands:\n"
+"  get-driver-list       Get Driver List\n"
+"  get-device-list       Get Device List\n"
+"  get-feature-list      Get Feature List\n"
+"  enroll                Enroll Feature\n"
+"  verify                Verify Feature\n"
+"  capture               Capture Feature\n"
+"  search                Search Feature\n"
+"  clean                 Clean Feature\n"
+"  rename                Rename Feature\n"
+"\n"
+"Options:\n"
+"  -h, --help            show this help message and exit\n"
+msgstr ""
+"用法：\n"
+"  biometric-auth-client 内建指令 ...\n"
+"\n"
+"内建指令:\n"
+"  get-driver-list       获取特征列表\n"
+"  get-device-list       获取设备列表\n"
+"  get-feature-list      获取特征列表\n"
+"  enroll                特征录入\n"
+"  verify                特征验证\n"
+"  capture               特征捕获\n"
+"  search                特征查找\n"
+"  clean                 特征清除\n"
+"  rename                特征重命名\n"
+"\n"
+"选项：\n"
+"  -h, --help            显示帮助选项并退出\n"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:114
+msgid "non-existent user"
+msgstr "用户不存在"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:150
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:168
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:187
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:221
+msgid "The device is busy, please try again later"
+msgstr "设备正忙，请稍后再试"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:156
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:174
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:193
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:227
+msgid "No permission to perform this operation"
+msgstr "没有权限执行该操作"
+
+# c-format
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:177
+#, c-format
+msgid "Character string: %s\n"
+msgstr "特征字符串：%s\n"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:196
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:230
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:284
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:329
+msgid "No."
+msgstr "No."
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:196
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:230
+msgid "User ID"
+msgstr "用户ID"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:196
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:230
+msgid "User Name"
+msgstr "用户名"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:196
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:231
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:450
+msgid "Feature Index"
+msgstr "特征索引"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:196
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:231
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:389
+msgid "Feature Name"
+msgstr "特征名称"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:210
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:248
+msgid "List of features found:"
+msgstr "查找到的特征列表："
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:230
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:285
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:345
+msgid "Biometric Type"
+msgstr "生物特征类型"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:231
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:284
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:329
+msgid "Driver Name"
+msgstr "驱动名"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:269
+msgid "Show all fields (Highest priority)"
+msgstr "显示所有字段（最高优先级）"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:271
+msgid "Show 'Driver Full Name' fields"
+msgstr "显示‘驱动全名’字段"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:273
+msgid "Show 'Biometric Type' fields"
+msgstr "显示‘生物特征类型’字段"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:275
+msgid "Show 'Storge Type' fields"
+msgstr "显示‘存储类型’字段"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:277
+msgid "Show 'Eigen Type' fields"
+msgstr "显示‘特征类型’字段"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:279
+msgid "Show 'Verify Type' fields"
+msgstr "显示‘验证类型’字段"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:281
+msgid "Show 'Identify Type' fields"
+msgstr "显示‘识别类型’字段"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:284
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:329
+msgid "Driver ID"
+msgstr "驱动ID"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:284
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:340
+msgid "Driver Full Name"
+msgstr "驱动全名"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:284
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:329
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:342
+msgid "Status"
+msgstr "状态"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:285
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:348
+msgid "Storge Type"
+msgstr "存储类型"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:285
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:351
+msgid "Eigen Type"
+msgstr "特征类型"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:285
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:354
+msgid "Verify Type"
+msgstr "验证类型"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:357
+msgid "Identify Type"
+msgstr "识别类型"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:329
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:359
+msgid "Bus Type"
+msgstr "总线类型"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:292
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:409
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:470
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:523
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:588
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:654
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:712
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:776
+msgid "Biometric identification backend framework service is not started"
+msgstr "生物特征识别后端框架服务未启动"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:298
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:417
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:478
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:531
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:596
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:662
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:720
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:784
+msgid ""
+"Client APP_API is newer than biometric identification framework service. "
+"Please upgrade framework service or degrade client.\n"
+msgstr ""
+"客户端的APP_API比生物特征识别框架服务新。请升级框架服务或者降级客户端。\n"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:302
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:421
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:482
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:535
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:600
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:666
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:724
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:788
+msgid ""
+"Client APP_API is older than biometric identification framework service. "
+"Please degrade framework service or upgrade client.\n"
+msgstr ""
+"客户端的APP_API比生物特征识别框架服务旧。请降级框架服务或者升级客户端。\n"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:381
+#, c-format
+msgid "%s %s [-u USER_NAME] -d DRIVER_ID -n FEATURE_NAME"
+msgstr "%s %s [-u 用户名] -d 驱动ID -n 特征名"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:385
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:446
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:625
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:691
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:749
+#, c-format
+msgid "User Name (Default is current user: %s)"
+msgstr "用户名（默认为当前用户：%s）"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:387
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:448
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:507
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:562
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:627
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:693
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:751
+msgid "Driver(or Device) ID"
+msgstr "驱动（或设备）ID"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:399
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:460
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:513
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:578
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:639
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:702
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:766
+msgid "Input parameter error\n"
+msgstr "输入参数错误\n"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:442
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:621
+#, c-format
+msgid "%s %s [-u USER_NAME] -d DRIVER_ID -i INDEX"
+msgstr "%s %s [-u 用户名] -d 驱动ID -i 索引"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:503
+#, c-format
+msgid "%s %s -d DRIVER_ID"
+msgstr "%s %s [-u 用户名] -d 驱动ID"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:556
+#, c-format
+msgid "%s %s [-u USER_NAME] -d DRIVER_ID [-s INDEX_START] [-e INDEX_END]"
+msgstr "%s %s [-u 用户名] -d 驱动ID [-s 开始的索引] [-e 结束的索引]"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:560
+msgid "User Name (Not set to search for all users)"
+msgstr "用户名（不设置则搜索所有用户）"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:564
+msgid "Start of Feature Index (default 0)"
+msgstr "开始的特征索引（默认为0）"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:566
+msgid "End of Feature Index (default -1, means search all)"
+msgstr "结束的特征索引（默认为-1，表示搜索所有特征）"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:629
+msgid "The Feature Index You Want To Delete (-1 means delete all)"
+msgstr "需要删除的特征的索引（-1表示删除所有特征）"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:687
+#, c-format
+msgid "%s %s [-u USER_NAME] -d DRIVER_ID"
+msgstr "%s %s [-u 用户名] -d 驱动ID"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:745
+#, c-format
+msgid "%s %s [-u USER_NAME] -d DRIVER_ID -i INDEX -n NEW_NAME"
+msgstr "%s %s [-u 用户名] -d 驱动ID -i 索引 -n 新的特征名称"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:753
+msgid "The Feature Index that needs to be renamed"
+msgstr "需要重命名的特征索引"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:755
+msgid "New Feature Name"
+msgstr "新的特征名称"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:812
+msgid ""
+"The abort operation failed and the current operation will continue in the "
+"background."
+msgstr "终止操作失败，当前操作会在后台继续运行。"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:813
+msgid "The device may have to wait a while before being used."
+msgstr "该设备可能需要等待一段时间才能使用。"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:814
+msgid ""
+"The wait problem can be solved by restarting the biometrics backend "
+"framework service."
+msgstr "可以重启生物特征识别后台框架服务解决等待问题。"
+
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:858
+#, c-format
+msgid "Unknown Builtin Commands: %s\n"
+msgstr "未知的内建指令：%s\n"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:35
 msgid "When there is a driver of the same name, force to override it"
@@ -1073,497 +1531,3 @@ msgstr ""
 #, c-format
 msgid "Failed to initialize libfprint\n"
 msgstr "初始化 libfprint 失败\n"
-
-#~ msgid "Hardware level cancel success, device status: %d\n"
-#~ msgstr "硬取消成功，设备状态为：%d\n"
-
-#~ msgid "A210SendInfo: "
-#~ msgstr "A210发送信息："
-
-#~ msgid "Identify success"
-#~ msgstr "识别成功"
-
-#~ msgid "Identified ID: %d\n"
-#~ msgstr "识别出的ID: %d\n"
-
-#~ msgid "Enroll success"
-#~ msgstr "录入成功"
-
-#~ msgid "Enrolled ID: %d\n"
-#~ msgstr "录入的ID: %d\n"
-
-#~ msgid "A210OpsResult[%d]: %s\n"
-#~ msgstr "A210操作结果[%d]：%s\n"
-
-#~ msgid "Device returns unknown data and skips processing"
-#~ msgstr "设备返回未知数据，跳过处理"
-
-#~ msgid "A210RecvInfo: "
-#~ msgstr "A210接收信息："
-
-#~ msgid "A210 enroll success, enroll_id = %d\n"
-#~ msgstr "A210 录入成功, enroll_id = %d\n"
-
-#~ msgid "a210_ops_search return NULL, device status: %d\n"
-#~ msgstr "a210_ops_search返回NULL, 设备状态为：%d\n"
-
-#~ msgid ""
-#~ "software level cancel success, dev_status = %d, StopFlag = %d, timeused = "
-#~ "%d, timeout = %d\n"
-#~ msgstr ""
-#~ "软取消成功，dev_status = %d, StopFlag = %d, timeused = %d, timeout = %d\n"
-
-#~ msgid "Look at the mirror to the iris device"
-#~ msgstr "双眼请看向虹膜设备的镜子"
-
-#~ msgid "Can not open serial"
-#~ msgstr "无法打开串口"
-
-#~ msgid "No.%d processing starts ...\n"
-#~ msgstr "第 %d 次处理开始 ...\n"
-
-#~ msgid "Command: 0x%02X returns data checksum error\n"
-#~ msgstr "指令: 0x%02X 返回数据校验和错误\n"
-
-#~ msgid "Device started successfully! The current version is: v"
-#~ msgstr "设备启动成功!当前版本为：v"
-
-#~ msgid "Identify failed"
-#~ msgstr "识别失败"
-
-#~ msgid "Identify success, ID: %s"
-#~ msgstr "识别成功，ID: %s"
-
-#~ msgid "Enroll success, ID: %s"
-#~ msgstr "录入成功，ID: %s"
-
-#~ msgid "Enroll failed, ID: %s"
-#~ msgstr "录入失败，ID: %s"
-
-#~ msgid "Enroll success, the user already exists, correct ID: %s"
-#~ msgstr "录入成功，用户已存在，修正ID: %s"
-
-#~ msgid "ID: %s enroll failed, ret: 0x%02X"
-#~ msgstr "ID: %s 录入失败，返回值：0x%02X"
-
-#~ msgid "Delete user %s template success"
-#~ msgstr "删除用户 %s 模板成功"
-
-#~ msgid "Delete user %s template failed"
-#~ msgstr "删除用户 %s 模板失败"
-
-#~ msgid "Read user success, user list: %s"
-#~ msgstr "读取用户成功，用户列表：%s"
-
-#~ msgid "Read user failed"
-#~ msgstr "读取用户失败"
-
-#~ msgid "Cancel the operation success"
-#~ msgstr "取消操作成功"
-
-#~ msgid "Get device status success, device operates normally"
-#~ msgstr "获取状态成功，设备工作正常"
-
-#~ msgid "Device operates abnormally, hardware version does not match"
-#~ msgstr "设备工作异常，硬件版本不匹配"
-
-#~ msgid "Get user %s's template success"
-#~ msgstr "获取用户 %s 的模板成功"
-
-#~ msgid "Get user %s's template failed\n"
-#~ msgstr "获取用户 %s 的模板失败\n"
-
-#~ msgid "Get user %s's template failed"
-#~ msgstr "获取用户 %s 的模板失败"
-
-#~ msgid "Receive the data of multiple packets, result = %d, ret = %d\n"
-#~ msgstr "接收多包数据，返回值：%d，ret = %d\n"
-
-#~ msgid "Issue template success"
-#~ msgstr "下发模板成功"
-
-#~ msgid "Issue template failed"
-#~ msgstr "下发模板失败"
-
-#~ msgid "Update success"
-#~ msgstr "升级成功"
-
-#~ msgid "Update failed"
-#~ msgstr "升级成功"
-
-#~ msgid ""
-#~ "Switch mode success, current mode is card-read mode, please insert the IC "
-#~ "card into the slot"
-#~ msgstr "切换模式成功，当前模式为读卡模式，请将IC卡插入卡槽中"
-
-#~ msgid ""
-#~ "Switch mode success, the current mode is local recognition mode, identify "
-#~ "by the iris library that is stored in device"
-#~ msgstr "切换模式成功，当前模式为本地识别模式，使用设备存储的虹膜库进行识别"
-
-#~ msgid "Switch mode failed"
-#~ msgstr "切换模式失败"
-
-#~ msgid ""
-#~ "Read the M1 card number failed, please check if the card is in the slot"
-#~ msgstr "读取M1卡号失败，请检查卡是否在卡槽中"
-
-#~ msgid "Read M1 card number success, card number: %X%X%X%X"
-#~ msgstr "读取M1卡号成功，卡号：%X%X%X%X"
-
-#~ msgid "Capture image success"
-#~ msgstr "捕获图像成功"
-
-#~ msgid "Capture image failed"
-#~ msgstr "捕获图像失败"
-
-#~ msgid "Device BBC check error"
-#~ msgstr "设备BBC校验错误"
-
-#~ msgid "Issue configuration parameter success"
-#~ msgstr "下发配置参数成功"
-
-#~ msgid "Keep distance"
-#~ msgstr "请保持距离"
-
-#~ msgid "(Left)"
-#~ msgstr "(左)"
-
-#~ msgid "Adjust distance"
-#~ msgstr "请调整距离"
-
-#~ msgid "Look in the mirror"
-#~ msgstr "请看镜子里"
-
-#~ msgid "Come closer"
-#~ msgstr "请靠近一点"
-
-#~ msgid "Open your eyes"
-#~ msgstr "请张大眼睛"
-
-#~ msgid "Don't squint"
-#~ msgstr "请不要斜视"
-
-#~ msgid "(Right)"
-#~ msgstr "(右)"
-
-#~ msgid "Generate real-time template success"
-#~ msgstr "产生实时模板成功"
-
-#~ msgid "Generate real-time template failed"
-#~ msgstr "产生实时模板失败"
-
-#~ msgid "Capture real-time template success"
-#~ msgstr "获取实时模板成功"
-
-#~ msgid "Capture real-time template failed"
-#~ msgstr "获取实时模板失败"
-
-#~ msgid "Stop generating real-time template success"
-#~ msgstr "结束产生实时模板成功"
-
-#~ msgid "Stop generating real-time template failed"
-#~ msgstr "结束产生实时模板失败"
-
-#~ msgid "Unsupported commands"
-#~ msgstr "暂不支持的命令"
-
-#~ msgid "No.%d processing end, ret = %d ...\n"
-#~ msgstr "第 %d 次处理结束，ret = %d ...\n"
-
-#~ msgid "Current send data: "
-#~ msgstr "当前发送数据："
-
-#~ msgid "Serial port is not opened, please open it"
-#~ msgstr "串口没有打开，请打开串口"
-
-#~ msgid "This command does not need to issue data"
-#~ msgstr "该命令不需要下发数据信息"
-
-#~ msgid "User ID length error"
-#~ msgstr "用户ID长度错误"
-
-#~ msgid "Template file or user ID length error"
-#~ msgstr "模板文件或用户ID长度错误"
-
-#~ msgid "File length error"
-#~ msgstr "文件长度错误"
-
-#~ msgid "Mode setting error"
-#~ msgstr "模式设置错误"
-
-#~ msgid "Not allowed to issue the interface internal command"
-#~ msgstr "不允许下发接口内部命令"
-
-#~ msgid "Parameter length error"
-#~ msgstr "参数长度错误"
-
-#~ msgid "All user"
-#~ msgstr "全部用户"
-
-#~ msgid "Receiving %d bytes of data from a serial port: %s"
-#~ msgstr "从串口接收到 %d 字节的数据：%s"
-
-#~ msgid "Legal data packets"
-#~ msgstr "合法的数据包"
-
-#~ msgid "Illegal data packets"
-#~ msgstr "不合法的数据包"
-
-#~ msgid "Can't Open Serial Port: %s\n"
-#~ msgstr "无法打开串口：%s\n"
-
-#~ msgid "No R301 finger print device detected\n"
-#~ msgstr "未检测到R301指纹设备\n"
-
-#~ msgid "R301RespondParse: Not a respond package\n"
-#~ msgstr "R301RespondParse: 非应答包\n"
-
-#~ msgid "R301RespondParse: Respond package length error\n"
-#~ msgstr "R301RespondParse: 应答包长度错误\n"
-
-#~ msgid "R301RespondParse: Respond package checksum error\n"
-#~ msgstr "R301RespondParse: 应答包校验和错误\n"
-
-#~ msgid "R301 send data package error\n"
-#~ msgstr "R301发送数据包出错\n"
-
-#~ msgid "R301 send command error\n"
-#~ msgstr "R301发送指令出错\n"
-
-#~ msgid "R301 receive respond error\n"
-#~ msgstr "R301接收应答出错\n"
-
-#~ msgid "Get basic parameters failed\n"
-#~ msgstr "获取基本参数失败\n"
-
-#~ msgid "Get serial attribute failed\n"
-#~ msgstr "获取串口属性失败\n"
-
-#~ msgid "Set serial failed\n"
-#~ msgstr "设置串口失败\n"
-
-#~ msgid "Receive download command failed\n"
-#~ msgstr "接收下载指令失败\n"
-
-#~ msgid "Send data package failed\n"
-#~ msgstr "发送数据包失败\n"
-
-#~ msgid "Get fingerprint characteristics failed\n"
-#~ msgstr "获取指纹特征出错\n"
-
-#~ msgid "Get message header failed\n"
-#~ msgstr "获取报文头失败\n"
-
-#~ msgid "Get message failed\n"
-#~ msgstr "获取报文失败\n"
-
-#~ msgid "Delete fingerprint failed\n"
-#~ msgstr "删除指纹失败\n"
-
-#~ msgid "Set port for R301 failed\n"
-#~ msgstr "R301设置端口失败\n"
-
-#~ msgid "Open R301 device failed\n"
-#~ msgstr "打开R301设备失败\n"
-
-#~ msgid "Set R301 port[%s] file descriptor flag failed\n"
-#~ msgstr "设置R301端口[%s]文件描述符标志失败\n"
-
-#~ msgid "Set R301 device failed\n"
-#~ msgstr "设置R301设备失败\n"
-
-#~ msgid "Collect fingerprint characteristics error"
-#~ msgstr "采集指纹特征出错"
-
-#~ msgid "Fingerprint characteristics collected, please raise your finger"
-#~ msgstr "已采集到指纹信息，请抬起手指"
-
-#~ msgid "Collecting fingerprint characteristics, please press you finger"
-#~ msgstr "正在采集指纹信息，请按下手指"
-
-#~ msgid ""
-#~ "For the 2nd collection fingerprint characteristics, please press you "
-#~ "finger"
-#~ msgstr "第 2 次采集指纹信息，请按下手指"
-
-#~ msgid ""
-#~ "For the 3rd collection fingerprint characteristics, please press you "
-#~ "finger"
-#~ msgstr "第 3 次采集指纹信息，请按下手指"
-
-#~ msgid ""
-#~ "For the 4th collection fingerprint characteristics, please press you "
-#~ "finger"
-#~ msgstr "第 4 次采集指纹信息，请按下手指"
-
-#~ msgid ""
-#~ "For the 5th collection fingerprint characteristics, please press you "
-#~ "finger"
-#~ msgstr "第 5 次采集指纹信息，请按下手指"
-
-#~ msgid ""
-#~ "Collecting fingerprint characteristics, please keep your finger pressed"
-#~ msgstr "正在采集指纹，请保持手指按压状态"
-
-#~ msgid "Generate fingerprint characteristics failed"
-#~ msgstr "生成指纹特征失败"
-
-#~ msgid "Generate fingerprint template failed"
-#~ msgstr "生成指纹模板失败"
-
-#~ msgid "Transport fingerprint template failed"
-#~ msgstr "传输指纹模板失败"
-
-#~ msgid "Save fingerprint template failed"
-#~ msgstr "存储指纹模板失败"
-
-#~ msgid "R301 device has insufficient storage space to record the fingerprint"
-#~ msgstr "R301设备存储空间不足，无法录入该指纹"
-
-#~ msgid "The fingerprint template is being saved, please wait"
-#~ msgstr "正在存储指纹模板，请稍候"
-
-#~ msgid "Cannot operate device node: %s\n"
-#~ msgstr "无法操作设备节点：%s\n"
-
-#~ msgid "Get R301 device parameter failed\n"
-#~ msgstr "获取R301设备参数失败\n"
-
-#~ msgid "R301GetFingerPrintData error: %s\n"
-#~ msgstr "R301GetFingerPrintData 错误：%s\n"
-
-#~ msgid ""
-#~ "The %dth sampling is successful and the eigenvalue(Base64) is: %.*s\n"
-#~ msgstr "第 %d 次采样成功，特征值(Base64)为：%.*s \n"
-
-#~ msgid "Matched ID:"
-#~ msgstr "匹配到的ID："
-
-#~ msgid "R301 driver unload\n"
-#~ msgstr "卸载R301驱动\n"
-
-#~ msgid "Gets the function '%s' error from UD650 driver: %s\n"
-#~ msgstr "从UD650驱动获取函数 '%s' 出错：%s\n"
-
-#~ msgid "Loading the dynamic link library '%s'\n"
-#~ msgstr "正在加载动态链接库 '%s'\n"
-
-#~ msgid "dlopen %s error: %s\n"
-#~ msgstr "dlopen %s 出错：%s\n"
-
-#~ msgid "Load the dynamic link library '%s' successful\n"
-#~ msgstr "加载动态链接库 '%s' 成功\n"
-
-#~ msgid "Collect finger vein characteristics error"
-#~ msgstr "采集指静脉特征出错"
-
-#~ msgid "Finger vein characteristics collected, please raise your finger"
-#~ msgstr "已采集到指静脉信息，请抬起手指"
-
-#~ msgid "Collecting finger vein characteristics, please press you finger"
-#~ msgstr "正在采集指静脉信息，请按下手指"
-
-#~ msgid ""
-#~ "For the 2nd collection finger vein characteristics, please press you "
-#~ "finger"
-#~ msgstr "第 2 次采集指静脉信息，请按下手指"
-
-#~ msgid ""
-#~ "For the 3rd collection finger vein characteristics, please press you "
-#~ "finger"
-#~ msgstr "第 3 次采集指静脉信息，请按下手指"
-
-#~ msgid ""
-#~ "For the 4th collection finger vein characteristics, please press you "
-#~ "finger"
-#~ msgstr "第 4 次采集指静脉信息，请按下手指"
-
-#~ msgid ""
-#~ "For the 5th collection finger vein characteristics, please press you "
-#~ "finger"
-#~ msgstr "第 5 次采集指静脉信息，请按下手指"
-
-#~ msgid "Open UD650 finger vein device error"
-#~ msgstr "打开UD650指静脉设备出错"
-
-#~ msgid "Get UD650 algorithms library version error"
-#~ msgstr "获取UD650算法库版本出错"
-
-#~ msgid "Initialize UD650 algorithms library error"
-#~ msgstr "初始化UD650算法库出错"
-
-#~ msgid "Set security level error"
-#~ msgstr "设置安全等级出错"
-
-#~ msgid "Delete the contrast space data error"
-#~ msgstr "删除对比空间数据出错"
-
-#~ msgid "Load finger vein characteristics to the contrast space error"
-#~ msgstr "加载指静脉特征到对比空间出错"
-
-#~ msgid "Load data to the contrast space error"
-#~ msgstr "加载数据到对比空间出错"
-
-#~ msgid "Get data from the contrast space error"
-#~ msgstr "获取对比空间数据出错"
-
-#~ msgid "Load the dynamic link library '%s' failed\n"
-#~ msgstr "加载动态链接库 '%s' 失败\n"
-
-#~ msgid "Dynamic link library %s has been loaded\n"
-#~ msgstr "动态链接库 %s 已经加载\n"
-
-#~ msgid "Function XG_OpenVeinDev is NULL\n"
-#~ msgstr "XG_OpenVeinDev函数不存在\n"
-
-#~ msgid "Function XG_DetectUsbDev is NULL\n"
-#~ msgstr "XG_DetectUsbDev函数不存在\n"
-
-#~ msgid "No %s finger vein device detected\n"
-#~ msgstr "未检测到 %s 指静脉设备\n"
-
-#~ msgid "There is %d %s finger vein device detected\n"
-#~ msgstr "检测到 %d 个 %s 指静脉设备\n"
-
-#~ msgid "XG_OpenVeinDev ERROR[%d]\n"
-#~ msgstr "XG_OpenVeinDev错误[%d]\n"
-
-#~ msgid "UD650 driver library version: %s\n"
-#~ msgstr "UD650驱动库版本：%s\n"
-
-#~ msgid "Get UD650 driver library version error\n"
-#~ msgstr "获取UD650驱动库版本出错\n"
-
-#~ msgid "Create UD650 algorithms library error[%d]\n"
-#~ msgstr "创建UD650算法库错误[%d]\n"
-
-#~ msgid "Set UD650 security level error[%d]\n"
-#~ msgstr "设置UD650安全等级错误[%d]\n"
-
-#~ msgid "Open device and create UD650 algorithms library successful\n"
-#~ msgstr "打开设备、创建UD650算法库成功\n"
-
-#~ msgid "The %dth sampling is successful and the eigenvalue is: %.32s\n"
-#~ msgstr "第 %d 次采样成功，特征值为：%.32s\n"
-
-#~ msgid "getFingerVeinData error: %s\n"
-#~ msgstr "getFingerVeinData 错误：%s\n"
-
-#~ msgid "The eigenvalue(Base64) is: %.*s\n"
-#~ msgstr "特征值(Base64)为：%.*s\n"
-
-#~ msgid "Unload the dynamic link library '%s'\n"
-#~ msgstr "卸载动态链接库 '%s'\n"
-
-#~ msgid "Add column \"UUID\" to Table \"%s\" Error: %s\n"
-#~ msgstr "添加字段 \"UUID\" 到表 \"%s\" 出现错误：%s\n"
-
-#~ msgid "Search Result: UID = %d, Index = %d, Index Name = %s\n"
-#~ msgstr "搜索结果：UID = %d, Index = %d, Index Name = %s\n"
-
-#~ msgid "Search Result: No found\n"
-#~ msgstr "搜索结果：未搜索到\n"
-
-#~ msgid "No Match Feature"
-#~ msgstr "无匹配特征"

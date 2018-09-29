@@ -39,6 +39,8 @@ src/drivers/community-multidevice/drivers/vfs101.c
 src/drivers/community-multidevice/drivers/vfs301.c
 src/drivers/community-multidevice/drivers/vfs5011.c
 
+src/utils/biometric-auth-client/biometric-auth-client.in
+
 src/utils/biometric-config-tool/biometric-config-tool-add-driver.c
 src/utils/biometric-config-tool/biometric-config-tool-add-driver.h
 src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c
