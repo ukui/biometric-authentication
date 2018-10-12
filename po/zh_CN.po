@@ -1,13 +1,13 @@
 # Chinese translations for biometric-authentication package.
-# Copyright (C) 2017 THE biometric-authentication'S COPYRIGHT HOLDER
+# Copyright (C) 2018 THE biometric-authentication'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the biometric-authentication package.
-# droiing <jianglinxuan@kylinos.cn>, 2017.
+# droiing <jianglinxuan@kylinos.cn>, 2018.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: biometric-authentication 0.9.55\n"
+"Project-Id-Version: biometric-authentication 0.9.58\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-29 09:25+0800\n"
+"POT-Creation-Date: 2018-10-12 10:30+0800\n"
 "PO-Revision-Date: 2017-10-11 11:57+0800\n"
 "Last-Translator: droiing <jianglinxuan@kylinos.cn>\n"
 "Language-Team: Chinese (simplified)\n"
@@ -15,6 +15,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../src/biometric-authenticationd.c:304
 #: ../src/biometric-authenticationd.c:382
@@ -108,7 +109,7 @@ msgstr "name_lost_cb函数被调用，错误：无法链接DBus总线\n"
 #: ../src/biometric-authenticationd.c:1455
 #, c-format
 msgid "name_lost_cb called, Error: Failed to obtain bus name: %s\n"
-msgstr "name_lost_cb函数被调用，错误：无法获得总线名\n"
+msgstr "name_lost_cb函数被调用，错误：无法获得总线名（%s）\n"
 
 #: ../src/biometric-authenticationd.c:1463
 msgid "run called in the server\n"
@@ -171,12 +172,12 @@ msgstr "初始化生物特征识别框架失败\n"
 #: ../src/biometric-dbus-common.c:51
 #, c-format
 msgid "Could not talk to message bus to find UID of sender %s: %s"
-msgstr "无法与消息总线进行通信以查找发送者的UID %s:%s"
+msgstr "无法与消息总线进行通信以查找发送者 %s 的UID：%s"
 
 #: ../src/biometric-dbus-common.c:86
 #, c-format
 msgid "Could not talk to message bus to find PID of sender %s: %s"
-msgstr "无法与消息总线进行通信以查找发送者的PID %s:%s"
+msgstr "无法与消息总线进行通信以查找发送者 %s 的PID：%s"
 
 #: ../src/lib/biometric_common.c:170
 msgid "Current driver list:"
@@ -685,7 +686,7 @@ msgstr "sqlite3预处理错误：%s\n"
 #: ../src/lib/biometric_stroge.c:198
 #, c-format
 msgid "Unable to set database(%s) permissions. ERROR[%d]: %s\n"
-msgstr "无法设置数据库权限。错误[%d]：%s\n"
+msgstr "无法设置数据库(%s)的权限。错误[%d]：%s\n"
 
 #: ../src/lib/biometric_stroge.c:712
 msgid "Check database format version ...\n"
@@ -790,7 +791,7 @@ msgstr "AES密钥文件(%s)无存在或者无读取权限，使用默认密钥�
 #: ../src/drivers/community-multidevice/community_ops.c:159
 #, c-format
 msgid "Can not open AES Key File: %s, use default key.\n"
-msgstr "无法打开AES密钥文件[%d]：%s，使用默认密钥。\n"
+msgstr "无法打开AES密钥文件：%s，使用默认密钥。\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:174
 msgid "AES Key File is Enpty, use default Key.\n"
