@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: biometric-authentication 0.9.59\n"
+"Project-Id-Version: biometric-authentication 0.9.60\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-12 10:30+0800\n"
+"POT-Creation-Date: 2018-11-01 15:57+0800\n"
 "PO-Revision-Date: 2018-10-12 10:20+0800\n"
 "Last-Translator: droiing <jianglinxuan@kylinos.cn>\n"
 "Language-Team: Chinese (simplified)\n"
@@ -160,10 +160,10 @@ msgid "There is an exception to write PID file: %s\n"
 msgstr "Существует исключение для записи PID-файла: %s\n"
 
 #: ../src/biometric-authenticationd.c:1633
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:153
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:171
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:190
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:224
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:155
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:173
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:192
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:226
 msgid "No such device"
 msgstr "Нет такого устройства"
 
@@ -960,141 +960,141 @@ msgstr ""
 "Выборка %d [%d / %d] была успешной в следующем отборе проб: пожалуйста, "
 "нажмите и поднимите палец (некоторые устройства должны провести пальцем)"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:59
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:61
 msgid "Disable"
 msgstr "запрещать"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:59
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:61
 msgid "Enable"
 msgstr "включить"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:60
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
 msgid "Finger Print"
 msgstr "Отпечаток пальца"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:60
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
 msgid "Finger Vein"
 msgstr "Finger Vein"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:60
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
 msgid "Iris"
 msgstr "Ирис"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:60
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
 msgid "Face"
 msgstr "Лицо"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:60
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
 msgid "Voice Print"
 msgstr "Голосовая печать"
 
 #
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:61
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:63
 msgid "Device"
 msgstr "устройство"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:61
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:63
 msgid "OS"
 msgstr "Операционные системы"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:61
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:63
 msgid "Device and OS"
 msgstr "Устройство и ОС"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:64
 msgid "Original Data"
 msgstr "Исходные данные"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:64
 msgid "Eigen Value"
 msgstr "Собственная ценность"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:64
 msgid "Eigen Vector"
 msgstr "Собственный вектор"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:63
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:64
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:65
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:66
 msgid "Hardware"
 msgstr "аппаратные средства"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:63
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:64
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:65
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:66
 msgid "Software"
 msgstr "Программного обеспечения"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:63
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:64
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:65
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:66
 msgid "Mix"
 msgstr "Смешивание"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:63
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:64
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:69
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:65
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:66
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:71
 msgid "Other"
 msgstr "Другие"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:67
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:69
 msgid "Serial"
 msgstr "последовательный"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:67
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:69
 msgid "USB"
 msgstr "USB"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:67
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:69
 msgid "PCIE"
 msgstr "PCIE"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:68
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:70
 msgid "Any"
 msgstr "Любые"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:71
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Common"
 msgstr "общий"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:71
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Open"
 msgstr "открыто"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:71
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Enroll"
 msgstr "зачислять"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:71
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Verify"
 msgstr "проверить"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:71
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Identify"
 msgstr "отождествлять"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:71
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Capture"
 msgstr "Захватить"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:72
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:74
 msgid "Search"
 msgstr "Поиск"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:72
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:74
 msgid "Clean"
 msgstr "чистый"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:72
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:74
 msgid "GetFeatureList"
 msgstr "GetFeatureList"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:72
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:74
 msgid "Rename"
 msgstr "переименовывать"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:72
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:74
 msgid "Close"
 msgstr "Закрыть"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:74
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:76
 msgid ""
 "Usage:\n"
 "  biometric-auth-client BuiltinCommands ...\n"
@@ -1130,166 +1130,166 @@ msgstr ""
 "Options:\n"
 " -h, --help показать это справочное сообщение и выйти\n"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:114
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:116
 msgid "non-existent user"
 msgstr "несуществующий пользователь"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:150
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:168
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:187
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:221
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:152
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:170
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:189
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:223
 msgid "The device is busy, please try again later"
 msgstr "Устройство занято, повторите попытку позже"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:156
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:174
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:193
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:227
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:158
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:176
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:195
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:229
 msgid "No permission to perform this operation"
 msgstr "Нет разрешения на выполнение этой операции"
 
 # c-format
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:177
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:179
 #, c-format
 msgid "Character string: %s\n"
 msgstr "Строка символов: %s\n"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:196
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:230
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:284
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:329
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:198
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:232
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:331
 msgid "No."
 msgstr "Нет."
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:196
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:230
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:198
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:232
 msgid "User ID"
 msgstr "Идентификатор пользователя"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:196
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:230
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:198
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:232
 msgid "User Name"
 msgstr "Имя пользователя"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:196
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:231
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:450
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:198
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:233
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:452
 msgid "Feature Index"
 msgstr "Индекс функций"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:196
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:231
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:389
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:198
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:233
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:391
 msgid "Feature Name"
 msgstr "Название функции"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:210
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:248
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:212
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:250
 msgid "List of features found:"
 msgstr "Список функций:"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:230
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:285
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:345
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:232
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:287
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:347
 msgid "Biometric Type"
 msgstr "Биометрический тип"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:231
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:284
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:329
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:233
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:331
 msgid "Driver Name"
 msgstr "Имя драйвера"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:269
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:271
 msgid "Show all fields (Highest priority)"
 msgstr "Показать все поля (Наивысший приоритет)"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:271
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:273
 msgid "Show 'Driver Full Name' fields"
 msgstr "Показывать поля «Полное имя драйвера»"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:273
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:275
 msgid "Show 'Biometric Type' fields"
 msgstr "Показать поля «Биометрический тип»"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:275
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:277
 msgid "Show 'Storge Type' fields"
 msgstr "Показать поля «Тип хранилища»"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:277
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:279
 msgid "Show 'Eigen Type' fields"
 msgstr "Показать поля «Eigen Type»"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:279
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:281
 msgid "Show 'Verify Type' fields"
 msgstr "Показывать поля «Проверить тип»"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:281
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:283
 msgid "Show 'Identify Type' fields"
 msgstr "Показать поля «Определить тип»"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:284
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:329
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:331
 msgid "Driver ID"
 msgstr "ID драйвера"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:284
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:340
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:342
 msgid "Driver Full Name"
 msgstr "Полное имя драйвера"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:284
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:329
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:342
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:331
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:344
 msgid "Status"
 msgstr "Положение дел"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:285
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:348
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:287
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:350
 msgid "Storge Type"
 msgstr "Тип Storge"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:285
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:351
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:287
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:353
 msgid "Eigen Type"
 msgstr "Eigen Type"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:285
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:354
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:287
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:356
 msgid "Verify Type"
 msgstr "Проверить тип"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:357
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:288
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:359
 msgid "Identify Type"
 msgstr "Определить тип"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:329
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:359
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:288
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:331
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:361
 msgid "Bus Type"
 msgstr "Тип шины"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:292
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:409
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:470
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:523
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:588
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:654
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:712
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:776
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:294
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:411
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:472
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:525
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:590
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:656
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:714
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:778
 msgid "Biometric identification backend framework service is not started"
 msgstr ""
 "Служба бэкэнд-идентификации биометрической идентификации не запускается"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:298
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:417
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:478
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:531
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:596
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:662
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:720
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:784
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:300
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:419
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:480
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:533
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:598
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:664
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:722
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:786
 msgid ""
 "Client APP_API is newer than biometric identification framework service. "
 "Please upgrade framework service or degrade client.\n"
@@ -1297,14 +1297,14 @@ msgstr ""
 "Клиент APP_API является новее, чем служба фреймворческой идентификации. "
 "Обновите службу инфраструктуры или деградируйте клиента.\n"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:302
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:421
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:482
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:535
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:600
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:666
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:724
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:788
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:304
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:423
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:484
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:537
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:602
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:668
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:726
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:790
 msgid ""
 "Client APP_API is older than biometric identification framework service. "
 "Please degrade framework service or upgrade client.\n"
@@ -1312,91 +1312,91 @@ msgstr ""
 "Клиент APP_API старше, чем служба оценки биометрической идентификации. "
 "Пожалуйста, деградируйте сервис-сервис инфраструктуры или обновления.\n"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:381
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:383
 #, c-format
 msgid "%s %s [-u USER_NAME] -d DRIVER_ID -n FEATURE_NAME"
 msgstr "%s %s [-u USER_NAME] -d DRIVER_ID -n FEATURE_NAME"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:385
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:446
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:625
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:691
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:749
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:387
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:448
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:627
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:693
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:751
 #, c-format
 msgid "User Name (Default is current user: %s)"
 msgstr "Имя пользователя (по умолчанию - текущий пользователь: %s )"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:387
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:448
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:507
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:562
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:627
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:693
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:751
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:389
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:450
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:509
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:564
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:629
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:695
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:753
 msgid "Driver(or Device) ID"
 msgstr "Идентификатор драйвера (или устройства)"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:399
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:460
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:513
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:578
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:639
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:702
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:766
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:401
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:462
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:515
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:580
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:641
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:704
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:768
 msgid "Input parameter error\n"
 msgstr "Ошибка входного параметра\n"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:442
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:621
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:444
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:623
 #, c-format
 msgid "%s %s [-u USER_NAME] -d DRIVER_ID -i INDEX"
 msgstr "%s %s [-u USER_NAME] -d DRIVER_ID -i ИНДЕКС"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:503
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:505
 #, c-format
 msgid "%s %s -d DRIVER_ID"
 msgstr "%s %s -d DRIVER_ID"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:556
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:558
 #, c-format
 msgid "%s %s [-u USER_NAME] -d DRIVER_ID [-s INDEX_START] [-e INDEX_END]"
 msgstr "%s %s [-u USER_NAME] -d DRIVER_ID [-s INDEX_START] [-e INDEX_END]"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:560
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:562
 msgid "User Name (Not set to search for all users)"
 msgstr "Имя пользователя (не для поиска для всех пользователей)"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:564
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:566
 msgid "Start of Feature Index (default 0)"
 msgstr "Начало индекса функции (по умолчанию 0)"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:566
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:568
 msgid "End of Feature Index (default -1, means search all)"
 msgstr "End of Feature Index (по умолчанию -1, означает поиск всех)"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:629
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:631
 msgid "The Feature Index You Want To Delete (-1 means delete all)"
 msgstr "Индекс функций, который вы хотите удалить (-1 означает удаление всех)"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:687
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:689
 #, c-format
 msgid "%s %s [-u USER_NAME] -d DRIVER_ID"
 msgstr "%s %s [-u USER_NAME] -d DRIVER_ID"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:745
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:747
 #, c-format
 msgid "%s %s [-u USER_NAME] -d DRIVER_ID -i INDEX -n NEW_NAME"
 msgstr "%s %s [-u USER_NAME] -d DRIVER_ID -i INDEX -n NEW_NAME"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:753
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:755
 msgid "The Feature Index that needs to be renamed"
 msgstr "Индекс функций, который необходимо переименовать"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:755
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:757
 msgid "New Feature Name"
 msgstr "Новое имя функции"
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:812
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:814
 msgid ""
 "The abort operation failed and the current operation will continue in the "
 "background."
@@ -1404,13 +1404,13 @@ msgstr ""
 "Операция отмены завершилась неудачно, и текущая операция будет продолжена в "
 "фоновом режиме."
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:813
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:815
 msgid "The device may have to wait a while before being used."
 msgstr ""
 "Возможно, устройству придется подождать некоторое время, прежде чем его "
 "использовать."
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:814
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:816
 msgid ""
 "The wait problem can be solved by restarting the biometrics backend "
 "framework service."
@@ -1418,7 +1418,7 @@ msgstr ""
 "Проблема ожидания может быть решена путем перезапуска службы фреймворка базы "
 "данных биометрии."
 
-#: ../src/utils/biometric-auth-client/biometric-auth-client.in:858
+#: ../src/utils/biometric-auth-client/biometric-auth-client.in:860
 #, c-format
 msgid "Unknown Builtin Commands: %s\n"
 msgstr "Неизвестные команды: %s\n"
