@@ -27,6 +27,8 @@ _ = gettext.gettext
 UKUI_GDBUS_BIO_BUS_NAME = 'org.ukui.Biometric'
 UKUI_GDBUS_BIO_OBJECT_PATH = '/org/ukui/Biometric'
 
+DBUS_OPS_TIMEOUT = 300
+
 RetOpsSuccess = 0
 RetOpsNoMatch = -1
 RetOpsError = -2
@@ -314,12 +316,12 @@ def getDrvOrDevList(argList, getType):
 		drvName = drvInfo[1]
 		drvFullName = drvInfo[2]
 		drvEnable = drvInfo[3]
-		drvBioType = drvInfo[4]
-		drvStoType = drvInfo[5]
-		drvEigType = drvInfo[6]
-		drvVerType = drvInfo[7]
-		drvIdType = drvInfo[8]
-		drvBusType = drvInfo[9]
+		drvBioType = drvInfo[5]
+		drvStoType = drvInfo[6]
+		drvEigType = drvInfo[7]
+		drvVerType = drvInfo[8]
+		drvIdType = drvInfo[9]
+		drvBusType = drvInfo[10]
 
 		drvTable.add_row([no, drvID, drvName, drvFullName,
 				DrvEnableList[drvEnable], DrvBioTypeList[drvBioType], DrvStoTypeList[drvStoType],
@@ -422,7 +424,7 @@ def doEnroll(argList):
 			" Please degrade framework service or upgrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 
-	bioIF.Enroll(opsDrvID, uid, -1, fname,
+	bioIF.Enroll(opsDrvID, uid, -1, fname, timeout=DBUS_OPS_TIMEOUT,
 					reply_handler=ops_handle_retcode_reply,
 					error_handler=ops_handle_error)
 
@@ -483,7 +485,7 @@ def doVerify(argList):
 			" Please degrade framework service or upgrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 
-	bioIF.Verify(opsDrvID, uid, index,
+	bioIF.Verify(opsDrvID, uid, index, timeout=DBUS_OPS_TIMEOUT,
 					reply_handler=ops_handle_retcode_reply,
 					error_handler=ops_handle_error)
 
@@ -536,7 +538,7 @@ def doCapture(argList):
 			" Please degrade framework service or upgrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 
-	bioIF.Capture(opsDrvID,
+	bioIF.Capture(opsDrvID, timeout=DBUS_OPS_TIMEOUT,
 					reply_handler=ops_handle_capture_reply,
 					error_handler=ops_handle_error)
 
@@ -601,7 +603,7 @@ def doSearch(argList):
 			" Please degrade framework service or upgrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 
-	bioIF.Search(opsDrvID, uid, index_start, index_end,
+	bioIF.Search(opsDrvID, uid, index_start, index_end, timeout=DBUS_OPS_TIMEOUT,
 					reply_handler=ops_handle_search_reply,
 					error_handler=ops_handle_error)
 
@@ -667,7 +669,7 @@ def doClean(argList):
 			" Please degrade framework service or upgrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 
-	bioIF.Clean(opsDrvID, uid, index_start, index_end,
+	bioIF.Clean(opsDrvID, uid, index_start, index_end, timeout=DBUS_OPS_TIMEOUT,
 					reply_handler=ops_handle_retcode_reply,
 					error_handler=ops_handle_error)
 
@@ -725,7 +727,7 @@ def doGetFeatureList(argList):
 			" Please degrade framework service or upgrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 
-	bioIF.GetFeatureList(opsDrvID, uid, 0, -1,
+	bioIF.GetFeatureList(opsDrvID, uid, 0, -1, timeout=DBUS_OPS_TIMEOUT,
 						reply_handler=ops_handle_get_feature_list_reply,
 						error_handler=ops_handle_error)
 
@@ -789,7 +791,7 @@ def doRename(argList):
 			" Please degrade framework service or upgrade client.\n"))
 		sys.exit(ExitAppApiNotMatch)
 
-	bioIF.Rename(opsDrvID, uid, index, new_name,
+	bioIF.Rename(opsDrvID, uid, index, new_name, timeout=DBUS_OPS_TIMEOUT,
 					reply_handler=ops_handle_retcode_reply,
 					error_handler=ops_handle_error)
 
