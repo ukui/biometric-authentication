@@ -1,0 +1,181 @@
+.TH BIOMETRIC-AUTH-CLIENT 8
+
+.SH NAME
+biometric-auth-client \- The command line client of the biometric identification framework service
+
+.SH SYNOPSIS
+.B biometric-auth-client
+[\fBOPTION\fR]
+.IR BuiltinCommands ...
+
+.SH DESCRIPTION
+.B biometric-auth-client
+The command line client of the biometric identification framework service.
+
+.SH OPTIONS
+.IP "-h,  --help"
+Display help message and exit
+
+.SH BuiltinCommands
+.PD 0.5v
+.IP "get-driver-list       Get Driver List"
+.IP "get-device-list       Get Device List"
+.IP "get-feature-list      Get Feature List"
+.IP "enroll                Enroll Feature"
+.IP "verify                Verify Feature"
+.IP "capture               Capture Feature"
+.IP "search                Search Feature"
+.IP "clean                 Clean Feature"
+.IP "rename                Rename Feature"
+.PD 1v
+
+.SH BuiltinCommands Usage
+.SS get-driver-list
+Usage: biometric-auth-client get-driver-list [-afbsevi]
+.IP OPTIONS:
+.RS
+.PD 0.5v
+.IP "-a"
+Show all fields (Highest priority)
+.IP "-f FEATURE_NAME"
+Show 'Driver Full Name' fields
+.IP "-b"
+Show 'Biometric Type' fields
+.IP "-s"
+Show 'Storge Type' fields
+.IP "-e"
+Show 'Feature Type' fields
+.IP "-v"
+Show 'Verify Type' fields
+.IP "-i INDEX"
+Show 'Identify Type' fields
+.IP "-h, --help"
+Display "biometric-auth-client get-driver-list" help message and exit
+.PD 1v
+.RE
+.SS get-device-list
+Usage: biometric-auth-client get-device-list [-afbsevi]
+.IP OPTIONS:
+.RS
+.PD 0.5v
+.IP "-a"
+Show all fields (Highest priority)
+.IP "-f FEATURE_NAME"
+Show 'Driver Full Name' fields
+.IP "-b"
+Show 'Biometric Type' fields
+.IP "-s"
+Show 'Storge Type' fields
+.IP "-e"
+Show 'Feature Type' fields
+.IP "-v"
+Show 'Verify Type' fields
+.IP "-i INDEX"
+Show 'Identify Type' fields
+.IP "-h, --help"
+Display "biometric-auth-client get-device-list" help message and exit
+.PD 1v
+.RE
+.SS get-feature-list
+Usage: biometric-auth-client get-feature-list [-u USER_NAME] -d DRIVER_ID
+.IP OPTIONS:
+.RS
+.PD 0.5v
+.IP "-u USER_NAME"
+User Name (Default is current user)
+.IP "-d DRIVER_ID"
+Driver(or Device) ID
+.IP "-h, --help"
+Display "biometric-auth-client get-feature-list" help message and exit
+.PD 1v
+.RE
+.SS enroll
+Usage: biometric-auth-client enroll [-u USER_NAME] -d DRIVER_ID -n FEATURE_NAME
+.IP OPTIONS:
+.RS
+.PD 0.5v
+.IP "-u USER_NAME"
+User Name (Default is current user)
+.IP "-d DRIVER_ID"
+Driver(or Device) ID
+.IP "-f FEATURE_NAME"
+Feature Name
+.IP "-h, --help"
+Display "biometric-auth-client enroll" help message and exit
+.PD 1v
+.RE
+.SS verify
+Usage: biometric-auth-client verify [-u USER_NAME] -d DRIVER_ID -i INDEX
+.IP OPTIONS:
+.RS
+.PD 0.5v
+.IP "-u USER_NAME"
+User Name (Default is current user)
+.IP "-d DRIVER_ID"
+Driver(or Device) ID
+.IP "-i INDEX"
+Feature Index
+.IP "-h, --help"
+Display "biometric-auth-client verify" help message and exit
+.PD 1v
+.RE
+.SS capture
+Usage: biometric-auth-client capture -d DRIVER_ID
+.IP OPTIONS:
+.RS
+.PD 0.5v
+.IP "-d DRIVER_ID"
+Driver(or Device) ID
+.IP "-h, --help"
+Display "biometric-auth-client capture" help message and exit
+.PD 1v
+.RE
+.SS search
+Usage: biometric-auth-client search [-u USER_NAME] -d DRIVER_ID [-s INDEX_START] [-e INDEX_END]
+.IP OPTIONS:
+.RS
+.PD 0.5v
+.IP "-u USER_NAME"
+User Name (Not set to search for all users)
+.IP "-d DRIVER_ID"
+Driver(or Device) ID
+.IP "-s INDEX_START"
+Start of Feature Index (default 0)
+.IP "-e INDEX_END"
+End of Feature Index (default -1, means search all)
+.IP "-h, --help"
+Display "biometric-auth-client search" help message and exit
+.PD 1v
+.RE
+.SS clean
+Usage: biometric-auth-client clean [-u USER_NAME] -d DRIVER_ID -i INDEX
+.IP OPTIONS:
+.RS
+.PD 0.5v
+.IP "-u USER_NAME"
+User Name (Default is current user)
+.IP "-d DRIVER_ID"
+Driver(or Device) ID
+.IP "-i INDEX"
+The Feature Index You Want To Delete (-1 means delete all)
+.IP "-h, --help"
+Display "biometric-auth-client clean" help message and exit
+.PD 1v
+.RE
+.SS rename
+Usage: biometric-auth-client rename [-u USER_NAME] -d DRIVER_ID -i INDEX -n NEW_NAME
+.IP OPTIONS:
+.RS
+.PD 0.5v
+.IP "-u USER_NAME"
+User Name (Default is current user)
+.IP "-d DRIVER_ID"
+Driver(or Device) ID
+.IP "-i INDEX"
+The Feature Index that needs to be renamed
+.IP "-n NEW_NAME"
+New Feature Name
+.IP "-h, --help"
+Display "biometric-auth-client rename" help message and exit
+.PD 1v
+.RE

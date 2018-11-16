@@ -347,7 +347,6 @@ int community_ops_enroll(bio_dev *dev, OpsActions action, int uid, int idx,
 		// Encrypted characteristic data
 		ciphertext = malloc(len);
 		memset(ciphertext, 0, len);
-		printf("AES Key = %s\n", cfpdev->aes_key);
 		community_internal_aes_encrypt(plaintext, len, cfpdev->aes_key, ciphertext);
 
 		// The characteristic array is converted to a string, using base64 encoding
@@ -994,7 +993,6 @@ struct fp_print_data **community_internal_create_fp_data(bio_dev *dev,
 			unsigned char * plaintext = malloc(len);
 			memset(plaintext, 0, len);
 			community_internal_aes_decrypt(ciphertext, len, cfpdev->aes_key, plaintext);
-			printf("AES Key = %s\n", cfpdev->aes_key);
 
 			// Generate community fingerprint feature data structure
 			fp_data_list[i] = fp_print_data_from_data(plaintext, len);

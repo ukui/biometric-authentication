@@ -23,12 +23,12 @@ biometric_authenticationd_SOURCES = \
 biometric_authenticationd_INCLUDE = biometric_common.h biometric_version.h
 
 biometric_authenticationd_CFLAGS = $(COMM_CFS) $(LOCALEDIR_CFS) \
-	$(GLIB_2_CFLAGS) $(GIO_2_CFLAGS) $(GIO_UNIX_2_CFLAGS) $(GTK_2_CFLAGS) \
+	$(GLIB_2_CFLAGS) $(GIO_2_CFLAGS) $(GIO_UNIX_2_CFLAGS) $(GTK_3_CFLAGS) \
 	$(GOBJECT_2_CFLAGS) $(LIBUSB_1_CFLAGS) $(SQLITE3_CFLAGS) $(POLKIT_CFLAGS) \
 	$(NULL)
 
 biometric_authenticationd_LDADD = $(COMM_LDFS) \
-	$(GLIB_2_LIBS) $(GIO_2_LIBS) $(GIO_UNIX_2_LIBS) $(GTK_2_LIBS) \
+	$(GLIB_2_LIBS) $(GIO_2_LIBS) $(GIO_UNIX_2_LIBS) $(GTK_3_LIBS) \
 	$(GOBJECT_2_LIBS) $(LIBUSB_1_LIBS) $(SQLITE3_LIBS) $(POLKIT_LIBS) \
 	$(NULL)
 

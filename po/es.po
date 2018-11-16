@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: biometric-authentication 0.9.60\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-01 15:57+0800\n"
-"PO-Revision-Date: 2017-10-11 11:57+0800\n"
+"PO-Revision-Date: 2018-11-01 15:39+0800\n"
 "Last-Translator: droiing <jianglinxuan@kylinos.cn>\n"
 "Language-Team: Chinese (simplified)\n"
-"Language: zh_CN\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,127 +31,133 @@ msgstr ""
 #: ../src/biometric-authenticationd.c:1649
 #, c-format
 msgid "Can't create thread: %s\n"
-msgstr "无法创建线程：%s\n"
+msgstr "No se puede crear el hilo: %s\n"
 
 #: ../src/biometric-authenticationd.c:504
 msgid "Enroll Result: Success\n"
-msgstr "录入结果：成功\n"
+msgstr "Resultado de la inscripción: éxito\n"
 
 #: ../src/biometric-authenticationd.c:507
 msgid "Enroll Result: Fail\n"
-msgstr "录入结果：失败\n"
+msgstr "Resultado de la inscripción: Error\n"
 
 #: ../src/biometric-authenticationd.c:611
 msgid "Verify Result: Match\n"
-msgstr "认证结果：匹配\n"
+msgstr "Verificar resultado: Coincidencia\n"
 
 #: ../src/biometric-authenticationd.c:615
 msgid "Verify Result: No Match\n"
-msgstr "认证结果：不匹配\n"
+msgstr "Verificar resultado: No hay coincidencia\n"
 
 #: ../src/biometric-authenticationd.c:720
 #, c-format
 msgid "Identify Result: UID = %d\n"
-msgstr "识别结果：UID = %d\n"
+msgstr "Identifique el resultado: UID = %d\n"
 
 #: ../src/biometric-authenticationd.c:724
 msgid "Identify Result: No Match\n"
-msgstr "识别结果：不匹配\n"
+msgstr "Identificar el resultado: No hay coincidencia\n"
 
 #: ../src/biometric-authenticationd.c:822
 #, c-format
 msgid "Capture Result: %.*s\n"
-msgstr "捕获结果：%.*s\n"
+msgstr "Resultado de captura: %.*s\n"
 
 #: ../src/biometric-authenticationd.c:825
 msgid "Capture Result: ERROR\n"
-msgstr "捕获结果：错误\n"
+msgstr "Resultado de captura: ERROR\n"
 
 #: ../src/biometric-authenticationd.c:1025
 #, c-format
 msgid "%s Clean Result: Success\n"
-msgstr "%s 清理结果：成功\n"
+msgstr "%s Resultado limpio: éxito\n"
 
 #: ../src/biometric-authenticationd.c:1028
 #, c-format
 msgid "%s Clean Result: Failed\n"
-msgstr "%s 清理结果：失败\n"
+msgstr "%s Resultado limpio: Falló\n"
 
 #. 系统层清理进行彻底的清理，免受当前不可用设备遗留的生物特征信息影响
 #: ../src/biometric-authenticationd.c:1096
 msgid ""
 "System level cleaning of the specified range of biometric features (all "
 "drivers)\n"
-msgstr "系统层面清理指定范围的生物特征（所有驱动）\n"
+msgstr ""
+"Limpieza a nivel del sistema de la gama especificada de características "
+"biométricas (todos los controladores)\n"
 
 #: ../src/biometric-authenticationd.c:1104
 msgid "System level Clean Result: Success\n"
-msgstr "系统层面 清理结果：成功\n"
+msgstr "Nivel de sistema Resultado limpio: éxito\n"
 
 #: ../src/biometric-authenticationd.c:1107
 msgid "System level Clean Result: Failed\n"
-msgstr "系统层面 清理结果：失败\n"
+msgstr "Resultado limpio del nivel del sistema: Falló\n"
 
 #: ../src/biometric-authenticationd.c:1434
 #, c-format
 msgid "Error: Failed to export object. Reason: %s\n"
-msgstr "错误：导出对象失败。原因：%s\n"
+msgstr "Error: Error al exportar el objeto. Motivo: %s\n"
 
 #: ../src/biometric-authenticationd.c:1444
 #, c-format
 msgid "name_acquired_cb called, Acquired bus name: %s\n"
-msgstr "name_acquired_cb函数被调用，获得总线名称：%s\n"
+msgstr "nombre_acquirido_cb llamado, Nombre de bus adquirido: %s\n"
 
 #: ../src/biometric-authenticationd.c:1453
 msgid "name_lost_cb called, Error: Failed to connect to dbus\n"
-msgstr "name_lost_cb函数被调用，错误：无法链接DBus总线\n"
+msgstr "name_lost_cb called, Error: Error al conectarse a dbus\n"
 
 #: ../src/biometric-authenticationd.c:1455
 #, c-format
 msgid "name_lost_cb called, Error: Failed to obtain bus name: %s\n"
-msgstr "name_lost_cb函数被调用，错误：无法获得总线名（%s）\n"
+msgstr "name_lost_cb called, Error: Error al obtener el nombre del bus: %s\n"
 
 #: ../src/biometric-authenticationd.c:1463
 msgid "run called in the server\n"
-msgstr "run函数在服务端被调用\n"
+msgstr "ejecutar llamado en el servidor\n"
 
 #: ../src/biometric-authenticationd.c:1480
 #: ../src/biometric-authenticationd.c:1651
 #, c-format
 msgid "New thread created: %s\n"
-msgstr "创建新线程：%s\n"
+msgstr "Nuevo hilo creado: %s\n"
 
 #. * init for usage of "g" types
 #. g_type_init();
 #: ../src/biometric-authenticationd.c:1493
 msgid "InitDBusCommunicationServer: Server started\n"
-msgstr "InitDBusCommunicationServer：服务端启动\n"
+msgstr "InitDBusCommunicationServer: servidor iniciado\n"
 
 #: ../src/biometric-authenticationd.c:1569
 #, c-format
 msgid "libusb_handle_events failed: %s\n"
-msgstr "libusb_handle_events失败：%s\n"
+msgstr "libusb_handle_events falló: %s\n"
 
 #: ../src/biometric-authenticationd.c:1586
 msgid ""
 "The biometric authentication server failed to start, requiring administrator "
 "permission to start\n"
-msgstr "生物特征认证服务启动失败，启动需要管理员权限\n"
+msgstr ""
+"El servidor de autenticación biométrica no pudo iniciarse, requiriendo "
+"permiso de administrador para iniciarse\n"
 
 #: ../src/biometric-authenticationd.c:1609
 #, c-format
 msgid "Can not open PID file: %s\n"
-msgstr "无法打 PID 文件：%s\n"
+msgstr "No se puede abrir el archivo PID: %s\n"
 
 #: ../src/biometric-authenticationd.c:1616
 msgid ""
 "Biometric authentication server is running, Do not restart it repeatedly\n"
-msgstr "生物特征认证服务正在运行中，请勿重复启动\n"
+msgstr ""
+"El servidor de autenticación biométrica se está ejecutando, no lo reinicie "
+"repetidamente\n"
 
 #: ../src/biometric-authenticationd.c:1625
 #, c-format
 msgid "There is an exception to write PID file: %s\n"
-msgstr "写 PID 文件出现异常：%s\n"
+msgstr "Hay una excepción para escribir el archivo PID: %s\n"
 
 #: ../src/biometric-authenticationd.c:1633
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:155
@@ -159,122 +165,134 @@ msgstr "写 PID 文件出现异常：%s\n"
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:192
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:226
 msgid "No such device"
-msgstr "无此设备"
+msgstr "Hay tal dispositivo"
 
 #: ../src/biometric-authenticationd.c:1634
 msgid "Device busy"
-msgstr "设备忙"
+msgstr "Dispositivo ocupado"
 
 #: ../src/biometric-authenticationd.c:1639
 msgid "Initial biometric recognition framework failed\n"
-msgstr "初始化生物特征识别框架失败\n"
+msgstr "Falló el marco de reconocimiento biométrico inicial\n"
 
 #: ../src/biometric-dbus-common.c:51
 #, c-format
 msgid "Could not talk to message bus to find UID of sender %s: %s"
-msgstr "无法与消息总线进行通信以查找发送者 %s 的UID：%s"
+msgstr ""
+"No se pudo hablar con el bus de mensajes para encontrar el UID del remitente "
+"%s: %s"
 
 #: ../src/biometric-dbus-common.c:86
 #, c-format
 msgid "Could not talk to message bus to find PID of sender %s: %s"
-msgstr "无法与消息总线进行通信以查找发送者 %s 的PID：%s"
+msgstr ""
+"No se pudo hablar con el bus de mensajes para encontrar el PID del remitente "
+"%s: %s"
 
 #: ../src/lib/biometric_common.c:170
 msgid "Current driver list:"
-msgstr "当前驱动列表："
+msgstr "Lista de controladores actuales:"
 
 #: ../src/lib/biometric_common.c:208
 msgid "Current device list:"
-msgstr "当前设备列表："
+msgstr "Lista de dispositivos actual:"
 
 #: ../src/lib/biometric_common.c:267 ../src/lib/biometric_common.c:285
 #: ../src/lib/biometric_common.c:331 ../src/lib/biometric_config.c:39
 #, c-format
 msgid "Error[%d]: %s\n"
-msgstr "错误[%d]：%s\n"
+msgstr "Error [%d]: %s\n"
 
 #: ../src/lib/biometric_common.c:311
 msgid ""
 "can't find \"bioconf\" struct, maybe someone forget use \"bio_conf_init()\" "
 "before\n"
-msgstr "无法找到\"bioconf\"结构体，也许前面忘记使用\"bio_conf_init()\"函数\n"
+msgstr ""
+"no puedo encontrar la estructura \"bioconf\", tal vez alguien olvide usar "
+"\"bio_conf_init ()\" antes de\n"
 
 #: ../src/lib/biometric_common.c:323 ../src/lib/biometric_stroge.c:229
 #: ../src/lib/biometric_stroge.c:300 ../src/lib/biometric_stroge.c:367
 #: ../src/lib/biometric_stroge.c:409 ../src/lib/biometric_stroge.c:597
 msgid "Unable to allocate memory\n"
-msgstr "无法分配内存\n"
+msgstr "No se puede asignar memoria\n"
 
 #: ../src/lib/biometric_common.c:338
 #, c-format
 msgid "No define driver in [%s]\n"
-msgstr "在 [%s] 中未定义驱动\n"
+msgstr "No definir controlador en [%s]\n"
 
 #: ../src/lib/biometric_common.c:351
 #, c-format
 msgid "Loaded Driver: %s\n"
-msgstr "已加载驱动：%s\n"
+msgstr "Controlador cargado: %s\n"
 
 #: ../src/lib/biometric_common.c:360
 #, c-format
 msgid "%s driver configure failed\n"
-msgstr "%s 驱动配置失败\n"
+msgstr "Error de configuración del controlador %s\n"
 
 #. 检测驱动版本兼容性
 #: ../src/lib/biometric_common.c:368
 #, c-format
 msgid "%s driver DRV_API version: %d.%d.%d\n"
-msgstr "%s 驱动 DRV_API版本：%d.%d.%d\n"
+msgstr "Versión del controlador DRV_API de %s: %d.%d.%d\n"
 
 #: ../src/lib/biometric_common.c:380
 #, c-format
 msgid ""
 "Detected Compatibility issues: %s driver version is higher than biometric "
 "framework\n"
-msgstr "检测到兼容性问题：%s驱动版本高于生物特征识别框架\n"
+msgstr ""
+"Problemas de compatibilidad detectados: %s versión del controlador es más "
+"alta que el marco biométrico\n"
 
 #: ../src/lib/biometric_common.c:384
 #, c-format
 msgid ""
 "Detected Compatibility issues: %s driver version is lower than biometric "
 "framework\n"
-msgstr "检测到兼容性问题：%s驱动版本低于生物特征识别框架\n"
+msgstr ""
+"Problemas de compatibilidad detectados: %s versión del controlador es más "
+"baja que el marco biométrico\n"
 
 #: ../src/lib/biometric_common.c:395
 #, c-format
 msgid "Driver %s initialization failed\n"
-msgstr "驱动 %s 初始化失败\n"
+msgstr "Falló la inicialización del controlador %s\n"
 
 #: ../src/lib/biometric_common.c:430
 msgid "Error: Can not register attach callback error\n"
-msgstr "错误：无法注册 attch 回调函数\n"
+msgstr "Error: No se puede registrar adjuntar error de devolución de llamada\n"
 
 #: ../src/lib/biometric_common.c:443
 msgid "Error: Can not register detach callback error\n"
-msgstr "错误：无法注册 detach 回调函数\n"
+msgstr ""
+"Error: no se puede registrar el error de devolución de llamada de "
+"desvinculación\n"
 
 #: ../src/lib/biometric_common.c:494
 msgid "Biometric framework API version:\n"
-msgstr "生物特征识别框架API版本：\n"
+msgstr "Versión del API del marco biométrico:\n"
 
 #: ../src/lib/biometric_common.c:495
 #, c-format
 msgid "         Driver API(DRV_API): %d.%d.%d\n"
-msgstr "    驱动API(DRV_API)：%d.%d.%d\n"
+msgstr "         API del controlador (DRV_API): %d.%d.%d\n"
 
 #: ../src/lib/biometric_common.c:499
 #, c-format
 msgid "    Application API(APP_API): %d.%d.%d\n"
-msgstr "    应用API(APP_API)：%d.%d.%d\n"
+msgstr "    Aplicación API (APP_API): %d.%d.%d\n"
 
 #: ../src/lib/biometric_common.c:506
 msgid "bio_conf_init failed\n"
-msgstr "执行 bio_conf_init 函数失败\n"
+msgstr "bio_conf_init fallido\n"
 
 #: ../src/lib/biometric_common.c:522
 #, c-format
 msgid "failed to initialise libusb: %s\n"
-msgstr "初始化 libusb 失败：%s\n"
+msgstr "Error al inicializar libusb: %s\n"
 
 #: ../src/lib/biometric_common.c:570 ../src/lib/biometric_common.c:616
 #: ../src/lib/biometric_common.c:660 ../src/lib/biometric_common.c:706
@@ -282,7 +300,7 @@ msgstr "初始化 libusb 失败：%s\n"
 #: ../src/lib/biometric_common.c:848 ../src/lib/biometric_common.c:890
 #, c-format
 msgid "Open Result: %d\n"
-msgstr "打开结果：%d\n"
+msgstr "Resultado abierto: %d\n"
 
 #: ../src/lib/biometric_common.c:586 ../src/lib/biometric_common.c:632
 #: ../src/lib/biometric_common.c:676 ../src/lib/biometric_common.c:722
@@ -290,7 +308,7 @@ msgstr "打开结果：%d\n"
 #: ../src/lib/biometric_common.c:857
 #, c-format
 msgid "Close Device: %s\n"
-msgstr "关闭设备：%s\n"
+msgstr "Cerrar dispositivo: %s\n"
 
 #: ../src/lib/biometric_common.c:587 ../src/lib/biometric_common.c:633
 #: ../src/lib/biometric_common.c:677 ../src/lib/biometric_common.c:723
@@ -298,7 +316,7 @@ msgstr "关闭设备：%s\n"
 #: ../src/lib/biometric_common.c:858
 #, c-format
 msgid "Device Status: [%d]%s\n"
-msgstr "设备状态：[%d]%s\n"
+msgstr "Estado del dispositivo: [%d] %s\n"
 
 #: ../src/lib/biometric_common.c:627 ../src/lib/biometric_common.c:717
 #: ../src/lib/biometric_common.c:765
@@ -308,369 +326,370 @@ msgstr "%s\n"
 
 #: ../src/lib/biometric_common.c:1056 ../src/lib/biometric_common.c:1247
 msgid "Device idle"
-msgstr "设备空闲"
+msgstr "Dispositivo inactivo"
 
 #: ../src/lib/biometric_common.c:1058
 msgid "Device is in process"
-msgstr "设备正在处理中"
+msgstr "El dispositivo está en proceso"
 
 #: ../src/lib/biometric_common.c:1060
 msgid "Terminating current operation"
-msgstr "正在终止当前操作"
+msgstr "Terminando la operación actual"
 
 #: ../src/lib/biometric_common.c:1062
 msgid "Device is disabled"
-msgstr "设备被禁用"
+msgstr "El dispositivo esta deshabilitado"
 
 #: ../src/lib/biometric_common.c:1065
 msgid "Opening device"
-msgstr "正在打开设备"
+msgstr "Dispositivo de apertura"
 
 #: ../src/lib/biometric_common.c:1067
 msgid "Terminating open operation"
-msgstr "正在中止设备打开操作"
+msgstr "Terminar la operación abierta"
 
 #: ../src/lib/biometric_common.c:1070
 msgid "Enrolling"
-msgstr "正在录入特征"
+msgstr "Inscribirse"
 
 #: ../src/lib/biometric_common.c:1072
 msgid "Terminating enroll operation"
-msgstr "正在中止录入操作"
+msgstr "Terminando la operación de inscripción"
 
 #: ../src/lib/biometric_common.c:1075
 msgid "Verifying"
-msgstr "正在认证特征"
+msgstr "Verificando"
 
 #: ../src/lib/biometric_common.c:1077
 msgid "Terminating Verify operation"
-msgstr "正在中止认证操作"
+msgstr "Terminar verificar la operación"
 
 #: ../src/lib/biometric_common.c:1080
 msgid "Identifying"
-msgstr "正在识别特征"
+msgstr "Identificando"
 
 #: ../src/lib/biometric_common.c:1082
 msgid "Terminating identify operation"
-msgstr "正在中止识别操作"
+msgstr "Terminando la operación de identificación"
 
 #: ../src/lib/biometric_common.c:1085
 msgid "Capturing"
-msgstr "正在捕获特征"
+msgstr "Capturando"
 
 #: ../src/lib/biometric_common.c:1087
 msgid "Terminating capture operation"
-msgstr "正在中止捕获操作"
+msgstr "Terminando la operación de captura"
 
 #: ../src/lib/biometric_common.c:1090
 msgid "Searching"
-msgstr "正在搜索特征"
+msgstr "buscando"
 
 #: ../src/lib/biometric_common.c:1092
 msgid "Terminating search operation"
-msgstr "正在中止搜索操作"
+msgstr "Terminando la operación de búsqueda"
 
 #: ../src/lib/biometric_common.c:1095
 msgid "Cleaning"
-msgstr "正在清理特征数据"
+msgstr "Limpieza"
 
 #: ../src/lib/biometric_common.c:1097
 msgid "Terminating clean operation"
-msgstr "正在中止清理特征操作"
+msgstr "Terminar la operación limpia"
 
 #: ../src/lib/biometric_common.c:1100
 msgid "Getting feature list"
-msgstr "正在获取特征列表"
+msgstr "Obtención de lista de características"
 
 #: ../src/lib/biometric_common.c:1102
 msgid "Terminating get feature list operation"
-msgstr "正在中止获取特征列表操作"
+msgstr "Terminar la operación de obtener la lista de características"
 
 #: ../src/lib/biometric_common.c:1105
 msgid "Renaming feature"
-msgstr "正在重命名特征"
+msgstr "Característica de cambio de nombre"
 
 #: ../src/lib/biometric_common.c:1107
 msgid "Terminating feature rename operation"
-msgstr "正在中止特征重命名操作"
+msgstr "Operación de cambio de nombre de la función de terminación"
 
 #: ../src/lib/biometric_common.c:1110
 msgid "Closing"
-msgstr "正在关闭设备"
+msgstr "Clausura"
 
 #: ../src/lib/biometric_common.c:1112
 msgid "Terminating close operation"
-msgstr "正在中止设备关闭操作"
+msgstr "Terminar la operación de cierre"
 
 #: ../src/lib/biometric_common.c:1115
 #, c-format
 msgid "Device unknown status code: %d\n"
-msgstr "设备未知状态码：%d\n"
+msgstr "Código de estado desconocido del dispositivo: %d\n"
 
 #: ../src/lib/biometric_common.c:1116
 msgid "Device is in an unknown status..."
-msgstr "设备处于未知状态..."
+msgstr "El dispositivo está en un estado desconocido ..."
 
 #: ../src/lib/biometric_common.c:1128
 msgid "Operation successful"
-msgstr "操作成功"
+msgstr "Operación exitosa"
 
 #: ../src/lib/biometric_common.c:1130 ../src/lib/biometric_common.c:1249
 msgid "Operation failed"
-msgstr "操作失败"
+msgstr "Operación fallida"
 
 #: ../src/lib/biometric_common.c:1132 ../src/lib/biometric_common.c:1251
 msgid "An error was encountered during the operation"
-msgstr "操作过程中遇到错误"
+msgstr "Se encontró un error durante la operación."
 
 #: ../src/lib/biometric_common.c:1134 ../src/lib/biometric_common.c:1253
 msgid "The operation was interrupted by the user"
-msgstr "操作被用户终止"
+msgstr "La operación fue interrumpida por el usuario."
 
 #: ../src/lib/biometric_common.c:1136 ../src/lib/biometric_common.c:1255
 msgid "Operation timeout"
-msgstr "操作超时"
+msgstr "Tiempo de expiración de operación"
 
 #: ../src/lib/biometric_common.c:1138 ../src/lib/biometric_common.c:1259
 msgid "Out of memory"
-msgstr "内存不足"
+msgstr "Sin memoria"
 
 #: ../src/lib/biometric_common.c:1141 ../src/lib/biometric_common.c:1264
 msgid "Open device completion"
-msgstr "打开设备完毕"
+msgstr "Completar dispositivo abierto"
 
 #: ../src/lib/biometric_common.c:1143 ../src/lib/biometric_common.c:1266
 msgid "Open device failed"
-msgstr "打开设备失败"
+msgstr "Dispositivo abierto falló"
 
 #: ../src/lib/biometric_common.c:1145 ../src/lib/biometric_common.c:1268
 msgid "An error was encountered during the opening"
-msgstr "打开设备过程中出错"
+msgstr "Se encontró un error durante la apertura."
 
 #: ../src/lib/biometric_common.c:1148 ../src/lib/biometric_common.c:1271
 msgid "Enroll feature successful"
-msgstr "录入特征成功"
+msgstr "Característica de inscripción exitosa"
 
 #: ../src/lib/biometric_common.c:1150 ../src/lib/biometric_common.c:1273
 msgid "Enroll feature failed"
-msgstr "录入特征失败"
+msgstr "Falló la función de inscripción"
 
 #: ../src/lib/biometric_common.c:1152 ../src/lib/biometric_common.c:1275
 msgid "An error was encountered during enrolling"
-msgstr "录入特征过程中遇到错误"
+msgstr "Se encontró un error durante la inscripción"
 
 #: ../src/lib/biometric_common.c:1154 ../src/lib/biometric_common.c:1277
 msgid "Enroll operation was interrupted by the user"
-msgstr "录入操作被用户终止"
+msgstr "La operación de inscripción fue interrumpida por el usuario"
 
 #: ../src/lib/biometric_common.c:1156 ../src/lib/biometric_common.c:1279
 msgid "Enroll operation timeout"
-msgstr "录入操作超时"
+msgstr "Tiempo de espera de la operación de inscripción"
 
 #: ../src/lib/biometric_common.c:1159 ../src/lib/biometric_common.c:1282
 msgid "Verify feature match"
-msgstr "认证特征匹配"
+msgstr "Verificar la coincidencia de características"
 
 #: ../src/lib/biometric_common.c:1161 ../src/lib/biometric_common.c:1284
 msgid "Verify feature no match"
-msgstr "认证特征不匹配"
+msgstr "Verifique que la característica no coincida"
 
 #: ../src/lib/biometric_common.c:1163 ../src/lib/biometric_common.c:1286
 msgid "An error was encountered during verifying"
-msgstr "认证特征过程中遇到错误"
+msgstr "Se ha encontrado un error durante la verificación."
 
 #: ../src/lib/biometric_common.c:1165 ../src/lib/biometric_common.c:1288
 msgid "Verify operation was interrupted by the user"
-msgstr "认证操作被用户终止"
+msgstr "Verificar que la operación fue interrumpida por el usuario."
 
 #: ../src/lib/biometric_common.c:1167 ../src/lib/biometric_common.c:1290
 msgid "Verify operation timeout"
-msgstr "认证操作超时"
+msgstr "Verifique el tiempo de espera de la operación"
 
 #: ../src/lib/biometric_common.c:1170 ../src/lib/biometric_common.c:1293
 msgid "Identify feature match"
-msgstr "识别特征匹配"
+msgstr "Identificar coincidencia de características"
 
 #: ../src/lib/biometric_common.c:1172 ../src/lib/biometric_common.c:1295
 msgid "Identify feature no match"
-msgstr "识别特征不匹配"
+msgstr "Identificar la característica no coincide"
 
 #: ../src/lib/biometric_common.c:1174 ../src/lib/biometric_common.c:1297
 msgid "An error was encountered during identifying"
-msgstr "识别特征过程中遇到错误"
+msgstr "Se encontró un error durante la identificación"
 
 #: ../src/lib/biometric_common.c:1176 ../src/lib/biometric_common.c:1299
 msgid "Identify operation was interrupted by the user"
-msgstr "识别操作被用户终止"
+msgstr "La operación de identificación fue interrumpida por el usuario"
 
 #: ../src/lib/biometric_common.c:1178 ../src/lib/biometric_common.c:1301
 msgid "Identify operation timeout"
-msgstr "识别操作超时"
+msgstr "Identificar tiempo de espera de operación"
 
 #: ../src/lib/biometric_common.c:1181 ../src/lib/biometric_common.c:1304
 msgid "Capture feature successful"
-msgstr "捕获特征成功"
+msgstr "Función de captura exitosa"
 
 #: ../src/lib/biometric_common.c:1183 ../src/lib/biometric_common.c:1306
 msgid "Capture feature failed"
-msgstr "捕获特征失败"
+msgstr "La característica de captura falló"
 
 #: ../src/lib/biometric_common.c:1185 ../src/lib/biometric_common.c:1308
 msgid "An error was encountered during capturing"
-msgstr "捕获过程中遇到错误"
+msgstr "Se encontró un error durante la captura."
 
 #: ../src/lib/biometric_common.c:1187 ../src/lib/biometric_common.c:1310
 msgid "Capture operation was interrupted by the user"
-msgstr "捕获操作被用户终止"
+msgstr "La operación de captura fue interrumpida por el usuario"
 
 #: ../src/lib/biometric_common.c:1189 ../src/lib/biometric_common.c:1312
 msgid "Capture operation timeout"
-msgstr "捕获操作超时"
+msgstr "Tiempo de espera de la operación de captura"
 
 #: ../src/lib/biometric_common.c:1192 ../src/lib/biometric_common.c:1315
 msgid "Find the specified features"
-msgstr "搜索到指定的特征"
+msgstr "Encuentra las características especificadas"
 
 #: ../src/lib/biometric_common.c:1194 ../src/lib/biometric_common.c:1317
 msgid "No specified features were found"
-msgstr "未搜索到指定特征"
+msgstr "No se encontraron características específicas"
 
 #: ../src/lib/biometric_common.c:1196 ../src/lib/biometric_common.c:1319
 msgid "An error was encountered during searching"
-msgstr "搜索过程中遇到错误"
+msgstr "Se encontró un error durante la búsqueda"
 
 #: ../src/lib/biometric_common.c:1198 ../src/lib/biometric_common.c:1321
 msgid "Search operation was interrupted by the user"
-msgstr "搜索操作被用户终止"
+msgstr "La operación de búsqueda fue interrumpida por el usuario"
 
 #: ../src/lib/biometric_common.c:1200 ../src/lib/biometric_common.c:1323
 msgid "Search operation timeout"
-msgstr "搜索操作超时"
+msgstr "Tiempo de espera de la operación de búsqueda"
 
 #: ../src/lib/biometric_common.c:1203 ../src/lib/biometric_common.c:1326
 msgid "Clean feature successful"
-msgstr "清理特征成功"
+msgstr "Característica limpia exitosa"
 
 #: ../src/lib/biometric_common.c:1205 ../src/lib/biometric_common.c:1328
 msgid "Clean feature failed"
-msgstr "清理特征失败"
+msgstr "La función de limpieza falló"
 
 #: ../src/lib/biometric_common.c:1207 ../src/lib/biometric_common.c:1330
 msgid "An error was encountered during cleaning"
-msgstr "清理过程中遇到错误"
+msgstr "Se encontró un error durante la limpieza."
 
 #: ../src/lib/biometric_common.c:1209 ../src/lib/biometric_common.c:1332
 msgid "Clean operation was interrupted by the user"
-msgstr "清理操作被用户终止"
+msgstr "La operación limpia fue interrumpida por el usuario"
 
 #: ../src/lib/biometric_common.c:1211 ../src/lib/biometric_common.c:1334
 msgid "Clean operation timeout"
-msgstr "清理操作超时"
+msgstr "Tiempo de espera de operación limpia"
 
 #: ../src/lib/biometric_common.c:1214 ../src/lib/biometric_common.c:1337
 msgid "Get feature list completion"
-msgstr "获取特征列表完成"
+msgstr "Obtener la lista de características completa"
 
 #: ../src/lib/biometric_common.c:1216 ../src/lib/biometric_common.c:1339
 msgid "Get feature list failed"
-msgstr "获取特征列表失败"
+msgstr "Obtener lista de características fallada"
 
 #: ../src/lib/biometric_common.c:1218 ../src/lib/biometric_common.c:1341
 msgid "An error was encountered during getting feature list"
-msgstr "获取特征列表过程中遇到错误"
+msgstr "Se encontró un error al obtener la lista de características"
 
 #: ../src/lib/biometric_common.c:1221 ../src/lib/biometric_common.c:1344
 msgid "Rename feature successful"
-msgstr "特征重命名成功"
+msgstr "Renombrar función exitosa"
 
 #: ../src/lib/biometric_common.c:1223 ../src/lib/biometric_common.c:1346
 msgid "Rename feature failed"
-msgstr "特征重命名失败"
+msgstr "La función de cambio de nombre falló"
 
 #: ../src/lib/biometric_common.c:1225 ../src/lib/biometric_common.c:1348
 msgid "An error was encountered during renaming"
-msgstr "重命名特征过程中遇到错误"
+msgstr "Se encontró un error durante el cambio de nombre"
 
 #: ../src/lib/biometric_common.c:1228 ../src/lib/biometric_common.c:1353
 msgid "Close device completion"
-msgstr "关闭设备完成"
+msgstr "Cerrar dispositivo completo"
 
 #: ../src/lib/biometric_common.c:1230 ../src/lib/biometric_common.c:1355
 msgid "Close device failed"
-msgstr "关闭设备失败"
+msgstr "Cerrar dispositivo fallado"
 
 #: ../src/lib/biometric_common.c:1232 ../src/lib/biometric_common.c:1357
 msgid "An error was encountered during closing"
-msgstr "关闭设备过程中遇到错误"
+msgstr "Se encontró un error durante el cierre."
 
 #: ../src/lib/biometric_common.c:1235
 msgid "Operation is in an unknown status......"
-msgstr "操作处于未知状态"
+msgstr "La operación está en un estado desconocido ......"
 
 #: ../src/lib/biometric_common.c:1257
 msgid "Device is disable"
-msgstr "设备被禁用"
+msgstr "El dispositivo esta deshabilitado"
 
 #: ../src/lib/biometric_common.c:1261
 msgid "The device or driver does not support this operation"
-msgstr "当前设备或驱动不支持该操作"
+msgstr "El dispositivo o controlador no admite esta operación."
 
 #: ../src/lib/biometric_common.c:1350
 msgid "Feature renaming is not complete, please try again"
-msgstr "特征重命名不完全，请重试"
+msgstr "El cambio de nombre de la función no está completo, inténtalo de nuevo"
 
 #: ../src/lib/biometric_common.c:1360
 msgid "Device internal error"
-msgstr "设备内部错误"
+msgstr "Error interno del dispositivo"
 
 #: ../src/lib/biometric_common.c:1473
 msgid "Init libusb Error\n"
-msgstr "初始化 libusb库 失败\n"
+msgstr "Error de inicio de libusb\n"
 
 #: ../src/lib/biometric_common.c:1480
 msgid "Get USB Device List Error\n"
-msgstr "获取USB设备列表失败\n"
+msgstr "Obtener error de lista de dispositivos USB\n"
 
 #: ../src/lib/biometric_common.c:1489
 msgid "Can not get usb information\n"
-msgstr "无法获取USB相关信息\n"
+msgstr "No se puede obtener información del usb\n"
 
 #: ../src/lib/biometric_common.c:1506
 #, c-format
 msgid "libbiometric detected usb device(%s): %d\n"
-msgstr "libbiometric检测到USB设备(%s)：%d\n"
+msgstr "Libbiometric dispositivo usb detectado (%s): %d\n"
 
 #: ../src/lib/biometric_common.c:1747
 #, c-format
 msgid "Get function %s handle error: %s\n"
-msgstr "获取函数 %s 句柄出错：%s\n"
+msgstr "Error en el manejo de la función %s : %s\n"
 
 #: ../src/lib/biometric_common.c:1764
 msgid "Error: Can not get device descriptor\n"
-msgstr "错误：无法获取设备描述符\n"
+msgstr "Error: No se puede obtener el descriptor del dispositivo\n"
 
 #: ../src/lib/biometric_common.c:1767
 #, c-format
 msgid "Device attached: %04x:%04x\n"
-msgstr "设备插入：%04x:%04x\n"
+msgstr "Dispositivo conectado: %04x:%04x\n"
 
 #: ../src/lib/biometric_common.c:1828
 msgid "Error getting device descriptor"
-msgstr "错误：无法获取设备描述符"
+msgstr "Error al obtener el descriptor del dispositivo"
 
 #: ../src/lib/biometric_common.c:1831
 #, c-format
 msgid "Device detached: %04x:%04x\n"
-msgstr "设备拔出：%04x:%04x\n"
+msgstr "Dispositivo desconectado: %04x:%04x\n"
 
 #: ../src/lib/biometric_common.c:1957
 msgid "Unable to find feature that require renaming\n"
-msgstr "未找到需要重命名的特征\n"
+msgstr "No se puede encontrar la función que requiere el cambio de nombre\n"
 
 #: ../src/lib/biometric_common.c:1960
 #, c-format
 msgid "There are %d feature samples to renaming failed, please try again\n"
-msgstr "%d 个特征采样重命名失败，请重试\n"
+msgstr ""
+"Hay %d ejemplos de funciones para cambiar el nombre, inténtelo de nuevo\n"
 
 #: ../src/lib/biometric_stroge.c:190 ../src/lib/biometric_stroge.c:206
 #: ../src/lib/biometric_stroge.c:387 ../src/lib/biometric_stroge.c:517
@@ -681,77 +700,84 @@ msgstr "%d 个特征采样重命名失败，请重试\n"
 #: ../src/lib/biometric_stroge.c:1169
 #, c-format
 msgid "sqlite3 prepare err: %s\n"
-msgstr "sqlite3预处理错误：%s\n"
+msgstr "sqlite3 prepare err: %s\n"
 
 #: ../src/lib/biometric_stroge.c:198
 #, c-format
 msgid "Unable to set database(%s) permissions. ERROR[%d]: %s\n"
-msgstr "无法设置数据库(%s)的权限。错误[%d]：%s\n"
+msgstr ""
+"No se pueden establecer permisos de la base de datos (%s). ERROR [%d]: %s\n"
 
 #: ../src/lib/biometric_stroge.c:712
 msgid "Check database format version ...\n"
-msgstr "检查数据库格式版本 ...\n"
+msgstr "Verifique la versión del formato de la base de datos ...\n"
 
 #: ../src/lib/biometric_stroge.c:720
 #, c-format
 msgid "Find Table '%s' Error: %s\n"
-msgstr "查找表 '%s' 错误：%s\n"
+msgstr "Error en la tabla ' %s ': %s\n"
 
 #: ../src/lib/biometric_stroge.c:754
 #, c-format
 msgid "Database format version is %d.%d.%d\n"
-msgstr "数据库格式版本为 %d.%d.%d\n"
+msgstr "La versión del formato de la base de datos es %d.%d.%d\n"
 
 #: ../src/lib/biometric_stroge.c:762
 #, c-format
 msgid "Failed to upgrade database format：version %d.%d.%d to %d.%d.%d\n"
-msgstr "升级数据库格式失败：版本 %d.%d.%d 到 %d.%d.%d\n"
+msgstr ""
+"Error al actualizar el formato de la base de datos: versión %d.%d.%d a %d.%d."
+"%d\n"
 
 #: ../src/lib/biometric_stroge.c:775
 msgid "The database format is compatible with the current framework\n"
-msgstr "数据库格式兼容当前框架\n"
+msgstr "El formato de la base de datos es compatible con el marco actual\n"
 
 #: ../src/lib/biometric_stroge.c:780
 #, c-format
 msgid ""
 "Incompatible version of the database format: %d.%d.%d. Version required for "
 "the current framework: %d.%d.x"
-msgstr "不兼容的数据库格式版：%d.%d.%d。当前框架需要 %d.%d.x 的版本"
+msgstr ""
+"Versión incompatible del formato de base de datos: %d.%d.%d. Versión "
+"requerida para el framework actual: %d.%d.x"
 
 #: ../src/lib/biometric_stroge.c:886
 #, c-format
 msgid "Create Biometric Datebase Directory (%s) Error\n"
-msgstr "创建生物特征识别数据库存放目录(%s)失败\n"
+msgstr "Crear un directorio biométrico de base de datos (%s) Error\n"
 
 #: ../src/lib/biometric_stroge.c:928 ../src/lib/biometric_stroge.c:947
 #: ../src/lib/biometric_stroge.c:973
 #, c-format
 msgid "Failure to modify the owner and group of %s. ERROR[%d]: %s\n"
-msgstr "修改 %s 的属主和属组失败。错误[%d]：%s\n"
+msgstr "Error al modificar el propietario y el grupo de %s . ERROR [%d]: %s\n"
 
 #: ../src/lib/biometric_stroge.c:992
 msgid "Upgrade database ...\n"
-msgstr "升级数据库中 ...\n"
+msgstr "Actualizar base de datos ...\n"
 
 #: ../src/lib/biometric_stroge.c:1002
 #, c-format
 msgid "Rename Table 'EIGEN_INFO' to 'EIGEN_INFO_VERSION_0_0_0' Error: %s\n"
-msgstr "重命名表 'EIGEN_INFO' 为 'EIGEN_INFO_VERSION_0_0_0' 出现错误：%s\n"
+msgstr ""
+"Cambie el nombre de la tabla 'EIGEN_INFO' a 'EIGEN_INFO_VERSION_0_0_0' "
+"Error: %s\n"
 
 #: ../src/lib/biometric_stroge.c:1031
 #, c-format
 msgid "Failed to migrate data from the original table: %s\n"
-msgstr "从原始数据表中迁移数据失败：%s\n"
+msgstr "Error al migrar datos de la tabla original: %s\n"
 
 #: ../src/lib/biometric_stroge.c:1061
 #, c-format
 msgid "Update UUID=%s to database(UID=%d) ...\n"
-msgstr "更新 UUID=%s 到数据库中(UID=%d) ...\n"
+msgstr "Actualizar UUID = %s a la base de datos (UID = %d) ...\n"
 
 #: ../src/lib/biometric_stroge.c:1068
 #, c-format
 msgid "Update column \"UUID\" to Table \"%s\" Error: %s\n"
-msgstr "更新字段 \"UUID\" 到表 \"%s\" 中出现错误：%s\n"
+msgstr "Actualizar la columna \"UUID \" a la tabla \"%s\" Error: %s\n"
 
 #: ../src/lib/biometric_stroge.c:1111 ../src/lib/biometric_stroge.c:1135
 #, c-format
@@ -759,13 +785,13 @@ msgid ""
 "Create Table %s:\n"
 "%s\n"
 msgstr ""
-"创建表 %s：\n"
-"%s\n"
+"Crear tabla %s :\n"
+" %s\n"
 
 #: ../src/lib/biometric_stroge.c:1115 ../src/lib/biometric_stroge.c:1139
 #, c-format
 msgid "Create Table '%s' Error: %s\n"
-msgstr "创建表 '%s' 错误：%s\n"
+msgstr "Error al crear la tabla '%s': %s\n"
 
 #: ../src/lib/biometric_stroge.c:1147
 #, c-format
@@ -773,73 +799,78 @@ msgid ""
 "Set Database Format(%d.%d.%d):\n"
 "%s\n"
 msgstr ""
-"设置数据库格式(%d.%d.%d)：\n"
+"Establecer formato de base de datos (%d.%d.%d):\n"
 "%s\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:129
 #, c-format
 msgid "Get AES Key File Error[%d]: %s, use default Key.\n"
-msgstr "获取AES密钥文件错误[%d]：%s，使用默认密钥。\n"
+msgstr "Error de archivo de clave AES [%d]: %s, use la clave predeterminada.\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:142
 #, c-format
 msgid ""
 "AES Key File (%s) does not Exist or has no Read Permission, use default "
 "key.\n"
-msgstr "AES密钥文件(%s)无存在或者无读取权限，使用默认密钥。\n"
+msgstr ""
+"El archivo de clave AES (%s) no existe o no tiene permiso de lectura, use la "
+"clave predeterminada.\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:159
 #, c-format
 msgid "Can not open AES Key File: %s, use default key.\n"
-msgstr "无法打开AES密钥文件：%s，使用默认密钥。\n"
+msgstr ""
+"No se puede abrir el archivo de clave AES: %s, use la clave predeterminada.\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:174
 msgid "AES Key File is Enpty, use default Key.\n"
-msgstr "AES密钥文件为空，使用默认Key。\n"
+msgstr "El archivo de clave AES es Enpty, use la clave predeterminada.\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:198
 msgid "AES Key is Enpty, use default Key.\n"
-msgstr "AES密钥为空，使用默认密钥。\n"
+msgstr "La clave AES es Enpty, use la clave predeterminada.\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:234
 #, c-format
 msgid "Detect %s device\n"
-msgstr "检测 %s 设备\n"
+msgstr "Detectar dispositivo %s\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:242
 #: ../src/drivers/community-multidevice/community_ops.c:247
 #, c-format
 msgid "No %s fingerprint device detected\n"
-msgstr "未检测到 %s 指纹设备\n"
+msgstr "No se detectó el dispositivo de huella digital %s\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:251
 #, c-format
 msgid "There is %d %s fingerprint device detected\n"
-msgstr "检测到 %d 个 %s 指纹设备\n"
+msgstr "Se detectó el dispositivo de huella digital %d %s\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:277
 #, c-format
 msgid "Device failed to open"
-msgstr "设备打开失败"
+msgstr "El dispositivo no se abrió"
 
 #: ../src/drivers/community-multidevice/community_ops.c:333
 #: ../src/drivers/community-multidevice/community_ops.c:1089
 #: ../src/drivers/community-multidevice/community_ops.c:1277
 #, c-format
 msgid "Unknown error, error code: %d"
-msgstr "出现未知的错误，错误码：%d"
+msgstr "Error desconocido, código de error: %d"
 
 #: ../src/drivers/community-multidevice/community_ops.c:458
 #: ../src/drivers/community-multidevice/community_ops.c:541
 #: ../src/drivers/community-multidevice/community_ops.c:676
 msgid "Find the following feature matching:\n"
-msgstr "找到以下匹配的特征：\n"
+msgstr "Encuentra las siguientes características que coinciden:\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:625
 #, c-format
 msgid ""
 "Search from offset %d, index %d has been searched, global index %d(%d + %d)\n"
-msgstr "从偏移 %d 开始搜索，搜索到索引 %d, 全局索引 %d(%d + %d)\n"
+msgstr ""
+"Buscar desde el desplazamiento %d, índice %d se ha buscado, índice global %d "
+"(%d + %d)\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:630
 #, c-format
@@ -847,72 +878,82 @@ msgid ""
 "The %d feature has been searched(UID = %d, Index = %d, Index Name = %s), "
 "please press your finger to continue the search"
 msgstr ""
-"搜索到第 %d 个特征(UID = %d, Index = %d, Index Name = %s)，请按下手指继续搜索"
+"Se ha buscado la función %d (UID = %d, Índice = %d, Nombre del índice = %s), "
+"presione su dedo para continuar la búsqueda"
 
 #: ../src/drivers/community-multidevice/community_ops.c:774
 #, c-format
 msgid "Device %s[%d] received interrupt request\n"
-msgstr "设备 %s[%d] 收到中断请求\n"
+msgstr "El dispositivo %s [%d] recibió una solicitud de interrupción\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:819
 msgid "Sample complete"
-msgstr "采样完成"
+msgstr "Muestra completa"
 
 #: ../src/drivers/community-multidevice/community_ops.c:821
 msgid ""
 "Enrollment failed due to incomprehensible data. (Please use the same finger "
 "at different sampling stages of the same enroll)"
 msgstr ""
-"由于采样数据无法理解而导致录入失败（请在同一次录入的不同阶段使用同一手指）"
+"Inscripción fallida debido a datos incomprensibles. (Utilice el mismo dedo "
+"en diferentes etapas de muestreo de la misma inscripción)"
 
 #: ../src/drivers/community-multidevice/community_ops.c:825
 msgid ""
 "Please place your finger again because of poor quality of the sample or "
 "other scanning problems"
-msgstr "由于采样的图像质量较差或其他扫描问题导致采样指纹失败，请重放手指..."
+msgstr ""
+"Coloque el dedo nuevamente debido a la mala calidad de la muestra u otros "
+"problemas de escaneo"
 
 #: ../src/drivers/community-multidevice/community_ops.c:828
 msgid "Your swipe was too short, please place your finger again."
-msgstr "由于手指的滑动距离太短导致采样失败，请重放手指..."
+msgstr "Su golpe fue demasiado corto, por favor, vuelva a colocar el dedo."
 
 #: ../src/drivers/community-multidevice/community_ops.c:831
 msgid ""
 "Didn't catch that, please center your finger on the sensor and try again."
-msgstr "由于手指偏离设备导致采样失败，请重放手指..."
+msgstr "No captó eso, centre el dedo en el sensor e inténtelo de nuevo."
 
 #: ../src/drivers/community-multidevice/community_ops.c:834
 msgid ""
 "Because of the scanning image quality or finger pressure problem, the "
 "sampling failed, please remove the finger and retry"
-msgstr "由于扫描成像质量或手指压力问题导致采样失败。请移开手指后重试"
+msgstr ""
+"Debido a la calidad de la imagen de escaneo o al problema de la presión del "
+"dedo, el muestreo falló, retire el dedo y vuelva a intentarlo"
 
 #: ../src/drivers/community-multidevice/community_ops.c:838
 msgid "Unable to generate feature data, enroll failure"
-msgstr "无法生成特征数据，录入失败"
+msgstr "No se pueden generar datos de características, inscriba fallas"
 
 #: ../src/drivers/community-multidevice/community_ops.c:840
 msgid ""
 "Sample start, please press and lift your finger (Some devices need to swipe "
 "your finger)"
-msgstr "采样开始，请按下并抬起您的手指（部分设备需要滑动手指）"
+msgstr ""
+"Inicio de la muestra, presione y levante el dedo (algunos dispositivos deben "
+"deslizar el dedo)"
 
 #: ../src/drivers/community-multidevice/community_ops.c:895
 #, c-format
 msgid "Could not open device (driver %s)"
-msgstr "无法打开设备（驱动 %s）"
+msgstr "No se pudo abrir el dispositivo (controlador %s)"
 
 #: ../src/drivers/community-multidevice/community_ops.c:1064
 #: ../src/drivers/community-multidevice/community_ops.c:1229
 #, c-format
 msgid "Failed to call function %s\n"
-msgstr "调用函数 %s 失败\n"
+msgstr "Error al llamar a la función %s\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:1112
 #, c-format
 msgid ""
 "Enroll failed: The feature was successfully sampled, but the encoding of the "
 "sampling feature could not be generated"
-msgstr "录入失败：特征采样成功，但无法生成采样特征的编码"
+msgstr ""
+"Falló la inscripción: la función se ha muestreado correctamente, pero no se "
+"pudo generar la codificación de la función de muestreo"
 
 #: ../src/drivers/community-multidevice/community_ops.c:1129
 #, c-format
@@ -920,86 +961,86 @@ msgid ""
 "The %d [%d/%d] sampling was successful, in the next sampling: please press "
 "and lift your finger (Some devices need to swipe your finger)"
 msgstr ""
-"第 %d [%d/%d] 次采样成功，正在进行下一次采样：请按下并抬起您的手指（部分设备"
-"需要滑动手指）"
+"La muestra %d [%d/%d] fue exitosa, en la siguiente muestra: presione y "
+"levante el dedo (algunos dispositivos deben deslizar el dedo)"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:61
 msgid "Disable"
-msgstr "禁用"
+msgstr "Inhabilitar"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:61
 msgid "Enable"
-msgstr "启用"
+msgstr "Habilitar"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
 msgid "Finger Print"
-msgstr "指纹"
+msgstr "Huella dactilar"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
 msgid "Finger Vein"
-msgstr "指静脉"
+msgstr "Vena del dedo"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
 msgid "Iris"
-msgstr "虹膜"
+msgstr "Iris"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
 msgid "Face"
-msgstr "人脸"
+msgstr "Cara"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
 msgid "Voice Print"
-msgstr "声纹"
+msgstr "Impresión de voz"
 
 #
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:63
 msgid "Device"
-msgstr "设备"
+msgstr "Dispositivo"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:63
 msgid "OS"
-msgstr "系统"
+msgstr "OS"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:63
 msgid "Device and OS"
-msgstr "设备和系统"
+msgstr "Dispositivo y sistema operativo"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:64
 msgid "Original Data"
-msgstr "原始数据"
+msgstr "Datos originales"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:64
 msgid "Eigen Value"
-msgstr "特征值"
+msgstr "Valor propio"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:64
 msgid "Eigen Vector"
-msgstr "特征向量"
+msgstr "Vector propio"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:65
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:66
 msgid "Hardware"
-msgstr "硬件"
+msgstr "Hardware"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:65
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:66
 msgid "Software"
-msgstr "软件"
+msgstr "Software"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:65
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:66
 msgid "Mix"
-msgstr "混合"
+msgstr "Mezcla"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:65
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:66
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:71
 msgid "Other"
-msgstr "其它"
+msgstr "Otro"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:69
 msgid "Serial"
-msgstr "串口"
+msgstr "De serie"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:69
 msgid "USB"
@@ -1011,51 +1052,51 @@ msgstr "PCIE"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:70
 msgid "Any"
-msgstr "任意"
+msgstr "Alguna"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Common"
-msgstr "通用"
+msgstr "Común"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Open"
-msgstr "打开设备"
+msgstr "Abierto"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Enroll"
-msgstr "录入"
+msgstr "Inscribirse"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Verify"
-msgstr "正在认证特征"
+msgstr "Verificar"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Identify"
-msgstr "识别"
+msgstr "Identificar"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Capture"
-msgstr "捕获"
+msgstr "Capturar"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:74
 msgid "Search"
-msgstr "搜索"
+msgstr "Buscar"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:74
 msgid "Clean"
-msgstr "清理"
+msgstr "Limpiar"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:74
 msgid "GetFeatureList"
-msgstr "获取特征列表"
+msgstr "GetFeatureList"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:74
 msgid "Rename"
-msgstr "重命名"
+msgstr "Rebautizar"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:74
 msgid "Close"
-msgstr "关闭设备"
+msgstr "Cerrar"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:76
 msgid ""
@@ -1076,46 +1117,46 @@ msgid ""
 "Options:\n"
 "  -h, --help            show this help message and exit\n"
 msgstr ""
-"用法：\n"
-"  biometric-auth-client 内建指令 ...\n"
+"Uso:\n"
+" biometric-auth-client BuiltinCommands ...\n"
 "\n"
-"内建指令:\n"
-"  get-driver-list       获取特征列表\n"
-"  get-device-list       获取设备列表\n"
-"  get-feature-list      获取特征列表\n"
-"  enroll                特征录入\n"
-"  verify                特征验证\n"
-"  capture               特征捕获\n"
-"  search                特征查找\n"
-"  clean                 特征清除\n"
-"  rename                特征重命名\n"
+"BuiltinCommands:\n"
+" get-driver-list Get Driver List\n"
+" get-device-list Get Device List\n"
+" get-feature-list Obtener Feature List\n"
+" inscriba la función de inscripción\n"
+" verifique la función de verificación\n"
+" capture la función de captura\n"
+" busque la función de búsqueda\n"
+" limpie la función\n"
+" cambie el nombre de la función de cambio de nombre\n"
 "\n"
-"选项：\n"
-"  -h, --help            显示帮助选项并退出\n"
+"Opciones:\n"
+" -h, --help muestra este mensaje de ayuda y sale\n"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:116
 msgid "non-existent user"
-msgstr "用户不存在"
+msgstr "usuario inexistente"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:152
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:170
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:189
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:223
 msgid "The device is busy, please try again later"
-msgstr "设备正忙，请稍后再试"
+msgstr "El dispositivo está ocupado, inténtalo de nuevo más tarde."
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:158
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:176
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:195
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:229
 msgid "No permission to perform this operation"
-msgstr "没有权限执行该操作"
+msgstr "No hay permiso para realizar esta operación."
 
 # c-format
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:179
 #, c-format
 msgid "Character string: %s\n"
-msgstr "特征字符串：%s\n"
+msgstr "Cadena de caracteres: %s\n"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:198
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:232
@@ -1127,111 +1168,111 @@ msgstr "No."
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:198
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:232
 msgid "User ID"
-msgstr "用户ID"
+msgstr "ID de usuario"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:198
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:232
 msgid "User Name"
-msgstr "用户名"
+msgstr "Nombre de usuario"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:198
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:233
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:452
 msgid "Feature Index"
-msgstr "特征索引"
+msgstr "Índice de características"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:198
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:233
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:391
 msgid "Feature Name"
-msgstr "特征名称"
+msgstr "Nombre de la característica"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:212
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:250
 msgid "List of features found:"
-msgstr "查找到的特征列表："
+msgstr "Lista de características encontradas:"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:232
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:287
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:347
 msgid "Biometric Type"
-msgstr "生物特征类型"
+msgstr "Tipo biometrico"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:233
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:331
 msgid "Driver Name"
-msgstr "驱动名"
+msgstr "Nombre del conductor"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:271
 msgid "Show all fields (Highest priority)"
-msgstr "显示所有字段（最高优先级）"
+msgstr "Mostrar todos los campos (prioridad más alta)"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:273
 msgid "Show 'Driver Full Name' fields"
-msgstr "显示‘驱动全名’字段"
+msgstr "Mostrar los campos de 'Nombre completo del conductor'"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:275
 msgid "Show 'Biometric Type' fields"
-msgstr "显示‘生物特征类型’字段"
+msgstr "Mostrar campos 'Tipo biométrico'"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:277
 msgid "Show 'Storge Type' fields"
-msgstr "显示‘存储类型’字段"
+msgstr "Mostrar campos 'Tipo de Storge'"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:279
 msgid "Show 'Eigen Type' fields"
-msgstr "显示‘特征类型’字段"
+msgstr "Mostrar los campos 'Tipo Eigen'"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:281
 msgid "Show 'Verify Type' fields"
-msgstr "显示‘验证类型’字段"
+msgstr "Mostrar los campos 'Verificar tipo'"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:283
 msgid "Show 'Identify Type' fields"
-msgstr "显示‘识别类型’字段"
+msgstr "Mostrar los campos 'Identificar Tipo'"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:331
 msgid "Driver ID"
-msgstr "驱动ID"
+msgstr "ID de conductor"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:342
 msgid "Driver Full Name"
-msgstr "驱动全名"
+msgstr "Nombre completo del conductor"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:331
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:344
 msgid "Status"
-msgstr "状态"
+msgstr "Estado"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:287
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:350
 msgid "Storge Type"
-msgstr "存储类型"
+msgstr "Tipo de storge"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:287
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:353
 msgid "Eigen Type"
-msgstr "特征类型"
+msgstr "Tipo propio"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:287
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:356
 msgid "Verify Type"
-msgstr "验证类型"
+msgstr "Verificar el tipo"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:288
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:359
 msgid "Identify Type"
-msgstr "识别类型"
+msgstr "Tipo de identificación"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:288
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:331
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:361
 msgid "Bus Type"
-msgstr "总线类型"
+msgstr "Tipo de bus"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:294
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:411
@@ -1242,7 +1283,9 @@ msgstr "总线类型"
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:714
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:778
 msgid "Biometric identification backend framework service is not started"
-msgstr "生物特征识别后端框架服务未启动"
+msgstr ""
+"No se ha iniciado el servicio de marco de backend de identificación "
+"biométrica."
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:300
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:419
@@ -1256,7 +1299,9 @@ msgid ""
 "Client APP_API is newer than biometric identification framework service. "
 "Please upgrade framework service or degrade client.\n"
 msgstr ""
-"客户端的APP_API比生物特征识别框架服务新。请升级框架服务或者降级客户端。\n"
+"El cliente APP_API es más nuevo que el servicio de marco de identificación "
+"biométrica. Por favor, actualice el servicio de marco o degradar el "
+"cliente.\n"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:304
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:423
@@ -1270,12 +1315,14 @@ msgid ""
 "Client APP_API is older than biometric identification framework service. "
 "Please degrade framework service or upgrade client.\n"
 msgstr ""
-"客户端的APP_API比生物特征识别框架服务旧。请降级框架服务或者升级客户端。\n"
+"El cliente APP_API es más antiguo que el servicio de marco de identificación "
+"biométrica. Por favor, degradar el servicio de marco o actualizar el "
+"cliente.\n"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:383
 #, c-format
 msgid "%s %s [-u USER_NAME] -d DRIVER_ID -n FEATURE_NAME"
-msgstr "%s %s [-u 用户名] -d 驱动ID -n 特征名"
+msgstr "%s %s [-u USER_NAME] -d DRIVER_ID -n FEATURE_NAME"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:387
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:448
@@ -1284,7 +1331,7 @@ msgstr "%s %s [-u 用户名] -d 驱动ID -n 特征名"
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:751
 #, c-format
 msgid "User Name (Default is current user: %s)"
-msgstr "用户名（默认为当前用户：%s）"
+msgstr "Nombre de usuario (el predeterminado es el usuario actual: %s)"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:389
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:450
@@ -1294,7 +1341,7 @@ msgstr "用户名（默认为当前用户：%s）"
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:695
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:753
 msgid "Driver(or Device) ID"
-msgstr "驱动（或设备）ID"
+msgstr "ID del controlador (o dispositivo)"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:401
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:462
@@ -1304,90 +1351,96 @@ msgstr "驱动（或设备）ID"
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:704
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:768
 msgid "Input parameter error\n"
-msgstr "输入参数错误\n"
+msgstr "Error de parámetro de entrada\n"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:444
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:623
 #, c-format
 msgid "%s %s [-u USER_NAME] -d DRIVER_ID -i INDEX"
-msgstr "%s %s [-u 用户名] -d 驱动ID -i 索引"
+msgstr "%s %s [-u USER_NAME] -d DRIVER_ID -i INDEX"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:505
 #, c-format
 msgid "%s %s -d DRIVER_ID"
-msgstr "%s %s [-u 用户名] -d 驱动ID"
+msgstr "%s %s -d DRIVER_ID"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:558
 #, c-format
 msgid "%s %s [-u USER_NAME] -d DRIVER_ID [-s INDEX_START] [-e INDEX_END]"
-msgstr "%s %s [-u 用户名] -d 驱动ID [-s 开始的索引] [-e 结束的索引]"
+msgstr "%s %s [-u USER_NAME] -d DRIVER_ID [-s INDEX_START] [-e INDEX_END]"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:562
 msgid "User Name (Not set to search for all users)"
-msgstr "用户名（不设置则搜索所有用户）"
+msgstr "Nombre de usuario (no configurado para buscar todos los usuarios)"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:566
 msgid "Start of Feature Index (default 0)"
-msgstr "开始的特征索引（默认为0）"
+msgstr "Inicio del índice de características (predeterminado 0)"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:568
 msgid "End of Feature Index (default -1, means search all)"
-msgstr "结束的特征索引（默认为-1，表示搜索所有特征）"
+msgstr ""
+"Fin del índice de características (predeterminado -1, significa buscar todo)"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:631
 msgid "The Feature Index You Want To Delete (-1 means delete all)"
-msgstr "需要删除的特征的索引（-1表示删除所有特征）"
+msgstr "El índice de funciones que desea eliminar (-1 significa eliminar todo)"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:689
 #, c-format
 msgid "%s %s [-u USER_NAME] -d DRIVER_ID"
-msgstr "%s %s [-u 用户名] -d 驱动ID"
+msgstr "%s %s [-u USER_NAME] -d DRIVER_ID"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:747
 #, c-format
 msgid "%s %s [-u USER_NAME] -d DRIVER_ID -i INDEX -n NEW_NAME"
-msgstr "%s %s [-u 用户名] -d 驱动ID -i 索引 -n 新的特征名称"
+msgstr "%s %s [-u USER_NAME] -d DRIVER_ID -i INDEX -n NEW_NAME"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:755
 msgid "The Feature Index that needs to be renamed"
-msgstr "需要重命名的特征索引"
+msgstr "El índice de características que necesita ser renombrado"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:757
 msgid "New Feature Name"
-msgstr "新的特征名称"
+msgstr "Nombre de la nueva característica"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:814
 msgid ""
 "The abort operation failed and the current operation will continue in the "
 "background."
-msgstr "终止操作失败，当前操作会在后台继续运行。"
+msgstr ""
+"La operación de cancelación falló y la operación actual continuará en "
+"segundo plano."
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:815
 msgid "The device may have to wait a while before being used."
-msgstr "该设备可能需要等待一段时间才能使用。"
+msgstr ""
+"El dispositivo puede tener que esperar un tiempo antes de ser utilizado."
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:816
 msgid ""
 "The wait problem can be solved by restarting the biometrics backend "
 "framework service."
-msgstr "可以重启生物特征识别后台框架服务解决等待问题。"
+msgstr ""
+"El problema de la espera se puede resolver reiniciando el servicio de marco "
+"de respaldo biométrico."
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:860
 #, c-format
 msgid "Unknown Builtin Commands: %s\n"
-msgstr "未知的内建指令：%s\n"
+msgstr "Comandos incorporados desconocidos: %s\n"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:35
 msgid "When there is a driver of the same name, force to override it"
-msgstr "出现同名驱动时，强制覆盖"
+msgstr "Cuando hay un controlador del mismo nombre, forzar para anularlo"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:37
 msgid "Only add driver and Not enable driver"
-msgstr "只添加而不启用驱动"
+msgstr "Solo agregar controlador y No habilitar controlador"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:48
 msgid "DriverName DriverFilePath"
-msgstr "驱动名 驱动文件路径"
+msgstr "DriverName DriverFilePath"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:57
 #: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:71
@@ -1404,7 +1457,7 @@ msgstr "驱动名 驱动文件路径"
 #: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:72
 #, c-format
 msgid "Error parsing commandline options: %s\n"
-msgstr "命令行选项解析出错：%s\n"
+msgstr "Error al analizar las opciones de la línea de comandos: %s\n"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:70
 #: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:67
@@ -1413,14 +1466,16 @@ msgstr "命令行选项解析出错：%s\n"
 #: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:67
 #: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:71
 msgid "The number of parameters is incorrect"
-msgstr "参数个数不正确"
+msgstr "El número de parámetros es incorrecto."
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:82
 #, c-format
 msgid ""
 "This driver already exists, using the -f parameter if you need to override "
 "the configuration\n"
-msgstr "已存在该驱动，如需覆盖配置，请使用 -f 参数强制覆盖\n"
+msgstr ""
+"Este controlador ya existe, utilizando el parámetro -f si necesita anular la "
+"configuración\n"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:100
 #: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:97
@@ -1430,20 +1485,20 @@ msgstr "已存在该驱动，如需覆盖配置，请使用 -f 参数强制覆�
 #: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:118
 #, c-format
 msgid "Write configuration failure: %s\n"
-msgstr "写入配置失败：%s\n"
+msgstr "Error de configuración de escritura: %s\n"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:35
 #: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:35
 #: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:35
 #: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:35
 msgid "Ignore nonexistent drivers"
-msgstr "忽略不存在的驱动"
+msgstr "Ignorar los controladores inexistentes"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:45
 #: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:45
 #: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:45
 msgid "Driver1 [Driver2 ...]"
-msgstr "驱动1 [驱动2 ...]"
+msgstr "Driver1 [Driver2 ...]"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:77
 #: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:77
@@ -1453,70 +1508,72 @@ msgstr "驱动1 [驱动2 ...]"
 msgid ""
 "Driver %s does not exist, if you need to ignore the problem, use -i "
 "parameter\n"
-msgstr "驱动 %s 不存在，如需忽略该问题，请使用 -i 参数\n"
+msgstr ""
+"El controlador %s no existe, si necesita ignorar el problema, use el "
+"parámetro -i\n"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:46
 msgid "Add driver"
-msgstr "添加驱动"
+msgstr "Añadir controlador"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:47
 msgid "Remove drive"
-msgstr "移除驱动"
+msgstr "Quitar la unidad"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:48
 msgid "Enable driver"
-msgstr "启用驱动"
+msgstr "Habilitar controlador"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:49
 msgid "Disable driver"
-msgstr "禁用驱动"
+msgstr "Deshabilitar conductor"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:50
 msgid "Set the key value of the specified driver"
-msgstr "设置驱动的键值"
+msgstr "Establecer el valor clave del controlador especificado"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:51
 msgid "remove the key value of the specified driver"
-msgstr "移除驱动的键值"
+msgstr "eliminar el valor clave del controlador especificado"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:98
 msgid "BuiltinCommands"
-msgstr "内建指令"
+msgstr "BuiltinCommands"
 
 #. g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:101
 msgid "Builtin commands: "
-msgstr "内建指令："
+msgstr "Comandos incorporados: "
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:215
 #, c-format
 msgid "Unknown command %s"
-msgstr "未知的指令 %s"
+msgstr "Comando desconocido %s"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:224
 msgid "Missing builtin command"
-msgstr "缺少内建指令"
+msgstr "Falta el comando incorporado"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:45
 msgid "DriverName Key"
-msgstr "驱动名 键名"
+msgstr "Clave de DriverName"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:35
 msgid "Forcibly overrides the existing key"
-msgstr "强制覆盖已存在的键"
+msgstr "Anula a la fuerza la clave existente"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:37
 msgid "Ignore this setting if the key already exists"
-msgstr "如果键已存在，则忽略设置"
+msgstr "Ignora esta configuración si la clave ya existe"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:49
 msgid "DriverName Key Value"
-msgstr "驱动名 键名 键值"
+msgstr "Valor de clave de DriverName"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:92
 #, c-format
 msgid "Driver %s does not exist\n"
-msgstr "驱动 %s 不存在\n"
+msgstr "El controlador %s no existe\n"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:102
 #, c-format
@@ -1525,10 +1582,11 @@ msgid ""
 "operation\n"
 "If you want to ignore this error, use the \"-i\" parameter\n"
 msgstr ""
-"键已存在且未指定强制覆盖，忽略本次设备操作。\n"
-"如果想要忽略本错误，使用\"-i\"参数\n"
+"La clave ya existe y no se sobrescribe a la fuerza, ignorando la operación "
+"de configuración\n"
+"Si desea ignorar este error, use el parámetro \"-i\"\n"
 
 #: ../src/utils/biometric-device-discover/community-multidevice/community_multidevice_discover_tool.c:119
 #, c-format
 msgid "Failed to initialize libfprint\n"
-msgstr "初始化 libfprint 失败\n"
+msgstr "Error al inicializar libfprint\n"

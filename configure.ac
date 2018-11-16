@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([biometric-authentication], [0.9.55], [https://github.com/ukui/biometric-authentication/issues])
+AC_INIT([biometric-authentication], [0.9.60], [https://github.com/ukui/biometric-authentication/issues])
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/biometric-authenticationd.c])
 AC_CONFIG_HEADER([config.h])
@@ -27,7 +27,7 @@ PKG_CHECK_MODULES(GLIB_2, glib-2.0 >= 2.48)
 PKG_CHECK_MODULES(GIO_2, gio-2.0 >= 2.48)
 PKG_CHECK_MODULES(GIO_UNIX_2, gio-unix-2.0 >= 2.48)
 PKG_CHECK_MODULES(GOBJECT_2, gobject-2.0 >= 2.48)
-PKG_CHECK_MODULES(GTK_2, gtk+-2.0 >= 2.10)
+PKG_CHECK_MODULES(GTK_3, gtk+-3.0 >= 3.18)
 PKG_CHECK_MODULES(LIBFPRINT, libfprint >= 0.7.0)
 PKG_CHECK_MODULES(LIBUSB_1, libusb-1.0 >= 1.0.20)
 PKG_CHECK_MODULES(SQLITE3, sqlite3 >= 3.8)
@@ -128,6 +128,7 @@ AC_CONFIG_FILES([Makefile
 				src/drivers/community-multidevice/Makefile
 				src/drivers/community-multidevice/drivers/Makefile
 				src/utils/Makefile
+				src/utils/biometric-auth-client/Makefile
 				src/utils/biometric-config-tool/Makefile
 				src/utils/biometric-device-discover/Makefile
 				src/utils/biometric-device-discover/community-multidevice/Makefile

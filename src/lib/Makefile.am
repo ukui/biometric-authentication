@@ -18,7 +18,7 @@ DOMAIN_NAME = -DLIBBIOMETRIC_DOMAIN_NAME=\""$(PACKAGE)"\"
 LOCALEDIR_CFS = -DLOCALEDIR=\""$(localedir)"\"
 
 COMM_CFS = -Wall -g $(LOCALEDIR_CFS) $(DOMAIN_NAME)
-COMM_LDFS = -z,now
+COMM_LDFS = -Wl,-z,now
 
 if HAS_BIO_DB_DIR
 COMM_CFS += -DBIO_DB_DIR=$(BIO_DB_DIR)
@@ -40,11 +40,11 @@ libbiometric_la_SOURCES = \
 	$(NULL)
 
 libbiometric_la_CFLAGS = $(COMM_CFS) $(UUID_CFLAGS) \
-	$(GLIB_2_CFLAGS) $(GTK_2_CFLAGS) $(LIBUSB_1_CFLAGS) $(SQLITE3_CFLAGS) \
+	$(GLIB_2_CFLAGS) $(GTK_3_CFLAGS) $(LIBUSB_1_CFLAGS) $(SQLITE3_CFLAGS) \
 	$(NULL)
 
 libbiometric_la_LDFLAGS = $(COMM_LDFS) $(UUID_LDFLAGS) \
-	$(GLIB_2_LIBS) $(GTK_2_LIBS) $(LIBUSB_1_LIBS) $(SQLITE3_LIBS) \
+	$(GLIB_2_LIBS) $(GTK_3_LIBS) $(LIBUSB_1_LIBS) $(SQLITE3_LIBS) \
 	$(NULL)
 
 libbiometricincludedir=$(includedir)/libbiometric/

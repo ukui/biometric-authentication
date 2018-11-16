@@ -1361,6 +1361,52 @@ const char * bio_get_notify_mid_mesg(bio_dev *dev){
 	}
 }
 
+int bio_common_get_empty_index(bio_dev *dev, int uid, int start, int end)
+{
+	sqlite3 *db = bio_sto_connect_db();
+	feature_info * info, * info_list;
+	int cmp = 0;
+	int empty_index = 0;
+	int current_index = -1;
+
+	if ((end != -1) && (end < start))
+		end = start;
+
+	info_list = bio_sto_get_feature_info(db, uid, dev->bioinfo.biotype,
+												 dev->device_name, start,
+												 end);
+	bio_sto_disconnect_db(db);
+
+	info = info_list;
+	empty_index = start;
+
+	while (info != NULL)
+	{
+		current_index = info->index;
+		cmp = current_index - empty_index;
+
+		if (cmp == 0)
+			empty_index++;
+
+		if (cmp > 0)
+			break;
+
+		info = info->next;
+	}
+	bio_sto_free_feature_info_list(info_list);
+
+	/* 找到空闲值，返回 */
+	if (cmp > 0)
+		return empty_index;
+
+	/* 未找到空闲值，且不限大小的情况下，返回值为：列表中最大索引值+1 */
+	if (end == -1)
+		return current_index + 1;
+
+	/* 其他情况代表这未找到，返回-1 */
+	return -1;
+}
+
 int bio_common_get_empty_sample_no(bio_dev *dev, int start, int end)
 {
 	sqlite3 *db = bio_sto_connect_db();

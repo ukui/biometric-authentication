@@ -1,0 +1,865 @@
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
+
+import sys
+import signal
+import pwd
+import getpass
+import gettext
+from optparse import OptionParser
+from prettytable import PrettyTable
+
+import dbus
+import dbus.mainloop.glib
+from gi.repository import GLib
+
+# if sys.getdefaultencoding() != 'utf-8':
+# 	reload(sys)
+# 	sys.setdefaultencoding('utf-8')
+
+DOMAIN_NAME = "BIO_DOMAIN_NAME"
+LOCALEDIR = "BIO_LOCALEDIR"
+
+gettext.bindtextdomain(DOMAIN_NAME, LOCALEDIR)
+gettext.textdomain(DOMAIN_NAME)
+_ = gettext.gettext
+
+UKUI_GDBUS_BIO_BUS_NAME = 'org.ukui.Biometric'
+UKUI_GDBUS_BIO_OBJECT_PATH = '/org/ukui/Biometric'
+
+DBUS_OPS_TIMEOUT = 300
+
+RetOpsSuccess = 0
+RetOpsNoMatch = -1
+RetOpsError = -2
+RetDeviceBusy = -3
+RetNoSuchDevice = -4
+RetPermissionDenied = -5
+
+OPS_TYPE_COMM = 0
+OPS_TYPE_OPEN = 1
+OPS_TYPE_ENROLL = 2
+OPS_TYPE_VERIFY = 3
+OPS_TYPE_IDENTIFY = 4
+OPS_TYPE_CAPTURE = 5
+OPS_TYPE_SEARCH = 6
+OPS_TYPE_CLEAN = 7
+OPS_TYPE_GET_FLIST = 8
+OPS_TYPE_RENAME = 9
+OPS_TYPE_CLOSE = 10
+
+ExitNormal = 0
+ExitParamError = 1
+ExitDBusNotExist = 2
+ExitStopOpsFailed = 3
+ExitAppApiNotMatch = 4
+
+APP_API_MAJOR = 0
+APP_API_MINOR = 11
+APP_API_FUNC = 1
+
+DrvEnableList = [_("Disable"), _("Enable")]
+DrvBioTypeList = [_("Finger Print"), _("Finger Vein"), _("Iris"), _("Face"), _("Voice Print")]
+DrvStoTypeList = [_("Device"), _("OS"), _("Device and OS")]
+DrvEigTypeList = [_("Original Data"), _("Eigen Value"), _("Eigen Vector")]
+DrvVerTypeList = [_("Hardware"), _("Software"), _("Mix"), _("Other")]
+DrvIdTypeList = [_("Hardware"), _("Software"), _("Mix"), _("Other")]
+
+DrvBusTypeList = [0 for i in range(102)]
+DrvBusTypeList[0:3] = [_("Serial"), _("USB"), _("PCIE")]
+DrvBusTypeList[100] = _("Any")
+DrvBusTypeList[101] = _("Other")
+
+DrvOpsList = [_("Common"), _("Open"), _("Enroll"), _("Verify"), _("Identify"), _("Capture"),
+			 _("Search"), _("Clean"), _("GetFeatureList"), _("Rename"), _("Close")]
+
+mainUsage = _("Usage:\n"
+"  biometric-auth-client BuiltinCommands ..."
+"\n"
+"\n"
+"BuiltinCommands:\n"
+"  get-driver-list       Get Driver List\n"
+"  get-device-list       Get Device List\n"
+"  get-feature-list      Get Feature List\n"
+"  enroll                Enroll Feature\n"
+"  verify                Verify Feature\n"
+"  capture               Capture Feature\n"
+"  search                Search Feature\n"
+"  clean                 Clean Feature\n"
+"  rename                Rename Feature\n"
+"\n"
+"Options:\n"
+"  -h, --help            show this help message and exit\n")
+
+notifyMSG = ""
+msgLines = 0
+retCode = 0
+opsDrvID = 0
+opsType = OPS_TYPE_COMM
+stopOpsTimeout = 5
+loop = GLib.MainLoop()
+
+
+def getUidByUname(uname):
+	for uinfo in pwd.getpwall():
+		if uinfo[0] == uname:
+			return uinfo[2]
+
+	return -1
+
+
+def getUnameByUID(uid):
+	for uinfo in pwd.getpwall():
+		if uinfo[2] == uid:
+			return uinfo[0]
+
+	return _("non-existent user")
+
+
+def getNotifyMsg(drvid):
+	notifyMsgBus = dbus.SystemBus()
+	proxy = notifyMsgBus.get_object('org.ukui.Biometric', UKUI_GDBUS_BIO_OBJECT_PATH)
+	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+	mGetList = bioIF.get_dbus_method("GetNotifyMesg", dbus_interface=None)
+	mReturn = mGetList(drvid)
+	msgString = mReturn[0]
+	return msgString
+
+
+def outputMsg(drvid):
+	global msgLines
+	global notifyMSG
+
+	if msgLines != 0:
+		print(("\033[%dA" % (msgLines)), end='')
+
+	print("\r\033[K\r", end='')
+	notifyMSG = getNotifyMsg(drvid)
+	msgLines = len(notifyMSG.split('\n')) - 1
+	print(notifyMSG, end='')
+	sys.stdout.flush()
+
+def statusChangedHandler(drvid, statusType):
+	if drvid == opsDrvID and statusType == 2:
+		outputMsg(drvid)
+
+
+def ops_handle_retcode_reply(ret):
+	global retCode
+	retCode = ret
+
+	if ret == RetDeviceBusy:
+		print(_("The device is busy, please try again later"))
+
+	if ret == RetNoSuchDevice:
+		print(_("No such device"))
+
+	if ret == RetPermissionDenied:
+		print(_("No permission to perform this operation"))
+
+	sys.stdout.flush()
+
+	loop.quit()
+
+
+def ops_handle_capture_reply(ret, eigen_base64):
+	global retCode
+	retCode = ret
+
+	if ret == RetDeviceBusy:
+		print(_("The device is busy, please try again later"))
+
+	if ret == RetNoSuchDevice:
+		print(_("No such device"))
+
+	if ret == RetPermissionDenied:
+		print(_("No permission to perform this operation"))
+
+	if ret == RetOpsSuccess:
+		print(_("Character string: %s\n") % (eigen_base64))
+
+	loop.quit()
+
+
+def ops_handle_search_reply(count, feature_list):
+	global retCode
+	retCode = count
+
+	if count == RetDeviceBusy:
+		print(_("The device is busy, please try again later"))
+
+	if count == RetNoSuchDevice:
+		print(_("No such device"))
+
+	if count == RetPermissionDenied:
+		print(_("No permission to perform this operation"))
+
+	if count > 0:
+		drvTable = PrettyTable([_("No."), _("User ID"), _("User Name"), _("Feature Index"), _("Feature Name")])
+		no = 0
+		for feature_info in feature_list:
+			no = no + 1
+			uid = feature_info[0]
+			index = feature_info[1]
+			index_name = feature_info[2]
+			user_name = getUnameByUID(uid)
+			drvTable.add_row([no, uid, user_name, index, index_name])
+
+		if msgLines != 0:
+			print("\033[%dA" % (msgLines), end='')
+		print("\r\033[K\r", end='')
+
+		print(_("List of features found:"))
+		print(drvTable.get_string())
+
+	loop.quit()
+
+
+def ops_handle_get_feature_list_reply(count, feature_list):
+	global retCode
+	retCode = count
+
+	if count == RetDeviceBusy:
+		print(_("The device is busy, please try again later"))
+
+	if count == RetNoSuchDevice:
+		print(_("No such device"))
+
+	if count == RetPermissionDenied:
+		print(_("No permission to perform this operation"))
+
+	if count >= 0:
+		drvTable = PrettyTable([_("No."), _("User ID"), _("User Name"), _("Biometric Type"),
+								_("Driver Name"), _("Feature Index"), _("Feature Name")])
+		no = 0
+		for feature_info in feature_list:
+			no = no + 1
+			uid = feature_info[0]
+			user_name = getUnameByUID(uid)
+			biotype = DrvBioTypeList[feature_info[1]]
+			driver_name = feature_info[2]
+			index = feature_info[3]
+			index_name = feature_info[4]
+
+			drvTable.add_row([no, uid, user_name, biotype, driver_name, index, index_name])
+
+		if msgLines != 0:
+			print(("\033[%dA" % (msgLines)), end='')
+		print("\r\033[K\r", end='')
+
+		print(_("List of features found:"))
+		print(drvTable.get_string())
+
+	loop.quit()
+
+
+def ops_handle_error(err):
+	print(str(err))
+	loop.quit()
+
+
+def getDrvOrDevList(argList, getType):
+	if getType == "driver":
+		method = "GetDrvList"
+	else:
+		method = "GetDevList"
+
+	usage = "%s %s [-afbsevi]" % (sys.argv[0], sys.argv[1])
+
+	opt = OptionParser(usage)
+	opt.add_option("-a", action="store_true", dest="showAll", default=False,
+					help=_("Show all fields (Highest priority)"))
+	opt.add_option("-f", action="store_true", dest="showFullName", default=False,
+					help=_("Show 'Driver Full Name' fields"))
+	opt.add_option("-b", action="store_true", dest="showBioType", default=False,
+					help=_("Show 'Biometric Type' fields"))
+	opt.add_option("-s", action="store_true", dest="showStoType", default=False,
+					help=_("Show 'Storge Type' fields"))
+	opt.add_option("-e", action="store_true", dest="showEigType", default=False,
+					help=_("Show 'Eigen Type' fields"))
+	opt.add_option("-v", action="store_true", dest="showVerType", default=False,
+					help=_("Show 'Verify Type' fields"))
+	opt.add_option("-i", action="store_true", dest="showIdType", default=False,
+					help=_("Show 'Identify Type' fields"))
+	options = opt.parse_args(args=argList)
+
+	drvTable = PrettyTable([_("No."), _("Driver ID"), _("Driver Name"), _("Driver Full Name"), _("Status"),
+							_("Biometric Type"), _("Storge Type"), _("Eigen Type"), _("Verify Type"),
+							_("Identify Type"), _("Bus Type")])
+
+	bus = dbus.SystemBus()
+	try:
+		proxy = bus.get_object('org.ukui.Biometric', UKUI_GDBUS_BIO_OBJECT_PATH)
+	except dbus.DBusException:
+		print(_("Biometric identification backend framework service is not started"))
+		sys.exit(ExitDBusNotExist)
+	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+
+	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
+	if api_check > 0:
+		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
+			" Please upgrade framework service or degrade client.\n"))
+		sys.exit(ExitAppApiNotMatch)
+	if api_check < 0:
+		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
+			" Please degrade framework service or upgrade client.\n"))
+		sys.exit(ExitAppApiNotMatch)
+
+	mGetList = bioIF.get_dbus_method(method, dbus_interface=None)
+	mReturn = mGetList()
+	drvList = mReturn[1]
+
+	no = 0
+	for drvInfo in drvList:
+		no = no + 1
+		drvID = drvInfo[0]
+		drvName = drvInfo[1]
+		drvFullName = drvInfo[2]
+		drvEnable = drvInfo[3]
+		drvBioType = drvInfo[5]
+		drvStoType = drvInfo[6]
+		drvEigType = drvInfo[7]
+		drvVerType = drvInfo[8]
+		drvIdType = drvInfo[9]
+		drvBusType = drvInfo[10]
+
+		drvTable.add_row([no, drvID, drvName, drvFullName,
+				DrvEnableList[drvEnable], DrvBioTypeList[drvBioType], DrvStoTypeList[drvStoType],
+				DrvEigTypeList[drvEigType], DrvVerTypeList[drvVerType], DrvIdTypeList[drvIdType],
+				DrvBusTypeList[drvBusType]])
+
+	outputFields = [_("No."), _("Driver ID"), _("Driver Name"), _("Status"), _("Bus Type")]
+
+	if options[0].showAll:
+		options[0].showFullName = True
+		options[0].showBioType = True
+		options[0].showStoType = True
+		options[0].showEigType = True
+		options[0].showVerType = True
+		options[0].showIdType = True
+
+	if options[0].showFullName:
+		outputFields.append(_("Driver Full Name"))
+
+	outputFields.append(_("Status"))
+
+	if options[0].showBioType:
+		outputFields.append(_("Biometric Type"))
+
+	if options[0].showStoType:
+		outputFields.append(_("Storge Type"))
+
+	if options[0].showEigType:
+		outputFields.append(_("Eigen Type"))
+
+	if options[0].showVerType:
+		outputFields.append(_("Verify Type"))
+
+	if options[0].showIdType:
+		outputFields.append(_("Identify Type"))
+
+	outputFields.append(_("Bus Type"))
+	return drvTable.get_string(fields=outputFields)
+
+
+def doGetDrvList(argList):
+	drvlist = getDrvOrDevList(argList, "driver")
+	print(drvlist)
+	sys.exit(ExitNormal)
+
+
+def doGetDevList(argList):
+	devlist = getDrvOrDevList(argList, "device")
+	print(devlist)
+	sys.exit(ExitNormal)
+
+
+def doEnroll(argList):
+	_ = gettext.gettext
+	global opsType
+	global opsDrvID
+
+	opsType = OPS_TYPE_ENROLL
+	usage = _("%s %s [-u USER_NAME] -d DRIVER_ID -n FEATURE_NAME") % (sys.argv[0], sys.argv[1])
+
+	opt = OptionParser(usage)
+	opt.add_option("-u", action="store", type="string", dest="user_name", default=None,
+					help=_("User Name (Default is current user: %s)") % getpass.getuser())
+	opt.add_option("-d", action="store", type="int", dest="driver_id", default=-1,
+					help=_("Driver(or Device) ID"))
+	opt.add_option("-n", action="store", type="string", dest="feature_name", default=None,
+					help=_("Feature Name"))
+	options = opt.parse_args(args=argList)
+
+	if options[0].user_name is None:
+		options[0].user_name = getpass.getuser()
+	uid = getUidByUname(options[0].user_name)
+	opsDrvID = options[0].driver_id
+	fname = options[0].feature_name
+
+	if uid == -1 or opsDrvID == -1 or fname is None:
+		sys.stderr.write(_("Input parameter error\n"))
+		sys.stderr.write(opt.get_usage())
+		sys.exit(ExitParamError)
+
+	dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+
+	bus = dbus.SystemBus()
+	try:
+		proxy = bus.get_object('org.ukui.Biometric', UKUI_GDBUS_BIO_OBJECT_PATH)
+	except dbus.DBusException:
+		print(_("Biometric identification backend framework service is not started"))
+		sys.exit(ExitDBusNotExist)
+
+	bus.add_signal_receiver(statusChangedHandler, dbus_interface="org.ukui.Biometric", signal_name="StatusChanged")
+	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+
+	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
+	if api_check > 0:
+		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
+			" Please upgrade framework service or degrade client.\n"))
+		sys.exit(ExitAppApiNotMatch)
+	if api_check < 0:
+		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
+			" Please degrade framework service or upgrade client.\n"))
+		sys.exit(ExitAppApiNotMatch)
+
+	bioIF.Enroll(opsDrvID, uid, -1, fname, timeout=DBUS_OPS_TIMEOUT,
+					reply_handler=ops_handle_retcode_reply,
+					error_handler=ops_handle_error)
+
+	loop.run()
+	if retCode >= RetOpsError:
+		outputMsg(opsDrvID)
+		print()
+
+	sys.exit(retCode)
+
+
+def doVerify(argList):
+	global opsType
+	global opsDrvID
+
+	opsType = OPS_TYPE_VERIFY
+	usage = _("%s %s [-u USER_NAME] -d DRIVER_ID -i INDEX") % (sys.argv[0], sys.argv[1])
+
+	opt = OptionParser(usage)
+	opt.add_option("-u", action="store", type="string", dest="user_name", default=None,
+					help=_("User Name (Default is current user: %s)") % getpass.getuser())
+	opt.add_option("-d", action="store", type="int", dest="driver_id", default=-1,
+					help=_("Driver(or Device) ID"))
+	opt.add_option("-i", action="store", type="int", dest="index", default=-1,
+					help=_("Feature Index"))
+	options = opt.parse_args(args=argList)
+
+	if options[0].user_name is None:
+		options[0].user_name = getpass.getuser()
+	uid = getUidByUname(options[0].user_name)
+	opsDrvID = options[0].driver_id
+	index = options[0].index
+
+	if uid == -1 or opsDrvID == -1 or index == -1:
+		sys.stderr.write(_("Input parameter error\n"))
+		sys.stderr.write(opt.get_usage())
+		sys.exit(ExitParamError)
+
+	dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+
+	bus = dbus.SystemBus()
+	try:
+		proxy = bus.get_object('org.ukui.Biometric', UKUI_GDBUS_BIO_OBJECT_PATH)
+	except dbus.DBusException:
+		print(_("Biometric identification backend framework service is not started"))
+		sys.exit(ExitDBusNotExist)
+
+	bus.add_signal_receiver(statusChangedHandler, dbus_interface="org.ukui.Biometric", signal_name="StatusChanged")
+	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+
+	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
+	if api_check > 0:
+		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
+			" Please upgrade framework service or degrade client.\n"))
+		sys.exit(ExitAppApiNotMatch)
+	if api_check < 0:
+		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
+			" Please degrade framework service or upgrade client.\n"))
+		sys.exit(ExitAppApiNotMatch)
+
+	bioIF.Verify(opsDrvID, uid, index, timeout=DBUS_OPS_TIMEOUT,
+					reply_handler=ops_handle_retcode_reply,
+					error_handler=ops_handle_error)
+
+	loop.run()
+	if retCode >= RetOpsError:
+		outputMsg(opsDrvID)
+		print()
+
+	sys.exit(retCode)
+
+
+def doCapture(argList):
+	global opsType
+	global opsDrvID
+
+	opsType = OPS_TYPE_CAPTURE
+	usage = _("%s %s -d DRIVER_ID") % (sys.argv[0], sys.argv[1])
+
+	opt = OptionParser(usage)
+	opt.add_option("-d", action="store", type="int", dest="driver_id", default=-1,
+					help=_("Driver(or Device) ID"))
+	options = opt.parse_args(args=argList)
+
+	opsDrvID = options[0].driver_id
+
+	if opsDrvID == -1:
+		sys.stderr.write(_("Input parameter error\n"))
+		sys.stderr.write(opt.get_usage())
+		sys.exit(ExitParamError)
+
+	dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+
+	bus = dbus.SystemBus()
+	try:
+		proxy = bus.get_object('org.ukui.Biometric', UKUI_GDBUS_BIO_OBJECT_PATH)
+	except dbus.DBusException:
+		print(_("Biometric identification backend framework service is not started"))
+		sys.exit(ExitDBusNotExist)
+
+	bus.add_signal_receiver(statusChangedHandler, dbus_interface="org.ukui.Biometric", signal_name="StatusChanged")
+	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+
+	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
+	if api_check > 0:
+		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
+			" Please upgrade framework service or degrade client.\n"))
+		sys.exit(ExitAppApiNotMatch)
+	if api_check < 0:
+		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
+			" Please degrade framework service or upgrade client.\n"))
+		sys.exit(ExitAppApiNotMatch)
+
+	bioIF.Capture(opsDrvID, timeout=DBUS_OPS_TIMEOUT,
+					reply_handler=ops_handle_capture_reply,
+					error_handler=ops_handle_error)
+
+	loop.run()
+	if retCode >= RetOpsError:
+		outputMsg(opsDrvID)
+		print()
+
+	sys.exit(retCode)
+
+
+def doSearch(argList):
+	global opsType
+	global opsDrvID
+
+	opsType = OPS_TYPE_SEARCH
+	usage = _("%s %s [-u USER_NAME] -d DRIVER_ID [-s INDEX_START] [-e INDEX_END]") % (sys.argv[0], sys.argv[1])
+
+	opt = OptionParser(usage)
+	opt.add_option("-u", action="store", type="string", dest="user_name", default=None,
+					help=_("User Name (Not set to search for all users)"))
+	opt.add_option("-d", action="store", type="int", dest="driver_id", default=-1,
+					help=_("Driver(or Device) ID"))
+	opt.add_option("-s", action="store", type="int", dest="index_start", default=0,
+					help=_("Start of Feature Index (default 0)"))
+	opt.add_option("-e", action="store", type="int", dest="index_end", default=-1,
+					help=_("End of Feature Index (default -1, means search all)"))
+	options = opt.parse_args(args=argList)
+
+	if options[0].user_name is None:
+		uid = -1
+	else:
+		uid = getUidByUname(options[0].user_name)
+	opsDrvID = options[0].driver_id
+	index_start = options[0].index_start
+	index_end = options[0].index_end
+
+	if opsDrvID <= -1 or index_start < 0 or index_end < -1:
+		sys.stderr.write(_("Input parameter error\n"))
+		sys.stderr.write(opt.get_usage())
+		sys.exit(ExitParamError)
+
+	dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+
+	bus = dbus.SystemBus()
+	try:
+		proxy = bus.get_object('org.ukui.Biometric', UKUI_GDBUS_BIO_OBJECT_PATH)
+	except dbus.DBusException:
+		print(_("Biometric identification backend framework service is not started"))
+		sys.exit(ExitDBusNotExist)
+
+	bus.add_signal_receiver(statusChangedHandler, dbus_interface="org.ukui.Biometric", signal_name="StatusChanged")
+	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+
+	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
+	if api_check > 0:
+		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
+			" Please upgrade framework service or degrade client.\n"))
+		sys.exit(ExitAppApiNotMatch)
+	if api_check < 0:
+		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
+			" Please degrade framework service or upgrade client.\n"))
+		sys.exit(ExitAppApiNotMatch)
+
+	bioIF.Search(opsDrvID, uid, index_start, index_end, timeout=DBUS_OPS_TIMEOUT,
+					reply_handler=ops_handle_search_reply,
+					error_handler=ops_handle_error)
+
+	loop.run()
+	if retCode >= RetOpsError:
+		outputMsg(opsDrvID)
+		print()
+
+	sys.exit(retCode)
+
+
+def doClean(argList):
+	global opsType
+	global opsDrvID
+
+	opsType = OPS_TYPE_CLEAN
+	usage = _("%s %s [-u USER_NAME] -d DRIVER_ID -i INDEX") % (sys.argv[0], sys.argv[1])
+
+	opt = OptionParser(usage)
+	opt.add_option("-u", action="store", type="string", dest="user_name", default=None,
+					help=_("User Name (Default is current user: %s)") % getpass.getuser())
+	opt.add_option("-d", action="store", type="int", dest="driver_id", default=-1,
+					help=_("Driver(or Device) ID"))
+	opt.add_option("-i", action="store", type="int", dest="index", default=-2,
+					help=_("The Feature Index You Want To Delete (-1 means delete all)"))
+	options = opt.parse_args(args=argList)
+
+	if options[0].user_name is None:
+		options[0].user_name = getpass.getuser()
+	uid = getUidByUname(options[0].user_name)
+	opsDrvID = options[0].driver_id
+	index = options[0].index
+
+	if uid == -1 or opsDrvID <= -1 or index <= -2:
+		sys.stderr.write(_("Input parameter error\n"))
+		sys.stderr.write(opt.get_usage())
+		sys.exit(ExitParamError)
+
+	index_start = index
+	index_end = index
+	if index == -1:
+		index_start = 0
+
+	dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+
+	bus = dbus.SystemBus()
+	try:
+		proxy = bus.get_object('org.ukui.Biometric', UKUI_GDBUS_BIO_OBJECT_PATH)
+	except dbus.DBusException:
+		print(_("Biometric identification backend framework service is not started"))
+		sys.exit(ExitDBusNotExist)
+
+	bus.add_signal_receiver(statusChangedHandler, dbus_interface="org.ukui.Biometric", signal_name="StatusChanged")
+	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+
+	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
+	if api_check > 0:
+		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
+			" Please upgrade framework service or degrade client.\n"))
+		sys.exit(ExitAppApiNotMatch)
+	if api_check < 0:
+		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
+			" Please degrade framework service or upgrade client.\n"))
+		sys.exit(ExitAppApiNotMatch)
+
+	bioIF.Clean(opsDrvID, uid, index_start, index_end, timeout=DBUS_OPS_TIMEOUT,
+					reply_handler=ops_handle_retcode_reply,
+					error_handler=ops_handle_error)
+
+	loop.run()
+	if retCode >= RetOpsError:
+		outputMsg(opsDrvID)
+		print()
+
+	sys.exit(retCode)
+
+
+def doGetFeatureList(argList):
+	global opsType
+	global opsDrvID
+
+	opsType = OPS_TYPE_GET_FLIST
+	usage = _("%s %s [-u USER_NAME] -d DRIVER_ID") % (sys.argv[0], sys.argv[1])
+
+	opt = OptionParser(usage)
+	opt.add_option("-u", action="store", type="string", dest="user_name", default=None,
+					help=_("User Name (Default is current user: %s)") % getpass.getuser())
+	opt.add_option("-d", action="store", type="int", dest="driver_id", default=-1,
+					help=_("Driver(or Device) ID"))
+	options = opt.parse_args(args=argList)
+
+	if options[0].user_name is None:
+		options[0].user_name = getpass.getuser()
+	uid = getUidByUname(options[0].user_name)
+	opsDrvID = options[0].driver_id
+
+	if uid == -1 or opsDrvID <= -1:
+		sys.stderr.write(_("Input parameter error\n"))
+		sys.stderr.write(opt.get_usage())
+		sys.exit(ExitParamError)
+
+	dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+
+	bus = dbus.SystemBus()
+	try:
+		proxy = bus.get_object('org.ukui.Biometric', UKUI_GDBUS_BIO_OBJECT_PATH)
+	except dbus.DBusException:
+		print(_("Biometric identification backend framework service is not started"))
+		sys.exit(ExitDBusNotExist)
+
+	bus.add_signal_receiver(statusChangedHandler, dbus_interface="org.ukui.Biometric", signal_name="StatusChanged")
+	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+
+	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
+	if api_check > 0:
+		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
+			" Please upgrade framework service or degrade client.\n"))
+		sys.exit(ExitAppApiNotMatch)
+	if api_check < 0:
+		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
+			" Please degrade framework service or upgrade client.\n"))
+		sys.exit(ExitAppApiNotMatch)
+
+	bioIF.GetFeatureList(opsDrvID, uid, 0, -1, timeout=DBUS_OPS_TIMEOUT,
+						reply_handler=ops_handle_get_feature_list_reply,
+						error_handler=ops_handle_error)
+
+	loop.run()
+	if retCode >= RetOpsError:
+		outputMsg(opsDrvID)
+		print()
+
+	sys.exit(retCode)
+
+
+def doRename(argList):
+	global opsType
+	global opsDrvID
+
+	opsType = OPS_TYPE_RENAME
+	usage = _("%s %s [-u USER_NAME] -d DRIVER_ID -i INDEX -n NEW_NAME") % (sys.argv[0], sys.argv[1])
+
+	opt = OptionParser(usage)
+	opt.add_option("-u", action="store", type="string", dest="user_name", default=None,
+					help=_("User Name (Default is current user: %s)") % getpass.getuser())
+	opt.add_option("-d", action="store", type="int", dest="driver_id", default=-1,
+					help=_("Driver(or Device) ID"))
+	opt.add_option("-i", action="store", type="int", dest="index", default=-1,
+					help=_("The Feature Index that needs to be renamed"))
+	opt.add_option("-n", action="store", type="string", dest="new_name", default=None,
+					help=_("New Feature Name"))
+	options = opt.parse_args(args=argList)
+
+	if options[0].user_name is None:
+		options[0].user_name = getpass.getuser()
+	uid = getUidByUname(options[0].user_name)
+	opsDrvID = options[0].driver_id
+	index = options[0].index
+	new_name = options[0].new_name
+
+	if uid == -1 or opsDrvID <= -1 or index <= -1 or new_name is None:
+		sys.stderr.write(_("Input parameter error\n"))
+		sys.stderr.write(opt.get_usage())
+		sys.exit(ExitParamError)
+
+	dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+
+	bus = dbus.SystemBus()
+	try:
+		proxy = bus.get_object('org.ukui.Biometric', UKUI_GDBUS_BIO_OBJECT_PATH)
+	except dbus.DBusException:
+		print(_("Biometric identification backend framework service is not started"))
+		sys.exit(ExitDBusNotExist)
+
+	bus.add_signal_receiver(statusChangedHandler, dbus_interface="org.ukui.Biometric", signal_name="StatusChanged")
+	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+
+	api_check = bioIF.CheckAppApiVersion(APP_API_MAJOR, APP_API_MINOR, APP_API_FUNC)
+	if api_check > 0:
+		sys.stderr.write(_("Client APP_API is newer than biometric identification framework service."
+			" Please upgrade framework service or degrade client.\n"))
+		sys.exit(ExitAppApiNotMatch)
+	if api_check < 0:
+		sys.stderr.write(_("Client APP_API is older than biometric identification framework service."
+			" Please degrade framework service or upgrade client.\n"))
+		sys.exit(ExitAppApiNotMatch)
+
+	bioIF.Rename(opsDrvID, uid, index, new_name, timeout=DBUS_OPS_TIMEOUT,
+					reply_handler=ops_handle_retcode_reply,
+					error_handler=ops_handle_error)
+
+	loop.run()
+	if retCode >= RetOpsError:
+		outputMsg(opsDrvID)
+		print()
+
+	sys.exit(retCode)
+
+
+def doStopOps(signum, frame):
+	notifyMsgBus = dbus.SystemBus()
+	proxy = notifyMsgBus.get_object('org.ukui.Biometric', UKUI_GDBUS_BIO_OBJECT_PATH)
+	bioIF = dbus.Interface(proxy, dbus_interface=UKUI_GDBUS_BIO_BUS_NAME)
+	ret = bioIF.StopOps(opsDrvID, stopOpsTimeout)
+	loop.quit()
+
+	if ret != RetOpsSuccess:
+		print(_("The abort operation failed and the current operation will continue in the background."))
+		print(_("The device may have to wait a while before being used."))
+		print(_("The wait problem can be solved by restarting the biometrics backend framework service."))
+		sys.exit(ExitStopOpsFailed)
+
+
+def main():
+	if len(sys.argv) < 2:
+		sys.stdout.write(mainUsage)
+		sys.exit(ExitParamError)
+
+	signal.signal(signal.SIGINT, doStopOps)
+	signal.signal(signal.SIGTERM, doStopOps)
+
+	if sys.argv[1] == "get-driver-list":
+		doGetDrvList(sys.argv[2:])
+
+	if sys.argv[1] == "get-device-list":
+		doGetDevList(sys.argv[2:])
+
+	if sys.argv[1] == "enroll":
+		doEnroll(sys.argv[2:])
+
+	if sys.argv[1] == "verify":
+		doVerify(sys.argv[2:])
+
+	if sys.argv[1] == "capture":
+		doCapture(sys.argv[2:])
+
+	if sys.argv[1] == "search":
+		doSearch(sys.argv[2:])
+
+	if sys.argv[1] == "clean":
+		doClean(sys.argv[2:])
+
+	if sys.argv[1] == "get-feature-list":
+		doGetFeatureList(sys.argv[2:])
+
+	if sys.argv[1] == "rename":
+		doRename(sys.argv[2:])
+
+	if sys.argv[1] == "-h" or sys.argv[1] == "--help":
+		sys.stdout.write(mainUsage)
+		sys.exit(ExitNormal)
+
+	sys.stderr.write(mainUsage + '\n')
+	sys.stderr.write(_("Unknown Builtin Commands: %s\n") % (sys.argv[1]))
+	sys.exit(ExitParamError)
+
+
+if __name__ == "__main__":
+	main()
