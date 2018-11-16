@@ -1,5 +1,26 @@
+biometric-authentication (0.9.60-1) unstable; urgency=medium
+
+  * BugFix:
+    - Error in content caused by incorrect driver information
+    - The interface timeout period is too short, resulting in an
+      abnormal interrupt of the interaction process
+  * Adds API check functionality in biometric-auth-client.
+  * Optimize the biometric-auth-client interaction
+    - The index scope can be omitted when using the search operation
+    - Update the manpage of biometric-auth-client
+  * debian/control:
+    - Add dh-python, python3:any
+    - libgtk-3-dev -> libgtk2.0-dev
+  * Update project translation
+    - Add the translation for the biometric-auth-client
+    - Fix Chinese translation errors
+    - Add French, Portuguese, Russian and Spanish translation
+    - Remove unwanted translations
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Fri, 16 Nov 2018 12:14:25 +0800
+
 biometric-authentication (0.9.56-2) unstable; urgency=medium
 
   * Initial release. (Closes: #908197)
 
- -- handsome_feng <jianfengli@ubuntukylin.com>  Tue, 25 Sep 2018 17:09:55 +0800
+ -- handsome_feng <jianfengli@ubuntukylin.com> Tue, 25 Sep 2018 17:09:55 +0800

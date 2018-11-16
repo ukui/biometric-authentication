@@ -1,2 +1,3 @@
+usr/bin/biometric-auth-client
 usr/bin/biometric-config-tool
 usr/bin/biometric-device-discover

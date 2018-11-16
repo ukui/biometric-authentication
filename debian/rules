@@ -20,18 +20,18 @@ DEB_BUILD_MAINT_OPTIONS = hardening=+all
 
 DRV_API_MAJOR := 0
 DRV_API_MINOR := 10
-DRV_API_FUNC := 1
+DRV_API_FUNC := 2
 DRV_API_DEPEND := bio-drv-api-$(DRV_API_MAJOR).$(DRV_API_MINOR)
 
 APP_API_MAJOR := 0
 APP_API_MINOR := 11
-APP_API_FUNC := 0
+APP_API_FUNC := 1
 APP_API_DEPEND := bio-app-api-$(APP_API_MAJOR).$(APP_API_MINOR)
 
 
 # main packaging script based on dh7 syntax
 %:
-	dh $@
+	dh $@ --with python3
 
 # debmake generated override targets
 # This is example for Cmake (See http://bugs.debian.org/641051 )
