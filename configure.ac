@@ -33,7 +33,6 @@ PKG_CHECK_MODULES(LIBUSB_1, libusb-1.0 >= 1.0.20)
 PKG_CHECK_MODULES(SQLITE3, sqlite3 >= 3.8)
 PKG_CHECK_MODULES(UUID, uuid >= 2.27)
 PKG_CHECK_MODULES(POLKIT, polkit-gobject-1 >= 0.105)
-PKG_CHECK_MODULES(OPENSSL, openssl >= 1.0.2g)
 AC_CHECK_LIB([dl], [dlsym])
 AC_CHECK_LIB([m], [pow])
 AC_CHECK_LIB([pthread], [pthread_mutex_trylock])
@@ -42,12 +41,11 @@ AC_CHECK_LIB([libfprint], [fp_discover_devs])
 AC_CHECK_LIB([usb-1.0], [libusb_hotplug_register_callback])
 AC_CHECK_LIB([glib-2.0], [g_key_file_get_string])
 AC_CHECK_LIB([uuid], [uuid_generate])
-AC_CHECK_LIB([openssl], [AES_set_encrypt_key])
 
 # Checks for header files.
 AC_CHECK_HEADERS([arpa/inet.h fcntl.h limits.h memory.h stdint.h stdlib.h \
 				  string.h termios.h unistd.h dlfcn.h libgen.h \
-				  libfprint/fprint.h openssl/aes.h])
+				  libfprint/fprint.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_CHECK_HEADER_STDBOOL
@@ -65,7 +63,7 @@ AC_CHECK_FUNCS([bzero memset mkdir pow strerror dlopen dlclose dlsym dlerror \
 				g_error_free g_key_file_free g_key_file_get_boolean g_key_file_get_groups \
 				g_key_file_get_string g_key_file_load_from_file g_key_file_new \
 				g_list_append g_list_foreach g_list_free g_list_index g_list_remove \
-				uuid_generate uuid_unparse_lower uuid_parse AES_set_encrypt_key])
+				uuid_generate uuid_unparse_lower uuid_parse])
 
 GETTEXT_PACKAGE=${PACKAGE_TARNAME}
 AC_SUBST([GETTEXT_PACKAGE])
