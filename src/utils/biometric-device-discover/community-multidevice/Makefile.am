@@ -21,7 +21,8 @@ COMM_CFS = -Wall -g -fpic \
 	$(LOCALEDIR_CFS) $(DOMAIN_NAME)
 	$(NULL)
 
-COMM_LDFS = -L$(top_srcdir)/src/
+COMM_LIBS = -L$(top_srcdir)/src/
+COMM_LDFS = -Wl,-z,now
 
 community_multidevice_discover_tool_SOURCES = \
 	community_multidevice_discover_tool.c \
@@ -36,9 +37,11 @@ community_multidevice_discover_tool_CFLAGS = $(COMM_CFS) \
 	$(LIBFPRINT_CFLAGS) $(GLIB_2_CFLAGS) $(LIBUSB_1_CFLAGS) $(SQLITE3_CFLAGS) \
 	$(NULL)
 
-community_multidevice_discover_tool_LDADD = $(COMM_LDFS) \
+community_multidevice_discover_tool_LDADD = $(COMM_LIBS) \
 	$(LIBFPRINT_LIBS) $(GLIB_2_LIBS) $(LIBUSB_1_LIBS) $(SQLITE3_LIBS) \
 	$(NULL)
+
+community_multidevice_discover_tool_LDFLAGS = $(COMM_LDFS)
 
 install-exec-local:
 	mkdir -p $(DESTDIR)/$(drv_dir)/../discover-tools/

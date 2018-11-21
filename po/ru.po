@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: biometric-authentication 0.9.60\n"
+"Project-Id-Version: biometric-authentication 0.9.61\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-01 15:57+0800\n"
 "PO-Revision-Date: 2018-10-12 10:20+0800\n"

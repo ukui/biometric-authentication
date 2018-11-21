@@ -32,11 +32,11 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include <pthread.h>
-#include <openssl/aes.h>
 #include <fcntl.h>
 
 #include "community_ops.h"
 #include "community_define.h"
+#include "aes_128_cfb.h"
 
 // Configure driver parameters
 int community_para_config(bio_dev * dev, GKeyFile * conf);
@@ -1414,21 +1414,13 @@ int community_internal_aes_encrypt(unsigned char *in, int len,
 	if (!in || !key || !out)
 		return -1;
 
-	AES_KEY aes;
 	unsigned char iv[AES_BLOCK_SIZE] = {0};		// 初始偏移向量IV
 	int i = 0;
-	int num = 0;
 
 	for (i = 0; i < AES_BLOCK_SIZE; i++)
 		iv[i] = i;
 
-	if (AES_set_encrypt_key((unsigned char*) key, 128, &aes) < 0)
-	{
-		return -2;
-	}
-
-	AES_cfb128_encrypt((unsigned char*) in, (unsigned char*) out, len,
-					&aes, iv, &num, AES_ENCRYPT);
+	AES_128_CFB_Encrypt(key, iv, in, len, out);
 
 	return 0;
 }
@@ -1438,20 +1430,13 @@ int community_internal_aes_decrypt(unsigned char *in, int len,
 	if (!in || !key || !out)
 		return -1;
 
-	AES_KEY aes;
 	unsigned char iv[AES_BLOCK_SIZE] = {0};		// 初始偏移向量IV
 	int i = 0;
-	int num = 0;
 
 	for (i = 0; i < AES_BLOCK_SIZE; i++)
 		iv[i] = i;
 
-	if(AES_set_encrypt_key((unsigned char*) key, 128, &aes) < 0)
-	{
-		return -2;
-	}
+	AES_128_CFB_Decrypt(key, iv, in, len, out);
 
-	AES_cfb128_encrypt((unsigned char*) in, (unsigned char*) out, len,
-						&aes, iv, &num, AES_DECRYPT);
 	return 0;
 }

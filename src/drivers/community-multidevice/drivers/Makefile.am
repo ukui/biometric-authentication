@@ -24,9 +24,12 @@ libdrv_LTLIBRARIES = upekts.la uru4000.la aes4000.la aes2501.la upektc.la \
 	etes603.la vfs5011.la vfs0050.la elan.la \
 	$(NULL)
 
-COMM_SOURCES = $(top_srcdir)/src/drivers/community-multidevice/community_ops.c
+COMM_SOURCES = $(top_srcdir)/src/drivers/community-multidevice/community_ops.c \
+	$(top_srcdir)/src/drivers/community-multidevice/aes_128_cfb.c
+
 COMM_INCLUDE = $(top_srcdir)/src/drivers/community-multidevice/community_ops.h \
 	$(top_srcdir)/src/drivers/community-multidevice/community_define.h \
+	$(top_srcdir)/src/drivers/community-multidevice/aes_128_cfb.h \
 	$(NULL)
 
 COMM_CFS = -Wall -g -shared -fpic \
@@ -37,7 +40,7 @@ COMM_CFS = -Wall -g -shared -fpic \
 	$(NULL)
 
 COMM_LDFS = $(LIBFPRINT_LIBS) $(GLIB_2_LIBS) $(LIBUSB_1_LIBS) $(SQLITE3_LIBS) \
-	../../../lib/libbiometric.la -lcrypto -module -avoid-version -Wl,-z,now \
+	../../../lib/libbiometric.la -module -avoid-version -Wl,-z,now \
 	$(NULL)
 
 upekts_la_SOURCES = $(COMM_SOURCES) upekts.c
