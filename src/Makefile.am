@@ -8,7 +8,8 @@ GENERATED_CH = biometric-generated
 libexec_PROGRAMS = biometric-authenticationd
 
 COMM_CFS = -Wall -g -I$(top_srcdir)/src/lib
-COMM_LDFS = -Llib -lbiometric
+COMM_LIBS = -Llib -lbiometric
+COMM_LDFS = -Wl,-z,now
 
 DOMAIN_NAME = -DDOMAIN_NAME=\""$(PACKAGE)"\"
 LOCALEDIR_CFS = -DLOCALEDIR=\""$(localedir)"\"
@@ -27,10 +28,12 @@ biometric_authenticationd_CFLAGS = $(COMM_CFS) $(LOCALEDIR_CFS) \
 	$(GOBJECT_2_CFLAGS) $(LIBUSB_1_CFLAGS) $(SQLITE3_CFLAGS) $(POLKIT_CFLAGS) \
 	$(NULL)
 
-biometric_authenticationd_LDADD = $(COMM_LDFS) \
+biometric_authenticationd_LDADD = $(COMM_LIBS) \
 	$(GLIB_2_LIBS) $(GIO_2_LIBS) $(GIO_UNIX_2_LIBS) $(GTK_3_LIBS) \
 	$(GOBJECT_2_LIBS) $(LIBUSB_1_LIBS) $(SQLITE3_LIBS) $(POLKIT_LIBS) \
 	$(NULL)
+
+biometric_authenticationd_LDFLAGS = $(COMM_LDFS)
 
 biometric-authenticationd.h: biometric-generated.h
 
