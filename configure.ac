@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([biometric-authentication], [0.9.60], [https://github.com/ukui/biometric-authentication/issues])
+AC_INIT([biometric-authentication], [0.9.61], [https://github.com/ukui/biometric-authentication/issues])
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/biometric-authenticationd.c])
 AC_CONFIG_HEADER([config.h])
