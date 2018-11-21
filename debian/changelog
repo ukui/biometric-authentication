@@ -1,3 +1,12 @@
+biometric-authentication (0.9.61-1) unstable; urgency=medium
+
+  * Implement the CFB mode of AES algorithm and replace the interface
+    using openssl
+    - OpenSSL's license is not compatible with GPL or LGPL, remove it
+  * Add the "bindnow" linker flag to the ELF binary
+
+ -- jianglinxuan (droiing) <jianglinxuan@kylinos.cn>  Wed, 21 Nov 2018 11:19:50 +0800
+
 biometric-authentication (0.9.60-1) unstable; urgency=medium
 
   * BugFix:
