@@ -3,6 +3,12 @@ set -e
 
 #DEBHELPER#
 
+if [ ! -f /etc/biometric-auth/biometric-drivers.conf ]; then
+	mkdir -p /etc/biometric-auth
+	cp /usr/share/biometric-auth/biometric-drivers.conf.template \
+		/etc/biometric-auth/biometric-drivers.conf
+fi
+
 # Automatically added by dh_systemd_enable/10.7.2ubuntu2
 # This will only remove masks created by d-s-h on package removal.
 deb-systemd-helper unmask biometric-authentication.service >/dev/null || true

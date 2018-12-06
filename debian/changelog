@@ -1,3 +1,12 @@
+biometric-authentication (0.9.61-2) unstable; urgency=medium
+
+  * Change the configuration file to the configuration template file
+    - Rename biometric-drivers.conf to biometric-drivers.conf.template
+    - The default configuration template file is installed to
+      /usr/share/biometric-auth/
+
+ -- jianglinxuan (droiing) <jianglinxuan@kylinos.cn>  Thu, 06 Dec 2018 15:35:33 +0800
+
 biometric-authentication (0.9.61-1) unstable; urgency=medium
 
   * Implement the CFB mode of AES algorithm and replace the interface

@@ -49,6 +49,12 @@ override_dh_auto_configure:
 			--with-bio-extra-dir=/usr/lib/biometric-authentication/drivers/extra \
 			--libexecdir=\$${prefix}/lib/biometric-authentication
 
+override_dh_auto_install:
+	dh_auto_install
+	mkdir -p debian/tmp/usr/share/biometric-auth/
+	mv debian/tmp/etc/biometric-auth/biometric-drivers.conf \
+		debian/tmp/usr/share/biometric-auth/biometric-drivers.conf.template
+
 override_dh_gencontrol:
 	echo "bio-app-api:Provides=$(APP_API_DEPEND)" >> debian/biometric-auth.substvars;
 	echo "bio-drv-api:Provides=$(DRV_API_DEPEND)" >> debian/libbiometric0.substvars;
