@@ -4,19 +4,20 @@ biometric-authentication (0.9.61-2) unstable; urgency=medium
     - Rename biometric-drivers.conf to biometric-drivers.conf.template
     - The default configuration template file is installed to
       /usr/share/biometric-auth/
+      (Closes: #914764)
 
- -- jianglinxuan (droiing) <jianglinxuan@kylinos.cn>  Thu, 06 Dec 2018 15:35:33 +0800
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Mon, 10 Dec 2018 10:58:34 +0800
 
-biometric-authentication (0.9.61-1) unstable; urgency=medium
+biometric-authentication (0.9.61-1) UNRELEASED; urgency=medium
 
   * Implement the CFB mode of AES algorithm and replace the interface
     using openssl
     - OpenSSL's license is not compatible with GPL or LGPL, remove it
   * Add the "bindnow" linker flag to the ELF binary
 
- -- jianglinxuan (droiing) <jianglinxuan@kylinos.cn>  Wed, 21 Nov 2018 11:19:50 +0800
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Wed, 21 Nov 2018 11:19:50 +0800
 
-biometric-authentication (0.9.60-1) unstable; urgency=medium
+biometric-authentication (0.9.60-1) UNRELEASED; urgency=medium
 
   * BugFix:
     - Error in content caused by incorrect driver information
@@ -37,7 +38,7 @@ biometric-authentication (0.9.60-1) unstable; urgency=medium
 
  -- handsome_feng <jianfengli@ubuntukylin.com>  Fri, 16 Nov 2018 12:14:25 +0800
 
-biometric-authentication (0.9.56-2) unstable; urgency=medium
+biometric-authentication (0.9.56-1) unstable; urgency=medium
 
   * Initial release. (Closes: #908197)
 
