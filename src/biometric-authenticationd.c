@@ -497,6 +497,13 @@ void gdbus_enroll_pt(GSList * argv) {
 		return;
 	}
 
+	if (idx == -1)
+	{
+		idx = bio_common_get_empty_index(dev, uid, 0, -1);
+		bio_print_debug(_("Framework automatically assigns the free index '%d'"
+						  " to driver %s user %d\n"),
+						idx, dev->device_name, uid);
+	}
 	ret = bio_ops_enroll(dev, uid, idx, (char *)idx_name);
 	pthread_mutex_unlock(&dev_dbus_mutex[drvid]);
 
