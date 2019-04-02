@@ -1,3 +1,15 @@
+biometric-authentication (0.9.62) unstable; urgency=medium
+
+  * Clean up the automatically generated configuration files after purge.
+    - config file:
+        /etc/biometric-auth/biometric-drivers.conf
+        /home/every_user/.biometric_auth/UUID
+    - database file:
+        /var/lib/biometric-auth/biometric.db
+  * Modify the description information when a dbus error occurs and update the translation file
+
+ -- jianglinxuan (droiing) <jianglinxuan@kylinos.cn>  Tue, 02 Apr 2019 10:54:25 +0800
+
 biometric-authentication (0.9.61-2) unstable; urgency=medium
 
   * Change the configuration file to the configuration template file
