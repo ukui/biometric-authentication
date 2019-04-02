@@ -1,0 +1,59 @@
+#!/bin/sh -e
+
+BIO_DRIVER_CONF="/etc/biometric-auth/biometric-drivers.conf"
+BIO_DATABASE="/var/lib/biometric-auth/biometric.db"
+BIO_USERS=`ls /home`
+
+case "$1" in
+	remove)
+		;;
+
+	purge)
+		if [ -e $BIO_DRIVER_CONF ]; then
+			rm -rf $BIO_DRIVER_CONF
+		fi
+
+		if [ -e $BIO_DATABASE ]; then
+			rm -rf $BIO_DATABASE
+		fi
+
+		for user in $BIO_USERS;
+		do
+			user_uuid_file="/home/$user/.biometric_auth/UUID"
+			if [ -e $user_uuid_file ]; then
+				rm -rf $user_uuid_file
+			fi
+		done
+
+		;;
+
+	upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+		;;
+
+	*)
+		echo "postrm called with unknown argument '$1'" >&2
+		exit 1
+		;;
+esac
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+
+# Automatically added by dh_systemd_enable/11.2.1ubuntu1
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'biometric-authentication.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'biometric-authentication.service' >/dev/null || true
+		deb-systemd-helper unmask 'biometric-authentication.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
