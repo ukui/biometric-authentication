@@ -1,4 +1,4 @@
-# Chinese translations for biometric-authentication package.
+# French translations for biometric-authentication package.
 # Copyright (C) 2018 THE biometric-authentication'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the biometric-authentication package.
 # droiing <jianglinxuan@kylinos.cn>, 2018.
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: biometric-authentication 0.9.61\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-01 15:57+0800\n"
+"POT-Creation-Date: 2019-04-02 09:52+0800\n"
 "PO-Revision-Date: 2018-10-12 09:59+0800\n"
 "Last-Translator: droiing <jianglinxuan@kylinos.cn>\n"
 "Language-Team: Chinese (simplified)\n"
@@ -19,66 +19,74 @@ msgstr ""
 
 #: ../src/biometric-authenticationd.c:304
 #: ../src/biometric-authenticationd.c:382
-#: ../src/biometric-authenticationd.c:564
-#: ../src/biometric-authenticationd.c:669
-#: ../src/biometric-authenticationd.c:785
-#: ../src/biometric-authenticationd.c:865
-#: ../src/biometric-authenticationd.c:1003
-#: ../src/biometric-authenticationd.c:1166
-#: ../src/biometric-authenticationd.c:1273
-#: ../src/biometric-authenticationd.c:1350
-#: ../src/biometric-authenticationd.c:1478
-#: ../src/biometric-authenticationd.c:1649
+#: ../src/biometric-authenticationd.c:571
+#: ../src/biometric-authenticationd.c:676
+#: ../src/biometric-authenticationd.c:792
+#: ../src/biometric-authenticationd.c:872
+#: ../src/biometric-authenticationd.c:1010
+#: ../src/biometric-authenticationd.c:1173
+#: ../src/biometric-authenticationd.c:1280
+#: ../src/biometric-authenticationd.c:1357
+#: ../src/biometric-authenticationd.c:1485
+#: ../src/biometric-authenticationd.c:1656
 #, c-format
 msgid "Can't create thread: %s\n"
 msgstr "Impossible de créer un fil: %s\n"
 
-#: ../src/biometric-authenticationd.c:504
+#: ../src/biometric-authenticationd.c:503
+#, c-format
+msgid ""
+"Framework automatically assigns the free index '%d' to driver %s user %d\n"
+msgstr ""
+"Framework attribue automatiquement l'index libre '%d' à l'utilisateur du "
+"pilote %s %d \n"
+
+#: ../src/biometric-authenticationd.c:511
 msgid "Enroll Result: Success\n"
 msgstr "Résultat d'inscription: succès\n"
 
-#: ../src/biometric-authenticationd.c:507
+#: ../src/biometric-authenticationd.c:514
 msgid "Enroll Result: Fail\n"
 msgstr "Résultat d'inscription: Echec\n"
 
-#: ../src/biometric-authenticationd.c:611
+#: ../src/biometric-authenticationd.c:618
 msgid "Verify Result: Match\n"
 msgstr "Résultat de vérification: correspondance\n"
 
-#: ../src/biometric-authenticationd.c:615
+#: ../src/biometric-authenticationd.c:622
 msgid "Verify Result: No Match\n"
 msgstr "Résultat de vérification: pas de correspondance\n"
 
-#: ../src/biometric-authenticationd.c:720
+#: ../src/biometric-authenticationd.c:727
 #, c-format
 msgid "Identify Result: UID = %d\n"
 msgstr "Identifier le résultat: UID = %d\n"
 
-#: ../src/biometric-authenticationd.c:724
+#: ../src/biometric-authenticationd.c:731
 msgid "Identify Result: No Match\n"
 msgstr "Identifier le résultat: pas de correspondance\n"
 
-#: ../src/biometric-authenticationd.c:822
+#: ../src/biometric-authenticationd.c:829
 #, c-format
 msgid "Capture Result: %.*s\n"
 msgstr "Résultat de la capture: %.*s\n"
 
-#: ../src/biometric-authenticationd.c:825
+#: ../src/biometric-authenticationd.c:832
 msgid "Capture Result: ERROR\n"
 msgstr "Résultat de la capture: ERREUR\n"
 
-#: ../src/biometric-authenticationd.c:1025
+#: ../src/biometric-authenticationd.c:1032
 #, c-format
 msgid "%s Clean Result: Success\n"
 msgstr "%s Résultat propre: succès\n"
 
-#: ../src/biometric-authenticationd.c:1028
+#: ../src/biometric-authenticationd.c:1035
 #, c-format
 msgid "%s Clean Result: Failed\n"
 msgstr "%s résultat propre: échec\n"
 
 #. 系统层清理进行彻底的清理，免受当前不可用设备遗留的生物特征信息影响
-#: ../src/biometric-authenticationd.c:1096
+#: ../src/biometric-authenticationd.c:1103
 msgid ""
 "System level cleaning of the specified range of biometric features (all "
 "drivers)\n"
@@ -86,55 +94,55 @@ msgstr ""
 "Nettoyage au niveau du système de la plage spécifiée de fonctions "
 "biométriques (tous les pilotes)\n"
 
-#: ../src/biometric-authenticationd.c:1104
+#: ../src/biometric-authenticationd.c:1111
 msgid "System level Clean Result: Success\n"
 msgstr "Niveau système Nettoyer Résultat: succès\n"
 
-#: ../src/biometric-authenticationd.c:1107
+#: ../src/biometric-authenticationd.c:1114
 msgid "System level Clean Result: Failed\n"
 msgstr "Niveau de nettoyage du système Résultat: Echec\n"
 
-#: ../src/biometric-authenticationd.c:1434
+#: ../src/biometric-authenticationd.c:1441
 #, c-format
 msgid "Error: Failed to export object. Reason: %s\n"
 msgstr "Erreur: Impossible d'exporter l'objet. Raison: %s\n"
 
-#: ../src/biometric-authenticationd.c:1444
+#: ../src/biometric-authenticationd.c:1451
 #, c-format
 msgid "name_acquired_cb called, Acquired bus name: %s\n"
 msgstr "name_acquired_cb appelé, Nom du bus acquis: %s\n"
 
-#: ../src/biometric-authenticationd.c:1453
+#: ../src/biometric-authenticationd.c:1460
 msgid "name_lost_cb called, Error: Failed to connect to dbus\n"
 msgstr "name_lost_cb appelé, Erreur: échec de la connexion à dbus\n"
 
-#: ../src/biometric-authenticationd.c:1455
+#: ../src/biometric-authenticationd.c:1462
 #, c-format
 msgid "name_lost_cb called, Error: Failed to obtain bus name: %s\n"
 msgstr "name_lost_cb appelé, Erreur: échec de l'obtention du nom du bus: %s\n"
 
-#: ../src/biometric-authenticationd.c:1463
+#: ../src/biometric-authenticationd.c:1470
 msgid "run called in the server\n"
 msgstr "exécuter appelé dans le serveur\n"
 
-#: ../src/biometric-authenticationd.c:1480
-#: ../src/biometric-authenticationd.c:1651
+#: ../src/biometric-authenticationd.c:1487
+#: ../src/biometric-authenticationd.c:1658
 #, c-format
 msgid "New thread created: %s\n"
 msgstr "Nouveau thread créé: %s\n"
 
 #. * init for usage of "g" types
 #. g_type_init();
-#: ../src/biometric-authenticationd.c:1493
+#: ../src/biometric-authenticationd.c:1500
 msgid "InitDBusCommunicationServer: Server started\n"
 msgstr "InitDBusCommunicationServer: serveur démarré\n"
 
-#: ../src/biometric-authenticationd.c:1569
+#: ../src/biometric-authenticationd.c:1576
 #, c-format
 msgid "libusb_handle_events failed: %s\n"
 msgstr "échec de libusb_handle_events: %s\n"
 
-#: ../src/biometric-authenticationd.c:1586
+#: ../src/biometric-authenticationd.c:1593
 msgid ""
 "The biometric authentication server failed to start, requiring administrator "
 "permission to start\n"
@@ -142,24 +150,24 @@ msgstr ""
 "Le serveur d'authentification biométrique n'a pas pu démarrer, nécessitant "
 "l'autorisation de l'administrateur pour démarrer\n"
 
-#: ../src/biometric-authenticationd.c:1609
+#: ../src/biometric-authenticationd.c:1616
 #, c-format
 msgid "Can not open PID file: %s\n"
 msgstr "Impossible d'ouvrir le fichier PID: %s\n"
 
-#: ../src/biometric-authenticationd.c:1616
+#: ../src/biometric-authenticationd.c:1623
 msgid ""
 "Biometric authentication server is running, Do not restart it repeatedly\n"
 msgstr ""
 "Le serveur d'authentification biométrique est en cours d'exécution, ne le "
 "redémarrez pas à plusieurs reprises\n"
 
-#: ../src/biometric-authenticationd.c:1625
+#: ../src/biometric-authenticationd.c:1632
 #, c-format
 msgid "There is an exception to write PID file: %s\n"
 msgstr "Il existe une exception pour écrire le fichier PID: %s\n"
 
-#: ../src/biometric-authenticationd.c:1633
+#: ../src/biometric-authenticationd.c:1640
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:155
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:173
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:192
@@ -167,27 +175,29 @@ msgstr "Il existe une exception pour écrire le fichier PID: %s\n"
 msgid "No such device"
 msgstr "Aucun appareil de ce type"
 
-#: ../src/biometric-authenticationd.c:1634
+#: ../src/biometric-authenticationd.c:1641
 msgid "Device busy"
 msgstr "Appareil occupé"
 
-#: ../src/biometric-authenticationd.c:1639
+#: ../src/biometric-authenticationd.c:1646
 msgid "Initial biometric recognition framework failed\n"
 msgstr "Echec du cadre de reconnaissance biométrique initial\n"
 
 #: ../src/biometric-dbus-common.c:51
 #, c-format
-msgid "Could not talk to message bus to find UID of sender %s: %s"
+msgid ""
+"The UID information of the requester (%s) could not be obtained. Error: %s\n"
 msgstr ""
-"Impossible de parler au bus de messages pour trouver l'UID de l'expéditeur "
-"%s : %s"
+"Les informations UID du demandeur (%s) n'ont pas pu être obtenues. Erreur:"
+"%s \n"
 
-#: ../src/biometric-dbus-common.c:86
+#: ../src/biometric-dbus-common.c:87
 #, c-format
-msgid "Could not talk to message bus to find PID of sender %s: %s"
+msgid ""
+"The PID information of the requester (%s) could not be obtained. Error: %s\n"
 msgstr ""
-"Impossible de parler au bus de messages pour trouver le PID de l'expéditeur "
-"%s : %s"
+"Les informations PID du demandeur (%s) n'ont pas pu être obtenues. Erreur:"
+"%s \n"
 
 #: ../src/lib/biometric_common.c:170
 msgid "Current driver list:"

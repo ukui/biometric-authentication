@@ -48,7 +48,8 @@ get_dbus_caller_uid (GDBusMethodInvocation *invocation, gint *uid)
 										 &error);
 
 	if (reply == NULL) {
-			bio_print_warning (_("Could not talk to message bus to find UID of sender %s: %s"),
+			bio_print_warning (_("The UID information of the requester (%s) "
+								 "could not be obtained. Error: %s\n"),
 								g_dbus_method_invocation_get_sender (invocation),
 								error->message);
 			g_error_free (error);
@@ -83,7 +84,8 @@ get_dbus_caller_pid (GDBusMethodInvocation *invocation, gint *pid)
 										 &error);
 
 	if (reply == NULL) {
-			bio_print_warning (_("Could not talk to message bus to find PID of sender %s: %s"),
+			bio_print_warning (_("The PID information of the requester (%s) "
+								 "could not be obtained. Error: %s\n"),
 							   g_dbus_method_invocation_get_sender (invocation),
 							   error->message);
 			g_error_free (error);
