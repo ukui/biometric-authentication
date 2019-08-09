@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+#DEBHELPER#
+
 BIO_DRIVER_CONF="/etc/biometric-auth/biometric-drivers.conf"
 BIO_DATABASE="/var/lib/biometric-auth/biometric.db"
 BIO_USERS=`ls /home`

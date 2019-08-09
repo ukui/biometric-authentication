@@ -17,7 +17,7 @@ Build-Depends: debhelper (>= 11),
                libfprint-dev,
                libpolkit-gobject-1-dev,
                uuid-dev
-Standards-Version: 4.2.1
+Standards-Version: 4.3.0
 Homepage: https://github.com/ukui/biometric-authentication.git
 Vcs-Git: https://github.com/ukui/biometric-authentication.git
 vcs-Browser: https://github.com/ukui/biometric-authentication

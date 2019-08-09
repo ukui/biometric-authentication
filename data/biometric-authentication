@@ -1,0 +1,70 @@
+#!/bin/bash
+#
+
+### BEGIN INIT INFO
+# Provides:          biometric-authentication
+# Required-Start:    $local_fs dbus
+# Required-Stop:     $local_fs dbus
+# Should-Start:      $named
+# Should-Stop:       $named
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Biometric Authentication Service
+# Description:
+#  The service layer of the biometric identification authentication framework.
+#  The service layer uses the DBus bus to provide the upper application with
+#  operation interfaces such as feature enroll, feature verify, feature identify,
+#  feature search, feature delete, etc. Meanwhile, it also provides notification
+#  of device status changes event and notification of USB device hotplug event.
+### END INIT INFO
+
+set -e
+
+PATH=/bin:/usr/bin:/sbin:/usr/sbin:/usr/lib/biometric-authentication/
+DAEMON=/usr/lib/biometric-authentication/biometric-authenticationd
+PIDFILE=/tmp/biometric-authentication.pid
+
+if [ -r /etc/default/locale ]; then
+  . /etc/default/locale
+  export LANG LANGUAGE
+fi
+
+test -x $DAEMON || exit 0
+
+. /lib/lsb/init-functions
+
+SSD_START_ARGS="--pidfile $PIDFILE --remove-pidfile --background --quiet --exec $DAEMON"
+SSD_STOP_ARGS="--pidfile $PIDFILE"
+
+start(){
+  log_begin_msg "Starting biometric authentication service"
+  start-stop-daemon --start $SSD_START_ARGS
+  log_end_msg 0
+}
+
+stop(){
+  log_daemon_msg "Stopping biometric authentication service"
+  start-stop-daemon --stop --quiet $SSD_STOP_ARGS || true
+  log_end_msg 0
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    stop
+    start
+    ;;
+  status)
+    status_of_proc -p "$PIDFILE" "$DAEMON" "$(basename $DAEMON)"
+    ;;
+  *)
+    echo "Usage: /etc/init.d/biometric-authentication {start|stop|restart|status}"
+    exit 1
+esac
+
+exit 0
