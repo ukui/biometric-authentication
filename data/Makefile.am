@@ -9,6 +9,9 @@ dist_dbusconf_DATA = org.ukui.Biometric.conf
 servicedir = /lib/systemd/system/
 dist_service_DATA = biometric-authentication.service
 
+initddir = /etc/init.d/
+dist_initd_SCRIPTS = biometric-authentication
+
 polkitdir = $(prefix)/share/polkit-1/actions
 
 dist_polkit_DATA = org.ukui.biometric.policy \
