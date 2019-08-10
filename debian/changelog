@@ -1,20 +1,23 @@
-biometric-authentication (0.9.62-2) UNRELEASED; urgency=medium
-
-  * Add alternate init script
-
- -- jianglinxuan (droiing) <jianglinxuan@kylinos.cn>  Fri, 09 Aug 2019 10:32:40 +0800
-
 biometric-authentication (0.9.62-1) unstable; urgency=medium
 
-  * Clean up the automatically generated configuration files after purge.
+  [ jianglinxuan (droiing) ]
+  * Add alternate init script
+  * Clean up the automatically generated configuration files after
+    purge. (Closes: #916770)
     - config file:
         /etc/biometric-auth/biometric-drivers.conf
         /home/every_user/.biometric_auth/UUID
     - database file:
         /var/lib/biometric-auth/biometric.db
-  * Modify the description information when a dbus error occurs and update the translation file
+  * Modify the description information when a dbus error occurs and
+    update the translation file
 
- -- handsome_feng <jianfengli@ubuntukylin.com>  Tue, 16 Apr 2019 20:52:05 +0800
+  [ handsome_feng ]
+  * debian/control:
+    - Bump standards-version to 4.4.0.
+    - Bump compat level to 12.
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Sat, 10 Aug 2019 10:46:44 +0800
 
 biometric-authentication (0.9.61-2) unstable; urgency=medium
 
