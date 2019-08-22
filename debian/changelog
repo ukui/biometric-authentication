@@ -1,4 +1,4 @@
-biometric-authentication (0.9.62-1) unstable; urgency=medium
+biometric-authentication (0.9.62-2) unstable; urgency=medium
 
   [ jianglinxuan (droiing) ]
   * Add alternate init script
