@@ -2,6 +2,8 @@
 
 #DEBHELPER#
 
+set -e
+
 BIO_DRIVER_CONF="/etc/biometric-auth/biometric-drivers.conf"
 BIO_DATABASE="/var/lib/biometric-auth/biometric.db"
 BIO_USERS=`ls /home`
@@ -57,5 +59,6 @@ if [ "$1" = "purge" ]; then
 		deb-systemd-helper purge 'biometric-authentication.service' >/dev/null || true
 		deb-systemd-helper unmask 'biometric-authentication.service' >/dev/null || true
 	fi
+	update-rc.d biometric-authentication remove >/dev/null
 fi
 # End automatically added section

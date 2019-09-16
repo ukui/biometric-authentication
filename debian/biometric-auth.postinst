@@ -23,6 +23,12 @@ else
 	# cleaned up on purge. Also remove old symlinks.
 	deb-systemd-helper update-state biometric-authentication.service >/dev/null || true
 fi
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+        if [ -x "/etc/init.d/biometric-authentication" ]; then
+                update-rc.d biometric-authentication defaults >/dev/null || exit 1
+        fi
+fi
 # End automatically added section
 
 exit 0
