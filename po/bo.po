@@ -1,21 +1,20 @@
-# Russian translations for biometric-authentication package.
-# Copyright (C) 2018 THE biometric-authentication'S COPYRIGHT HOLDER
+# Tibetan translations for biometric-authentication package.
+# Copyright (C) 2019 THE biometric-authentication'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the biometric-authentication package.
-# droiing <jianglinxuan@kylinos.cn>, 2018.
+# feng <jianfengli@ubuntukylin.com>, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: biometric-authentication 0.9.62\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-14 10:09+0800\n"
-"PO-Revision-Date: 2018-10-12 10:20+0800\n"
-"Last-Translator: droiing <jianglinxuan@kylinos.cn>\n"
-"Language-Team: Chinese (simplified)\n"
-"Language: ru\n"
+"PO-Revision-Date: 2019-12-14 10:10+0800\n"
+"Last-Translator: handsome_feng <jianfengli@ubuntukylin.com>\n"
+"Language-Team: Tibetan\n"
+"Language: bo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../src/biometric-authenticationd.c:304
 #: ../src/biometric-authenticationd.c:382
@@ -31,59 +30,57 @@ msgstr ""
 #: ../src/biometric-authenticationd.c:1656
 #, c-format
 msgid "Can't create thread: %s\n"
-msgstr "Не удалось создать поток: %s\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:503
 #, c-format
 msgid ""
 "Framework automatically assigns the free index '%d' to driver %s user %d\n"
 msgstr ""
-"Framework автоматически назначает свободный индекс '%d' для драйвера %s "
-"пользователя %d \n"
 
 #: ../src/biometric-authenticationd.c:511
 msgid "Enroll Result: Success\n"
-msgstr "Задать результат: Успех\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:514
 msgid "Enroll Result: Fail\n"
-msgstr "Результат регистрации: Fail\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:618
 msgid "Verify Result: Match\n"
-msgstr "Проверить результат: Матч\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:622
 msgid "Verify Result: No Match\n"
-msgstr "Результат проверки: Нет соответствия\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:727
 #, c-format
 msgid "Identify Result: UID = %d\n"
-msgstr "Идентификация результата: UID = %d\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:731
 msgid "Identify Result: No Match\n"
-msgstr "Идентифицировать результат: Нет соответствия\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:829
 #, c-format
 msgid "Capture Result: %.*s\n"
-msgstr "Результат захвата: %.*s\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:832
 msgid "Capture Result: ERROR\n"
-msgstr "Capture Result: ERROR\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:1032
 #, c-format
 msgid "%s Clean Result: Success\n"
-msgstr "%s Чистый результат: Успех\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:1035
 #, c-format
 msgid "%s Clean Result: Failed\n"
-msgstr "%s Чистый результат: сбой\n"
+msgstr ""
 
 #. 系统层清理进行彻底的清理，免受当前不可用设备遗留的生物特征信息影响
 #: ../src/biometric-authenticationd.c:1103
@@ -91,81 +88,75 @@ msgid ""
 "System level cleaning of the specified range of biometric features (all "
 "drivers)\n"
 msgstr ""
-"Очистка уровня системы указанного диапазона биометрических функций (все "
-"драйверы)\n"
 
 #: ../src/biometric-authenticationd.c:1111
 msgid "System level Clean Result: Success\n"
-msgstr "Уровень системы Чистый результат: Успех\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:1114
 msgid "System level Clean Result: Failed\n"
-msgstr "Уровень системы Чистый результат: сбой\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:1441
 #, c-format
 msgid "Error: Failed to export object. Reason: %s\n"
-msgstr "Ошибка: не удалось экспортировать объект. Причина: %s\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:1451
 #, c-format
 msgid "name_acquired_cb called, Acquired bus name: %s\n"
-msgstr "name_acquired_cb, имя приобретенной шины: %s\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:1460
 msgid "name_lost_cb called, Error: Failed to connect to dbus\n"
-msgstr "name_lost_cb, Ошибка: Не удалось подключиться к dbus\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:1462
 #, c-format
 msgid "name_lost_cb called, Error: Failed to obtain bus name: %s\n"
-msgstr "name_lost_cb, Ошибка: не удалось получить имя шины: %s\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:1470
 msgid "run called in the server\n"
-msgstr "выполнить вызов на сервере\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:1487
 #: ../src/biometric-authenticationd.c:1658
 #, c-format
 msgid "New thread created: %s\n"
-msgstr "Создана новая тема: %s\n"
+msgstr ""
 
 #. * init for usage of "g" types
 #. g_type_init();
 #: ../src/biometric-authenticationd.c:1500
 msgid "InitDBusCommunicationServer: Server started\n"
-msgstr "InitDBusCommunicationServer: Сервер запущен\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:1576
 #, c-format
 msgid "libusb_handle_events failed: %s\n"
-msgstr "Ошибка libusb_handle_events: %s\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:1593
 msgid ""
 "The biometric authentication server failed to start, requiring administrator "
 "permission to start\n"
 msgstr ""
-"Не удалось запустить биометрический сервер аутентификации, требуя разрешения "
-"администратора на запуск\n"
 
 #: ../src/biometric-authenticationd.c:1616
 #, c-format
 msgid "Can not open PID file: %s\n"
-msgstr "Не удается открыть файл PID: %s\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:1623
 msgid ""
 "Biometric authentication server is running, Do not restart it repeatedly\n"
 msgstr ""
-"Сервер биометрической аутентификации запущен, не перезапускайте его "
-"повторно\n"
 
 #: ../src/biometric-authenticationd.c:1632
 #, c-format
 msgid "There is an exception to write PID file: %s\n"
-msgstr "Существует исключение для записи PID-файла: %s\n"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:1640
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:155
@@ -173,80 +164,74 @@ msgstr "Существует исключение для записи PID-фай
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:192
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:226
 msgid "No such device"
-msgstr "Нет такого устройства"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:1641
 msgid "Device busy"
-msgstr "Устройство занято"
+msgstr ""
 
 #: ../src/biometric-authenticationd.c:1646
 msgid "Initial biometric recognition framework failed\n"
-msgstr "Исходная структура биометрического распознавания не выполнена\n"
+msgstr ""
 
 #: ../src/biometric-dbus-common.c:51
 #, c-format
 msgid ""
 "The UID information of the requester (%s) could not be obtained. Error: %s\n"
 msgstr ""
-"Информация UID запрашивающей стороны (%s) не может быть получена. Ошибка: "
-"%s \n"
 
 #: ../src/biometric-dbus-common.c:87
 #, c-format
 msgid ""
 "The PID information of the requester (%s) could not be obtained. Error: %s\n"
 msgstr ""
-"Информация PID запрашивающей стороны (%s) не может быть получена. Ошибка: "
-"%s \n"
 
 #: ../src/lib/biometric_common.c:170
 msgid "Current driver list:"
-msgstr "Текущий список драйверов:"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:208
 msgid "Current device list:"
-msgstr "Список текущих устройств:"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:267 ../src/lib/biometric_common.c:285
 #: ../src/lib/biometric_common.c:331 ../src/lib/biometric_config.c:39
 #, c-format
 msgid "Error[%d]: %s\n"
-msgstr "Ошибка [%d]: %s\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:311
 msgid ""
 "can't find \"bioconf\" struct, maybe someone forget use \"bio_conf_init()\" "
 "before\n"
 msgstr ""
-"не может найти структуру \"bioconf\", возможно, кто-то забыл использовать "
-"\"bio_conf_init()\" перед\n"
 
 #: ../src/lib/biometric_common.c:323 ../src/lib/biometric_stroge.c:229
 #: ../src/lib/biometric_stroge.c:300 ../src/lib/biometric_stroge.c:367
 #: ../src/lib/biometric_stroge.c:409 ../src/lib/biometric_stroge.c:597
 msgid "Unable to allocate memory\n"
-msgstr "Невозможно выделить память\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:338
 #, c-format
 msgid "No define driver in [%s]\n"
-msgstr "Нет драйвера определения в [%s]\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:351
 #, c-format
 msgid "Loaded Driver: %s\n"
-msgstr "Загруженный драйвер: %s\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:360
 #, c-format
 msgid "%s driver configure failed\n"
-msgstr "%s удалось установить драйвер\n"
+msgstr ""
 
 #. 检测驱动版本兼容性
 #: ../src/lib/biometric_common.c:368
 #, c-format
 msgid "%s driver DRV_API version: %d.%d.%d\n"
-msgstr "%s драйвер DRV_API версия: %d.%d.%d\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:380
 #, c-format
@@ -254,8 +239,6 @@ msgid ""
 "Detected Compatibility issues: %s driver version is higher than biometric "
 "framework\n"
 msgstr ""
-"Обнаруженные проблемы совместимости: версия драйвера %s выше, чем "
-"биометрическая структура\n"
 
 #: ../src/lib/biometric_common.c:384
 #, c-format
@@ -263,46 +246,42 @@ msgid ""
 "Detected Compatibility issues: %s driver version is lower than biometric "
 "framework\n"
 msgstr ""
-"Обнаруженные проблемы совместимостью: версия драйвера %s ниже, чем "
-"биометрическая структура\n"
 
 #: ../src/lib/biometric_common.c:395
 #, c-format
 msgid "Driver %s initialization failed\n"
-msgstr "Ошибка инициализации драйвера %s\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:430
 msgid "Error: Can not register attach callback error\n"
 msgstr ""
-"Ошибка: невозможно зарегистрировать ошибку обратного вызова присоединения\n"
 
 #: ../src/lib/biometric_common.c:443
 msgid "Error: Can not register detach callback error\n"
 msgstr ""
-"Ошибка: невозможно зарегистрировать ошибку обратного вызова отсоединения\n"
 
 #: ../src/lib/biometric_common.c:494
 msgid "Biometric framework API version:\n"
-msgstr "Версия API биометрической структуры:\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:495
 #, c-format
 msgid "         Driver API(DRV_API): %d.%d.%d\n"
-msgstr "         API-интерфейс драйвера (DRV_API): %d.%d.%d\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:499
 #, c-format
 msgid "    Application API(APP_API): %d.%d.%d\n"
-msgstr "    API приложения (APP_API): %d.%d.%d\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:506
 msgid "bio_conf_init failed\n"
-msgstr "Ошибка bio_conf_init\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:522
 #, c-format
 msgid "failed to initialise libusb: %s\n"
-msgstr "не удалось инициализировать libusb: %s\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:570 ../src/lib/biometric_common.c:616
 #: ../src/lib/biometric_common.c:660 ../src/lib/biometric_common.c:706
@@ -310,7 +289,7 @@ msgstr "не удалось инициализировать libusb: %s\n"
 #: ../src/lib/biometric_common.c:848 ../src/lib/biometric_common.c:890
 #, c-format
 msgid "Open Result: %d\n"
-msgstr "Открыть результат: %d\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:586 ../src/lib/biometric_common.c:632
 #: ../src/lib/biometric_common.c:676 ../src/lib/biometric_common.c:722
@@ -318,7 +297,7 @@ msgstr "Открыть результат: %d\n"
 #: ../src/lib/biometric_common.c:857
 #, c-format
 msgid "Close Device: %s\n"
-msgstr "Закрыть устройство: %s\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:587 ../src/lib/biometric_common.c:633
 #: ../src/lib/biometric_common.c:677 ../src/lib/biometric_common.c:723
@@ -326,379 +305,379 @@ msgstr "Закрыть устройство: %s\n"
 #: ../src/lib/biometric_common.c:858
 #, c-format
 msgid "Device Status: [%d]%s\n"
-msgstr "Состояние устройства: [%d] %s\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:627 ../src/lib/biometric_common.c:717
 #: ../src/lib/biometric_common.c:765
 #, c-format
 msgid "%s\n"
-msgstr "%s\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1056 ../src/lib/biometric_common.c:1247
 msgid "Device idle"
-msgstr "Устройство в режиме ожидания"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1058
 msgid "Device is in process"
-msgstr "Устройство находится в процессе"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1060
 msgid "Terminating current operation"
-msgstr "Завершение текущей операции"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1062
 msgid "Device is disabled"
-msgstr "Устройство отключено"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1065
 msgid "Opening device"
-msgstr "Открывающееся устройство"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1067
 msgid "Terminating open operation"
-msgstr "Прекращение операции открытия"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1070
 msgid "Enrolling"
-msgstr "поступив"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1072
 msgid "Terminating enroll operation"
-msgstr "Завершение регистрации"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1075
 msgid "Verifying"
-msgstr "проверка"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1077
 msgid "Terminating Verify operation"
-msgstr "Операция завершения проверки"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1080
 msgid "Identifying"
-msgstr "идентифицирующий"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1082
 msgid "Terminating identify operation"
-msgstr "Прекращение операции идентификации"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1085
 msgid "Capturing"
-msgstr "Захватив"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1087
 msgid "Terminating capture operation"
-msgstr "Прекращение операции захвата"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1090
 msgid "Searching"
-msgstr "поиск"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1092
 msgid "Terminating search operation"
-msgstr "Прекращение операции поиска"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1095
 msgid "Cleaning"
-msgstr "очищающий"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1097
 msgid "Terminating clean operation"
-msgstr "Прекращение очистки"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1100
 msgid "Getting feature list"
-msgstr "Получение списка функций"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1102
 msgid "Terminating get feature list operation"
-msgstr "Прекращение работы функции списка функций"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1105
 msgid "Renaming feature"
-msgstr "Функция переименования"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1107
 msgid "Terminating feature rename operation"
-msgstr "Операция переименования функции завершения"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1110
 msgid "Closing"
-msgstr "закрытие"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1112
 msgid "Terminating close operation"
-msgstr "Прекращение закрытия"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1115
 #, c-format
 msgid "Device unknown status code: %d\n"
-msgstr "Неизвестный код состояния устройства: %d\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1116
 msgid "Device is in an unknown status..."
-msgstr "Устройство находится в неизвестном состоянии ..."
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1128
 msgid "Operation successful"
-msgstr "Операция успешна"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1130 ../src/lib/biometric_common.c:1249
 msgid "Operation failed"
-msgstr "Операция не удалась"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1132 ../src/lib/biometric_common.c:1251
 msgid "An error was encountered during the operation"
-msgstr "Во время операции возникла ошибка"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1134 ../src/lib/biometric_common.c:1253
 msgid "The operation was interrupted by the user"
-msgstr "Операция была прервана пользователем"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1136 ../src/lib/biometric_common.c:1255
 msgid "Operation timeout"
-msgstr "Тайм-аут работы"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1138 ../src/lib/biometric_common.c:1259
 msgid "Out of memory"
-msgstr "Недостаточно памяти"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1141 ../src/lib/biometric_common.c:1264
 msgid "Open device completion"
-msgstr "Завершение открытого устройства"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1143 ../src/lib/biometric_common.c:1266
 msgid "Open device failed"
-msgstr "Не удалось открыть устройство"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1145 ../src/lib/biometric_common.c:1268
 msgid "An error was encountered during the opening"
-msgstr "Во время открытия возникла ошибка"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1148 ../src/lib/biometric_common.c:1271
 msgid "Enroll feature successful"
-msgstr "Функция регистрации успешно"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1150 ../src/lib/biometric_common.c:1273
 msgid "Enroll feature failed"
-msgstr "Не удалось выполнить функцию регистрации"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1152 ../src/lib/biometric_common.c:1275
 msgid "An error was encountered during enrolling"
-msgstr "Во время регистрации произошла ошибка"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1154 ../src/lib/biometric_common.c:1277
 msgid "Enroll operation was interrupted by the user"
-msgstr "Операция регистрации была прервана пользователем"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1156 ../src/lib/biometric_common.c:1279
 msgid "Enroll operation timeout"
-msgstr "Завершить сеанс работы"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1159 ../src/lib/biometric_common.c:1282
 msgid "Verify feature match"
-msgstr "Проверка соответствия функции"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1161 ../src/lib/biometric_common.c:1284
 msgid "Verify feature no match"
-msgstr "Функция проверки не соответствует"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1163 ../src/lib/biometric_common.c:1286
 msgid "An error was encountered during verifying"
-msgstr "При проверке возникла ошибка"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1165 ../src/lib/biometric_common.c:1288
 msgid "Verify operation was interrupted by the user"
-msgstr "Операция подтверждения была прервана пользователем"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1167 ../src/lib/biometric_common.c:1290
 msgid "Verify operation timeout"
-msgstr "Проверка тайм-аута работы"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1170 ../src/lib/biometric_common.c:1293
 msgid "Identify feature match"
-msgstr "Определить соответствие характеристик"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1172 ../src/lib/biometric_common.c:1295
 msgid "Identify feature no match"
-msgstr "Идентифицировать функцию не соответствует"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1174 ../src/lib/biometric_common.c:1297
 msgid "An error was encountered during identifying"
-msgstr "При идентификации"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1176 ../src/lib/biometric_common.c:1299
 msgid "Identify operation was interrupted by the user"
-msgstr "Идентификация операции была прервана пользователем"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1178 ../src/lib/biometric_common.c:1301
 msgid "Identify operation timeout"
-msgstr "Определение тайм-аута работы"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1181 ../src/lib/biometric_common.c:1304
 msgid "Capture feature successful"
-msgstr "Функция захвата выполнена успешно"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1183 ../src/lib/biometric_common.c:1306
 msgid "Capture feature failed"
-msgstr "Сбой функции захвата"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1185 ../src/lib/biometric_common.c:1308
 msgid "An error was encountered during capturing"
-msgstr "При захвате возникла ошибка"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1187 ../src/lib/biometric_common.c:1310
 msgid "Capture operation was interrupted by the user"
-msgstr "Операция захвата была прервана пользователем"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1189 ../src/lib/biometric_common.c:1312
 msgid "Capture operation timeout"
-msgstr "Тайм-аут захвата"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1192 ../src/lib/biometric_common.c:1315
 msgid "Find the specified features"
-msgstr "Найти указанные функции"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1194 ../src/lib/biometric_common.c:1317
 msgid "No specified features were found"
-msgstr "Никаких определенных функций не найдено"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1196 ../src/lib/biometric_common.c:1319
 msgid "An error was encountered during searching"
-msgstr "Во время поиска возникла ошибка"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1198 ../src/lib/biometric_common.c:1321
 msgid "Search operation was interrupted by the user"
-msgstr "Операция поиска была прервана пользователем"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1200 ../src/lib/biometric_common.c:1323
 msgid "Search operation timeout"
-msgstr "Тайм-аут поисковой операции"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1203 ../src/lib/biometric_common.c:1326
 msgid "Clean feature successful"
-msgstr "Чистая функция выполнена успешно"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1205 ../src/lib/biometric_common.c:1328
 msgid "Clean feature failed"
-msgstr "Не удалось выполнить очистку"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1207 ../src/lib/biometric_common.c:1330
 msgid "An error was encountered during cleaning"
-msgstr "Во время очистки возникла ошибка"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1209 ../src/lib/biometric_common.c:1332
 msgid "Clean operation was interrupted by the user"
-msgstr "Операция очистки была прервана пользователем"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1211 ../src/lib/biometric_common.c:1334
 msgid "Clean operation timeout"
-msgstr "Тайм-аут чистой работы"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1214 ../src/lib/biometric_common.c:1337
 msgid "Get feature list completion"
-msgstr "Получить список функций"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1216 ../src/lib/biometric_common.c:1339
 msgid "Get feature list failed"
-msgstr "Не удалось получить список функций"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1218 ../src/lib/biometric_common.c:1341
 msgid "An error was encountered during getting feature list"
-msgstr "При получении списка функций произошла ошибка"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1221 ../src/lib/biometric_common.c:1344
 msgid "Rename feature successful"
-msgstr "Функция переименования успешно"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1223 ../src/lib/biometric_common.c:1346
 msgid "Rename feature failed"
-msgstr "Не удалось переименовать"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1225 ../src/lib/biometric_common.c:1348
 msgid "An error was encountered during renaming"
-msgstr "При переименовании возникла ошибка"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1228 ../src/lib/biometric_common.c:1353
 msgid "Close device completion"
-msgstr "Закрытие устройства"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1230 ../src/lib/biometric_common.c:1355
 msgid "Close device failed"
-msgstr "Не удалось закрыть устройство"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1232 ../src/lib/biometric_common.c:1357
 msgid "An error was encountered during closing"
-msgstr "При закрытии"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1235
 msgid "Operation is in an unknown status......"
-msgstr "Операция находится в неизвестном состоянии ......"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1257
 msgid "Device is disable"
-msgstr "Устройство отключено"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1261
 msgid "The device or driver does not support this operation"
-msgstr "Устройство или драйвер не поддерживают эту операцию"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1350
 msgid "Feature renaming is not complete, please try again"
-msgstr "Переименование функции не завершено, повторите попытку"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1360
 msgid "Device internal error"
-msgstr "Внутренняя ошибка устройства"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1473
 msgid "Init libusb Error\n"
-msgstr "Init libusb Error\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1480
 msgid "Get USB Device List Error\n"
-msgstr "Ошибка получения списка устройств USB\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1489
 msgid "Can not get usb information\n"
-msgstr "Не удается получить информацию о USB-файле\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1506
 #, c-format
 msgid "libbiometric detected usb device(%s): %d\n"
-msgstr "libbiometric обнаруженное устройство usb ( %s ): %d\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1747
 #, c-format
 msgid "Get function %s handle error: %s\n"
-msgstr "Получить функцию %s ошибка дескриптора: %s\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1764
 msgid "Error: Can not get device descriptor\n"
-msgstr "Ошибка: не удается получить дескриптор устройства\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1767
 #, c-format
 msgid "Device attached: %04x:%04x\n"
-msgstr "Прилагаемое устройство: %04x:%04x\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1828
 msgid "Error getting device descriptor"
-msgstr "Ошибка при получении дескриптора устройства"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1831
 #, c-format
 msgid "Device detached: %04x:%04x\n"
-msgstr "Устройство отсоединено: %04x:%04x\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1957
 msgid "Unable to find feature that require renaming\n"
-msgstr "Не удалось найти функцию, требующую переименования\n"
+msgstr ""
 
 #: ../src/lib/biometric_common.c:1960
 #, c-format
 msgid "There are %d feature samples to renaming failed, please try again\n"
-msgstr "Есть примеры образцов %d для переименования, попробуйте еще раз\n"
+msgstr ""
 
 #: ../src/lib/biometric_stroge.c:190 ../src/lib/biometric_stroge.c:206
 #: ../src/lib/biometric_stroge.c:387 ../src/lib/biometric_stroge.c:517
@@ -709,35 +688,35 @@ msgstr "Есть примеры образцов %d для переименов�
 #: ../src/lib/biometric_stroge.c:1169
 #, c-format
 msgid "sqlite3 prepare err: %s\n"
-msgstr "sqlite3 подготовить err: %s\n"
+msgstr ""
 
 #: ../src/lib/biometric_stroge.c:198
 #, c-format
 msgid "Unable to set database(%s) permissions. ERROR[%d]: %s\n"
-msgstr "Невозможно установить разрешения базы данных ( %s ). ОШИБКА [%d]: %s\n"
+msgstr ""
 
 #: ../src/lib/biometric_stroge.c:712
 msgid "Check database format version ...\n"
-msgstr "Проверьте версию формата базы данных ...\n"
+msgstr ""
 
 #: ../src/lib/biometric_stroge.c:720
 #, c-format
 msgid "Find Table '%s' Error: %s\n"
-msgstr "Найти таблицу « %s » Ошибка: %s\n"
+msgstr ""
 
 #: ../src/lib/biometric_stroge.c:754
 #, c-format
 msgid "Database format version is %d.%d.%d\n"
-msgstr "Версия формата базы данных: %d.%d.%d\n"
+msgstr ""
 
 #: ../src/lib/biometric_stroge.c:762
 #, c-format
 msgid "Failed to upgrade database format：version %d.%d.%d to %d.%d.%d\n"
-msgstr "Не удалось обновить формат базы данных: версия %d.%d.%d до %d.%d.%d\n"
+msgstr ""
 
 #: ../src/lib/biometric_stroge.c:775
 msgid "The database format is compatible with the current framework\n"
-msgstr "Формат базы данных совместим с текущей структурой\n"
+msgstr ""
 
 #: ../src/lib/biometric_stroge.c:780
 #, c-format
@@ -745,44 +724,41 @@ msgid ""
 "Incompatible version of the database format: %d.%d.%d. Version required for "
 "the current framework: %d.%d.x"
 msgstr ""
-"Несовместимая версия формата базы данных: %d.%d.%d . Версия, необходимая для "
-"текущей структуры: %d . %d .x"
 
 #: ../src/lib/biometric_stroge.c:886
 #, c-format
 msgid "Create Biometric Datebase Directory (%s) Error\n"
-msgstr "Создание каталога биометрических дат ( %s ) Ошибка\n"
+msgstr ""
 
 #: ../src/lib/biometric_stroge.c:928 ../src/lib/biometric_stroge.c:947
 #: ../src/lib/biometric_stroge.c:973
 #, c-format
 msgid "Failure to modify the owner and group of %s. ERROR[%d]: %s\n"
-msgstr "Невозможность изменить владельца и группу %s . ОШИБКА [%d]: %s\n"
+msgstr ""
 
 #: ../src/lib/biometric_stroge.c:992
 msgid "Upgrade database ...\n"
-msgstr "Обновление базы данных ...\n"
+msgstr ""
 
 #: ../src/lib/biometric_stroge.c:1002
 #, c-format
 msgid "Rename Table 'EIGEN_INFO' to 'EIGEN_INFO_VERSION_0_0_0' Error: %s\n"
 msgstr ""
-"Переименуйте таблицу «EIGEN_INFO» в «EIGEN_INFO_VERSION_0_0_0» Ошибка: %s\n"
 
 #: ../src/lib/biometric_stroge.c:1031
 #, c-format
 msgid "Failed to migrate data from the original table: %s\n"
-msgstr "Не удалось перенести данные из исходной таблицы: %s\n"
+msgstr ""
 
 #: ../src/lib/biometric_stroge.c:1061
 #, c-format
 msgid "Update UUID=%s to database(UID=%d) ...\n"
-msgstr "Обновить UUID = %s для базы данных (UID = %d ) ...\n"
+msgstr ""
 
 #: ../src/lib/biometric_stroge.c:1068
 #, c-format
 msgid "Update column \"UUID\" to Table \"%s\" Error: %s\n"
-msgstr "Обновить столбец \"UUID\" в таблицу \"%s\" Ошибка: %s\n"
+msgstr ""
 
 #: ../src/lib/biometric_stroge.c:1111 ../src/lib/biometric_stroge.c:1135
 #, c-format
@@ -790,13 +766,11 @@ msgid ""
 "Create Table %s:\n"
 "%s\n"
 msgstr ""
-"Создать таблицу %s :\n"
-" %s\n"
 
 #: ../src/lib/biometric_stroge.c:1115 ../src/lib/biometric_stroge.c:1139
 #, c-format
 msgid "Create Table '%s' Error: %s\n"
-msgstr "Создать таблицу « %s » Ошибка: %s\n"
+msgstr ""
 
 #: ../src/lib/biometric_stroge.c:1147
 #, c-format
@@ -804,14 +778,11 @@ msgid ""
 "Set Database Format(%d.%d.%d):\n"
 "%s\n"
 msgstr ""
-"Установить формат базы данных ( %d . %d %d ):\n"
-" %s\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:129
 #, c-format
 msgid "Get AES Key File Error[%d]: %s, use default Key.\n"
 msgstr ""
-"Получить AES Key File Error [%d]: %s , использовать ключ по умолчанию.\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:142
 #, c-format
@@ -819,63 +790,59 @@ msgid ""
 "AES Key File (%s) does not Exist or has no Read Permission, use default "
 "key.\n"
 msgstr ""
-"Файл ключа AES ( %s ) не существует или не имеет разрешения на чтение, "
-"используйте ключ по умолчанию.\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:159
 #, c-format
 msgid "Can not open AES Key File: %s, use default key.\n"
-msgstr "Не удается открыть файл AES Key: %s , используйте ключ по умолчанию.\n"
+msgstr ""
 
 #: ../src/drivers/community-multidevice/community_ops.c:174
 msgid "AES Key File is Enpty, use default Key.\n"
-msgstr "Файл ключа AES - Enpty, используйте ключ по умолчанию.\n"
+msgstr ""
 
 #: ../src/drivers/community-multidevice/community_ops.c:198
 msgid "AES Key is Enpty, use default Key.\n"
-msgstr "AES Key - Enpty, используйте ключ по умолчанию.\n"
+msgstr ""
 
 #: ../src/drivers/community-multidevice/community_ops.c:234
 #, c-format
 msgid "Detect %s device\n"
-msgstr "Обнаружить %s устройство\n"
+msgstr ""
 
 #: ../src/drivers/community-multidevice/community_ops.c:242
 #: ../src/drivers/community-multidevice/community_ops.c:247
 #, c-format
 msgid "No %s fingerprint device detected\n"
-msgstr "Не обнаружено устройство отпечатков пальцев %s\n"
+msgstr ""
 
 #: ../src/drivers/community-multidevice/community_ops.c:251
 #, c-format
 msgid "There is %d %s fingerprint device detected\n"
-msgstr "Существует обнаруженное %d %s устройство отпечатков пальцев\n"
+msgstr ""
 
 #: ../src/drivers/community-multidevice/community_ops.c:277
 #, c-format
 msgid "Device failed to open"
-msgstr "Не удалось открыть устройство"
+msgstr ""
 
 #: ../src/drivers/community-multidevice/community_ops.c:333
 #: ../src/drivers/community-multidevice/community_ops.c:1089
 #: ../src/drivers/community-multidevice/community_ops.c:1277
 #, c-format
 msgid "Unknown error, error code: %d"
-msgstr "Неизвестная ошибка, код ошибки: %d"
+msgstr ""
 
 #: ../src/drivers/community-multidevice/community_ops.c:458
 #: ../src/drivers/community-multidevice/community_ops.c:541
 #: ../src/drivers/community-multidevice/community_ops.c:676
 msgid "Find the following feature matching:\n"
-msgstr "Найдите следующее соответствие:\n"
+msgstr ""
 
 #: ../src/drivers/community-multidevice/community_ops.c:625
 #, c-format
 msgid ""
 "Search from offset %d, index %d has been searched, global index %d(%d + %d)\n"
 msgstr ""
-"Поиск из смещения %d , индекс %d был просмотрен, глобальный индекс %d ( %d + "
-"%d )\n"
 
 #: ../src/drivers/community-multidevice/community_ops.c:630
 #, c-format
@@ -883,76 +850,63 @@ msgid ""
 "The %d feature has been searched(UID = %d, Index = %d, Index Name = %s), "
 "please press your finger to continue the search"
 msgstr ""
-"Была просмотрена функция %d (UID = %d , Index = %d , Index Name = %s ), "
-"пожалуйста, нажмите пальцем, чтобы продолжить поиск"
 
 #: ../src/drivers/community-multidevice/community_ops.c:774
 #, c-format
 msgid "Device %s[%d] received interrupt request\n"
-msgstr "Устройство %s [%d] получено запрос прерывания\n"
+msgstr ""
 
 #: ../src/drivers/community-multidevice/community_ops.c:819
 msgid "Sample complete"
-msgstr "Образец завершен"
+msgstr ""
 
 #: ../src/drivers/community-multidevice/community_ops.c:821
 msgid ""
 "Enrollment failed due to incomprehensible data. (Please use the same finger "
 "at different sampling stages of the same enroll)"
 msgstr ""
-"Зачисление закончилось из-за непонятных данных. (Пожалуйста, используйте "
-"один и тот же палец на разных этапах выборки одной и той же записи)"
 
 #: ../src/drivers/community-multidevice/community_ops.c:825
 msgid ""
 "Please place your finger again because of poor quality of the sample or "
 "other scanning problems"
 msgstr ""
-"Поместите палец снова из-за низкого качества образца или других проблем "
-"сканирования"
 
 #: ../src/drivers/community-multidevice/community_ops.c:828
 msgid "Your swipe was too short, please place your finger again."
 msgstr ""
-"Ваш салфетка была слишком короткой, пожалуйста, поместите свой палец снова."
 
 #: ../src/drivers/community-multidevice/community_ops.c:831
 msgid ""
 "Didn't catch that, please center your finger on the sensor and try again."
 msgstr ""
-"Не поймайте это, пожалуйста, сосредоточьте свой палец на датчике и повторите "
-"попытку."
 
 #: ../src/drivers/community-multidevice/community_ops.c:834
 msgid ""
 "Because of the scanning image quality or finger pressure problem, the "
 "sampling failed, please remove the finger and retry"
 msgstr ""
-"Из-за качества изображения сканирования или проблемы с давлением пальца, "
-"выборка не удалась, удалите палец и повторите попытку"
 
 #: ../src/drivers/community-multidevice/community_ops.c:838
 msgid "Unable to generate feature data, enroll failure"
-msgstr "Невозможно генерировать данные функции, регистрировать сбой"
+msgstr ""
 
 #: ../src/drivers/community-multidevice/community_ops.c:840
 msgid ""
 "Sample start, please press and lift your finger (Some devices need to swipe "
 "your finger)"
 msgstr ""
-"Пример начала, пожалуйста, нажмите и поднимите палец (некоторые устройства "
-"должны пронести пальцем)"
 
 #: ../src/drivers/community-multidevice/community_ops.c:895
 #, c-format
 msgid "Could not open device (driver %s)"
-msgstr "Не удалось открыть устройство (драйвер %s )"
+msgstr ""
 
 #: ../src/drivers/community-multidevice/community_ops.c:1064
 #: ../src/drivers/community-multidevice/community_ops.c:1229
 #, c-format
 msgid "Failed to call function %s\n"
-msgstr "Не удалось вызвать функцию %s\n"
+msgstr ""
 
 #: ../src/drivers/community-multidevice/community_ops.c:1112
 #, c-format
@@ -960,8 +914,6 @@ msgid ""
 "Enroll failed: The feature was successfully sampled, but the encoding of the "
 "sampling feature could not be generated"
 msgstr ""
-"Ошибка регистрации: функция была успешно отобрана, но кодирование функции "
-"выборки не может быть сгенерировано"
 
 #: ../src/drivers/community-multidevice/community_ops.c:1129
 #, c-format
@@ -969,142 +921,139 @@ msgid ""
 "The %d [%d/%d] sampling was successful, in the next sampling: please press "
 "and lift your finger (Some devices need to swipe your finger)"
 msgstr ""
-"Выборка %d [%d / %d] была успешной в следующем отборе проб: пожалуйста, "
-"нажмите и поднимите палец (некоторые устройства должны провести пальцем)"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:61
 msgid "Disable"
-msgstr "запрещать"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:61
 msgid "Enable"
-msgstr "включить"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
 msgid "Finger Print"
-msgstr "Отпечаток пальца"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
 msgid "Finger Vein"
-msgstr "Finger Vein"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
 msgid "Iris"
-msgstr "Ирис"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
 msgid "Face"
-msgstr "Лицо"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:62
 msgid "Voice Print"
-msgstr "Голосовая печать"
+msgstr ""
 
-#
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:63
 msgid "Device"
-msgstr "устройство"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:63
 msgid "OS"
-msgstr "Операционные системы"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:63
 msgid "Device and OS"
-msgstr "Устройство и ОС"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:64
 msgid "Original Data"
-msgstr "Исходные данные"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:64
 msgid "Eigen Value"
-msgstr "Собственная ценность"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:64
 msgid "Eigen Vector"
-msgstr "Собственный вектор"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:65
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:66
 msgid "Hardware"
-msgstr "аппаратные средства"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:65
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:66
 msgid "Software"
-msgstr "Программного обеспечения"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:65
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:66
 msgid "Mix"
-msgstr "Смешивание"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:65
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:66
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:71
 msgid "Other"
-msgstr "Другие"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:69
 msgid "Serial"
-msgstr "последовательный"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:69
 msgid "USB"
-msgstr "USB"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:69
 msgid "PCIE"
-msgstr "PCIE"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:70
 msgid "Any"
-msgstr "Любые"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Common"
-msgstr "общий"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Open"
-msgstr "открыто"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Enroll"
-msgstr "зачислять"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Verify"
-msgstr "проверить"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Identify"
-msgstr "отождествлять"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:73
 msgid "Capture"
-msgstr "Захватить"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:74
 msgid "Search"
-msgstr "Поиск"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:74
 msgid "Clean"
-msgstr "чистый"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:74
 msgid "GetFeatureList"
-msgstr "GetFeatureList"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:74
 msgid "Rename"
-msgstr "переименовывать"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:74
 msgid "Close"
-msgstr "Закрыть"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:76
 msgid ""
@@ -1125,162 +1074,145 @@ msgid ""
 "Options:\n"
 "  -h, --help            show this help message and exit\n"
 msgstr ""
-"Использование:\n"
-" biometric-auth-client BuiltinCommands ...\n"
-"\n"
-"BuiltinCommands:\n"
-" get-driver-list Получить список драйверов\n"
-" получить список устройств Получить список устройств\n"
-" get-feature-list Получить список функций\n"
-" enroll Enroll Feature\n"
-" проверить Verify Feature\n"
-" capture Capture Feature\n"
-" search Функция поиска\n"
-" clean Clean Feature\n"
-" переименовать функцию Rename\n"
-"\n"
-"Options:\n"
-" -h, --help показать это справочное сообщение и выйти\n"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:116
 msgid "non-existent user"
-msgstr "несуществующий пользователь"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:152
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:170
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:189
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:223
 msgid "The device is busy, please try again later"
-msgstr "Устройство занято, повторите попытку позже"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:158
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:176
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:195
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:229
 msgid "No permission to perform this operation"
-msgstr "Нет разрешения на выполнение этой операции"
+msgstr ""
 
-# c-format
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:179
 #, c-format
 msgid "Character string: %s\n"
-msgstr "Строка символов: %s\n"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:198
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:232
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:331
 msgid "No."
-msgstr "Нет."
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:198
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:232
 msgid "User ID"
-msgstr "Идентификатор пользователя"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:198
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:232
 msgid "User Name"
-msgstr "Имя пользователя"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:198
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:233
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:452
 msgid "Feature Index"
-msgstr "Индекс функций"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:198
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:233
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:391
 msgid "Feature Name"
-msgstr "Название функции"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:212
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:250
 msgid "List of features found:"
-msgstr "Список функций:"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:232
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:287
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:347
 msgid "Biometric Type"
-msgstr "Биометрический тип"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:233
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:331
 msgid "Driver Name"
-msgstr "Имя драйвера"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:271
 msgid "Show all fields (Highest priority)"
-msgstr "Показать все поля (Наивысший приоритет)"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:273
 msgid "Show 'Driver Full Name' fields"
-msgstr "Показывать поля «Полное имя драйвера»"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:275
 msgid "Show 'Biometric Type' fields"
-msgstr "Показать поля «Биометрический тип»"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:277
 msgid "Show 'Storge Type' fields"
-msgstr "Показать поля «Тип хранилища»"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:279
 msgid "Show 'Eigen Type' fields"
-msgstr "Показать поля «Eigen Type»"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:281
 msgid "Show 'Verify Type' fields"
-msgstr "Показывать поля «Проверить тип»"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:283
 msgid "Show 'Identify Type' fields"
-msgstr "Показать поля «Определить тип»"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:331
 msgid "Driver ID"
-msgstr "ID драйвера"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:342
 msgid "Driver Full Name"
-msgstr "Полное имя драйвера"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:286
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:331
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:344
 msgid "Status"
-msgstr "Положение дел"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:287
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:350
 msgid "Storge Type"
-msgstr "Тип Storge"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:287
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:353
 msgid "Eigen Type"
-msgstr "Eigen Type"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:287
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:356
 msgid "Verify Type"
-msgstr "Проверить тип"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:288
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:359
 msgid "Identify Type"
-msgstr "Определить тип"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:288
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:331
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:361
 msgid "Bus Type"
-msgstr "Тип шины"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:294
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:411
@@ -1292,7 +1224,6 @@ msgstr "Тип шины"
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:778
 msgid "Biometric identification backend framework service is not started"
 msgstr ""
-"Служба бэкэнд-идентификации биометрической идентификации не запускается"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:300
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:419
@@ -1306,8 +1237,6 @@ msgid ""
 "Client APP_API is newer than biometric identification framework service. "
 "Please upgrade framework service or degrade client.\n"
 msgstr ""
-"Клиент APP_API является новее, чем служба фреймворческой идентификации. "
-"Обновите службу инфраструктуры или деградируйте клиента.\n"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:304
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:423
@@ -1321,13 +1250,11 @@ msgid ""
 "Client APP_API is older than biometric identification framework service. "
 "Please degrade framework service or upgrade client.\n"
 msgstr ""
-"Клиент APP_API старше, чем служба оценки биометрической идентификации. "
-"Пожалуйста, деградируйте сервис-сервис инфраструктуры или обновления.\n"
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:383
 #, c-format
 msgid "%s %s [-u USER_NAME] -d DRIVER_ID -n FEATURE_NAME"
-msgstr "%s %s [-u USER_NAME] -d DRIVER_ID -n FEATURE_NAME"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:387
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:448
@@ -1336,7 +1263,7 @@ msgstr "%s %s [-u USER_NAME] -d DRIVER_ID -n FEATURE_NAME"
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:751
 #, c-format
 msgid "User Name (Default is current user: %s)"
-msgstr "Имя пользователя (по умолчанию - текущий пользователь: %s )"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:389
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:450
@@ -1346,7 +1273,7 @@ msgstr "Имя пользователя (по умолчанию - текущи�
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:695
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:753
 msgid "Driver(or Device) ID"
-msgstr "Идентификатор драйвера (или устройства)"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:401
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:462
@@ -1356,96 +1283,90 @@ msgstr "Идентификатор драйвера (или устройства
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:704
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:768
 msgid "Input parameter error\n"
-msgstr "Ошибка входного параметра\n"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:444
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:623
 #, c-format
 msgid "%s %s [-u USER_NAME] -d DRIVER_ID -i INDEX"
-msgstr "%s %s [-u USER_NAME] -d DRIVER_ID -i ИНДЕКС"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:505
 #, c-format
 msgid "%s %s -d DRIVER_ID"
-msgstr "%s %s -d DRIVER_ID"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:558
 #, c-format
 msgid "%s %s [-u USER_NAME] -d DRIVER_ID [-s INDEX_START] [-e INDEX_END]"
-msgstr "%s %s [-u USER_NAME] -d DRIVER_ID [-s INDEX_START] [-e INDEX_END]"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:562
 msgid "User Name (Not set to search for all users)"
-msgstr "Имя пользователя (не для поиска для всех пользователей)"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:566
 msgid "Start of Feature Index (default 0)"
-msgstr "Начало индекса функции (по умолчанию 0)"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:568
 msgid "End of Feature Index (default -1, means search all)"
-msgstr "End of Feature Index (по умолчанию -1, означает поиск всех)"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:631
 msgid "The Feature Index You Want To Delete (-1 means delete all)"
-msgstr "Индекс функций, который вы хотите удалить (-1 означает удаление всех)"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:689
 #, c-format
 msgid "%s %s [-u USER_NAME] -d DRIVER_ID"
-msgstr "%s %s [-u USER_NAME] -d DRIVER_ID"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:747
 #, c-format
 msgid "%s %s [-u USER_NAME] -d DRIVER_ID -i INDEX -n NEW_NAME"
-msgstr "%s %s [-u USER_NAME] -d DRIVER_ID -i INDEX -n NEW_NAME"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:755
 msgid "The Feature Index that needs to be renamed"
-msgstr "Индекс функций, который необходимо переименовать"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:757
 msgid "New Feature Name"
-msgstr "Новое имя функции"
+msgstr ""
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:814
 msgid ""
 "The abort operation failed and the current operation will continue in the "
 "background."
 msgstr ""
-"Операция отмены завершилась неудачно, и текущая операция будет продолжена в "
-"фоновом режиме."
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:815
 msgid "The device may have to wait a while before being used."
 msgstr ""
-"Возможно, устройству придется подождать некоторое время, прежде чем его "
-"использовать."
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:816
 msgid ""
 "The wait problem can be solved by restarting the biometrics backend "
 "framework service."
 msgstr ""
-"Проблема ожидания может быть решена путем перезапуска службы фреймворка базы "
-"данных биометрии."
 
 #: ../src/utils/biometric-auth-client/biometric-auth-client.in:860
 #, c-format
 msgid "Unknown Builtin Commands: %s\n"
-msgstr "Неизвестные команды: %s\n"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:35
 msgid "When there is a driver of the same name, force to override it"
-msgstr "Когда есть драйвер с тем же именем, принудительно его переопределить"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:37
 msgid "Only add driver and Not enable driver"
-msgstr "Добавлять драйвер и не включать драйвер"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:48
 msgid "DriverName DriverFilePath"
-msgstr "DriverName DriverFilePath"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:57
 #: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:71
@@ -1462,7 +1383,7 @@ msgstr "DriverName DriverFilePath"
 #: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:72
 #, c-format
 msgid "Error parsing commandline options: %s\n"
-msgstr "Ошибка анализа параметров командной строки: %s\n"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:70
 #: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:67
@@ -1471,7 +1392,7 @@ msgstr "Ошибка анализа параметров командной ст
 #: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:67
 #: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:71
 msgid "The number of parameters is incorrect"
-msgstr "Количество параметров неверно."
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:82
 #, c-format
@@ -1479,8 +1400,6 @@ msgid ""
 "This driver already exists, using the -f parameter if you need to override "
 "the configuration\n"
 msgstr ""
-"Этот драйвер уже существует, используя параметр -f, если вам нужно "
-"переопределить конфигурацию\n"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:100
 #: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:97
@@ -1490,20 +1409,20 @@ msgstr ""
 #: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:118
 #, c-format
 msgid "Write configuration failure: %s\n"
-msgstr "Ошибка конфигурации записи: %s\n"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:35
 #: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:35
 #: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:35
 #: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:35
 msgid "Ignore nonexistent drivers"
-msgstr "Игнорировать несуществующие драйверы"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:45
 #: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:45
 #: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:45
 msgid "Driver1 [Driver2 ...]"
-msgstr "Driver1 [Driver2 ...]"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:77
 #: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:77
@@ -1514,71 +1433,69 @@ msgid ""
 "Driver %s does not exist, if you need to ignore the problem, use -i "
 "parameter\n"
 msgstr ""
-"Драйвер %s не существует, если вам нужно игнорировать проблему, используйте "
-"параметр -i\n"
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:46
 msgid "Add driver"
-msgstr "Добавить драйвер"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:47
 msgid "Remove drive"
-msgstr "Удалить привод"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:48
 msgid "Enable driver"
-msgstr "Включить драйвер"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:49
 msgid "Disable driver"
-msgstr "Отключить драйвер"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:50
 msgid "Set the key value of the specified driver"
-msgstr "Задайте значение ключа указанного драйвера"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:51
 msgid "remove the key value of the specified driver"
-msgstr "удалить значение ключа указанного драйвера"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:98
 msgid "BuiltinCommands"
-msgstr "BuiltinCommands"
+msgstr ""
 
 #. g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:101
 msgid "Builtin commands: "
-msgstr "Встроенные команды: "
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:215
 #, c-format
 msgid "Unknown command %s"
-msgstr "Неизвестная команда %s"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:224
 msgid "Missing builtin command"
-msgstr "Отсутствует встроенная команда"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:45
 msgid "DriverName Key"
-msgstr "Ключ DriverName"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:35
 msgid "Forcibly overrides the existing key"
-msgstr "Принудительно отменяет существующий ключ"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:37
 msgid "Ignore this setting if the key already exists"
-msgstr "Игнорируйте этот параметр, если ключ уже существует"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:49
 msgid "DriverName Key Value"
-msgstr "Значение ключа DriverName"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:92
 #, c-format
 msgid "Driver %s does not exist\n"
-msgstr "Драйвер %s не существует\n"
+msgstr ""
 
 #: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:102
 #, c-format
@@ -1587,11 +1504,8 @@ msgid ""
 "operation\n"
 "If you want to ignore this error, use the \"-i\" parameter\n"
 msgstr ""
-"Ключ уже существует и не перезаписывается принудительно, игнорируя операцию "
-"установки\n"
-"Если вы хотите проигнорировать эту ошибку, используйте параметр \"-i\"\n"
 
 #: ../src/utils/biometric-device-discover/community-multidevice/community_multidevice_discover_tool.c:119
 #, c-format
 msgid "Failed to initialize libfprint\n"
-msgstr "Не удалось инициализировать libfprint\n"
+msgstr ""
