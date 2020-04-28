@@ -3,7 +3,7 @@ Section: admin
 Priority: optional
 Maintainer: Kylin Team <team+kylin@tracker.debian.org>
 Uploaders: handsome_feng <jianfengli@ubuntukylin.com>,
-Build-Depends: debhelper (>= 12),
+Build-Depends: debhelper-compat (= 12),
                dh-python,
                python3:any,
                automake,
