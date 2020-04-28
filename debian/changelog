@@ -1,6 +1,8 @@
 biometric-authentication (0.9.62-3) UNRELEASED; urgency=medium
 
   * Set debhelper-compat version in Build-Depends.
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
 
  -- Debian Janitor <janitor@jelmer.uk>  Tue, 28 Apr 2020 15:20:51 +0000
 
