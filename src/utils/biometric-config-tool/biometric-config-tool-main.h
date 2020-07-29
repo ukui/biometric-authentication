@@ -26,7 +26,7 @@
 #include <glib/gi18n.h>
 //#include "biometric_intl.h"
 
-GKeyFile * bio_config_file;
+//GKeyFile * bio_config_file;
 
 #ifndef DOMAIN_NAME
 	#define DOMAIN_NAME "biometric-authentication"

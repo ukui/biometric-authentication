@@ -30,6 +30,12 @@
 #include "biometric-config-tool-main.h"
 #include "biometric-config-tool-set-key.h"
 
+extern gboolean force_override;
+extern gboolean ignore_exist;
+extern gboolean key_is_exist;
+
+extern GKeyFile * bio_config_file;
+
 GOptionEntry set_key_entries[] = {
 	{ "force", 'f', 0, G_OPTION_ARG_NONE, &force_override,
 	  N_("Forcibly overrides the existing key"), NULL},

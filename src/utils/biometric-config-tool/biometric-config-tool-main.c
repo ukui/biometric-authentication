@@ -35,6 +35,13 @@
 #include "biometric-config-tool-set-key.h"
 #include "biometric-config-tool-remove-key.h"
 
+GKeyFile * bio_config_file;
+gboolean force_override;
+gboolean driver_disable;
+gboolean driver_ignore;
+gboolean ignore_exist;
+gboolean key_is_exist;
+
 typedef struct
 {
 	const char *name;

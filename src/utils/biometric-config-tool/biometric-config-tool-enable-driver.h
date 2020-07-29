@@ -24,7 +24,7 @@
 
 #include <glib.h>
 
-gboolean driver_ignore;
+//gboolean driver_ignore;
 
 gboolean biometric_config_enable_driver (int argc, char **argv, GError **error);
 

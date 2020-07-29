@@ -30,6 +30,10 @@
 #include "biometric-config-tool-main.h"
 #include "biometric-config-tool-add-driver.h"
 
+extern GKeyFile * bio_config_file;
+extern gboolean force_override;
+extern gboolean driver_disable;
+
 GOptionEntry add_driver_entries[] = {
 	{ "force", 'f', 0, G_OPTION_ARG_NONE, &force_override,
 	  N_("When there is a driver of the same name, force to override it"), NULL},

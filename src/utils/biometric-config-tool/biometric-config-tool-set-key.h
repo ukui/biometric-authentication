@@ -24,9 +24,9 @@
 
 #include <glib.h>
 
-gboolean force_override;
-gboolean ignore_exist;
-gboolean key_is_exist;
+//gboolean force_override;
+//gboolean ignore_exist;
+//gboolean key_is_exist;
 
 gboolean biometric_config_set_key (int argc, char **argv, GError **error);
 

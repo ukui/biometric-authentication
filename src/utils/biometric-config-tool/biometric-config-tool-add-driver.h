@@ -24,8 +24,8 @@
 
 #include <glib.h>
 
-gboolean force_override;
-gboolean driver_disable;
+//gboolean force_override;
+//gboolean driver_disable;
 
 gboolean biometric_config_add_driver (int argc, char **argv, GError **error);
 

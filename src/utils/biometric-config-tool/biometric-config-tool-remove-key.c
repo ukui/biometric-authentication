@@ -30,6 +30,9 @@
 #include "biometric-config-tool-main.h"
 #include "biometric-config-tool-remove-key.h"
 
+extern GKeyFile * bio_config_file;
+extern gboolean driver_ignore;
+
 GOptionEntry remove_key_entries[] = {
 	{ "ignore", 'i', 0, G_OPTION_ARG_NONE, &driver_ignore,
 	  N_("Ignore nonexistent drivers"), NULL},
