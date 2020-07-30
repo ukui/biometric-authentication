@@ -18,9 +18,10 @@ Build-Depends: debhelper-compat (= 12),
                libpolkit-gobject-1-dev,
                uuid-dev
 Standards-Version: 4.5.0
+Rules-Requires-Root: no
 Homepage: https://github.com/ukui/biometric-authentication.git
 Vcs-Git: https://github.com/ukui/biometric-authentication.git
-vcs-Browser: https://github.com/ukui/biometric-authentication
+Vcs-Browser: https://github.com/ukui/biometric-authentication
 
 Package: biometric-auth
 Architecture: any

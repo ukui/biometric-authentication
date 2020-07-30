@@ -1,11 +1,16 @@
-biometric-authentication (0.9.62-3) UNRELEASED; urgency=medium
+biometric-authentication (0.9.63-1) unstable; urgency=medium
 
+  [ Debian Janitor ]
   * Set debhelper-compat version in Build-Depends.
   * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
     Repository-Browse.
   * Update standards version to 4.5.0, no changes needed.
 
- -- Debian Janitor <janitor@jelmer.uk>  Tue, 28 Apr 2020 15:20:51 +0000
+  [ handsome_feng ]
+  * New upstream release. (Closes: #957042)
+  * debian/control: Add Rules-Requires-Root: no.
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Tue, 28 Apr 2020 15:20:51 +0000
 
 biometric-authentication (0.9.62-2) unstable; urgency=medium
 
