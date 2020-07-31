@@ -29,7 +29,7 @@
 #include <libusb.h>
 #include <pthread.h>
 
-#include "biometric_stroge.h"
+#include "biometric_storage.h"
 
 #ifdef  __cplusplus
 extern "C" {

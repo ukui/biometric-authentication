@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: biometric-authentication 0.9.62\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-02 09:52+0800\n"
+"POT-Creation-Date: 2020-07-31 11:01+0800\n"
 "PO-Revision-Date: 2018-10-12 09:59+0800\n"
 "Last-Translator: droiing <jianglinxuan@kylinos.cn>\n"
 "Language-Team: Chinese (simplified)\n"
@@ -221,9 +221,9 @@ msgstr ""
 "impossible de trouver la structure \"bioconf\", peut-être que quelqu'un "
 "oubliera d'utiliser \"bio_conf_init()\" avant\n"
 
-#: ../src/lib/biometric_common.c:323 ../src/lib/biometric_stroge.c:229
-#: ../src/lib/biometric_stroge.c:300 ../src/lib/biometric_stroge.c:367
-#: ../src/lib/biometric_stroge.c:409 ../src/lib/biometric_stroge.c:597
+#: ../src/lib/biometric_common.c:323 ../src/lib/biometric_storage.c:229
+#: ../src/lib/biometric_storage.c:300 ../src/lib/biometric_storage.c:367
+#: ../src/lib/biometric_storage.c:409 ../src/lib/biometric_storage.c:597
 msgid "Unable to allocate memory\n"
 msgstr "Impossible d'allouer de la mémoire\n"
 
@@ -704,51 +704,51 @@ msgstr ""
 "Il y a %d exemples de fonctionnalités dont le changement de nom a échoué. "
 "Veuillez réessayer.\n"
 
-#: ../src/lib/biometric_stroge.c:190 ../src/lib/biometric_stroge.c:206
-#: ../src/lib/biometric_stroge.c:387 ../src/lib/biometric_stroge.c:517
-#: ../src/lib/biometric_stroge.c:559 ../src/lib/biometric_stroge.c:616
-#: ../src/lib/biometric_stroge.c:636 ../src/lib/biometric_stroge.c:663
-#: ../src/lib/biometric_stroge.c:689 ../src/lib/biometric_stroge.c:740
-#: ../src/lib/biometric_stroge.c:1046 ../src/lib/biometric_stroge.c:1155
-#: ../src/lib/biometric_stroge.c:1169
+#: ../src/lib/biometric_storage.c:190 ../src/lib/biometric_storage.c:206
+#: ../src/lib/biometric_storage.c:387 ../src/lib/biometric_storage.c:517
+#: ../src/lib/biometric_storage.c:559 ../src/lib/biometric_storage.c:616
+#: ../src/lib/biometric_storage.c:636 ../src/lib/biometric_storage.c:663
+#: ../src/lib/biometric_storage.c:689 ../src/lib/biometric_storage.c:740
+#: ../src/lib/biometric_storage.c:1046 ../src/lib/biometric_storage.c:1155
+#: ../src/lib/biometric_storage.c:1169
 #, c-format
 msgid "sqlite3 prepare err: %s\n"
 msgstr "sqlite3 prepare err: %s\n"
 
-#: ../src/lib/biometric_stroge.c:198
+#: ../src/lib/biometric_storage.c:198
 #, c-format
 msgid "Unable to set database(%s) permissions. ERROR[%d]: %s\n"
 msgstr ""
 "Impossible de définir les autorisations de la base de données(%s). "
 "ERREUR[%d]: %s\n"
 
-#: ../src/lib/biometric_stroge.c:712
+#: ../src/lib/biometric_storage.c:712
 msgid "Check database format version ...\n"
 msgstr "Vérifier la version du format de la base de données ...\n"
 
-#: ../src/lib/biometric_stroge.c:720
+#: ../src/lib/biometric_storage.c:720
 #, c-format
 msgid "Find Table '%s' Error: %s\n"
 msgstr "Erreur de recherche de la table '%s': %s\n"
 
-#: ../src/lib/biometric_stroge.c:754
+#: ../src/lib/biometric_storage.c:754
 #, c-format
 msgid "Database format version is %d.%d.%d\n"
 msgstr "La version du format de base de données est %d.%d.%d\n"
 
-#: ../src/lib/biometric_stroge.c:762
+#: ../src/lib/biometric_storage.c:762
 #, c-format
 msgid "Failed to upgrade database format：version %d.%d.%d to %d.%d.%d\n"
 msgstr ""
 "Échec de la mise à niveau du format de la base de données: version %d.%d.%d "
 "à %d.%d.%d\n"
 
-#: ../src/lib/biometric_stroge.c:775
+#: ../src/lib/biometric_storage.c:775
 msgid "The database format is compatible with the current framework\n"
 msgstr ""
 "Le format de la base de données est compatible avec le framework actuel\n"
 
-#: ../src/lib/biometric_stroge.c:780
+#: ../src/lib/biometric_storage.c:780
 #, c-format
 msgid ""
 "Incompatible version of the database format: %d.%d.%d. Version required for "
@@ -757,45 +757,45 @@ msgstr ""
 "Version incompatible du format de la base de données: %d.%d.%d. Version "
 "requise pour le cadre actuel: %d.%d.x"
 
-#: ../src/lib/biometric_stroge.c:886
+#: ../src/lib/biometric_storage.c:886
 #, c-format
 msgid "Create Biometric Datebase Directory (%s) Error\n"
 msgstr "Créer un répertoire de base de données biométrique (%s) Erreur\n"
 
-#: ../src/lib/biometric_stroge.c:928 ../src/lib/biometric_stroge.c:947
-#: ../src/lib/biometric_stroge.c:973
+#: ../src/lib/biometric_storage.c:928 ../src/lib/biometric_storage.c:947
+#: ../src/lib/biometric_storage.c:973
 #, c-format
 msgid "Failure to modify the owner and group of %s. ERROR[%d]: %s\n"
 msgstr ""
 "Échec de la modification du propriétaire et du groupe de %s. ERREUR [%d]: "
 "%s\n"
 
-#: ../src/lib/biometric_stroge.c:992
+#: ../src/lib/biometric_storage.c:992
 msgid "Upgrade database ...\n"
 msgstr "Mettre à niveau la base de données ...\n"
 
-#: ../src/lib/biometric_stroge.c:1002
+#: ../src/lib/biometric_storage.c:1002
 #, c-format
 msgid "Rename Table 'EIGEN_INFO' to 'EIGEN_INFO_VERSION_0_0_0' Error: %s\n"
 msgstr ""
 "Renommez la table 'EIGEN_INFO' en 'EIGEN_INFO_VERSION_0_0_0' Erreur: %s\n"
 
-#: ../src/lib/biometric_stroge.c:1031
+#: ../src/lib/biometric_storage.c:1031
 #, c-format
 msgid "Failed to migrate data from the original table: %s\n"
 msgstr "Échec de la migration des données de la table d'origine: %s\n"
 
-#: ../src/lib/biometric_stroge.c:1061
+#: ../src/lib/biometric_storage.c:1061
 #, c-format
 msgid "Update UUID=%s to database(UID=%d) ...\n"
 msgstr "Mettre à jour l'UUID = %s dans la base de données (UID = %d) ...\n"
 
-#: ../src/lib/biometric_stroge.c:1068
+#: ../src/lib/biometric_storage.c:1068
 #, c-format
 msgid "Update column \"UUID\" to Table \"%s\" Error: %s\n"
 msgstr "Mettre à jour la colonne \"UUID\" dans la table \" %s\" Erreur: %s\n"
 
-#: ../src/lib/biometric_stroge.c:1111 ../src/lib/biometric_stroge.c:1135
+#: ../src/lib/biometric_storage.c:1111 ../src/lib/biometric_storage.c:1135
 #, c-format
 msgid ""
 "Create Table %s:\n"
@@ -804,12 +804,12 @@ msgstr ""
 "Créer une table %s :\n"
 " %s\n"
 
-#: ../src/lib/biometric_stroge.c:1115 ../src/lib/biometric_stroge.c:1139
+#: ../src/lib/biometric_storage.c:1115 ../src/lib/biometric_storage.c:1139
 #, c-format
 msgid "Create Table '%s' Error: %s\n"
 msgstr "Erreur de création de table '%s': %s\n"
 
-#: ../src/lib/biometric_stroge.c:1147
+#: ../src/lib/biometric_storage.c:1147
 #, c-format
 msgid ""
 "Set Database Format(%d.%d.%d):\n"
@@ -1453,45 +1453,45 @@ msgstr ""
 msgid "Unknown Builtin Commands: %s\n"
 msgstr "Commandes intégrées inconnues: %s\n"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:35
+#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:39
 msgid "When there is a driver of the same name, force to override it"
 msgstr "Quand il y a un pilote du même nom, forcer à le remplacer"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:37
+#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:41
 msgid "Only add driver and Not enable driver"
 msgstr "Ajoute seulement le pilote et pas l'activation du pilote"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:48
+#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:52
 msgid "DriverName DriverFilePath"
 msgstr "DriverName DriverFilePath"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:57
-#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:71
-#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:54
-#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:68
-#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:54
-#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:68
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:273
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:54
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:68
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:54
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:68
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:58
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:72
+#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:61
+#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:75
+#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:57
+#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:71
+#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:57
+#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:71
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:280
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:57
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:71
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:57
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:71
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:64
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:78
 #, c-format
 msgid "Error parsing commandline options: %s\n"
 msgstr "Erreur d’analyse des options de la ligne de commande: %s\n"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:70
-#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:67
-#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:67
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:67
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:67
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:71
+#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:74
+#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:70
+#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:70
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:70
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:70
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:77
 msgid "The number of parameters is incorrect"
 msgstr "Le nombre de paramètres est incorrect"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:82
+#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:86
 #, c-format
 msgid ""
 "This driver already exists, using the -f parameter if you need to override "
@@ -1500,33 +1500,33 @@ msgstr ""
 "Ce pilote existe déjà, utilisez le paramètre -f si vous devez remplacer la "
 "configuration\n"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:100
-#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:97
-#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:97
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:93
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:90
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:118
+#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:104
+#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:100
+#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:100
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:96
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:93
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:124
 #, c-format
 msgid "Write configuration failure: %s\n"
 msgstr "Échec de la configuration en écriture: %s\n"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:35
-#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:35
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:35
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:35
+#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:38
+#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:38
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:38
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:38
 msgid "Ignore nonexistent drivers"
 msgstr "Ignorer les pilotes inexistants"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:45
-#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:45
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:45
+#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:48
+#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:48
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:48
 msgid "Driver1 [Driver2 ...]"
 msgstr "Driver1 [Driver2 ...]"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:77
-#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:77
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:77
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:76
+#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:80
+#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:80
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:80
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:79
 #, c-format
 msgid ""
 "Driver %s does not exist, if you need to ignore the problem, use -i "
@@ -1535,70 +1535,70 @@ msgstr ""
 "Le pilote %s n’existe pas. Si vous devez ignorer le problème, utilisez le "
 "paramètre -i\n"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:46
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:53
 msgid "Add driver"
 msgstr "Ajouter un pilote"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:47
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:54
 msgid "Remove drive"
 msgstr "Retirer le lecteur"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:48
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:55
 msgid "Enable driver"
 msgstr "Activer le pilote"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:49
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:56
 msgid "Disable driver"
 msgstr "Désactiver le pilote"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:50
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:57
 msgid "Set the key value of the specified driver"
 msgstr "Définir la valeur de clé du pilote spécifié"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:51
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:58
 msgid "remove the key value of the specified driver"
 msgstr "supprime la valeur de clé du pilote spécifié"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:98
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:105
 msgid "BuiltinCommands"
 msgstr "Commandes intégrées"
 
 #. g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:101
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:108
 msgid "Builtin commands: "
 msgstr "Commandes intégrées: "
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:215
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:222
 #, c-format
 msgid "Unknown command %s"
 msgstr "Commande inconnue %s"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:224
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:231
 msgid "Missing builtin command"
 msgstr "Commande intégrée manquante"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:45
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:48
 msgid "DriverName Key"
 msgstr "Clé DriverName"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:35
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:41
 msgid "Forcibly overrides the existing key"
 msgstr "Remplace de force la clé existante"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:37
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:43
 msgid "Ignore this setting if the key already exists"
 msgstr "Ignorer ce paramètre si la clé existe déjà"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:49
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:55
 msgid "DriverName Key Value"
 msgstr "DriverName Key Value"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:92
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:98
 #, c-format
 msgid "Driver %s does not exist\n"
 msgstr "Le pilote %s n'existe pas\n"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:102
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:108
 #, c-format
 msgid ""
 "The key already exists and is not forcibly overwritten, ignoring the setting "

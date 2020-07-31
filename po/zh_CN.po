@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: biometric-authentication 0.9.62\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-02 09:52+0800\n"
+"POT-Creation-Date: 2020-07-31 11:01+0800\n"
 "PO-Revision-Date: 2017-10-11 11:57+0800\n"
 "Last-Translator: droiing <jianglinxuan@kylinos.cn>\n"
 "Language-Team: Chinese (simplified)\n"
@@ -207,9 +207,9 @@ msgid ""
 "before\n"
 msgstr "无法找到\"bioconf\"结构体，也许前面忘记使用\"bio_conf_init()\"函数\n"
 
-#: ../src/lib/biometric_common.c:323 ../src/lib/biometric_stroge.c:229
-#: ../src/lib/biometric_stroge.c:300 ../src/lib/biometric_stroge.c:367
-#: ../src/lib/biometric_stroge.c:409 ../src/lib/biometric_stroge.c:597
+#: ../src/lib/biometric_common.c:323 ../src/lib/biometric_storage.c:229
+#: ../src/lib/biometric_storage.c:300 ../src/lib/biometric_storage.c:367
+#: ../src/lib/biometric_storage.c:409 ../src/lib/biometric_storage.c:597
 msgid "Unable to allocate memory\n"
 msgstr "无法分配内存\n"
 
@@ -680,88 +680,88 @@ msgstr "未找到需要重命名的特征\n"
 msgid "There are %d feature samples to renaming failed, please try again\n"
 msgstr "%d 个特征采样重命名失败，请重试\n"
 
-#: ../src/lib/biometric_stroge.c:190 ../src/lib/biometric_stroge.c:206
-#: ../src/lib/biometric_stroge.c:387 ../src/lib/biometric_stroge.c:517
-#: ../src/lib/biometric_stroge.c:559 ../src/lib/biometric_stroge.c:616
-#: ../src/lib/biometric_stroge.c:636 ../src/lib/biometric_stroge.c:663
-#: ../src/lib/biometric_stroge.c:689 ../src/lib/biometric_stroge.c:740
-#: ../src/lib/biometric_stroge.c:1046 ../src/lib/biometric_stroge.c:1155
-#: ../src/lib/biometric_stroge.c:1169
+#: ../src/lib/biometric_storage.c:190 ../src/lib/biometric_storage.c:206
+#: ../src/lib/biometric_storage.c:387 ../src/lib/biometric_storage.c:517
+#: ../src/lib/biometric_storage.c:559 ../src/lib/biometric_storage.c:616
+#: ../src/lib/biometric_storage.c:636 ../src/lib/biometric_storage.c:663
+#: ../src/lib/biometric_storage.c:689 ../src/lib/biometric_storage.c:740
+#: ../src/lib/biometric_storage.c:1046 ../src/lib/biometric_storage.c:1155
+#: ../src/lib/biometric_storage.c:1169
 #, c-format
 msgid "sqlite3 prepare err: %s\n"
 msgstr "sqlite3预处理错误：%s\n"
 
-#: ../src/lib/biometric_stroge.c:198
+#: ../src/lib/biometric_storage.c:198
 #, c-format
 msgid "Unable to set database(%s) permissions. ERROR[%d]: %s\n"
 msgstr "无法设置数据库(%s)的权限。错误[%d]：%s\n"
 
-#: ../src/lib/biometric_stroge.c:712
+#: ../src/lib/biometric_storage.c:712
 msgid "Check database format version ...\n"
 msgstr "检查数据库格式版本 ...\n"
 
-#: ../src/lib/biometric_stroge.c:720
+#: ../src/lib/biometric_storage.c:720
 #, c-format
 msgid "Find Table '%s' Error: %s\n"
 msgstr "查找表 '%s' 错误：%s\n"
 
-#: ../src/lib/biometric_stroge.c:754
+#: ../src/lib/biometric_storage.c:754
 #, c-format
 msgid "Database format version is %d.%d.%d\n"
 msgstr "数据库格式版本为 %d.%d.%d\n"
 
-#: ../src/lib/biometric_stroge.c:762
+#: ../src/lib/biometric_storage.c:762
 #, c-format
 msgid "Failed to upgrade database format：version %d.%d.%d to %d.%d.%d\n"
 msgstr "升级数据库格式失败：版本 %d.%d.%d 到 %d.%d.%d\n"
 
-#: ../src/lib/biometric_stroge.c:775
+#: ../src/lib/biometric_storage.c:775
 msgid "The database format is compatible with the current framework\n"
 msgstr "数据库格式兼容当前框架\n"
 
-#: ../src/lib/biometric_stroge.c:780
+#: ../src/lib/biometric_storage.c:780
 #, c-format
 msgid ""
 "Incompatible version of the database format: %d.%d.%d. Version required for "
 "the current framework: %d.%d.x"
 msgstr "不兼容的数据库格式版：%d.%d.%d。当前框架需要 %d.%d.x 的版本"
 
-#: ../src/lib/biometric_stroge.c:886
+#: ../src/lib/biometric_storage.c:886
 #, c-format
 msgid "Create Biometric Datebase Directory (%s) Error\n"
 msgstr "创建生物特征识别数据库存放目录(%s)失败\n"
 
-#: ../src/lib/biometric_stroge.c:928 ../src/lib/biometric_stroge.c:947
-#: ../src/lib/biometric_stroge.c:973
+#: ../src/lib/biometric_storage.c:928 ../src/lib/biometric_storage.c:947
+#: ../src/lib/biometric_storage.c:973
 #, c-format
 msgid "Failure to modify the owner and group of %s. ERROR[%d]: %s\n"
 msgstr "修改 %s 的属主和属组失败。错误[%d]：%s\n"
 
-#: ../src/lib/biometric_stroge.c:992
+#: ../src/lib/biometric_storage.c:992
 msgid "Upgrade database ...\n"
 msgstr "升级数据库中 ...\n"
 
-#: ../src/lib/biometric_stroge.c:1002
+#: ../src/lib/biometric_storage.c:1002
 #, c-format
 msgid "Rename Table 'EIGEN_INFO' to 'EIGEN_INFO_VERSION_0_0_0' Error: %s\n"
 msgstr "重命名表 'EIGEN_INFO' 为 'EIGEN_INFO_VERSION_0_0_0' 出现错误：%s\n"
 
-#: ../src/lib/biometric_stroge.c:1031
+#: ../src/lib/biometric_storage.c:1031
 #, c-format
 msgid "Failed to migrate data from the original table: %s\n"
 msgstr "从原始数据表中迁移数据失败：%s\n"
 
-#: ../src/lib/biometric_stroge.c:1061
+#: ../src/lib/biometric_storage.c:1061
 #, c-format
 msgid "Update UUID=%s to database(UID=%d) ...\n"
 msgstr "更新 UUID=%s 到数据库中(UID=%d) ...\n"
 
-#: ../src/lib/biometric_stroge.c:1068
+#: ../src/lib/biometric_storage.c:1068
 #, c-format
 msgid "Update column \"UUID\" to Table \"%s\" Error: %s\n"
 msgstr "更新字段 \"UUID\" 到表 \"%s\" 中出现错误：%s\n"
 
-#: ../src/lib/biometric_stroge.c:1111 ../src/lib/biometric_stroge.c:1135
+#: ../src/lib/biometric_storage.c:1111 ../src/lib/biometric_storage.c:1135
 #, c-format
 msgid ""
 "Create Table %s:\n"
@@ -770,12 +770,12 @@ msgstr ""
 "创建表 %s：\n"
 "%s\n"
 
-#: ../src/lib/biometric_stroge.c:1115 ../src/lib/biometric_stroge.c:1139
+#: ../src/lib/biometric_storage.c:1115 ../src/lib/biometric_storage.c:1139
 #, c-format
 msgid "Create Table '%s' Error: %s\n"
 msgstr "创建表 '%s' 错误：%s\n"
 
-#: ../src/lib/biometric_stroge.c:1147
+#: ../src/lib/biometric_storage.c:1147
 #, c-format
 msgid ""
 "Set Database Format(%d.%d.%d):\n"
@@ -1385,148 +1385,148 @@ msgstr "可以重启生物特征识别后台框架服务解决等待问题。"
 msgid "Unknown Builtin Commands: %s\n"
 msgstr "未知的内建指令：%s\n"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:35
+#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:39
 msgid "When there is a driver of the same name, force to override it"
 msgstr "出现同名驱动时，强制覆盖"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:37
+#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:41
 msgid "Only add driver and Not enable driver"
 msgstr "只添加而不启用驱动"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:48
+#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:52
 msgid "DriverName DriverFilePath"
 msgstr "驱动名 驱动文件路径"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:57
-#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:71
-#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:54
-#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:68
-#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:54
-#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:68
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:273
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:54
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:68
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:54
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:68
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:58
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:72
+#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:61
+#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:75
+#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:57
+#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:71
+#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:57
+#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:71
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:280
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:57
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:71
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:57
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:71
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:64
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:78
 #, c-format
 msgid "Error parsing commandline options: %s\n"
 msgstr "命令行选项解析出错：%s\n"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:70
-#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:67
-#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:67
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:67
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:67
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:71
+#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:74
+#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:70
+#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:70
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:70
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:70
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:77
 msgid "The number of parameters is incorrect"
 msgstr "参数个数不正确"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:82
+#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:86
 #, c-format
 msgid ""
 "This driver already exists, using the -f parameter if you need to override "
 "the configuration\n"
 msgstr "已存在该驱动，如需覆盖配置，请使用 -f 参数强制覆盖\n"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:100
-#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:97
-#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:97
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:93
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:90
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:118
+#: ../src/utils/biometric-config-tool/biometric-config-tool-add-driver.c:104
+#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:100
+#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:100
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:96
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:93
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:124
 #, c-format
 msgid "Write configuration failure: %s\n"
 msgstr "写入配置失败：%s\n"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:35
-#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:35
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:35
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:35
+#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:38
+#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:38
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:38
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:38
 msgid "Ignore nonexistent drivers"
 msgstr "忽略不存在的驱动"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:45
-#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:45
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:45
+#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:48
+#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:48
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:48
 msgid "Driver1 [Driver2 ...]"
 msgstr "驱动1 [驱动2 ...]"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:77
-#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:77
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:77
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:76
+#: ../src/utils/biometric-config-tool/biometric-config-tool-disable-driver.c:80
+#: ../src/utils/biometric-config-tool/biometric-config-tool-enable-driver.c:80
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-driver.c:80
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:79
 #, c-format
 msgid ""
 "Driver %s does not exist, if you need to ignore the problem, use -i "
 "parameter\n"
 msgstr "驱动 %s 不存在，如需忽略该问题，请使用 -i 参数\n"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:46
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:53
 msgid "Add driver"
 msgstr "添加驱动"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:47
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:54
 msgid "Remove drive"
 msgstr "移除驱动"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:48
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:55
 msgid "Enable driver"
 msgstr "启用驱动"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:49
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:56
 msgid "Disable driver"
 msgstr "禁用驱动"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:50
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:57
 msgid "Set the key value of the specified driver"
 msgstr "设置驱动的键值"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:51
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:58
 msgid "remove the key value of the specified driver"
 msgstr "移除驱动的键值"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:98
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:105
 msgid "BuiltinCommands"
 msgstr "内建指令"
 
 #. g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:101
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:108
 msgid "Builtin commands: "
 msgstr "内建指令："
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:215
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:222
 #, c-format
 msgid "Unknown command %s"
 msgstr "未知的指令 %s"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:224
+#: ../src/utils/biometric-config-tool/biometric-config-tool-main.c:231
 msgid "Missing builtin command"
 msgstr "缺少内建指令"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:45
+#: ../src/utils/biometric-config-tool/biometric-config-tool-remove-key.c:48
 msgid "DriverName Key"
 msgstr "驱动名 键名"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:35
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:41
 msgid "Forcibly overrides the existing key"
 msgstr "强制覆盖已存在的键"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:37
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:43
 msgid "Ignore this setting if the key already exists"
 msgstr "如果键已存在，则忽略设置"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:49
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:55
 msgid "DriverName Key Value"
 msgstr "驱动名 键名 键值"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:92
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:98
 #, c-format
 msgid "Driver %s does not exist\n"
 msgstr "驱动 %s 不存在\n"
 
-#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:102
+#: ../src/utils/biometric-config-tool/biometric-config-tool-set-key.c:108
 #, c-format
 msgid ""
 "The key already exists and is not forcibly overwritten, ignoring the setting "

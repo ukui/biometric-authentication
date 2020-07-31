@@ -35,7 +35,7 @@ endif
 libbiometric_la_SOURCES = \
 	biometric_common.h biometric_common.c \
 	biometric_config.h biometric_config.c \
-	biometric_stroge.h biometric_stroge.c \
+	biometric_storage.h biometric_storage.c \
 	biometric_version.h biometric_version.c \
 	$(NULL)
 
@@ -51,6 +51,6 @@ libbiometricincludedir=$(includedir)/libbiometric/
 
 libbiometricinclude_HEADERS = biometric_common.h \
 	biometric_config.h \
-	biometric_stroge.h \
+	biometric_storage.h \
 	biometric_version.h \
 	$(NULL)

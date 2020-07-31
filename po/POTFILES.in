@@ -8,8 +8,8 @@ src/lib/biometric_common.c
 src/lib/biometric_common.h
 src/lib/biometric_config.c
 src/lib/biometric_config.h
-src/lib/biometric_stroge.c
-src/lib/biometric_stroge.h
+src/lib/biometric_storage.c
+src/lib/biometric_storage.h
 src/lib/biometric_version.c
 src/lib/biometric_version.h
 

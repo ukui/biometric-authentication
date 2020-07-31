@@ -36,7 +36,7 @@
 
 #include "biometric_common.h"
 #include "biometric_intl.h"
-#include "biometric_stroge.h"
+#include "biometric_storage.h"
 
 const unsigned char kFirstBitMask = 128;// 1000000
 const unsigned char kSecondBitMask = 64;// 0100000

@@ -27,7 +27,7 @@
 #include <unistd.h>
 
 #include <biometric_common.h>
-#include <biometric_stroge.h>
+#include <biometric_storage.h>
 #include <biometric_version.h>
 
 #include "community_ops.h"
