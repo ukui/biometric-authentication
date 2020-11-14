@@ -1599,12 +1599,13 @@ int main()
 	{
 		struct stat dir_stat;
 
-		stat(pid_dir_list[i], &dir_stat);
-		if (S_ISDIR(dir_stat.st_mode))
-		{
-			pid_dir = pid_dir_list[i];
-			break;
-		}
+        if (access(pid_dir_list[i], F_OK) == 0) {
+            stat(pid_dir_list[i], &dir_stat);
+            if (S_ISDIR(dir_stat.st_mode)) {
+                pid_dir = pid_dir_list[i];
+                break;
+            }
+        }
 	}
 	if (pid_dir == NULL)
 		pid_dir = "/";
