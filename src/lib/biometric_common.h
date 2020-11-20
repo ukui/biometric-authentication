@@ -31,6 +31,8 @@
 
 #include "biometric_storage.h"
 
+#include <libfprint-2/fprint.h>
+
 #ifdef  __cplusplus
 extern "C" {
 #endif
@@ -197,7 +199,8 @@ typedef enum {
 	OPS_TYPE_CLEAN,
 	OPS_TYPE_GET_FLIST,
 	OPS_TYPE_RENAME,
-	OPS_TYPE_CLOSE,
+    OPS_TYPE_CLOSE,
+    OPS_TYPE_ENROLL_PROCESS,
 }BioOpsType;
 
 /*
@@ -413,11 +416,21 @@ typedef enum {
 	NOTIFY_CLOSE_MAX,
 }NotifyMID;
 
+//typedef enum {
+//    ENROLL_PROCESS_START = OPS_TYPE_ENROLL_PROCESS,         /** 未按压手指，即录入阶段为0% **/
+//    ENROLL_PROCESS_ONE,                                     /** 第一次按压手指，即录入阶段为20% **/
+//    ENROLL_PROCESS_TWO,                                     /** 第二次按压手指，即录入阶段为40% **/
+//    ENROLL_PROCESS_THREE,                                   /** 第三次按压手指，即录入阶段为60% **/
+//    ENROLL_PROCESS_FOUR,                                    /** 第四次按压手指，即录入阶段为80% **/
+//    ENROLL_PROCESS_FIVE,                                    /** 第五次按压手指，即录入阶段为100% **/
+//    ENROLL_PROCESS_MAX,
+//}EnrollProcess;
+
 /* 定义状态类型，用于通知服务层设备状态的改变 */
 typedef enum {
 	STATUS_TYPE_DEVICE = 0,
 	STATUS_TYPE_OPERATION,
-	STATUS_TYPE_NOTIFY
+    STATUS_TYPE_NOTIFY
 }StatusType;
 
 /*

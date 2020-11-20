@@ -14,7 +14,7 @@ Build-Depends: debhelper-compat (= 12),
                libgtk-3-dev (>= 3.18),
                libusb-1.0-0-dev (>= 1.0.20),
                libsqlite3-dev (>= 3.8),
-               libfprint-dev,
+               libfprint-2-dev,
                libpolkit-gobject-1-dev,
                uuid-dev
 Standards-Version: 4.5.0
@@ -99,5 +99,5 @@ Description: Biometric Authentication Driver (community multidevice)
  .
  This package supports following devices:
    upekts, uru4000, aes4000, aes2501, upektc, aes1610, fdu2000, vcom5s,
-   upeksonly, vfs101, vfs301, aes2550, upeke2, aes1660, aes2660, aes3500,
+   upeksonly, vfs101, vfs301, aes2550, aes1660, aes2660, aes3500,
    upektc_img, etes603, vfs5011, vfs0050, elan.

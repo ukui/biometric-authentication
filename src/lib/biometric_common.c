@@ -1000,7 +1000,7 @@ void bio_set_notify_abs_mid(bio_dev * dev, int mid) {
 	if ((dev->ops_status_changed_callback != NULL) &&
 			(dev->ops_status_changed_callback != bio_status_changed_callback))
 		dev->ops_status_changed_callback(dev->driver_id, STATUS_TYPE_NOTIFY);
-	bio_status_changed_common_callback(dev->driver_id, STATUS_TYPE_NOTIFY);
+    bio_status_changed_common_callback(dev->driver_id, STATUS_TYPE_NOTIFY);
 }
 
 void bio_set_all_status(bio_dev * dev,
@@ -1982,3 +1982,6 @@ void bio_dev_glist_data_free(bio_dev * dev, gpointer p2)
 {
 	bio_dev_free(dev);
 }
+
+
+

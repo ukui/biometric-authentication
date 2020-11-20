@@ -19,32 +19,47 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  */
+#ifndef DRIVE_INTERNAL_H
+#define DRIVE_INTERNAL_H
 
-#ifndef COMMUNITY_MULTIDEVICE_DISCOVER_TOOL_H
-#define COMMUNITY_MULTIDEVICE_DISCOVER_TOOL_H
-
-#include <stdbool.h>
+#include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include <libgen.h>
+#include <stdbool.h>
+#include <dlfcn.h>
+#include <unistd.h>
+#include <glib.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+#include "driver_type.h"
+#include "close.h"
+#include "aes_128_cfb.h"
+#include "community_define.h"
+#include "community_ops.h"
+
+#include <biometric_common.h>
+#include <biometric_storage.h>
+#include <biometric_version.h>
 #include <libfprint-2/fprint.h>
-#include <community_define.h>
 
-#define PROGAM_NAME "community-multidevice-discover-tool"
 
-typedef struct device_info_t device_info;
-struct device_info_t
-{
-	char *drv_id;
-	bool exist;
-};
+// 探测设备
+int device_discover(bio_dev *dev);
 
-typedef struct driver_info_t driver_info;
-struct driver_info_t
-{
-	GPtrArray *devices;
-	FpDevice *device;
-	FpContext *ctx;
-};
+int set_fp_common_context(bio_dev *dev);
 
-#endif // COMMUNITY_MULTIDEVICE_DISCOVER_TOOL_H
+void *buf_alloc(unsigned long size);
+void buf_clean(void *buf, unsigned long size);
+
+char *finger_capture(capture_data *user_data);
+
+int community_para_config(bio_dev *dev, GKeyFile *conf);
+
+int community_internal_aes_encrypt(unsigned char *in, int len, unsigned char *key, unsigned char *out);
+
+int community_internal_aes_decrypt(unsigned char *in, int len, unsigned char *key, unsigned char *out);
+
+#endif // DRIVE_INTERNAL_H

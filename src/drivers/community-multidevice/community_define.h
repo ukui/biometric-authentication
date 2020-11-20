@@ -2,6 +2,7 @@
  * Copyright (C) 2018 Tianjin KYLIN Information Technology Co., Ltd.
  *
  * Author: Droiing <jianglinxuan@kylinos.cn>
+ *         chenziyi <chenziyi@kylinos.cn>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published
@@ -18,7 +19,6 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  */
-
 #ifndef COMMUNITY_DEFINE_H
 #define COMMUNITY_DEFINE_H
 
@@ -33,35 +33,33 @@ enum {
 	AES1610_ID	= 6,
 	FDU2000_ID	= 7,
 	VCOM5S_ID	= 8,
-	UPEKSONLY_ID	= 9,
+	UPEKSONLY_ID= 9,
 	VFS101_ID	= 10,
 	VFS301_ID	= 11,
 	AES2550_ID	= 12,
-	UPEKE2_ID	= 13,
-	AES1660_ID	= 14,
-	AES2660_ID	= 15,
-	AES3500_ID	= 16,
-	UPEKTC_IMG_ID	= 17,
-	ETES603_ID	= 18,
-	VFS5011_ID	= 19,
-	VFS0050_ID	= 20,
-	ELAN_ID		= 21,
+	AES1660_ID	= 13,
+	AES2660_ID	= 14,
+	AES3500_ID	= 15,
+	UPEKTC_IMG_ID= 16,
+	ETES603_ID	= 17,
+	VFS5011_ID	= 18,
+	VFS0050_ID	= 19,
+	ELAN_ID	= 20,
 	COMMUNITY_MULTIDEVICE_MAX_ID,
 };
 
-#define UPEKTS_NAME		"upekts"
+#define UPEKTS_NAME	"upekts"
 #define URU4000_NAME	"uru4000"
 #define AES4000_NAME	"aes4000"
 #define AES2501_NAME	"aes2501"
-#define UPEKTC_NAME		"upektc"
+#define UPEKTC_NAME	"upektc"
 #define AES1610_NAME	"aes1610"
 #define FDU2000_NAME	"fdu2000"
-#define VCOM5S_NAME		"vcom5s"
+#define VCOM5S_NAME	"vcom5s"
 #define UPEKSONLY_NAME	"upeksonly"
-#define VFS101_NAME		"vfs101"
-#define VFS301_NAME		"vfs301"
+#define VFS101_NAME	"vfs101"
+#define VFS301_NAME	"vfs301"
 #define AES2550_NAME	"aes2550"
-#define UPEKE2_NAME		"upeke2"
 #define AES1660_NAME	"aes1660"
 #define AES2660_NAME	"aes2660"
 #define AES3500_NAME	"aes3500"
@@ -69,7 +67,7 @@ enum {
 #define ETES603_NAME	"etes603"
 #define VFS5011_NAME	"vfs5011"
 #define VFS0050_NAME	"vfs0050"
-#define ELAN_NAME		"elan"
+#define ELAN_NAME	"elan"
 
 #ifndef BIOMETRIC_DRIVER_COMMUNITY_MULTIDEVICE_DOMAIN_NAME
 	#define BIOMETRIC_DRIVER_COMMUNITY_MULTIDEVICE_DOMAIN_NAME \

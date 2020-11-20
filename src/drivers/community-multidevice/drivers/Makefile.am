@@ -20,19 +20,23 @@ LOCALEDIR_CFS = -DLOCALEDIR=\""$(localedir)"\"
 libdrvdir = $(drv_dir)
 libdrv_LTLIBRARIES = upekts.la uru4000.la aes4000.la aes2501.la upektc.la \
 	aes1610.la fdu2000.la vcom5s.la upeksonly.la vfs101.la vfs301.la \
-	aes2550.la upeke2.la aes1660.la aes2660.la aes3500.la upektc_img.la \
+	aes2550.la aes1660.la aes2660.la aes3500.la upektc_img.la \
 	etes603.la vfs5011.la vfs0050.la elan.la \
 	$(NULL)
 
 COMM_SOURCES = $(top_srcdir)/src/drivers/community-multidevice/community_ops.c \
-	$(top_srcdir)/src/drivers/community-multidevice/aes_128_cfb.c
+	$(top_srcdir)/src/drivers/community-multidevice/aes_128_cfb.c \
+	$(top_srcdir)/src/drivers/community-multidevice/close.c \
+	$(top_srcdir)/src/drivers/community-multidevice/driver_internal.c
 
-COMM_INCLUDE = $(top_srcdir)/src/drivers/community-multidevice/community_ops.h \
+COMM_INCLUDE = $(top_srcdir)/src/drivers/community-multidevice/close.h \
 	$(top_srcdir)/src/drivers/community-multidevice/community_define.h \
 	$(top_srcdir)/src/drivers/community-multidevice/aes_128_cfb.h \
+	$(top_srcdir)/src/drivers/community_multidevice/driver_internal.h \
+	$(top_srcdir)/src/drivers/comunity_multidevice/driver_type.h \
 	$(NULL)
 
-COMM_CFS = -Wall -g -shared -fpic \
+COMM_CFS = -Wall -g -o0 -shared -fpic \
 	-I$(top_srcdir)/src/lib/ -I$(top_srcdir)/src/drivers/community-multidevice/ \
 	$(LOCALEDIR_CFS) $(DOMAIN_NAME) \
 	$(LIBBIOMETRIC_CFLAGS) $(LIBFPRINT_CFLAGS) \
@@ -103,11 +107,6 @@ aes2550_la_INCLUDE = $(COMM_INCLUDE)
 aes2550_la_CFLAGS = $(COMM_CFS)
 aes2550_la_LDFLAGS = $(COMM_LDFS)
 
-upeke2_la_SOURCES = $(COMM_SOURCES) upeke2.c
-upeke2_la_INCLUDE = $(COMM_INCLUDE)
-upeke2_la_CFLAGS = $(COMM_CFS)
-upeke2_la_LDFLAGS = $(COMM_LDFS)
-
 aes1660_la_SOURCES = $(COMM_SOURCES) aes1660.c
 aes1660_la_INCLUDE = $(COMM_INCLUDE)
 aes1660_la_CFLAGS = $(COMM_CFS)
@@ -147,4 +146,5 @@ elan_la_SOURCES = $(COMM_SOURCES) elan.c
 elan_la_INCLUDE = $(COMM_INCLUDE)
 elan_la_CFLAGS = $(COMM_CFS)
 elan_la_LDFLAGS = $(COMM_LDFS)
+
 

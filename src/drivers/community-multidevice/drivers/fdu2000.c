@@ -2,6 +2,7 @@
  * Copyright (C) 2018 Tianjin KYLIN Information Technology Co., Ltd.
  *
  * Author: Droiing <jianglinxuan@kylinos.cn>
+ *         chenziyi <chenziyi@kylinos.cn>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published
@@ -18,7 +19,6 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  */
-
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -81,12 +81,10 @@ int ops_configure(bio_dev * dev, GKeyFile * conf)
 
 	dev->enable = bio_dev_is_enable(dev, conf);
 
-	community_fpdev *cfpdev = malloc(sizeof(community_fpdev));
-	memset(cfpdev, 0, sizeof(community_fpdev));
-	cfpdev->dev = NULL;
-	cfpdev->community_driver_id = FDU2000_ID;
-	cfpdev->ops_timeout_ms = 30 * 1000;
-	dev->dev_priv = cfpdev;
+	driver_info *priv = g_new0 (driver_info, 1);
+	dev->dev_priv = priv;
+
+	priv->community_driver_id = FDU2000_NAME;
 
 	community_para_config(dev, conf);
 

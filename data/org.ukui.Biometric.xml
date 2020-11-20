@@ -235,7 +235,7 @@
 
 		<signal name="USBDeviceHotPlug">
 			<doc>
-				Emitted when device status is changed.
+				Emit when the device is plugged in or pulled out.
 			</doc>
 			<arg name="drvid" type="i">
 				<doc>Driver or device ID</doc>
@@ -247,7 +247,6 @@
 				<doc>Number of devices after the event</doc>
 			</arg>
 		</signal>
-
 
 	</interface>
 </node>
