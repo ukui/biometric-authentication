@@ -52,7 +52,6 @@ struct timeval timestamp_dev_status[MAX_DEVICES] = {0};
 struct timeval timestamp_ops_result[MAX_DEVICES] = {0};
 struct timeval timestamp_notify_mid[MAX_DEVICES] = {0};
 
-
 static gboolean gdbus_check_app_api_version(Biometric *object,
 											GDBusMethodInvocation *invocation,
 											int major, int minor, int function)

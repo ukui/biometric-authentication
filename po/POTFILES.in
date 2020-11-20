@@ -27,7 +27,6 @@ src/drivers/community-multidevice/drivers/aes4000.c
 src/drivers/community-multidevice/drivers/elan.c
 src/drivers/community-multidevice/drivers/etes603.c
 src/drivers/community-multidevice/drivers/fdu2000.c
-src/drivers/community-multidevice/drivers/upeke2.c
 src/drivers/community-multidevice/drivers/upeksonly.c
 src/drivers/community-multidevice/drivers/upektc.c
 src/drivers/community-multidevice/drivers/upektc_img.c

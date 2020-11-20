@@ -1,3 +1,24 @@
+/*
+ * Copyright (C) 2018 Tianjin KYLIN Information Technology Co., Ltd.
+ *
+ * Author: Droiing <jianglinxuan@kylinos.cn>
+ *         chenziyi <chenziyi@kylinos.cn>
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+ *
+ */
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
@@ -53,18 +74,15 @@ void keyExpansion(unsigned char* key, unsigned char w[][4][4])
 			w[0][r][c] = key[r + c * 4];
 
 	for (i = 1; i <= 10; i++)
-		for (j = 0; j < 4; j++)
-		{
+		for (j = 0; j < 4; j++) {
 			unsigned char t[4];
 
 			for (r = 0; r < 4; r++)
 				t[r] = j ? w[i][r][j - 1] : w[i - 1][r][3];
 
-			if (j == 0)
-			{
+			if (j == 0) {
 				unsigned char temp = t[0];
-				for (r = 0; r < 3; r++)
-				{
+				for (r = 0; r < 3; r++) {
 					t[r] = SBox[t[(r + 1) % 4]];
 				}
 				t[3] = SBox[temp];
@@ -82,13 +100,12 @@ unsigned char* cipher(unsigned char* input, unsigned char* output, unsigned char
 	int i, r, c;
 
 	for (r = 0; r < 4; r++)
-		for (c			= 0; c < 4; c++)
+		for (c = 0; c < 4; c++)
 			state[r][c] = input[c * 4 + r];
 
 	addRoundKey(state, w[0]);
 
-	for (i = 1; i <= 10; i++)
-	{
+	for (i = 1; i <= 10; i++) {
 		subBytes(state);
 		shiftRows(state);
 		if (i != 10)
@@ -97,7 +114,7 @@ unsigned char* cipher(unsigned char* input, unsigned char* output, unsigned char
 	}
 
 	for (r = 0; r < 4; r++)
-		for (c				  = 0; c < 4; c++)
+		for (c = 0; c < 4; c++)
 			output[c * 4 + r] = state[r][c];
 
 	return output;
@@ -109,12 +126,11 @@ unsigned char* invCipher(unsigned char* input, unsigned char* output, unsigned c
 	int i, r, c;
 
 	for (r = 0; r < 4; r++)
-		for (c			= 0; c < 4; c++)
+		for (c = 0; c < 4; c++)
 			state[r][c] = input[c * 4 + r];
 
 	addRoundKey(state, w[10]);
-	for (i = 9; i >= 0; i--)
-	{
+	for (i = 9; i >= 0; i--) {
 		invShiftRows(state);
 		invSubBytes(state);
 		addRoundKey(state, w[i]);
@@ -135,8 +151,7 @@ unsigned char FFmul(unsigned char a, unsigned char b)
 	int i;
 
 	bw[0] = b;
-	for (i = 1; i < 4; i++)
-	{
+	for (i = 1; i < 4; i++) {
 		bw[i] = bw[i - 1] << 1;
 		if (bw[i - 1] & 0x80)
 			bw[i] ^= 0x1b;
@@ -163,13 +178,12 @@ void shiftRows(unsigned char state[][4])
 	unsigned char t[4];
 	int r, c;
 
-	for (r = 1; r < 4; r++)
-	{
+	for (r = 1; r < 4; r++) {
 		for (c = 0; c < 4; c++)
 			t[c] = state[r][(c + r) % 4];
 
-		for (c = 0; c < 4; c++)
-			state[r][c] = t[c];
+	for (c = 0; c < 4; c++)
+		state[r][c] = t[c];
 	}
 }
 
@@ -178,16 +192,15 @@ void mixColumns(unsigned char state[][4])
 	unsigned char t[4];
 	int r, c;
 
-	for (c = 0; c < 4; c++)
-	{
+	for (c = 0; c < 4; c++) {
 		for (r = 0; r < 4; r++)
 			t[r] = state[r][c];
 
 		for (r = 0; r < 4; r++)
 			state[r][c] = FFmul(0x02, t[r]) ^
-						  FFmul(0x03, t[(r + 1) % 4]) ^
-						  FFmul(0x01, t[(r + 2) % 4]) ^
-						  FFmul(0x01, t[(r + 3) % 4]);
+				      FFmul(0x03, t[(r + 1) % 4]) ^
+				      FFmul(0x01, t[(r + 2) % 4]) ^
+				      FFmul(0x01, t[(r + 3) % 4]);
 	}
 }
 
@@ -205,13 +218,12 @@ void invShiftRows(unsigned char state[][4])
 	unsigned char t[4];
 	int r, c;
 
-	for (r = 1; r < 4; r++)
-	{
+	for (r = 1; r < 4; r++) {
 		for (c = 0; c < 4; c++)
 			t[c] = state[r][(c - r + 4) % 4];
 
-		for (c = 0; c < 4; c++)
-			state[r][c] = t[c];
+	for (c = 0; c < 4; c++)
+		state[r][c] = t[c];
 	}
 }
 
@@ -220,16 +232,15 @@ void invMixColumns(unsigned char state[][4])
 	unsigned char t[4];
 	int r, c;
 
-	for (c = 0; c < 4; c++)
-	{
+	for (c = 0; c < 4; c++) {
 		for (r = 0; r < 4; r++)
 			t[r] = state[r][c];
 
 		for (r = 0; r < 4; r++)
 			state[r][c] = FFmul(0x0e, t[r]) ^
-						  FFmul(0x0b, t[(r + 1) % 4]) ^
-						  FFmul(0x0d, t[(r + 2) % 4]) ^
-						  FFmul(0x09, t[(r + 3) % 4]);
+				      FFmul(0x0b, t[(r + 1) % 4]) ^
+				      FFmul(0x0d, t[(r + 2) % 4]) ^
+				      FFmul(0x09, t[(r + 3) % 4]);
 	}
 }
 
@@ -245,7 +256,7 @@ void addRoundKey(unsigned char state[][4], unsigned char k[][4])
 /**************************************************************/
 
 int AES_128_CFB_Encrypt(unsigned char* key, unsigned char* iv,
-						unsigned char* inData, int inLen, unsigned char* outData)
+			unsigned char* inData, int inLen, unsigned char* outData)
 {
 	bool firstRound = true;
 	int r = 0;
@@ -268,8 +279,7 @@ int AES_128_CFB_Encrypt(unsigned char* key, unsigned char* iv,
 	else
 		rounds = inLen / 16 + 1;
 
-	for (r = 0; r < rounds; r++)
-	{
+	for (r = 0; r < rounds; r++) {
 		start = r * 16;
 		end = r * 16 + 16;
 		if (end > inLen)
@@ -278,8 +288,7 @@ int AES_128_CFB_Encrypt(unsigned char* key, unsigned char* iv,
 		memset(plainText, 0, 16);
 		memcpy(plainText, inData + start, end - start);
 
-		if (firstRound == true)
-		{
+		if (firstRound == true) {
 			cipher(iv, output, w);
 			firstRound = false;
 		}
@@ -303,7 +312,7 @@ int AES_128_CFB_Encrypt(unsigned char* key, unsigned char* iv,
 }
 
 int AES_128_CFB_Decrypt(unsigned char* key, unsigned char* iv,
-						unsigned char* inData, int inLen, unsigned char* outData)
+			unsigned char* inData, int inLen, unsigned char* outData)
 {
 	bool firstRound = true;
 	int r = 0;
@@ -326,8 +335,7 @@ int AES_128_CFB_Decrypt(unsigned char* key, unsigned char* iv,
 	else
 		rounds = inLen / 16 + 1;
 
-	for (r = 0; r < rounds; r++)
-	{
+	for (r = 0; r < rounds; r++) {
 		start = r * 16;
 		end = start + 16;
 		if (end > inLen)
@@ -336,8 +344,7 @@ int AES_128_CFB_Decrypt(unsigned char* key, unsigned char* iv,
 		memset(cipherText, 0, 16);
 		memcpy(cipherText, inData + start, end - start);
 
-		if (firstRound == true)
-		{
+		if (firstRound == true) {
 			cipher(iv, output, w);
 			firstRound = false;
 		}

@@ -46,7 +46,7 @@ community_multidevice_discover_tool_LDFLAGS = $(COMM_LDFS)
 install-exec-local:
 	mkdir -p $(DESTDIR)/$(drv_dir)/../discover-tools/
 	DRIVER_LIST="upekts uru4000 aes4000 aes2501 upektc aes1610 fdu2000 vcom5s \
-		upeksonly vfs101 vfs301 aes2550 upeke2 aes1660 aes2660 aes3500  \
+		upeksonly vfs101 vfs301 aes2550 aes1660 aes2660 aes3500  \
 		upektc_img etes603 vfs5011 vfs0050 elan"; \
 	for driver in $${DRIVER_LIST}; do \
 		ln -sf extra/community-multidevice-discover-tool \

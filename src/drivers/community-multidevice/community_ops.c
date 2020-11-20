@@ -2,6 +2,7 @@
  * Copyright (C) 2018 Tianjin KYLIN Information Technology Co., Ltd.
  *
  * Author: Droiing <jianglinxuan@kylinos.cn>
+ *         chenziyi <chenziyi@kylinos.cn>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published
@@ -18,1425 +19,844 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  */
-
-#include <biometric_common.h>
-#include <biometric_version.h>
-#include <biometric_storage.h>
-#include <biometric_version.h>
-
-#include <libfprint/fprint.h>
-
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/time.h>
-#include <pthread.h>
-#include <fcntl.h>
-
 #include "community_ops.h"
-#include "community_define.h"
-#include "aes_128_cfb.h"
 
-// Configure driver parameters
-int community_para_config(bio_dev * dev, GKeyFile * conf);
-
-// Driver initialization and resource recovery function
-int community_ops_driver_init(bio_dev *dev);
-void community_ops_free(bio_dev *dev);
-int community_ops_discover(bio_dev *dev);
-
-// Device initialization and resource recovery function
-int community_ops_open(bio_dev *dev);
-void community_ops_close(bio_dev *dev);
-
-// Functional operation of device
-int community_ops_enroll(bio_dev *dev, OpsActions action, int uid, int idx,
-				  char * bio_idx_name);
-int community_ops_verify(bio_dev *dev, OpsActions action, int uid, int idx);
-int community_ops_identify(bio_dev *dev, OpsActions action, int uid,
-					int idx_start, int idx_end);
-feature_info * community_ops_search(bio_dev *dev, OpsActions action, int uid,
-				  int idx_start, int idx_end);
-int community_ops_clean(bio_dev *dev, OpsActions action, int uid,
-				 int idx_start, int idx_end);
-feature_info * community_ops_get_feature_list(bio_dev *dev, OpsActions action,
-									   int uid, int idx_start, int idx_end);
-int community_ops_feature_rename(bio_dev *dev, int uid, int idx, char * new_name);
-
-// Framework auxiliary function
-int community_ops_stop_by_user(bio_dev *dev, int waiting_ms);
-const char * community_ops_get_dev_status_mesg(bio_dev *dev);
-const char * community_ops_get_ops_result_mesg(bio_dev *dev);
-const char * community_ops_get_notify_mid_mesg(bio_dev *dev);
-void community_ops_attach(bio_dev *dev);
-void community_ops_detach(bio_dev *dev);
-
-// Device initialization and resource release related operations
-int community_internal_device_init(bio_dev *dev);
-void community_internal_device_free(bio_dev *dev);
-
-// Processing fingerprint characteristic data
-struct fp_print_data **community_internal_create_fp_data(bio_dev *dev,
-														 feature_info * info_list);
-void community_internal_free_fp_data(struct fp_print_data **fp_data_list);
-
-// Internal implementation of the device enroll operation
-int community_internal_enroll(bio_dev *dev);
-static void community_internal_enroll_stage_cb(struct fp_dev *fpdev,
-											   int result,
-											   struct fp_print_data *print,
-											   struct fp_img *img,
-											   void *user_data);
-int community_internal_enroll_stop(bio_dev *dev);
-void community_internal_enroll_stopped_cb(struct fp_dev *fpdev,
-												   void *user_data);
-
-// Internal implementation of the device identify operation
-int community_internal_identify(bio_dev *dev,
-								struct fp_print_data **print_gallery);
-static void community_internal_identify_cb(struct fp_dev *fpdev,
-										   int result,
-										   size_t match_offset,
-										   struct fp_img *img,
-										   void *user_data);
-int community_internal_identify_stop(bio_dev *dev);
-static void community_internal_identify_stopped_cb(struct fp_dev *fpdev,
-												   void *user_data);
-
-// Internal auxiliary function
-void community_internal_timeout_tv_update(bio_dev *dev);
-void community_internal_interactive_waiting(bio_dev *dev);
-
-int community_internal_aes_encrypt(unsigned char *in, int len,
-								   unsigned char *key, unsigned char *out);
-int community_internal_aes_decrypt(unsigned char *in, int len,
-								   unsigned char *key, unsigned char *out);
-
-
-
-int community_para_config(bio_dev * dev, GKeyFile * conf)
-{
-	community_fpdev *cfpdev = dev->dev_priv;
-	char * key_file = NULL;
-
-	cfpdev->aes_key = NULL;
-	GError * err = NULL;
-
-	key_file = g_key_file_get_string(conf, dev->device_name, "AESKey", &err);
-	if (err != NULL)
-	{
-		bio_print_warning(_("Get AES Key File Error[%d]: %s, use default Key.\n"),
-							err->code, err->message);
-		g_error_free(err);
-
-		cfpdev->aes_key = malloc(strlen(DEFAULT_AES_KEY) + 1);
-		memset(cfpdev->aes_key, 0, strlen(DEFAULT_AES_KEY) + 1);
-		sprintf((char *)cfpdev->aes_key, "%s", DEFAULT_AES_KEY);
-
-		return 0;
-	}
-
-	if (access(key_file, F_OK | R_OK) != 0)
-	{
-		bio_print_warning(_("AES Key File (%s) does not Exist or has no Read "
-							"Permission, use default key.\n"), key_file);
-
-		cfpdev->aes_key = malloc(strlen(DEFAULT_AES_KEY) + 1);
-		memset(cfpdev->aes_key, 0, strlen(DEFAULT_AES_KEY) + 1);
-		sprintf((char *)cfpdev->aes_key, "%s", DEFAULT_AES_KEY);
-
-		return 0;
-	}
-
-	FILE *fp = NULL;
-	int len = 0;
-	int read_len = 0;
-
-	fp = fopen(key_file, "r");
-	if (fp == NULL)
-	{
-		bio_print_warning(_("Can not open AES Key File: %s, use default key.\n")
-						  , key_file);
-
-		cfpdev->aes_key = malloc(strlen(DEFAULT_AES_KEY) + 1);
-		memset(cfpdev->aes_key, 0, strlen(DEFAULT_AES_KEY) + 1);
-		sprintf((char *)cfpdev->aes_key, "%s", DEFAULT_AES_KEY);
-
-		return 0;
-	}
-
-	fseek(fp, 0, SEEK_END);
-	len = ftell(fp);
-
-	if (len == 0)
-	{
-		bio_print_warning(_("AES Key File is Enpty, use default Key.\n"));
-		fclose(fp);
-
-		cfpdev->aes_key = malloc(strlen(DEFAULT_AES_KEY) + 1);
-		memset(cfpdev->aes_key, 0, strlen(DEFAULT_AES_KEY) + 1);
-		sprintf((char *)cfpdev->aes_key, "%s", DEFAULT_AES_KEY);
-
-		return 0;
-	}
-
-	if (len > DEFAULT_AES_KEY_MAX_LEN)
-		len = DEFAULT_AES_KEY_MAX_LEN;
-
-	cfpdev->aes_key = malloc(len + 1);
-	memset(cfpdev->aes_key, 0, len + 1);
-
-	fseek(fp, 0, SEEK_SET);
-	read_len = fread(cfpdev->aes_key, 1, len, fp);
-	cfpdev->aes_key[read_len * 1] = 0;
-
-	fclose(fp);
-
-	if (cfpdev->aes_key[0] == '\0')
-	{
-		bio_print_warning(_("AES Key is Enpty, use default Key.\n"));
-
-		free(cfpdev->aes_key);
-		cfpdev->aes_key = malloc(strlen(DEFAULT_AES_KEY) + 1);
-		memset(cfpdev->aes_key, 0, strlen(DEFAULT_AES_KEY) + 1);
-		sprintf((char *)cfpdev->aes_key, "%s", DEFAULT_AES_KEY);
-	}
-
-	return 0;
-}
-
+/*
+ * 驱动初始化函数
+*/
 int community_ops_driver_init(bio_dev *dev)
 {
+	bio_print_debug ("bio_drv_demo_ops_driver_init start\n");
+
+	// 私有结构体
+	driver_info *priv = (driver_info *)dev->dev_priv;
+
+	// 私有结构体超时时间成员变量设置初值为：框架通用的操作超时时间
+	priv->timeoutMS = bio_get_ops_timeout_ms ();
+
+	// 私有结构体控制标志成员变量设置初值为：CONTROL_FLAG_IDLE
+	priv->ctrlFlag = CONTROL_FLAG_IDLE;
+
+	priv->cancellable = NULL;
+
+	// 获取通用的context
+	set_fp_common_context (dev);
+
+	bio_print_debug ("bio_drv_demo_ops_driver_init end\n");
+
 	return 0;
 }
 
-void community_ops_free(bio_dev *dev)
-{
-	community_fpdev *cfpdev = dev->dev_priv;
 
-	community_internal_device_free(dev);
-
-	if (cfpdev->aes_key != NULL)
-	{
-		free(cfpdev->aes_key);
-		cfpdev->aes_key = NULL;
-	}
-
-	free(cfpdev);
-	dev->dev_priv = NULL;
-}
-
+/*
+ * 设备检测函数
+*/
 int community_ops_discover(bio_dev *dev)
 {
-	int usb_num = 0;
+	bio_print_debug ("bio_drv_demo_ops_discover start\n");
 
-	bio_print_info(_("Detect %s device\n"), dev->device_name);
+	int ret = 0;
 
-	usb_num = community_internal_device_init(dev);
-	community_internal_device_free(dev);
+	if ((strcmp(getenv("BIO_PRINT_LEVEL"), "7") == 0) && (strcmp(getenv("BIO_PRINT_COLOR"), "1") == 0))
+		setenv ("G_MESSAGES_DEBUG", "all", 0);
 
-	// Detect USB devices
-	if( usb_num < 0 )
-	{
-		 bio_print_info(_("No %s fingerprint device detected\n"), dev->device_name);
-		 return -1;
-	}
-	if( usb_num == 0 )
-	{
-		 bio_print_info(_("No %s fingerprint device detected\n"), dev->device_name);
-		 return 0;
-	}
-
-	bio_print_info(_("There is %d %s fingerprint device detected\n"),
-				   usb_num, dev->device_name);
-
-	return usb_num;
-}
-
-// Device initialization and open
-int community_ops_open(bio_dev *dev)
-{
-	community_fpdev *cfpdev = dev->dev_priv;
-
-	int usb_num = 0;
-	bio_set_dev_status(dev, DEVS_COMM_IDLE);
-	bio_set_ops_result(dev, OPS_COMM_SUCCESS);
-	bio_set_notify_mid(dev, NOTIFY_COMM_IDLE);
-
-	if (dev->enable == FALSE) {
-		bio_set_dev_status(dev, DEVS_COMM_DISABLE);
+	// 探测设备
+	ret = device_discover (dev);
+	if ( ret < 0 ) {
+		bio_print_info (_("No %s fingerprint device detected\n"), dev->device_name);
 		return -1;
 	}
-	bio_set_dev_status(dev, DEVS_OPEN_DOING);
-
-	usb_num = community_internal_device_init(dev);
-	if (usb_num <= 0)
-	{
-		snprintf(cfpdev->extra_info, EXTRA_INFO_LENGTH,
-						 _("Device failed to open"));
-		bio_set_notify_abs_mid(dev, COMMUNITY_ENROLL_EXTRA);
-		bio_print_warning("%s\n", bio_get_notify_mid_mesg(dev));
+	if ( ret == 0 ) {
+		bio_print_info (_("No %s fingerprint device detected\n"), dev->device_name);
+		return 0;
 	}
 
-	bio_set_dev_status(dev, DEVS_COMM_IDLE);
-	bio_set_ops_abs_result(dev, OPS_OPEN_SUCCESS);
+	bio_print_debug ("bio_drv_demo_ops_discover end\n");
+
+	return ret;
+}
+
+/*
+ * 驱动释放函数
+*/
+void community_ops_free(bio_dev *dev)
+{
+	bio_print_debug ("bio_drv_demo_ops_free start\n");
+
+	driver_info *priv = (driver_info *)dev->dev_priv;
+
+	key_t key;
+	shared_number *share;
+	// 申请一个key
+	key = ftok ("/tmp/biometric_shared_file", 1234);
+
+	priv->shmid = shmget (key, sizeof(shared_number), 0);
+	priv->shmaddr = shmat (priv->shmid, NULL, 0);
+	share = (shared_number *)(priv->shmaddr);
+
+	share->d_count--;
+
+	if (share->d_count == 0) {
+		// 资源释放
+		g_object_unref (priv->ctx);
+		priv->devices = NULL;
+		priv->device = NULL;
+		// 解映射
+		shmdt (priv->shmaddr);
+		// 释放共享内存
+		shmctl (priv->shmid, IPC_RMID, NULL);
+	}
+	// 关闭文件描述符
+	close (priv->fd);
+
+	bio_print_debug ("bio_drv_demo_ops_free end\n");
+}
+
+/*
+ * 设备打开函数
+*/
+int community_ops_open(bio_dev *dev)
+{
+	bio_print_debug ("bio_drv_demo_ops_open start\n");
+
+	// 私有结构体
+	driver_info *priv = (driver_info *)dev->dev_priv;
+	priv->asyn_flag = ASYN_FALG_RUNNING;
+	// 私有结构体控制变量成员设置为:CONTROL_FLAG_RUNNING
+	priv->ctrlFlag = CONTROL_FLAG_RUNNING;
+
+	if (dev->enable == false) {
+		bio_set_dev_status (dev, DEVS_COMM_DISABLE);            //设备状态设置为：设备被禁用
+		bio_set_ops_result (dev, OPS_COMM_ERROR);               //操作结果设置为：通用操作错误
+		bio_set_notify_abs_mid (dev, NOTIFY_COMM_DISABLE);      //提示消息设置为：设备不可用
+		return -1;
+	}
+
+	bio_set_dev_status (dev, DEVS_OPEN_DOING);                        //设备状态设置为：正在打开设备
+
+	// 创建一个GCancellable
+	priv->cancellable = g_cancellable_new ();
+
+	// 启动异步操作打开设备
+	fp_device_open (priv->device, NULL, (GAsyncReadyCallback)on_device_opened, dev);
+	while (1) {
+		usleep (100);
+		if (priv->asyn_flag == ASYN_FLAG_DONE) {
+			break;
+		} else {
+			if (priv->timeused > priv->timeoutMS) {
+				// 取消libfprint库异步操作
+				g_cancellable_cancel (priv->cancellable);
+					// 判断取消是否成功
+					if (g_cancellable_is_cancelled (priv->cancellable)) {
+						while (1) {
+							usleep (100);
+							if(priv->asyn_flag == ASYN_FLAG_DONE) {
+								bio_set_ops_abs_result (dev, OPS_OPEN_FAIL);          // 设置操作结果：打开设备失败
+								bio_set_notify_abs_mid (dev, NOTIFY_OPEN_FAIL);       // 用户提醒消息：打开设备失败
+								bio_set_dev_status (dev, DEVS_COMM_IDLE);             // 设备状态：空闲状态
+								return -1;
+							}
+						}
+				}
+			}
+			priv->timeused += EM1600DEV_FINGER_CHECK_INTERVAL_MS;
+			usleep (EM1600DEV_FINGER_CHECK_INTERVAL_MS * 1000);
+		}
+	}
+
+	// 设置状态
+	bio_set_dev_status (dev, DEVS_COMM_IDLE);                    //当前状态设置为：空闲状态
+	bio_set_ops_abs_result (dev, OPS_OPEN_SUCCESS);              //操作结果设置为：打开设备成功
+	bio_set_notify_abs_mid (dev, NOTIFY_OPEN_SUCCESS);           //提示消息设置为：打开设备成功
+
+	bio_print_debug ("bio_drv_demo_ops_open end\n");
+
 	return 0;
 }
 
-// Device close and resource recovery
+/*
+ * 设备关闭函数
+*/
 void community_ops_close(bio_dev *dev)
 {
-	community_internal_device_free(dev);
-}
+	bio_print_debug ("bio_drv_demo_ops_close start\n");
 
-int community_ops_enroll(bio_dev *dev, OpsActions action, int uid, int idx,
-				  char * bio_idx_name)
-{
-	community_fpdev *cfpdev = dev->dev_priv;
-	unsigned char *plaintext = NULL;
-	unsigned char *ciphertext = NULL;
-	char *chara_data = NULL;
-	size_t len;
-	int r = 0;
+	// 私有结构体
+	driver_info *priv = (driver_info *)dev->dev_priv;
 
-	if (dev->enable == FALSE) {
-		bio_set_dev_status(dev, DEVS_COMM_DISABLE);
-		return -1;
+	priv->asyn_flag = ASYN_FALG_RUNNING;
+
+	if (dev->enable == false) {
+		bio_set_dev_status (dev, DEVS_COMM_DISABLE);                   //设备状态设置为：设备被禁用
+		bio_set_ops_result (dev, OPS_COMM_ERROR);                      //操作结果设置为：通用操作错误
+		bio_set_notify_abs_mid (dev, NOTIFY_COMM_DISABLE);             //提示消息设置为：设备不可用
 	}
 
-	if (action == ACTION_START)
-	{
-		bio_set_dev_status(dev, DEVS_ENROLL_DOING);
-
-		// Enroll fingerprint information and get the characteristic array
-		bio_set_notify_abs_mid(dev, COMMUNITY_SAMPLE_START);
-		bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-
-		r = community_internal_enroll(dev);
-		if (r < 0 || cfpdev->enrolled_print == NULL)
-		{
-			switch (r)
-			{
-			case DOR_STOP_BY_USER:
-				bio_set_ops_result(dev, OPS_COMM_STOP_BY_USER);
-				bio_set_notify_mid(dev, NOTIFY_COMM_STOP_BY_USER);
-				break;
-			case DOR_TIMEOUT:
-				bio_set_ops_result(dev, OPS_COMM_TIMEOUT);
-				bio_set_notify_mid(dev, NOTIFY_COMM_TIMEOUT);
-				break;
-			case DOR_FAIL:
-			default:
-				bio_set_ops_result(dev, OPS_COMM_FAIL);
-				snprintf(cfpdev->extra_info, EXTRA_INFO_LENGTH,
-								 _("Unknown error, error code: %d"), r);
-				bio_set_notify_abs_mid(dev, COMMUNITY_ENROLL_EXTRA);
-				bio_print_warning("%s\n", bio_get_notify_mid_mesg(dev));
-				break;
+	// 异步关闭
+	fp_device_close (priv->device, NULL, (GAsyncReadyCallback)on_device_closed, dev);
+	while (1) {
+		usleep (100);
+		if (priv->asyn_flag == ASYN_FLAG_DONE) {
+			break;
+		} else {
+			if (priv->timeused > priv->timeoutMS) {
+				// 取消libfprint库异步操作
+				g_cancellable_cancel (priv->cancellable);
+				// 判断取消是否成功
+				if (g_cancellable_is_cancelled (priv->cancellable)) {
+					while (1) {
+						usleep (100);
+						if(priv->asyn_flag == ASYN_FLAG_DONE) {
+							bio_set_ops_abs_result (dev, OPS_CLOSE_FAIL);          // 设置操作结果：关闭设备失败
+							bio_set_notify_abs_mid (dev, NOTIFY_CLOSE_FAIL);       // 用户提醒消息：关闭设备失败
+							bio_set_dev_status (dev, DEVS_COMM_IDLE);              // 设备状态：空闲状态
+							return;
+						}
+					}
+				}
 			}
-			bio_set_dev_status(dev, DEVS_COMM_IDLE);
-
-			return -1;
+			priv->timeused += EM1600DEV_FINGER_CHECK_INTERVAL_MS;
+			usleep (EM1600DEV_FINGER_CHECK_INTERVAL_MS * 1000);
 		}
+	}
 
-		len = fp_print_data_get_data(cfpdev->enrolled_print, &plaintext);
-		fp_print_data_free(cfpdev->enrolled_print);
-		cfpdev->enrolled_print = NULL;
+	priv->ctrlFlag = CONTROL_FLAG_IDLE;
 
-		// Encrypted characteristic data
-		ciphertext = malloc(len);
-		memset(ciphertext, 0, len);
-		community_internal_aes_encrypt(plaintext, len, cfpdev->aes_key, ciphertext);
+	bio_print_debug ("bio_drv_demo_ops_close end\n");
 
-		// The characteristic array is converted to a string, using base64 encoding
-		chara_data = malloc(len * 2);
-		memset(chara_data, 0, len * 2);
-		bio_base64_encode(ciphertext, chara_data, len);
+	return;
+}
 
-		// Generate the info list corresponding to the feature
-		feature_info * info;
-		info = bio_sto_new_feature_info(uid, dev->bioinfo.biotype,
-												dev->device_name, idx,
-												bio_idx_name);
-		info->sample = bio_sto_new_feature_sample(-1, NULL);
-		info->sample->no = 1;
-		info->sample->data = bio_sto_new_str(chara_data);
+/*
+ * 特征捕获函数，用来捕获生物特征信息
+*/
+char *community_ops_capture(bio_dev *dev, OpsActions action)
+{
+	bio_print_debug ("bio_drv_demo_ops_capture start\n");
 
-		print_feature_info(info);
+	capture_data *captureData = malloc(sizeof(capture_data));
+	captureData->dev = dev;
+	captureData->feature_data = NULL;
+	captureData->feature_encode = NULL;
 
-		// Store the feature information in the database
-		sqlite3 *db = bio_sto_connect_db();
-		bio_sto_set_feature_info(db, info);
-		bio_sto_disconnect_db(db);
+	//设备驱动不启用
+	if (dev->enable == false) {
+		bio_set_dev_status (dev, DEVS_COMM_DISABLE);              //设备状态设置为：设备被禁用
+		bio_set_ops_result (dev, OPS_COMM_ERROR);                 //操作结果设置为：通用操作错误
+		bio_set_notify_abs_mid (dev, NOTIFY_COMM_DISABLE);        //提示消息设置为：设备不可用
+		return NULL;
+	}
 
-		// Release resources
-		bio_sto_free_feature_info_list(info);
-		free(ciphertext);
-		free(chara_data);
-		free(plaintext);
+	bio_set_dev_status (dev, DEVS_CAPTURE_DOING);                 //设备状态设置为：正在捕获信息
 
-		bio_set_notify_mid(dev, NOTIFY_COMM_SUCCESS);
-		bio_set_ops_result(dev, OPS_COMM_SUCCESS);
-		bio_set_dev_status(dev, DEVS_COMM_IDLE);
+	if (dev->bioinfo.eigtype == EigT_Data) {        // 原始数据
 
-		return 0;
+		captureData->feature_data = finger_capture (captureData);
+		if (captureData->feature_data == NULL)
+			return NULL;
+
+		bio_set_dev_status (dev, DEVS_COMM_IDLE);                    //当前状态设置为：空闲状态
+		bio_set_ops_result (dev, OPS_CAPTURE_SUCCESS);               //操作结果设置为：捕获成功
+		bio_set_notify_abs_mid (dev, NOTIFY_CAPTURE_SUCCESS);        //提示消息设置为：捕获成功
+
+		bio_print_debug ("bio_drv_demo_ops_capture end 1\n");
+			return captureData->feature_data;
+
+	} else if (dev->bioinfo.eigtype == EigT_Eigenvalue || dev->bioinfo.eigtype == EigT_Eigenvector) {   //特征值或者特征向量非纯字符串
+
+		captureData->feature_data = finger_capture(captureData);
+		if (captureData->feature_data == NULL)
+			return NULL;
+
+		// 64编码
+		bio_base64_encode ((guchar *)captureData->feature_data, captureData->feature_encode, (sizeof(captureData->feature_encode)));
+
+		bio_set_dev_status (dev, DEVS_COMM_IDLE);                      //当前状态设置为：空闲状态
+		bio_set_ops_result (dev, OPS_CAPTURE_SUCCESS);                 //操作结果设置为：捕获成功
+		bio_set_notify_abs_mid (dev, NOTIFY_CAPTURE_SUCCESS);          //提示消息设置为：捕获成功
+
+		bio_print_debug ("bio_drv_demo_ops_capture end 2\n");
+			return captureData->feature_encode;
+
 	} else {
-		bio_set_notify_mid(dev, NOTIFY_COMM_STOP_BY_USER);
-		bio_set_ops_result(dev, OPS_COMM_STOP_BY_USER);
-		bio_set_dev_status(dev, DEVS_COMM_IDLE);
+		bio_set_dev_status (dev, DEVS_COMM_IDLE);                      //当前状态设置为：空闲状态
+		bio_set_ops_result (dev, OPS_CAPTURE_FAIL);                    //操作结果设置为：捕获失败
+		bio_set_notify_abs_mid (dev, NOTIFY_CAPTURE_FAIL);             //提示消息设置为：捕获失败
 
-		return -1;
+		bio_print_debug ("bio_drv_demo_ops_capture end 3\n");
+		return NULL;
 	}
 }
 
+/*
+ * 特征录入函数,用来录入用户的生物特征信息
+*/
+int community_ops_enroll(bio_dev *dev, OpsActions action, int uid, int idx, char *bio_idx_name)
+{
+	bio_print_debug ("bio_drv_demo_ops_enroll start\n");
+	// 用于获取可用索引
+	if (idx == -1)
+		idx = bio_common_get_empty_index (dev, uid, 0, -1);
+
+	//设备驱动不启用
+	if (dev->enable == false) {
+		bio_set_dev_status (dev, DEVS_COMM_DISABLE);                           //设备状态设置为：设备被禁用
+		bio_set_ops_result (dev, OPS_COMM_ERROR);                              //操作结果设置为：通用操作错误
+		bio_set_notify_abs_mid (dev, NOTIFY_COMM_DISABLE);                     //提示消息设置为：设备不可用
+		return -1;
+	}
+
+	bio_set_dev_status (dev, DEVS_ENROLL_DOING);                           //设备状态设置为：正在录入
+
+	driver_info *priv = (driver_info *)dev->dev_priv;
+	FpPrint *print_template = NULL;
+	g_autoptr(GError) error = NULL;
+
+	enroll_data *enrollData ;
+	enrollData = (enroll_data *)malloc(sizeof(enroll_data));
+	enrollData->dev = dev;
+	enrollData->uid = uid;
+	enrollData->idx = idx;
+	enrollData->bio_idx_name = bio_idx_name;
+
+	priv->asyn_flag = ASYN_FALG_RUNNING;
+	priv->timeused = 0;
+
+	// 生成指纹模板
+	print_template = print_create_template (priv->device, 1, dev);
+
+	snprintf (priv->extra_info, EXTRA_INFO_LENGTH, "enroll start ! Please press your finger.\n");
+	bio_set_notify_abs_mid (dev, MID_EXTENDED_MESSAGE);
+	bio_print_debug ("%s\n", bio_get_notify_mid_mesg(dev));
+
+	// 启动异步操作以进行打印
+	fp_device_enroll (priv->device, print_template, priv->cancellable, on_enroll_progress, enrollData,
+			NULL, (GAsyncReadyCallback)on_enroll_completed,
+			enrollData);
+	while (1) {
+		usleep (100);
+		// 异步结束
+		if (priv->asyn_flag == ASYN_FLAG_DONE){
+			break;
+		} else {
+			if (priv->timeused > priv->timeoutMS) {
+				// 取消libfprint库异步操作
+				g_cancellable_cancel (priv->cancellable);
+				// 判断取消是否成功
+				if (g_cancellable_is_cancelled (priv->cancellable)) {
+					while (1) {
+						usleep (100);
+						if(priv->asyn_flag == ASYN_FLAG_DONE) {
+							bio_set_ops_abs_result (enrollData->dev, OPS_ENROLL_TIMEOUT);          // 设置操作结果：录入超时
+							bio_set_notify_abs_mid (enrollData->dev, NOTIFY_ENROLL_TIMEOUT);       // 用户提醒消息：录入超时
+							bio_set_dev_status (enrollData->dev, DEVS_COMM_IDLE);                  // 设备状态：空闲状态
+							return -1;
+						}
+					}
+				}
+			}
+			priv->timeused += EM1600DEV_FINGER_CHECK_INTERVAL_MS;
+			usleep (EM1600DEV_FINGER_CHECK_INTERVAL_MS * 1000);
+		}
+		// 状态被中断
+		if (priv->ctrlFlag == CONTROL_FLAG_STOPING) {
+			bio_set_ops_result (enrollData->dev, OPS_COMM_STOP_BY_USER);
+			bio_set_notify_mid (enrollData->dev, NOTIFY_COMM_STOP_BY_USER);
+			bio_set_dev_status (enrollData->dev, DEVS_COMM_IDLE);
+			priv->ctrlFlag = CONTROL_FLAG_STOPPED;
+			// 取消libfprint库异步操作
+			g_cancellable_cancel (priv->cancellable);
+			// 判断取消是否成功
+			if (g_cancellable_is_cancelled (priv->cancellable)) {
+				while (1) {
+					usleep (100);
+					if (priv->asyn_flag == ASYN_FLAG_DONE)
+						return -1;
+				}
+			}
+		}
+	}
+	bio_print_debug ("bio_drv_demo_ops_enroll end\n");
+	return 0;
+}
+
+
+/*
+ * 特征验证函数,使用当前生物特征与指定特征对比,判断是否是同一个特征
+*/
 int community_ops_verify(bio_dev *dev, OpsActions action, int uid, int idx)
 {
-	struct fp_print_data **fp_data_list;
+	bio_print_debug ("bio_drv_demo_ops_verify start\n");
 
-	int i = 0;
-	int index = -1;
-	int found_uid = -1;
-
-	if (dev->enable == FALSE) {
+	if (dev->enable == FALSE) {       // 设备不可用
 		bio_set_dev_status(dev, DEVS_COMM_DISABLE);
 		return -1;
 	}
 
-	if (action == ACTION_START)
-	{
-		bio_set_dev_status(dev, DEVS_VERIFY_DOING);
+	bio_set_dev_status (dev, DEVS_VERIFY_DOING);         // 设备状态：正在验证
 
-		// Get the feature list from the database
-		sqlite3 *db = bio_sto_connect_db();
-		feature_info *info_list = NULL;
-		feature_info *l = NULL;
-		info_list = bio_sto_get_feature_info(db, uid, dev->bioinfo.biotype,
-											 dev->device_name, idx,
-											 idx);
-		bio_sto_disconnect_db(db);
-		print_feature_info(info_list);
+	driver_info *priv = (driver_info *)dev->dev_priv;
+	feature_info *info_list = NULL;
+	FpPrint *verify_print = NULL;
+	const guchar *stored_data = NULL;
+	guchar *template_data = NULL;
+	guchar *feature_data = NULL;
+	gsize stored_len;
+	g_autoptr(GError) error = NULL;
 
-		// Create a community fingerprint data list
-		fp_data_list = community_internal_create_fp_data(dev, info_list);
+	priv->asyn_flag = ASYN_FALG_RUNNING;
+	priv->timeused = 0;
 
-		// Identify the fingerprint using the given fingerprint list
-		bio_set_notify_abs_mid(dev, COMMUNITY_SAMPLE_START);
-		bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
+	// 连接数据库
+	sqlite3 *db = bio_sto_connect_db ();
+	// 从数据库中获取特征列表
+	info_list = bio_sto_get_feature_info (db, uid, dev->bioinfo.biotype, dev->device_name, idx, idx);
+	// 打印特征列表
+	print_feature_info (info_list);
+	// 断开数据库
+	bio_sto_disconnect_db (db);
 
-		index = community_internal_identify(dev, fp_data_list);
-		community_internal_free_fp_data(fp_data_list);
-		if (index < 0)
-		{
-			switch (index)
-			{
-			case DOR_STOP_BY_USER:
-				bio_set_ops_abs_result(dev, OPS_VERIFY_STOP_BY_USER);
-				bio_set_notify_abs_mid(dev, NOTIFY_VERIFY_STOP_BY_USER);
-				break;
-			case DOR_TIMEOUT:
-				bio_set_ops_abs_result(dev, OPS_VERIFY_TIMEOUT);
-				bio_set_notify_abs_mid(dev, NOTIFY_VERIFY_TIMEOUT);
-				break;
-			case DOR_NO_MATCH:
-				bio_set_ops_abs_result(dev, OPS_VERIFY_NO_MATCH);
-				bio_set_notify_abs_mid(dev, NOTIFY_VERIFY_NO_MATCH);
-				break;
-			}
-			bio_set_dev_status(dev, DEVS_COMM_IDLE);
+	feature_sample *sample = info_list->sample;
+	template_data = buf_alloc (sample->no);
+	feature_data = buf_alloc (sample->no);
+	stored_data = buf_alloc (sample->no);
+	stored_len = sample->no;
 
-			return -1;
-		}
+	// base64解码
+	bio_base64_decode (sample->data, feature_data);
+	// 解密
+	community_internal_aes_decrypt (feature_data, sample->no, priv->aes_key, template_data);
 
-		l = info_list;
-		for (i = 0; i < index; i++)
-			if (l->next != NULL)
-				l = l->next;
+	stored_data = (const guchar *)template_data;
 
-		bio_sto_free_feature_info_list(l->next);
-		l->next = NULL;
-		bio_print_debug(_("Find the following feature matching:\n"));
-		print_feature_info(l);
-		bio_sto_free_feature_info_list(info_list);
-
-		bio_set_ops_abs_result(dev, OPS_VERIFY_MATCH);
-		bio_set_notify_abs_mid(dev, NOTIFY_VERIFY_MATCH);
-
-		bio_set_dev_status(dev, DEVS_COMM_IDLE);
-		return found_uid;
-	} else {
-		bio_set_dev_status(dev, DEVS_COMM_IDLE);
-		bio_set_ops_abs_result(dev, OPS_VERIFY_STOP_BY_USER);
-		bio_set_notify_abs_mid(dev, NOTIFY_VERIFY_STOP_BY_USER);
+	// 将数据库中的值反序列化
+	verify_print = fp_print_deserialize (stored_data, stored_len, &error);
+	if (error) {
+		g_warning ("Error deserializing data: %s", error->message);
 		return -1;
 	}
-}
+	// 回收资源
+	free (template_data);
+	// 回收特征数据项
+	bio_sto_free_feature_info_list (info_list);
 
-int community_ops_identify(bio_dev *dev, OpsActions action, int uid,
-					int idx_start, int idx_end)
-{
-	struct fp_print_data **fp_data_list;
+	snprintf (priv->extra_info, EXTRA_INFO_LENGTH, "verify start ! Please press your finger.\n");
+	bio_set_notify_abs_mid (dev, MID_EXTENDED_MESSAGE);
+	bio_print_debug ("%s\n", bio_get_notify_mid_mesg(dev));
 
-	int i = 0;
-	int index = -1;
-	int found_uid = -1;
-
-	if (dev->enable == FALSE) {
-		bio_set_dev_status(dev, DEVS_COMM_DISABLE);
-		return -1;
-	}
-
-	if (action == ACTION_START)
-	{
-		bio_set_dev_status(dev, DEVS_IDENTIFY_DOING);
-
-		// Get the feature list from the database
-		sqlite3 *db = bio_sto_connect_db();
-		feature_info *info_list = NULL;
-		feature_info *l = NULL;
-		info_list = bio_sto_get_feature_info(db, uid, dev->bioinfo.biotype,
-											 dev->device_name, idx_start,
-											 idx_end);
-		bio_sto_disconnect_db(db);
-		print_feature_info(info_list);
-
-		// Create a community fingerprint data list
-		fp_data_list = community_internal_create_fp_data(dev, info_list);
-
-		// Identify the fingerprint using the given fingerprint list
-		bio_set_notify_abs_mid(dev, COMMUNITY_SAMPLE_START);
-		bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-
-		index = community_internal_identify(dev, fp_data_list);
-		community_internal_free_fp_data(fp_data_list);
-		if (index < 0)
-		{
-			switch (index)
-			{
-			case DOR_STOP_BY_USER:
-				bio_set_ops_abs_result(dev, OPS_IDENTIFY_STOP_BY_USER);
-				bio_set_notify_abs_mid(dev, NOTIFY_IDENTIFY_STOP_BY_USER);
-				break;
-			case DOR_TIMEOUT:
-				bio_set_ops_abs_result(dev, OPS_IDENTIFY_TIMEOUT);
-				bio_set_notify_abs_mid(dev, NOTIFY_IDENTIFY_TIMEOUT);
-				break;
-			case DOR_NO_MATCH:
-				bio_set_ops_abs_result(dev, OPS_IDENTIFY_NO_MATCH);
-				bio_set_notify_abs_mid(dev, NOTIFY_IDENTIFY_NO_MATCH);
-				break;
-			}
-			bio_set_dev_status(dev, DEVS_COMM_IDLE);
-
-			return -1;
-		}
-
-		l = info_list;
-		for (i = 0; i < index; i++)
-			if (l->next != NULL)
-				l = l->next;
-
-		bio_sto_free_feature_info_list(l->next);
-		l->next = NULL;
-		bio_print_debug(_("Find the following feature matching:\n"));
-		print_feature_info(l);
-		found_uid = l->uid;
-		bio_sto_free_feature_info_list(info_list);
-
-		bio_set_ops_abs_result(dev, OPS_IDENTIFY_MATCH);
-		bio_set_notify_abs_mid(dev, NOTIFY_IDENTIFY_MATCH);
-
-		bio_set_dev_status(dev, DEVS_COMM_IDLE);
-		return found_uid;
-	} else {
-		bio_set_dev_status(dev, DEVS_COMM_IDLE);
-		bio_set_ops_abs_result(dev, OPS_IDENTIFY_STOP_BY_USER);
-		bio_set_notify_abs_mid(dev, NOTIFY_IDENTIFY_STOP_BY_USER);
-		return -1;
-	}
-}
-
-feature_info * community_ops_search(bio_dev *dev, OpsActions action, int uid,
-				  int idx_start, int idx_end)
-{
-	community_fpdev *cfpdev = dev->dev_priv;
-	struct fp_print_data **fp_data_list;
-	feature_info * found = NULL;
-	feature_info * new_fi = NULL;
-	feature_sample * sample = NULL;
-
-	int i = 0;
-	int index = -1;
-	int offset = 0;
-	int found_num = 0;
-
-	if (dev->enable == FALSE) {
-		bio_set_dev_status(dev, DEVS_COMM_DISABLE);
-		return NULL;
-	}
-
-	if (action == ACTION_START)
-	{
-		bio_set_dev_status(dev, DEVS_SEARCH_DOING);
-
-		// Get the feature list from the database
-		sqlite3 *db = bio_sto_connect_db();
-		feature_info *info_list = NULL;
-		feature_info *l = NULL;
-		info_list = bio_sto_get_feature_info(db, uid, dev->bioinfo.biotype,
-											 dev->device_name, idx_start,
-											 idx_end);
-		bio_sto_disconnect_db(db);
-		print_feature_info(info_list);
-
-		// Create a community fingerprint data list
-		fp_data_list = community_internal_create_fp_data(dev, info_list);
-
-		// Identify the fingerprint using the given fingerprint list
-		bio_set_notify_abs_mid(dev, COMMUNITY_SAMPLE_START);
-		bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-
-		offset = 0;
-		found_num = 0;
-		do {
-			index = community_internal_identify(dev, &(fp_data_list[offset]));
-			if (index >= 0)
-			{
-				l = info_list;
-				sample = l->sample;
-				for (i = 0; i < index + offset; i++)
-				{
-					if (sample->next != NULL)
-						sample = sample->next;
-					else
-						if (l->next != NULL)
-						{
-							l = l->next;
-							sample = l->sample;
-						}
-				}
-
-				new_fi = bio_sto_new_feature_info(l->uid, l->biotype, l->driver,
-												 l->index, l->index_name);
-				new_fi->sample = bio_sto_new_feature_sample(sample->no, sample->data);
-				new_fi->next = NULL;
-				new_fi->sample->next = NULL;
-
-				bio_print_debug(_("Search from offset %d, index %d has been "
-								  "searched, global index %d(%d + %d)\n"),
-								offset, index, index + offset, offset, index);
-				found_num++;
-				snprintf(cfpdev->extra_info, EXTRA_INFO_LENGTH,
-						 _("The %d feature has been searched(UID = %d, Index = "
-						   "%d, Index Name = %s), please press your finger "
-						   "to continue the search"),
-						 found_num, new_fi->uid, new_fi->index,
-						 new_fi->index_name);
-				bio_set_notify_abs_mid(dev, COMMUNITY_ENROLL_EXTRA);
-				bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-
-				if (found == NULL)
-					found = new_fi;
-				else
-				{
-					l = found;
-					while (l->next != NULL)
-						l = l->next;
-					l->next = new_fi;
-				}
-
-				offset += index + 1;
-			}
-		} while (index >= 0 && fp_data_list[offset] != NULL);
-		community_internal_free_fp_data(fp_data_list);
-
-		if (found == NULL)
-		{
-			switch (index)
-			{
-			case DOR_STOP_BY_USER:
-				bio_set_ops_abs_result(dev, OPS_SEARCH_STOP_BY_USER);
-				bio_set_notify_abs_mid(dev, NOTIFY_SEARCH_STOP_BY_USER);
-				break;
-			case DOR_TIMEOUT:
-				bio_set_ops_abs_result(dev, OPS_SEARCH_TIMEOUT);
-				bio_set_notify_abs_mid(dev, NOTIFY_SEARCH_TIMEOUT);
-				break;
-			case DOR_NO_MATCH:
-				bio_set_ops_abs_result(dev, OPS_SEARCH_NO_MATCH);
-				bio_set_notify_abs_mid(dev, NOTIFY_SEARCH_NO_MATCH);
-				break;
-			}
-			bio_set_dev_status(dev, DEVS_COMM_IDLE);
-
-			return NULL;
-		}
-
-		bio_sto_free_feature_info_list(info_list);
-		bio_print_debug(_("Find the following feature matching:\n"));
-		print_feature_info(found);
-
-		bio_set_ops_abs_result(dev, OPS_SEARCH_MATCH);
-		bio_set_notify_abs_mid(dev, NOTIFY_SEARCH_MATCH);
-
-		bio_set_dev_status(dev, DEVS_COMM_IDLE);
-
-		return found;
-	}
-	else
-	{
-		bio_set_dev_status(dev, DEVS_COMM_IDLE);
-		bio_set_ops_abs_result(dev, OPS_SEARCH_STOP_BY_USER);
-		bio_set_notify_abs_mid(dev, NOTIFY_SEARCH_STOP_BY_USER);
-		return NULL;
-	}
-}
-
-int community_ops_clean(bio_dev *dev, OpsActions action, int uid,
-				 int idx_start, int idx_end)
-{
-	if (dev->enable == FALSE) {
-		bio_set_dev_status(dev, DEVS_COMM_DISABLE);
-		return 0;
-	}
-
-	if (action == ACTION_START) {
-		bio_set_dev_status(dev, DEVS_CLEAN_DOING);
-
-		sqlite3 * db;
-		db = bio_sto_connect_db();
-		int ret = 0;
-		ret = bio_sto_clean_feature_info(db, uid, dev->bioinfo.biotype,
-												 dev->device_name, idx_start,
-												 idx_end);
-		bio_sto_disconnect_db(db);
-		if (ret == 0) {
-			bio_set_ops_abs_result(dev, OPS_CLEAN_SUCCESS);
-			bio_set_notify_abs_mid(dev, NOTIFY_CLEAN_SUCCESS);
+	// 异步验证
+	fp_device_verify (priv->device, verify_print, priv->cancellable,
+			on_match_cb_verify, dev, NULL,
+			(GAsyncReadyCallback) on_verify_completed,
+			dev);
+	while (1) {
+		usleep (100);
+		// 异步结束
+		if (priv->asyn_flag == ASYN_FLAG_DONE) {
+			break;
 		} else {
-			bio_set_ops_result(dev, OPS_CLEAN_FAIL);
-			bio_set_notify_abs_mid(dev, NOTIFY_CLEAN_FAIL);
+			if(priv->timeused > priv->timeoutMS) {
+				// 取消libfprint库异步操作
+				g_cancellable_cancel (priv->cancellable);
+				// 判断取消是否成功
+				if (g_cancellable_is_cancelled (priv->cancellable)) {
+					while (1) {
+						usleep (100);
+						if(priv->asyn_flag == ASYN_FLAG_DONE) {
+							bio_set_ops_abs_result (dev, OPS_VERIFY_TIMEOUT);          // 设置操作结果：验证超时
+							bio_set_notify_abs_mid (dev, NOTIFY_VERIFY_TIMEOUT);       // 用户提醒消息：验证超时
+							bio_set_dev_status (dev, DEVS_COMM_IDLE);                  // 设备状态：空闲状态
+							return -1;
+						}
+					}
+				}
+			}
+			priv->timeused += EM1600DEV_FINGER_CHECK_INTERVAL_MS;
+			usleep (EM1600DEV_FINGER_CHECK_INTERVAL_MS * 1000);
 		}
-
-		bio_set_dev_status(dev, DEVS_COMM_IDLE);
-		return ret;
-	} else {
-		bio_set_dev_status(dev, DEVS_COMM_IDLE);
-		bio_set_ops_abs_result(dev, OPS_CLEAN_STOP_BY_USER);
-		bio_set_notify_abs_mid(dev, NOTIFY_CLEAN_STOP_BY_USER);
-		return 0;
+		// 状态被中断
+		if (priv->ctrlFlag == CONTROL_FLAG_STOPING) {
+			bio_set_ops_result (dev, OPS_COMM_STOP_BY_USER);
+			bio_set_notify_mid (dev, NOTIFY_COMM_STOP_BY_USER);
+			bio_set_dev_status (dev, DEVS_COMM_IDLE);
+			priv->ctrlFlag = CONTROL_FLAG_STOPPED;
+			// 取消libfprint库异步操作
+			g_cancellable_cancel (priv->cancellable);
+			// 判断取消是否成功
+			if (g_cancellable_is_cancelled (priv->cancellable)) {
+				while (1) {
+					usleep (100);
+					if (priv->asyn_flag == ASYN_FLAG_DONE)
+						return -1;
+				}
+			}
+		}
 	}
+
+	bio_set_dev_status (dev, DEVS_COMM_IDLE);
+
+	bio_print_debug ("bio_drv_demo_ops_verify end\n");
+	return 0;
 }
 
-feature_info * community_ops_get_feature_list(bio_dev *dev, OpsActions action,
-									   int uid, int idx_start, int idx_end)
+/*
+ * 特征识别函数,使用当前生物特征与指定范围的特征比对,识别出当前特征与指定范围内的哪个特征匹配
+*/
+int community_ops_identify(bio_dev *dev, OpsActions action, int uid, int idx_start, int idx_end)
 {
+	bio_print_debug ("bio_drv_demo_ops_identify start\n");
+
+	GPtrArray *prints = NULL;
+	identify_data *identifyData = malloc(sizeof(identify_data));
+	identifyData->dev = dev;
+	identifyData->uid = uid;
+	identifyData->idx_start = idx_start;
+	identifyData->idx_end = idx_end;
+
+	// 设备不可用
+	if (dev->enable == FALSE) {
+		bio_set_dev_status(dev, DEVS_COMM_DISABLE);
+		return -1;
+	}
+
+	bio_set_dev_status (dev, OPS_TYPE_IDENTIFY);                    // 设备状态设置为：正在识别指定特征
+
+	// 验证特征操作放在此处
+	driver_info *priv = (driver_info *)dev->dev_priv;
+	// 异步控制标志
+	priv->asyn_flag = ASYN_FALG_RUNNING;
+	priv->timeused = 0;
+
+	// 创建指纹集
+	prints = create_prints(dev, uid, idx_start, idx_end);
+
+	snprintf (priv->extra_info, EXTRA_INFO_LENGTH, "identify start ! Please press your finger.\n");
+	bio_set_notify_abs_mid (dev, MID_EXTENDED_MESSAGE);
+	bio_print_debug ("%s\n", bio_get_notify_mid_mesg(dev));
+
+	// 异步识别
+	fp_device_identify (priv->device, prints, priv->cancellable, on_match_cb_identify, identifyData, NULL, (GAsyncReadyCallback)on_device_identify, dev);
+	while (1) {
+		usleep (100);
+		// 异步结束
+		if (priv->asyn_flag == ASYN_FLAG_DONE) {
+			break;
+		} else {
+			if (priv->timeused > priv->timeoutMS) {
+				// 取消libfprint库异步操作
+				g_cancellable_cancel (priv->cancellable);
+				// 判断取消是否成功
+				if (g_cancellable_is_cancelled (priv->cancellable)) {
+					while (1) {
+						usleep (100);
+						if(priv->asyn_flag == ASYN_FLAG_DONE) {
+							bio_set_ops_abs_result (identifyData->dev, OPS_IDENTIFY_TIMEOUT);          // 设置操作结果：识别超时
+							bio_set_notify_abs_mid (identifyData->dev, NOTIFY_IDENTIFY_TIMEOUT);       // 用户提醒消息：识别超时
+							bio_set_dev_status (identifyData->dev, DEVS_COMM_IDLE);                    // 设备状态：空闲状态
+							return -1;
+						}
+					}
+				}
+			}
+			priv->timeused += EM1600DEV_FINGER_CHECK_INTERVAL_MS;
+			usleep (EM1600DEV_FINGER_CHECK_INTERVAL_MS * 1000);
+		}
+		// 状态被中断
+		if (priv->ctrlFlag == CONTROL_FLAG_STOPING) {
+			bio_set_ops_result (identifyData->dev, OPS_COMM_STOP_BY_USER);
+			bio_set_notify_mid (identifyData->dev, NOTIFY_COMM_STOP_BY_USER);
+			bio_set_dev_status (identifyData->dev, DEVS_COMM_IDLE);
+			priv->ctrlFlag = CONTROL_FLAG_STOPPED;
+			// 取消libfprint库异步操作
+			g_cancellable_cancel (priv->cancellable);
+			// 判断取消是否成功
+			if (g_cancellable_is_cancelled (priv->cancellable)) {
+				while (1) {
+					usleep (100);
+					if (priv->asyn_flag == ASYN_FLAG_DONE)
+						return -1;
+				}
+			}
+		}
+	}
+
+	bio_set_dev_status (dev, DEVS_COMM_IDLE);
+
+	bio_print_debug ("bio_drv_demo_ops_identify end\n");
+
+	return identifyData->uid;
+}
+
+/*
+ * 特征搜索函数,使用当前生物特征与指定范围的特征比对,搜索出指定范围内所有匹配的特征
+*/
+feature_info *community_ops_search(bio_dev *dev, OpsActions action, int uid, int idx_start, int idx_end)
+{
+	bio_print_debug ("bio_drv_demo_ops_search start\n");
+
+	GPtrArray *prints = NULL;
+	search_data *searchData = malloc(sizeof(search_data));
+	searchData->dev = dev;
+	searchData->uid = uid;
+	searchData->idx_start = idx_start;
+	searchData->idx_end = idx_end;
+	searchData->index = 0;
+	searchData->found = NULL;
+	searchData->found_head.next = NULL;      // found_head的下一个特征信息指向空
+	searchData->found = &(searchData->found_head);         // found指针指向found_head
+
+	// 设备不可用
 	if (dev->enable == FALSE) {
 		bio_set_dev_status(dev, DEVS_COMM_DISABLE);
 		return NULL;
 	}
 
-	if (action == ACTION_START) {
-		feature_info * finfo_list = NULL;
-		sqlite3 *db = bio_sto_connect_db();
+	bio_set_dev_status (dev, OPS_TYPE_SEARCH);            // 设备状态设置为：正在搜索指定特征
 
-		bio_set_dev_status(dev, DEVS_GET_FLIST_DOING);
+	// 验证特征操作放在此处
+	driver_info *priv = (driver_info *)dev->dev_priv;
 
-		finfo_list = bio_sto_get_feature_info(db, uid, dev->bioinfo.biotype,
-													 dev->device_name, idx_start,
-													 idx_end);
-		print_feature_info(finfo_list);
-		bio_sto_disconnect_db(db);
+	snprintf (priv->extra_info, EXTRA_INFO_LENGTH, "search start ! Please press your finger.\n");
+	bio_set_notify_abs_mid (dev, MID_EXTENDED_MESSAGE);
+	bio_print_debug ("%s\n", bio_get_notify_mid_mesg(dev));
 
-		bio_set_dev_status(dev, DEVS_COMM_IDLE);
-		bio_set_ops_abs_result(dev, OPS_GET_FLIST_SUCCESS);
-		bio_set_notify_abs_mid(dev, NOTIFY_GET_FLIST_SUCCESS);
-
-		return finfo_list;
-	} else {
-		bio_set_dev_status(dev, DEVS_COMM_IDLE);
-		bio_set_ops_abs_result(dev, OPS_GET_FLIST_STOP_BY_USER);
-		bio_set_notify_abs_mid(dev, NOTIFY_GET_FLIST_STOP_BY_USER);
-
-		return NULL;
+	while (priv->ctrlFlag != CONTROL_FLAG_DONE) {
+		// 异步控制标志位
+		priv->asyn_flag = ASYN_FALG_RUNNING;
+		priv->timeused = 0;
+		// 创建指纹集
+		prints = create_prints(dev, uid, searchData->index, idx_end);
+		// 异步识别
+		fp_device_identify (priv->device, prints, priv->cancellable, on_match_cb_search, searchData, NULL, (GAsyncReadyCallback)on_device_identify, dev);
+		while (1) {
+			usleep (100);
+			// 异步结束
+			if (priv->asyn_flag == ASYN_FLAG_DONE){
+				break;
+			} else {
+			if (priv->timeused > priv->timeoutMS) {
+				// 取消libfprint库异步操作
+				g_cancellable_cancel (priv->cancellable);
+				// 判断取消是否成功
+				if (g_cancellable_is_cancelled (priv->cancellable)) {
+					while (1) {
+						usleep (100);
+						if (priv->asyn_flag == ASYN_FLAG_DONE) {
+							bio_set_ops_abs_result (dev, OPS_SEARCH_TIMEOUT);          // 设置操作结果：搜索超时
+							bio_set_notify_abs_mid (dev, NOTIFY_SEARCH_TIMEOUT);       // 用户提醒消息：搜索超时
+							bio_set_dev_status (dev, DEVS_COMM_IDLE);                  // 设备状态：空闲状态
+							return NULL;
+						}
+					}
+				}
+			}
+			priv->timeused += EM1600DEV_FINGER_CHECK_INTERVAL_MS;
+			usleep (EM1600DEV_FINGER_CHECK_INTERVAL_MS * 1000);
+			}
+			// 状态被中断
+			if (priv->ctrlFlag == CONTROL_FLAG_STOPING) {
+				bio_set_ops_result(dev, OPS_COMM_STOP_BY_USER);
+				bio_set_notify_mid(dev, NOTIFY_COMM_STOP_BY_USER);
+				bio_set_dev_status(dev, DEVS_COMM_IDLE);
+				priv->ctrlFlag = CONTROL_FLAG_STOPPED;
+				// 取消libfprint库异步操作
+				g_cancellable_cancel (priv->cancellable);
+				// 判断取消是否成功
+				if (g_cancellable_is_cancelled (priv->cancellable)) {
+					while (1) {
+						usleep (100);
+						if (priv->asyn_flag == ASYN_FLAG_DONE)
+							return NULL;
+					}
+				}
+			}
+		}
+		searchData->index = searchData->index + 1;
 	}
+
+	if (searchData->found) {
+		snprintf (priv->extra_info, EXTRA_INFO_LENGTH, "_search fingerprint template successful");
+
+		bio_set_ops_abs_result (searchData->dev, OPS_SEARCH_MATCH);
+		bio_set_notify_abs_mid (searchData->dev, NOTIFY_SEARCH_MATCH);
+		bio_set_notify_abs_mid (searchData->dev, MID_EXTENDED_MESSAGE);
+
+		bio_print_info("%s\n", bio_get_notify_mid_mesg(searchData->dev));
+	} else {
+		snprintf (priv->extra_info, EXTRA_INFO_LENGTH, "_search fingerprint template fail");
+
+		bio_set_ops_abs_result (searchData->dev, OPS_SEARCH_NO_MATCH);
+		bio_set_notify_abs_mid (searchData->dev, NOTIFY_SEARCH_NO_MATCH);
+		bio_set_notify_abs_mid (searchData->dev, MID_EXTENDED_MESSAGE);
+
+		bio_print_info ("%s\n", bio_get_notify_mid_mesg(searchData->dev));
+	}
+
+	bio_set_dev_status (dev, DEVS_COMM_IDLE);
+
+	bio_print_debug ("bio_drv_demo_ops_search end\n");
+
+	return searchData->found;
 }
 
-// Framework auxiliary function
+
+/*
+ * 特征清理(删除)函数,删除指定范围内的所有特征
+*/
+int community_ops_clean(bio_dev *dev, OpsActions action, int uid, int idx_start, int idx_end)
+{
+	bio_print_debug ("bio_drv_demo_ops_clean start\n");
+
+	if (dev->enable == FALSE) {       // 设备不可用
+		bio_set_dev_status(dev, DEVS_COMM_DISABLE);
+		return 0;
+	}
+
+	bio_set_dev_status (dev, DEVS_CLEAN_DOING);       // 设备状态设置为：正在清理特征数据
+
+	sqlite3 *db;
+	int ret = 0;
+	// 连接数据库
+	db = bio_sto_connect_db ();
+	// 从数据库中删除特征
+	ret = bio_sto_clean_feature_info (db, uid, dev->bioinfo.biotype,
+					dev->device_name, idx_start,
+					idx_end);
+	// 断开数据库
+	bio_sto_disconnect_db (db);
+
+	if (ret == 0) {
+		bio_set_ops_abs_result (dev, OPS_CLEAN_SUCCESS);              // 操作结果设置为：清理特征成功
+		bio_set_notify_abs_mid (dev, NOTIFY_CLEAN_SUCCESS);           // 用户提示设置为：清理特征成功
+	} else {
+		bio_set_ops_result (dev, OPS_CLEAN_FAIL);                     // 操作结果设置为：清理特征失败
+		bio_set_notify_abs_mid (dev, NOTIFY_CLEAN_FAIL);              // 用户提示设置为：清理特征失败
+	}
+
+	bio_set_dev_status (dev, DEVS_COMM_IDLE);
+
+	return ret;
+}
+
+/*
+ * 获取指定设备的特征列表
+*/
+feature_info *community_ops_get_feature_list(bio_dev *dev, OpsActions action, int uid, int idx_start, int idx_end)
+{
+	bio_print_debug ("bio_drv_demo_ops_get_feature_list start\n");
+
+	feature_info *found = NULL;
+	driver_info *priv = (driver_info *)dev->dev_priv;
+
+	if (dev->enable == FALSE) {           // 设备不可用
+		bio_set_dev_status(dev, DEVS_COMM_DISABLE);
+		return NULL;
+	}
+
+	bio_set_dev_status (dev, OPS_TYPE_GET_FLIST);                        // 设备状态设置为：正在获取特征列表
+	// 连接数据库
+	sqlite3 *db = bio_sto_connect_db ();
+	// 从数据库中获取特征列表
+	found = bio_sto_get_feature_info (db, uid, dev->bioinfo.biotype,
+					dev->device_name, idx_start,
+					idx_end);
+	// 打印特征列表
+	print_feature_info (found);
+	// 断开数据库
+	bio_sto_disconnect_db (db);
+	// 设置状态
+	snprintf (priv->extra_info, EXTRA_INFO_LENGTH, "_get_feature_list fingerprint template seccessful");
+	bio_set_dev_status (dev, DEVS_COMM_IDLE);
+	bio_set_ops_abs_result (dev, OPS_GET_FLIST_SUCCESS);
+	bio_set_notify_abs_mid (dev, MID_EXTENDED_MESSAGE);
+
+	bio_print_info ("%s\n", bio_get_notify_mid_mesg(dev));
+
+	bio_set_dev_status (dev, DEVS_COMM_IDLE);
+
+	return found;
+}
+
+/*
+ * 中止设备的当前操作
+*/
 int community_ops_stop_by_user(bio_dev *dev, int waiting_ms)
 {
-	community_fpdev *cfpdev = dev->dev_priv;
-	int timeout = bio_get_ops_timeout_ms();
-	int timeused = 0;
-	int dev_status = bio_get_dev_status(dev);
-	int ops_type = dev_status / 100;
+	bio_print_debug ("bio_drv_demo_ops_stop_by_user start\n");
 
-	bio_print_info(_("Device %s[%d] received interrupt request\n"),
-				   dev->device_name, dev->driver_id);
+	bio_print_info (("_Device %s[%d] received interrupt request\n"), dev->device_name, dev->driver_id);
+
+	if (bio_get_dev_status(dev) == DEVS_COMM_IDLE)    // 如果设备为空闲状态
+		return 0;
+
+	driver_info *priv = (driver_info *)dev->dev_priv;
+	int timeout = bio_get_ops_timeout_ms();          // 获取通用超时时间
+	int timeused = 0;
+
+	priv->asyn_flag = ASYN_FALG_RUNNING;
 
 	if (waiting_ms < timeout)
 		timeout = waiting_ms;
 
-	if (bio_get_dev_status(dev) % 100 != DEVS_COMM_IDLE)
+	// 设置状态位，用于通知用户中断
+	priv->ctrlFlag = CONTROL_FLAG_STOPING;
+	snprintf (priv->extra_info, EXTRA_INFO_LENGTH, ("_Device %s[%d] received interrupt request\n"), dev->device_name, dev->driver_id);
+	bio_set_notify_abs_mid (dev, MID_EXTENDED_MESSAGE);
+
+	while ((priv->ctrlFlag != CONTROL_FLAG_STOPPED) &&
+		(priv->ctrlFlag != CONTROL_FLAG_DONE) &&
+		(priv->ctrlFlag != CONTROL_FLAG_IDLE) &&
+		(timeused < timeout))
 	{
-		bio_set_dev_status(dev, ops_type * 100 + DEVS_COMM_STOP_BY_USER);
-
-		cfpdev->ops_result = DOR_STOP_BY_USER;
-		cfpdev->ops_done = true;
+		timeused += EM1600DEV_FINGER_CHECK_INTERVAL_MS;
+		usleep(EM1600DEV_FINGER_CHECK_INTERVAL_MS * 1000);
 	}
 
-	while ((bio_get_dev_status(dev) % 100 != DEVS_COMM_IDLE) &&
-		   (timeused < timeout)){
-		timeused += OPS_DETECTION_INTERVAL_MS;
-		usleep(OPS_DETECTION_INTERVAL_MS * 1000);
-	}
-
-	if (bio_get_dev_status(dev) % 100 == DEVS_COMM_IDLE)
+	if ((priv->ctrlFlag == CONTROL_FLAG_STOPPED)
+	    || (priv->ctrlFlag == CONTROL_FLAG_DONE)
+	    || (priv->ctrlFlag == CONTROL_FLAG_IDLE)) {
 		return 0;
+	}
 
-	// Interrupt failed, restore operation status
-	bio_set_dev_status(dev, dev_status);
 	return -1;
 }
 
-const char * community_ops_get_dev_status_mesg(bio_dev *dev)
+
+/*
+ * 获取设备状态的文本消息
+*/
+const char *community_ops_get_dev_status_mesg(bio_dev *dev)
 {
+	bio_print_debug ("bio_drv_demo_ops_get_dev_status_mesg end\n");
 	return NULL;
 }
 
-const char * community_ops_get_ops_result_mesg(bio_dev *dev)
+/*
+ * 获取操作结果的文本消息
+*/
+const char *community_ops_get_ops_result_mesg(bio_dev *dev)
 {
+	bio_print_debug ("bio_drv_demo_ops_get_ops_result_mesg end\n");
 	return NULL;
 }
 
-const char * community_ops_get_notify_mid_mesg(bio_dev *dev)
+/*
+ * 获取面向用户的提示消息
+*/
+const char *community_ops_get_notify_mid_mesg(bio_dev *dev)
 {
-	community_fpdev *cfpdev = dev->dev_priv;
+	bio_print_debug ("bio_drv_demo_ops_get_notify_mid_mesg start\n");
+
+	driver_info *priv = (driver_info *)dev->dev_priv;
 
 	switch (bio_get_notify_mid(dev))
 	{
-	case COMMUNITY_ENROLL_COMPLETE:
-		return _("Sample complete");
-	case COMMUNITY_ENROLL_FAIL:
-		return _("Enrollment failed due to incomprehensible data. "
-				 "(Please use the same finger at different sampling "
-				 "stages of the same enroll)");
-	case COMMUNITY_COMMON_RETRY:
-		return _("Please place your finger again because of poor "
-				 "quality of the sample or other scanning problems");
-	case COMMUNITY_COMMON_RETRY_TOO_SHORT:
-		return _("Your swipe was too short, please place your "
-				 "finger again.");
-	case COMMUNITY_COMMON_RETRY_CENTER_FINGER:
-		return _("Didn't catch that, please center your finger on the "
-				 "sensor and try again.");
-	case COMMUNITY_COMMON_RETRY_REMOVE_FINGER:
-		return _("Because of the scanning image quality or finger "
-				 "pressure problem, the sampling failed, please remove "
-				 "the finger and retry");
-	case COMMUNITY_ENROLL_EMPTY:
-		return _("Unable to generate feature data, enroll failure");
-	case COMMUNITY_SAMPLE_START:
-		return _("Sample start, please press and lift your finger"
-				 " (Some devices need to swipe your finger)");
+	case MID_EXTENDED_MESSAGE:
+		return priv->extra_info;
 
-	case COMMUNITY_ENROLL_EXTRA:
-		return cfpdev->extra_info;
 	default:
 		return NULL;
 	}
 }
 
-void community_ops_attach(bio_dev *dev)
-{
-
-}
-
-void community_ops_detach(bio_dev *dev)
-{
-
-}
-
-// Drives internal functions
-
-/**
- * Detect and open the device
- * The return value：
- *	>= 0, The number of devices found
- *	< 0, Error in processing
- */
-int community_internal_device_init(bio_dev *dev)
-{
-	struct fp_dscv_dev **discovered_devs = NULL;
-	struct fp_dscv_dev *ddev;
-	struct fp_driver *drv;
-	struct fp_dev *community_dev = NULL;
-	community_fpdev *cfpdev = dev->dev_priv;
-	int usbNum = 0;
-	int i = 0;
-
-	fp_init();
-
-	discovered_devs = fp_discover_devs();
-
-	for (i = 0; discovered_devs[i] != NULL; i++)
-	{
-		int drv_id = -1;
-		ddev = discovered_devs[i];
-
-		drv = fp_dscv_dev_get_driver(ddev);
-		drv_id = fp_driver_get_driver_id(drv);
-
-		if (drv_id == cfpdev->community_driver_id)
-		{
-			community_dev = fp_dev_open(ddev);
-			if (!community_dev)
-			{
-				bio_print_warning(_("Could not open device (driver %s)"),
-								  fp_driver_get_full_name(drv));
-				continue;
-			}
-
-			usbNum++;
-		}
-	}
-	fp_dscv_devs_free(discovered_devs);
-
-	if (usbNum > 0)
-	{
-		cfpdev->dev = community_dev;
-
-		cfpdev->ops_result = DOR_NO_MATCH;
-		cfpdev->ops_done = true;
-		cfpdev->ops_stopped = true;
-
-		cfpdev->ops_timeout_ms = bio_get_ops_timeout_ms();
-		cfpdev->ops_detection_interval_tv.tv_sec = 0;
-		cfpdev->ops_detection_interval_tv.tv_usec = OPS_DETECTION_INTERVAL_MS * 1000;
-
-		cfpdev->enroll_times = fp_dev_get_nr_enroll_stages(community_dev);
-		cfpdev->sample_times = 0;
-		cfpdev->enrolled_print = NULL;
-	}
-
-	return usbNum;
-}
-
-void community_internal_device_free(bio_dev *dev)
-{
-	community_fpdev *cfpdev = dev->dev_priv;
-	struct fp_dev *community_dev = cfpdev->dev;
-	fp_dev_close(community_dev);
-
-	cfpdev->dev = NULL;
-
-	cfpdev->ops_result = DOR_NO_MATCH;
-	cfpdev->ops_done = true;
-	cfpdev->ops_stopped = true;
-
-	if (cfpdev->enrolled_print != NULL)
-		fp_print_data_free(cfpdev->enrolled_print);
-
-	fp_exit();
-}
-
-/**
- * The fp_print_data list is generated from the feature_info list and returns
- * the fp_print_data list
- * Parameter:
- *	feature_info * info_list	Feature list
- * Return:
- *	fp_print_data **	The fp_print_data list address, ending with NULL
- * Note:
- *	The fp_print_data list needs to be freed using the
- *	community_internal_free_fp_data function
- */
-struct fp_print_data **community_internal_create_fp_data(bio_dev *dev,
-														 feature_info * info_list)
-{
-	community_fpdev *cfpdev = dev->dev_priv;
-	struct fp_print_data **fp_data_list;
-	feature_info * l = info_list;
-	int len = 0;
-	int i = 0;
-	int fp_num = 0;
-
-	// Gets the length of the feature list
-	while (l != NULL)
-	{
-		feature_sample *sample = l->sample;
-		while (sample != NULL)
-		{
-			fp_num++;
-			sample = sample->next;
-		}
-		l = l->next;
-	}
-
-	// Traverse feature lists, decode feature
-	fp_data_list = malloc((fp_num + 1) * sizeof(struct fp_print_data **));
-	memset(fp_data_list, 0, (fp_num + 1) * sizeof(struct fp_print_data **));
-	l = info_list;
-	i = 0;
-	while (l != NULL)
-	{
-		feature_sample *sample = l->sample;
-		while (sample != NULL)
-		{
-			// Decoding feature
-			len = strlen(sample->data);
-			unsigned char * ciphertext = malloc(len);
-			memset(ciphertext, 0, len);
-			len = bio_base64_decode(sample->data, ciphertext);
-
-			// Decrypted characteristic data
-			unsigned char * plaintext = malloc(len);
-			memset(plaintext, 0, len);
-			community_internal_aes_decrypt(ciphertext, len, cfpdev->aes_key, plaintext);
-
-			// Generate community fingerprint feature data structure
-			fp_data_list[i] = fp_print_data_from_data(plaintext, len);
-
-			// Release resources
-			free(ciphertext);
-			free(plaintext);
-
-			sample = sample->next;
-			i++;
-		}
-		l = l->next;
-	}
-
-	return fp_data_list;
-}
-
-/**
- * Release the fp_data_list list
- * Parameter:
- *	fp_print_data **fp_data_list	The fp_print_data list address
- */
-void community_internal_free_fp_data(struct fp_print_data **fp_data_list)
-{
-	struct fp_print_data * fp_data;
-	int i = 0;
-
-	fp_data = fp_data_list[i];
-	while (fp_data)
-	{
-		fp_print_data_free(fp_data);
-		i++;
-		fp_data = fp_data_list[i];
-	}
-	free(fp_data_list);
-}
-
-/**
- * Enroll operation main processing function
- * Parameter:
- *	bio_dev *dev	Biometric device structure
- * Return:
- *	0	Enroll success
- *	-1	Enroll failure
- *	-2	Operation timeout
- *	-3	The operation is stop by the user
- *
- * Note
- *	The return value needs to be manually released
- */
-int community_internal_enroll(bio_dev *dev)
-{
-	community_fpdev *cfpdev = dev->dev_priv;
-	struct fp_dev *community_dev = cfpdev->dev;
-	int r;
-
-	cfpdev->ops_done = false;
-	if (cfpdev->enrolled_print != NULL)
-	{
-		fp_print_data_free(cfpdev->enrolled_print);
-		cfpdev->enrolled_print = NULL;
-	}
-
-	cfpdev->sample_times = 1;
-	r = fp_async_enroll_start(community_dev,
-							  community_internal_enroll_stage_cb, dev);
-	if (r < 0)
-	{
-		bio_print_error(_("Failed to call function %s\n"),
-						"community_internal_enroll");
-		return DOR_FAIL;
-	}
-
-	// Wait for the interaction to complete or timeout or be stop by the user
-	community_internal_interactive_waiting(dev);
-
-	// Stop the enroll operation
-	community_internal_enroll_stop(dev);
-
-	return cfpdev->ops_result;
-}
-
-static void community_internal_enroll_stage_cb(struct fp_dev *fpdev,
-											   int result,
-											   struct fp_print_data *print,
-											   struct fp_img *img,
-											   void *user_data)
-{
-	bio_dev *dev = user_data;
-	community_fpdev *cfpdev = dev->dev_priv;
-
-	if (result < 0) {
-		snprintf(cfpdev->extra_info, EXTRA_INFO_LENGTH,
-				 _("Unknown error, error code: %d"), result);
-		bio_set_notify_abs_mid(dev, COMMUNITY_ENROLL_EXTRA);
-		bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-
-		cfpdev->ops_done = true;
-		cfpdev->ops_result = DOR_FAIL;
-		community_internal_enroll_stop(dev);
-
-		return;
-	}
-
-	switch (result)
-	{
-	case FP_ENROLL_COMPLETE:
-		bio_set_notify_abs_mid(dev, COMMUNITY_ENROLL_COMPLETE);
-		bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-		cfpdev->ops_result = 0;
-
-		if (print)
-			cfpdev->enrolled_print = print;
-		else
-		{
-			snprintf(cfpdev->extra_info, EXTRA_INFO_LENGTH,
-					 _("Enroll failed: The feature was successfully sampled, "
-					   "but the encoding of the sampling feature could "
-					   "not be generated"));
-			bio_set_notify_abs_mid(dev, COMMUNITY_ENROLL_EXTRA);
-			bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-
-			cfpdev->enrolled_print = NULL;
-			cfpdev->ops_result = DOR_FAIL;
-		}
-
-		break;
-	case FP_ENROLL_FAIL:
-		bio_set_notify_abs_mid(dev, COMMUNITY_ENROLL_FAIL);
-		bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-		break;
-	case FP_ENROLL_PASS:
-		snprintf(cfpdev->extra_info, EXTRA_INFO_LENGTH,
-				 _("The %d [%d/%d] sampling was successful, in the next "
-				   "sampling: please press and lift your finger (Some "
-				   "devices need to swipe your finger)"),
-				 cfpdev->sample_times, cfpdev->sample_times, cfpdev->enroll_times);
-		bio_set_notify_abs_mid(dev, COMMUNITY_ENROLL_EXTRA);
-		bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-		cfpdev->sample_times++;
-
-		// Update timeout
-		community_internal_timeout_tv_update(dev);
-		break;
-	case FP_ENROLL_RETRY:
-		bio_set_notify_abs_mid(dev, COMMUNITY_COMMON_RETRY);
-		bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-		break;
-	case FP_ENROLL_RETRY_TOO_SHORT:
-		bio_set_notify_abs_mid(dev, COMMUNITY_COMMON_RETRY_TOO_SHORT);
-		bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-		break;
-	case FP_ENROLL_RETRY_CENTER_FINGER:
-		bio_set_notify_abs_mid(dev, COMMUNITY_COMMON_RETRY_CENTER_FINGER);
-		bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-		break;
-	case FP_ENROLL_RETRY_REMOVE_FINGER:
-		bio_set_notify_abs_mid(dev, COMMUNITY_COMMON_RETRY_REMOVE_FINGER);
-		bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-		break;
-	}
-
-	if (result != FP_ENROLL_PASS && result != FP_ENROLL_COMPLETE)
-		cfpdev->ops_result = DOR_FAIL;
-
-	if (result != FP_ENROLL_PASS)
-	{
-		community_internal_enroll_stop(dev);
-		cfpdev->ops_done = true;
-	}
-}
-
-int community_internal_enroll_stop(bio_dev *dev)
-{
-	community_fpdev *cfpdev = dev->dev_priv;
-	struct fp_dev *community_dev = cfpdev->dev;
-
-	cfpdev->ops_stopped = false;
-	fp_async_enroll_stop(community_dev,
-						   community_internal_enroll_stopped_cb, dev);
-
-	// Using the wait function will block unaccountably, so wait is not
-	// considered for the time being...
-#if 0
-	// Wait for the stop operation to complete
-	int r = 0;
-	while (!cfpdev->ops_stopped)
-	{
-//		r = fp_handle_events_timeout(&(cfpdev->ops_detection_interval_tv));
-//		r = fp_handle_events();
-		if (r < 0)
-			cfpdev->ops_stopped = true;
-	}
-#else
-	cfpdev->ops_stopped = true;
-#endif
-
-	return 0;
-}
-
-void community_internal_enroll_stopped_cb(struct fp_dev *fpdev,
-												   void *user_data)
-{
-	bio_dev *dev = user_data;
-	community_fpdev *cfpdev = dev->dev_priv;
-
-	cfpdev->ops_stopped = true;
-}
-
-/**
- * Scans the fingerprint and compares it with the given fingerprint data
- * table to return the index of the matched table items
- * Parameter:
- *	bio_dev *dev	Community fingerprint device structure
- *	struct fp_print_data ** Fingerprint data list
- * Return:
- *	-1	No match
- *	-2	Operation timeout
- *	-3	The operation is stop by the user
- *	>=0	Matches the index of list items
- */
-int community_internal_identify(bio_dev *dev,
-								struct fp_print_data **print_gallery)
-{
-	community_fpdev *cfpdev = dev->dev_priv;
-	struct fp_dev *community_dev = cfpdev->dev;
-	int r;
-
-	cfpdev->ops_done = false;
-	r = fp_async_identify_start(community_dev, print_gallery,
-								community_internal_identify_cb, dev);
-	if (r < 0)
-	{
-		bio_print_error(_("Failed to call function %s\n"),
-						"community_internal_enroll");
-		return DOR_NO_MATCH;
-	}
-
-	struct timeval time_now;
-	gettimeofday(&time_now, NULL);
-	cfpdev->ops_timeout_tv.tv_sec = time_now.tv_sec + cfpdev->ops_timeout_ms / 1000;
-	cfpdev->ops_timeout_tv.tv_usec = time_now.tv_usec;
-
-	while (!cfpdev->ops_done)
-	{
-		r = fp_handle_events_timeout(&(cfpdev->ops_detection_interval_tv));
-		if (r < 0)
-			cfpdev->ops_done = true;
-
-		gettimeofday(&time_now, NULL);
-
-		if (time_now.tv_sec > cfpdev->ops_timeout_tv.tv_sec)
-		{
-			cfpdev->ops_result = DOR_TIMEOUT;
-			cfpdev->ops_done = true;
-
-		} else
-			if (time_now.tv_sec == cfpdev->ops_timeout_tv.tv_sec)
-				if (time_now.tv_usec >= cfpdev->ops_timeout_tv.tv_usec)
-				{
-					cfpdev->ops_result = DOR_TIMEOUT;
-					cfpdev->ops_done = true;
-				}
-	}
-
-	community_internal_identify_stop(dev);
-
-	return cfpdev->ops_result;
-}
-
-void community_internal_identify_cb(struct fp_dev *fpdev,
-										   int result,
-										   size_t match_offset,
-										   struct fp_img *img,
-										   void *user_data)
-{
-	bio_dev *dev = user_data;
-	community_fpdev *cfpdev = dev->dev_priv;
-
-	if (result < 0) {
-		snprintf(cfpdev->extra_info, EXTRA_INFO_LENGTH,
-				 _("Unknown error, error code: %d"), result);
-		bio_set_notify_abs_mid(dev, COMMUNITY_ENROLL_EXTRA);
-		bio_print_warning("%s\n", bio_get_notify_mid_mesg(dev));
-		result = FP_VERIFY_NO_MATCH;
-	}
-	else
-	{
-		switch (result) {
-		case FP_VERIFY_NO_MATCH:
-			bio_set_notify_mid(dev, NOTIFY_COMM_NO_MATCH);
-			bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-			break;
-		case FP_VERIFY_MATCH:
-			bio_set_notify_mid(dev, NOTIFY_COMM_SUCCESS);
-			bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-			break;
-		case FP_VERIFY_RETRY:
-			bio_set_notify_abs_mid(dev, COMMUNITY_COMMON_RETRY);
-			bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-			break;
-		case FP_VERIFY_RETRY_TOO_SHORT:
-			bio_set_notify_abs_mid(dev, COMMUNITY_COMMON_RETRY_TOO_SHORT);
-			bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-			break;
-		case FP_VERIFY_RETRY_CENTER_FINGER:
-			bio_set_notify_abs_mid(dev, COMMUNITY_COMMON_RETRY_CENTER_FINGER);
-			bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-			break;
-		case FP_VERIFY_RETRY_REMOVE_FINGER:
-			bio_set_notify_abs_mid(dev, COMMUNITY_COMMON_RETRY_REMOVE_FINGER);
-			bio_print_debug("%s\n", bio_get_notify_mid_mesg(dev));
-			break;
-		}
-	}
-
-	if (result == FP_VERIFY_MATCH)
-		cfpdev->ops_result = match_offset;
-	else
-		cfpdev->ops_result = DOR_NO_MATCH;
-	cfpdev->ops_done = true;
-
-//	fp_async_identify_stop(fpdev,
-//						   community_internal_identify_stopped_cb, dev);
-}
-
-int community_internal_identify_stop(bio_dev *dev)
-{
-	community_fpdev *cfpdev = dev->dev_priv;
-	struct fp_dev *community_dev = cfpdev->dev;
-	int r = 0;
-
-	cfpdev->ops_stopped = false;
-	fp_async_identify_stop(community_dev,
-						   community_internal_identify_stopped_cb, dev);
-
-	// Wait for the stop operation to complete
-	while (!cfpdev->ops_stopped)
-	{
-		r = fp_handle_events_timeout(&(cfpdev->ops_detection_interval_tv));
-		if (r < 0)
-			cfpdev->ops_stopped = true;
-	}
-
-	return 0;
-}
-
-static void community_internal_identify_stopped_cb(struct fp_dev *fpdev,
-												   void *user_data)
-{
-	bio_dev *dev = user_data;
-	community_fpdev *cfpdev = dev->dev_priv;
-
-	cfpdev->ops_stopped = true;
-}
-
-void community_internal_timeout_tv_update(bio_dev *dev)
-{
-	community_fpdev *cfpdev = dev->dev_priv;
-	struct timeval time_now;
-
-	gettimeofday(&time_now, NULL);
-	cfpdev->ops_timeout_tv.tv_sec = time_now.tv_sec + cfpdev->ops_timeout_ms / 1000;
-	cfpdev->ops_timeout_tv.tv_usec = time_now.tv_usec;
-}
-
-/**
- * Interactive wait function. Due to the particularity of libfprint, sleep
- * waiting cannot be used directly, so it is necessary for this function
- * to detect the interaction state and wait.
- */
-void community_internal_interactive_waiting(bio_dev *dev)
-{
-	community_fpdev *cfpdev = dev->dev_priv;
-	struct timeval time_now;
-	int r = 0;
-
-	gettimeofday(&time_now, NULL);
-	cfpdev->ops_timeout_tv.tv_sec = time_now.tv_sec + cfpdev->ops_timeout_ms / 1000;
-	cfpdev->ops_timeout_tv.tv_usec = time_now.tv_usec;
-
-	/*
-	 * Exit condition: cfpdev->ops_done == true, Operation is completed
-	 *
-	 * Possible situations:
-	 *	1. The operation is complete. The relevant callback function completed
-	 *     by the operation modifies the value of cfpdev->ops_done;
-	 *	2. The operation is stop by the user. Modify the value of
-	 *     cfpdev->ops_done from the stop function;
-	 *	3. Operation timeout. Modify the value of cfpdev->ops_done by the
-	 *     following code;
-	 */
-	while (!cfpdev->ops_done)
-	{
-		r = fp_handle_events_timeout(&(cfpdev->ops_detection_interval_tv));
-		if (r < 0)
-			cfpdev->ops_done = true;
-
-		gettimeofday(&time_now, NULL);
-
-		if (time_now.tv_sec > cfpdev->ops_timeout_tv.tv_sec)
-		{
-			cfpdev->ops_result = DOR_TIMEOUT;
-			cfpdev->ops_done = true;
-
-		} else
-			if (time_now.tv_sec == cfpdev->ops_timeout_tv.tv_sec)
-				if (time_now.tv_usec >= cfpdev->ops_timeout_tv.tv_usec)
-				{
-					cfpdev->ops_result = DOR_TIMEOUT;
-					cfpdev->ops_done = true;
-				}
-	}
-}
-
-int community_internal_aes_encrypt(unsigned char *in, int len,
-								   unsigned char *key, unsigned char *out)
-{
-	if (!in || !key || !out)
-		return -1;
-
-	unsigned char iv[AES_BLOCK_SIZE] = {0};		// 初始偏移向量IV
-	int i = 0;
-
-	for (i = 0; i < AES_BLOCK_SIZE; i++)
-		iv[i] = i;
-
-	AES_128_CFB_Encrypt(key, iv, in, len, out);
-
-	return 0;
-}
-int community_internal_aes_decrypt(unsigned char *in, int len,
-								   unsigned char *key, unsigned char *out)
-{
-	if (!in || !key || !out)
-		return -1;
-
-	unsigned char iv[AES_BLOCK_SIZE] = {0};		// 初始偏移向量IV
-	int i = 0;
-
-	for (i = 0; i < AES_BLOCK_SIZE; i++)
-		iv[i] = i;
-
-	AES_128_CFB_Decrypt(key, iv, in, len, out);
-
-	return 0;
-}
