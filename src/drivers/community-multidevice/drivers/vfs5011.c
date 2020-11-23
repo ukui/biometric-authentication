@@ -66,8 +66,8 @@ int ops_configure(bio_dev * dev, GKeyFile * conf)
 	dev->ops_search = community_ops_search;
 	dev->ops_clean = community_ops_clean;
 	dev->ops_get_feature_list = community_ops_get_feature_list;
-	dev->ops_attach = community_ops_attach;
-	dev->ops_detach = community_ops_detach;
+	//dev->ops_attach = community_ops_attach;
+	//dev->ops_detach = community_ops_detach;
 	dev->ops_stop_by_user = community_ops_stop_by_user;
 	dev->ops_feature_rename = NULL;	// Use the default function provided by the framework
 	dev->ops_close = community_ops_close;
