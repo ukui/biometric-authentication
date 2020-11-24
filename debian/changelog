@@ -1,3 +1,11 @@
+biometric-authentication (0.9.70-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/control: migrate from libfprint1 to libfprint2.
+    (Closes: 952671)
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Tue, 24 Nov 2020 15:39:09 +0800
+
 biometric-authentication (0.9.63-1) unstable; urgency=medium
 
   [ Debian Janitor ]
