@@ -860,3 +860,12 @@ const char *community_ops_get_notify_mid_mesg(bio_dev *dev)
 	}
 }
 
+void *community_ops_attach(bio_dev *dev)
+{
+
+}
+
+void *community_ops_detach(bio_dev *dev)
+{
+
+}
