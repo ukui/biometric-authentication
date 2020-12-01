@@ -54,4 +54,27 @@
 		</defaults>
 	</action>
 
+	<action id="org.ukui.biometric.rename-own-data">
+		<description>Rename your biometric features</description>
+		<description xml:lang="zh">重命名您的用户生物信息</description>
+		<message>Renaming your biometric features requires authorization</message>
+		<message xml:lang="zh">重命名您的用户生物信息需要授权</message>
+		<defaults>
+			<allow_any>auth_self</allow_any>
+			<allow_inactive>auth_self</allow_inactive>
+			<allow_active>auth_self_keep</allow_active>
+		</defaults>
+	</action>
+
+	<action id="org.ukui.biometric.rename-admin-data">
+		<description>Rename other user's biometric features</description>
+		<description xml:lang="zh">重命名其他用户生物信息</description>
+		<message>Renaming other user's biometric features requires authorization</message>
+		<message xml:lang="zh">重命名其他用户的生物信息需要授权</message>
+		<defaults>
+			<allow_any>auth_admin</allow_any>
+			<allow_inactive>auth_admin</allow_inactive>
+			<allow_active>auth_admin_keep</allow_active>
+		</defaults>
+	</action>
 </policyconfig>

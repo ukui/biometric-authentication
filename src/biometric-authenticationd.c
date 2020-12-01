@@ -1200,6 +1200,23 @@ void gdbus_feature_rename_pt(GSList * argv)
 	int idx = (int)*p4;
 	char * new_name = p5;
 
+	gboolean auth_ret = FALSE;
+	int auth_uid = 0;
+	get_dbus_caller_uid(invocation, &auth_uid);
+	if (auth_uid == uid)
+		auth_ret = authority_check_by_polkit(pAuthority,
+											 invocation,
+											 POLKIT_RENAME_OWN_ACTION_ID);
+	else
+		auth_ret = authority_check_by_polkit(pAuthority,
+											 invocation,
+											 POLKIT_RENAME_ADMIN_ACTION_ID);
+
+	if (!auth_ret) {
+		biometric_complete_enroll(object, invocation, -RetPermissionDenied);
+		return;
+	}
+
 	bio_dev * dev = get_dev_by_drvid(drvid);
 	if (dev == NULL) {
 		biometric_complete_stop_ops(object, invocation, -RetNoSuchDevice);
@@ -1598,13 +1615,13 @@ int main()
 	{
 		struct stat dir_stat;
 
-        if (access(pid_dir_list[i], F_OK) == 0) {
-            stat(pid_dir_list[i], &dir_stat);
-            if (S_ISDIR(dir_stat.st_mode)) {
-                pid_dir = pid_dir_list[i];
-                break;
-            }
-        }
+		if (access(pid_dir_list[i], F_OK) == 0) {
+			stat(pid_dir_list[i], &dir_stat);
+			if (S_ISDIR(dir_stat.st_mode)) {
+				pid_dir = pid_dir_list[i];
+				break;
+			}
+		}
 	}
 	if (pid_dir == NULL)
 		pid_dir = "/";

@@ -36,6 +36,9 @@
 #define POLKIT_CLEAN_OWN_ACTION_ID "org.ukui.biometric.clean-own-data"
 #define POLKIT_CLEAN_ADMIN_ACTION_ID "org.ukui.biometric.clean-admin-data"
 
+#define POLKIT_RENAME_OWN_ACTION_ID "org.ukui.biometric.rename-own-data"
+#define POLKIT_RENAME_ADMIN_ACTION_ID "org.ukui.biometric.rename-admin-data"
+
 gboolean get_dbus_caller_uid (GDBusMethodInvocation *invocation, gint *uid);
 gboolean get_dbus_caller_pid (GDBusMethodInvocation *invocation, gint *pid);
 
