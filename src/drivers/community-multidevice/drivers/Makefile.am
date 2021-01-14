@@ -5,13 +5,13 @@ AUTOMAKE_OPTIONS = subdir-objects
 if HAS_BIO_DRIVER_DIR
 drv_dir = $(BIO_DRIVER_DIR)
 else
-drv_dir = $(datadir)/biometric-authentication/driver
+drv_dir = $(libdir)/biometric-authentication/driver
 endif
 
 if HAS_BIO_EXTRA_DIR
 extra_dir = $(BIO_EXTRA_DIR)
 else
-extra_dir = $(datadir)/biometric-authentication/driver/extra
+extra_dir = $(libdir)/biometric-authentication/driver/extra
 endif
 
 DOMAIN_NAME = -DBIOMETRIC_DRIVER_COMMUNITY_MULTIDEVICE_DOMAIN_NAME=\""$(PACKAGE)"\"
