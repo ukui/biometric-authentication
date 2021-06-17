@@ -1,3 +1,9 @@
+biometric-authentication (0.9.71-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- handsome_feng <jianfengli@ubuntukylin.com>  Thu, 17 Jun 2021 14:31:00 +0800
+
 biometric-authentication (0.9.70-1) unstable; urgency=medium
 
   * New upstream release.
