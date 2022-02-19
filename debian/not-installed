@@ -17,5 +17,5 @@ usr/lib/biometric-authentication/drivers/vfs0050.la
 usr/lib/biometric-authentication/drivers/vfs101.la 
 usr/lib/biometric-authentication/drivers/vfs301.la 
 usr/lib/biometric-authentication/drivers/vfs5011.la
-usr/lib/x86_64-linux-gnu/libbiometric.la
+usr/lib/*/libbiometric.la
 usr/lib/biometric-authentication/drivers/aes1610.la
