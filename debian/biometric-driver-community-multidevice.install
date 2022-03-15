@@ -1,2 +1,2 @@
-usr/lib/biometric-authentication/drivers/*.so
 usr/lib/biometric-authentication/discover-tools/*
+usr/lib/biometric-authentication/drivers/*.so
