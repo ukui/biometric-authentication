@@ -19,7 +19,7 @@ Build-Depends: automake,
                uuid-dev
 Standards-Version: 4.6.0.1
 Rules-Requires-Root: no
-Homepage: https://github.com/ukui/biometric-authentication.git
+Homepage: https://github.com/ukui/biometric-authentication
 Vcs-Git: https://github.com/ukui/biometric-authentication.git
 Vcs-Browser: https://github.com/ukui/biometric-authentication
 
